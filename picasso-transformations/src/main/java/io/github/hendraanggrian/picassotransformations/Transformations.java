@@ -44,6 +44,10 @@ public final class Transformations {
         return get(GrayscaleTransformation.TAG);
     }
 
+    public synchronized static boolean isAvailable(String tag){
+        return TRANSFORMATIONS.containsKey(tag);
+    }
+
     private synchronized static Transformation get(@NonNull String tag, @NonNull Object... params) {
         if (TRANSFORMATIONS == null) {
             if (DEBUG)
