@@ -4,17 +4,20 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-import com.squareup.picasso.Transformation;
+import java.util.Arrays;
+import java.util.Collection;
 
 import io.github.hendraanggrian.picassotransformations.internal.PaintBuilder;
 
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-class CropRoundedTransformation implements Transformation {
+class CropRoundedTransformation extends BaseTransformation {
 
-    static final String TAG = "cropRounded(radius=%s, margin=%s)";
+    static final String TAG = "cropRounded";
 
     private int radius;
     private int margin;
@@ -40,8 +43,15 @@ class CropRoundedTransformation implements Transformation {
         return bitmap;
     }
 
+    @NonNull
     @Override
-    public String key() {
-        return String.format(TAG, radius, margin);
+    String name() {
+        return TAG;
+    }
+
+    @Nullable
+    @Override
+    Collection values() {
+        return Arrays.asList(radius, margin);
     }
 }

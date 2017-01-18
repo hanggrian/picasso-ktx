@@ -1,15 +1,17 @@
 package io.github.hendraanggrian.picassotransformations;
 
 import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-import com.squareup.picasso.Transformation;
+import java.util.Collection;
 
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-class CropSquareTransformation implements Transformation {
+class CropSquareTransformation extends BaseTransformation {
 
-    static final String TAG = "cropSquare()";
+    static final String TAG = "cropSquare";
 
     int size;
 
@@ -25,8 +27,15 @@ class CropSquareTransformation implements Transformation {
         return bitmap;
     }
 
+    @NonNull
     @Override
-    public String key() {
+    String name() {
         return TAG;
+    }
+
+    @Nullable
+    @Override
+    Collection values() {
+        return null;
     }
 }

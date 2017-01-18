@@ -1,15 +1,13 @@
 ![logo](/art/logo.png) Picasso Transformations
 ==============================================
-
-Image transformations with Picasso.
+Image transformations with Picasso. It uses `WeakHashMap` to cache transformations for faster reuse.
 
 ![demo](/art/demo.gif)
 
 Download
 --------
-
 ```gradle
-compile 'io.github.hendraanggrian:picasso-transformations:0.1.0@aar'
+compile 'io.github.hendraanggrian:picasso-transformations:0.2.0@aar'
 ```
 
 Usage
@@ -24,7 +22,6 @@ Picasso.with(context)
 
 Currently Available Transformations
 -----------------------------------
-
 #### Crop Square
 `Transformations.cropSquare();`
 

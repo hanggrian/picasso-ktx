@@ -3,6 +3,10 @@ package io.github.hendraanggrian.picassotransformations;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import java.util.Collection;
 
 import io.github.hendraanggrian.picassotransformations.internal.PaintBuilder;
 
@@ -11,7 +15,7 @@ import io.github.hendraanggrian.picassotransformations.internal.PaintBuilder;
  */
 class CropCircleTransformation extends CropSquareTransformation {
 
-    static final String TAG = "cropCircle()";
+    static final String TAG = "cropCircle";
 
     @Override
     public Bitmap transform(Bitmap source) {
@@ -27,8 +31,15 @@ class CropCircleTransformation extends CropSquareTransformation {
         return bitmap;
     }
 
+    @NonNull
     @Override
-    public String key() {
+    String name() {
         return TAG;
+    }
+
+    @Nullable
+    @Override
+    Collection values() {
+        return null;
     }
 }

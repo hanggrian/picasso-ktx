@@ -4,17 +4,19 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-import com.squareup.picasso.Transformation;
+import java.util.Collection;
 
 import io.github.hendraanggrian.picassotransformations.internal.PaintBuilder;
 
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-class GrayscaleTransformation implements Transformation {
+class GrayscaleTransformation extends BaseTransformation {
 
-    static final String TAG = "GrayscaleTransformation";
+    static final String TAG = "cropGrayscale";
 
     @Override
     public Bitmap transform(Bitmap source) {
@@ -28,8 +30,15 @@ class GrayscaleTransformation implements Transformation {
         return bitmap;
     }
 
+    @NonNull
     @Override
-    public String key() {
+    String name() {
         return TAG;
+    }
+
+    @Nullable
+    @Override
+    Collection values() {
+        return null;
     }
 }

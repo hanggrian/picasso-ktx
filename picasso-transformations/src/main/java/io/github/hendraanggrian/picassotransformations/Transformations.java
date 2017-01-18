@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.squareup.picasso.Transformation;
 
+import java.util.Arrays;
 import java.util.WeakHashMap;
 
 /**
@@ -22,65 +23,52 @@ public final class Transformations {
         DEBUG = debug;
     }
 
+    @NonNull
     public synchronized static Transformation cropSquare() {
         return get(CropSquareTransformation.TAG);
     }
 
+    @NonNull
     public synchronized static Transformation cropCircle() {
         return get(CropCircleTransformation.TAG);
     }
 
+    @NonNull
     public synchronized static Transformation cropRounded(int radius, int margin) {
         return cropRounded(radius, margin, false);
     }
 
+    @NonNull
     public synchronized static Transformation cropRounded(int radius, int margin, boolean useDp) {
         return useDp
                 ? get(CropRoundedTransformation.TAG, (int) (radius * Resources.getSystem().getDisplayMetrics().density), (int) (margin * Resources.getSystem().getDisplayMetrics().density))
                 : get(CropRoundedTransformation.TAG, radius, margin);
     }
 
+    @NonNull
     public synchronized static Transformation grayscale() {
         return get(GrayscaleTransformation.TAG);
     }
 
-    public synchronized static boolean isAvailable(String tag){
-        return TRANSFORMATIONS.containsKey(tag);
-    }
-
-    private synchronized static Transformation get(@NonNull String tag, @NonNull Object... params) {
+    @NonNull
+    private synchronized static Transformation get(@NonNull String name, @NonNull Object... values) {
         if (TRANSFORMATIONS == null) {
             if (DEBUG)
                 Log.d(TAG, "Initializing...");
             TRANSFORMATIONS = new WeakHashMap<>();
         }
 
-        final String key = params.length != 0
-                ? String.format(tag, params)
-                : tag;
-
+        final String key = BaseTransformation.buildKey(name, Arrays.asList(values));
         if (TRANSFORMATIONS.containsKey(key)) {
             if (DEBUG)
-                Log.d(TAG, String.format("%s is available.", key));
+                Log.d(TAG, key + " is available.");
             return TRANSFORMATIONS.get(key);
+        } else {
+            if (DEBUG)
+                Log.d(TAG, key + " unavailable, new instance cached.");
+            final Transformation transformation = BaseTransformation.parse(key);
+            TRANSFORMATIONS.put(key, transformation);
+            return transformation;
         }
-
-        if (DEBUG)
-            Log.d(TAG, String.format("%s unavailable, creating...", key));
-        switch (tag) {
-            case CropSquareTransformation.TAG:
-                TRANSFORMATIONS.put(key, new CropSquareTransformation());
-                break;
-            case CropCircleTransformation.TAG:
-                TRANSFORMATIONS.put(key, new CropCircleTransformation());
-                break;
-            case CropRoundedTransformation.TAG:
-                TRANSFORMATIONS.put(key, new CropRoundedTransformation((int) params[0], (int) params[1]));
-                break;
-            case GrayscaleTransformation.TAG:
-                TRANSFORMATIONS.put(key, new GrayscaleTransformation());
-                break;
-        }
-        return get(key);
     }
 }
