@@ -1,2 +1,39 @@
-# picasso-transformations
-Bitmap transformations for Picasso.
+![logo](/art/logo.png) Picasso Transformations
+==============================================
+
+Image transformations with Picasso.
+
+![demo](/art/demo.gif)
+
+Download
+--------
+
+```gradle
+compile 'io.github.hendraanggrian:picasso-transformations:0.1.0@aar'
+```
+
+Usage
+-----
+```java
+Picasso.with(context)
+    .load(image)
+    .transform(Transformations.cropCircle())
+    .into(target);
+```
+
+
+Currently Available Transformations
+-----------------------------------
+
+#### Crop Square
+`Transformations.cropSquare();`
+
+#### Crop Circle
+`Transformations.cropCircle();`
+
+#### Crop Rounded
+`Transformations.cropRounded(int radius, int margin);` to transform to rounded corners in px,
+or use `Transformations.cropRounded(int radius, int margin, boolean useDp);` to use dp.
+
+#### Grayscale
+`Transformations.grayscale();`
