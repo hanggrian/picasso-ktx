@@ -67,16 +67,20 @@
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"/>
 
             <CheckBox
+                android:id="@+id/checkbox_colorOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="colorOverlay()"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"/>
+
+            <CheckBox
                 android:id="@+id/checkbox_grayscale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="grayscale()"
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2000dp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

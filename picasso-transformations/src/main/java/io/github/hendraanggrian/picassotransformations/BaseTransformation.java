@@ -1,67 +1,68 @@
 package io.github.hendraanggrian.picassotransformations;
 
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.squareup.picasso.Transformation;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Collection;
-
 /**
+ * Superclass of all transformations that builds <tt>JSONObject</tt> as a key for <tt>Transformation</tt> caching.
+ * <p>
+ * Subclasses of this class should no longer override methods from <tt>Transformation</tt>
+ * since abstract methods of this class are passed to <tt>Transformation</tt> methods.
+ *
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-abstract class BaseTransformation implements Transformation {
+public abstract class BaseTransformation implements Transformation {
 
-    private static final String JSON_NAME = "name";
-    private static final String JSON_VALUES = "values";
-
+    /**
+     * Replacement of {@link Transformation#transform(Bitmap)}.
+     *
+     * @param source Bitmap.
+     * @param height of source Bitmap.
+     * @param width  of source Bitmap.
+     * @param target new empty Bitmap configured on {@link BaseTransformation#target(Bitmap)}.
+     * @return transformed Bitmap, must not null.
+     */
     @NonNull
-    abstract String name();
+    public abstract Bitmap transform(@NonNull Bitmap source, int height, int width, @NonNull Bitmap target);
 
-    @Nullable
-    abstract Collection values();
+    /**
+     * Replacement of {@link Transformation#key()}.
+     *
+     * @return key, must not null.
+     */
+    @NonNull
+    public abstract Key getKey();
 
+    /**
+     * Implemented from <tt>Transformation</tt>.
+     *
+     * @return transformed bitmap.
+     */
+    @Override
+    public Bitmap transform(Bitmap source) {
+        return transform(source, source.getHeight(), source.getWidth(), target(source));
+    }
+
+    /**
+     * Implemented from <tt>Transformation</tt>.
+     *
+     * @return key for transformation caching.
+     */
     @Override
     public String key() {
-        return buildKey(name(), values());
+        return getKey().toString();
     }
 
+    /**
+     * Construct new default Bitmap, override to use custom Bitmap as target.
+     *
+     * @param source Bitmap from {@link Transformation#transform(Bitmap)}.
+     * @return target Bitmap to be used on {@link BaseTransformation#transform(Bitmap, int, int, Bitmap)}.
+     */
     @NonNull
-    static String buildKey(@NonNull String name, @Nullable Collection values) {
-        try {
-            final JSONObject json = new JSONObject();
-            json.put(JSON_NAME, name);
-            json.put(JSON_VALUES, new JSONArray(values));
-            return json.toString();
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @NonNull
-    static BaseTransformation parse(@NonNull String key) {
-        try {
-            final JSONObject json = new JSONObject(key);
-            switch (json.getString(JSON_NAME)) {
-                case CropSquareTransformation.TAG:
-                    return new CropSquareTransformation();
-                case CropCircleTransformation.TAG:
-                    return new CropCircleTransformation();
-                case CropRoundedTransformation.TAG:
-                    return new CropRoundedTransformation(
-                            json.getJSONArray(JSON_VALUES).getInt(0),
-                            json.getJSONArray(JSON_VALUES).getInt(1));
-                case GrayscaleTransformation.TAG:
-                    return new GrayscaleTransformation();
-                default:
-                    throw new RuntimeException("Invalid key: " + key);
-            }
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
+    public Bitmap target(@NonNull Bitmap source) {
+        return Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
     }
 }

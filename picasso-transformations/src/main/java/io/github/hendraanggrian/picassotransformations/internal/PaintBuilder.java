@@ -1,7 +1,5 @@
 package io.github.hendraanggrian.picassotransformations.internal;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Shader;
@@ -27,10 +25,6 @@ public class PaintBuilder {
     public PaintBuilder colorFilter(@NonNull ColorFilter colorFilter) {
         this.colorFilter = colorFilter;
         return this;
-    }
-
-    public PaintBuilder shader(@NonNull Bitmap bitmap) {
-        return shader(new BitmapShader(bitmap, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP));
     }
 
     public PaintBuilder shader(@NonNull Shader shader) {

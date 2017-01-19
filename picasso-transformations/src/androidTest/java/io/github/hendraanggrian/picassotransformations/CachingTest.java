@@ -1,115 +1,181 @@
 package io.github.hendraanggrian.picassotransformations;
 
-import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.rule.UiThreadTestRule;
+import android.support.annotation.NonNull;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+import com.squareup.picasso.Transformation;
 
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.concurrent.CountDownLatch;
+import java.util.Random;
+
+import io.github.hendraanggrian.picassotransformations.color.ColorGrayscaleTransformation;
+import io.github.hendraanggrian.picassotransformations.color.ColorOverlayTransformation;
+import io.github.hendraanggrian.picassotransformations.crop.CropCircleTransformation;
+import io.github.hendraanggrian.picassotransformations.crop.CropRoundedTransformation;
+import io.github.hendraanggrian.picassotransformations.crop.CropSquareTransformation;
 
 /**
  * Made to test whether it's a good idea to keep references of Transformation in {@link java.util.WeakHashMap}.
- * <p>
- * Although the result are not consistent, it is expected that {@link CachingTest#withCaching()} performs
- * twice as fast as {@link CachingTest#withoutCaching()}.
  *
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
 @RunWith(AndroidJUnit4.class)
-public class CachingTest {
-
-    @Rule
-    public UiThreadTestRule uiThreadTestRule = new UiThreadTestRule();
+public final class CachingTest extends BaseTest {
 
     private static final int COUNT = 1000;
 
-    private CountDownLatch latch;
-    private int currentCount;
+    private final Random random = new Random();
 
     @Test
     public void withoutCaching() throws Throwable {
-        currentCount = 0;
-        latch = new CountDownLatch(COUNT);
-        uiThreadTestRule.runOnUiThread(new Runnable() {
+        initLatch(COUNT);
+        runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 final Runnable runnable = this;
                 Picasso.with(getContext())
                         .load(android.R.drawable.alert_dark_frame)
                         .transform(new CropCircleTransformation())
-                        .into(new Target() {
+                        .into(new TargetTest() {
                             @Override
-                            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                                latch.countDown();
-                                currentCount++;
-                                if (currentCount < COUNT)
-                                    try {
-                                        uiThreadTestRule.runOnUiThread(runnable);
-                                    } catch (Throwable throwable) {
-                                        throwable.printStackTrace();
-                                    }
-                            }
-
-                            @Override
-                            public void onBitmapFailed(Drawable errorDrawable) {
-                            }
-
-                            @Override
-                            public void onPrepareLoad(Drawable placeHolderDrawable) {
+                            void onBitmapLoaded(Bitmap bitmap) throws Throwable {
+                                countdown();
+                                if (counting())
+                                    runOnUiThread(runnable);
                             }
                         });
             }
         });
-        latch.await();
+        await();
     }
 
     @Test
     public void withCaching() throws Throwable {
-        currentCount = 0;
-        latch = new CountDownLatch(COUNT);
-        uiThreadTestRule.runOnUiThread(new Runnable() {
+        Transformations.clearCache();
+
+        initLatch(COUNT);
+        runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 final Runnable runnable = this;
                 Picasso.with(getContext())
                         .load(android.R.drawable.alert_dark_frame)
-                        .transform(Transformations.cropCircle())
-                        .into(new Target() {
+                        .transform(Transformations.circle())
+                        .into(new TargetTest() {
                             @Override
-                            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                                latch.countDown();
-                                currentCount++;
-                                if (currentCount < COUNT)
-                                    try {
-                                        uiThreadTestRule.runOnUiThread(runnable);
-                                    } catch (Throwable throwable) {
-                                        throwable.printStackTrace();
-                                    }
-                            }
-
-                            @Override
-                            public void onBitmapFailed(Drawable errorDrawable) {
-                            }
-
-                            @Override
-                            public void onPrepareLoad(Drawable placeHolderDrawable) {
+                            void onBitmapLoaded(Bitmap bitmap) throws Throwable {
+                                countdown();
+                                if (counting())
+                                    runOnUiThread(runnable);
                             }
                         });
             }
         });
-        latch.await();
+        await();
     }
 
-    public Context getContext() {
-        return InstrumentationRegistry.getTargetContext();
+    @Test
+    public void randomizedWithoutCaching() throws Throwable {
+        initLatch(COUNT);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                final Runnable runnable = this;
+                Picasso.with(getContext())
+                        .load(android.R.drawable.alert_dark_frame)
+                        .transform(randomize(false))
+                        .into(new TargetTest() {
+                            @Override
+                            void onBitmapLoaded(Bitmap bitmap) throws Throwable {
+                                countdown();
+                                if (counting())
+                                    runOnUiThread(runnable);
+                            }
+                        });
+            }
+        });
+        await();
+    }
+
+    @Test
+    public void randomizedWithCaching() throws Throwable {
+        Transformations.clearCache();
+
+        initLatch(COUNT);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                final Runnable runnable = this;
+                Picasso.with(getContext())
+                        .load(android.R.drawable.alert_dark_frame)
+                        .transform(randomize(true))
+                        .into(new TargetTest() {
+                            @Override
+                            void onBitmapLoaded(Bitmap bitmap) throws Throwable {
+                                countdown();
+                                if (counting())
+                                    runOnUiThread(runnable);
+                            }
+                        });
+            }
+        });
+        await();
+    }
+
+    @NonNull
+    public Transformation randomize(boolean withCaching) {
+        switch (random.nextInt(5 - 1 + 1) + 1) {
+            case 1:
+                return withCaching
+                        ? Transformations.square()
+                        : new CropSquareTransformation();
+            case 2:
+                return withCaching
+                        ? Transformations.circle()
+                        : new CropCircleTransformation();
+            case 3:
+                return withCaching
+                        ? Transformations.rounded(25, 25)
+                        : new CropRoundedTransformation(25, 25);
+            case 4:
+                return withCaching
+                        ? Transformations.overlay(Color.RED)
+                        : new ColorOverlayTransformation(Color.RED);
+            case 5:
+                return withCaching
+                        ? Transformations.grayscale()
+                        : new ColorGrayscaleTransformation();
+            default:
+                throw new RuntimeException("random error!");
+        }
+    }
+
+    abstract class TargetTest implements Target {
+
+        abstract void onBitmapLoaded(Bitmap bitmap) throws Throwable;
+
+        @Override
+        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+            try {
+                onBitmapLoaded(bitmap);
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onBitmapFailed(Drawable errorDrawable) {
+        }
+
+        @Override
+        public void onPrepareLoad(Drawable placeHolderDrawable) {
+        }
     }
 }

@@ -7,7 +7,7 @@ Image transformations with Picasso. It uses `WeakHashMap` to cache transformatio
 Download
 --------
 ```gradle
-compile 'io.github.hendraanggrian:picasso-transformations:0.2.0@aar'
+compile 'io.github.hendraanggrian:picasso-transformations:0.3.0@aar'
 ```
 
 Usage
@@ -15,22 +15,26 @@ Usage
 ```java
 Picasso.with(context)
     .load(image)
-    .transform(Transformations.cropCircle())
+    .transform(Transformations.circle())
     .into(target);
 ```
 
 
 Currently Available Transformations
 -----------------------------------
-#### Crop Square
-`Transformations.cropSquare();`
+#### Square
+`Transformations.square();`
 
-#### Crop Circle
-`Transformations.cropCircle();`
+#### Circle
+`Transformations.circle();`
 
-#### Crop Rounded
-`Transformations.cropRounded(int radius, int margin);` to transform to rounded corners in px,
-or use `Transformations.cropRounded(int radius, int margin, boolean useDp);` to use dp.
+#### Rounded
+`Transformations.rounded(int radius, int margin);` to transform to rounded corners in px,
+or use `Transformations.rounded(int radius, int margin, boolean useDp);` to use dp.
+
+#### Overlay
+`Transformations.overlay(int color, int alpha);` to apply color overlay,
+or use `Transformations.cropRounded(Context context, int colorRes, int alpha);` to use color from resources.
 
 #### Grayscale
 `Transformations.grayscale();`
