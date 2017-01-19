@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 
 import io.github.hendraanggrian.picassotransformations.Transformer;
 import io.github.hendraanggrian.picassotransformations.internal.PaintBuilder;
@@ -24,13 +25,15 @@ public class ColorOverlayTransformer extends Transformer {
         this.color = color;
     }
 
+    @NonNull
     @Override
-    public Bitmap transform(Bitmap source) {
+    public Bitmap transform(@NonNull Bitmap source, boolean recycleSource) {
         final Bitmap target = createDefaultBitmap(source);
         new Canvas(target).drawBitmap(source, 0, 0, new PaintBuilder(Paint.ANTI_ALIAS_FLAG)
                 .colorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP))
                 .build());
-        source.recycle();
+        if (recycleSource)
+            source.recycle();
         return target;
     }
 

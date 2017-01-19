@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.support.annotation.NonNull;
 
 import io.github.hendraanggrian.picassotransformations.internal.PaintBuilder;
 
@@ -14,8 +15,9 @@ public class CropCircleTransformer extends CropSquareTransformer {
 
     public static final String TAG = "circle";
 
+    @NonNull
     @Override
-    public Bitmap transform(Bitmap source) {
+    public Bitmap transform(@NonNull Bitmap source, boolean recycleSource) {
         final int size = Math.min(source.getWidth(), source.getHeight());
         final Bitmap squared = super.transform(source);
         final Bitmap circle = createDefaultBitmap(source);
@@ -23,7 +25,8 @@ public class CropCircleTransformer extends CropSquareTransformer {
         new Canvas(circle).drawCircle(r, r, r, new PaintBuilder(Paint.ANTI_ALIAS_FLAG)
                 .shader(new BitmapShader(squared, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP))
                 .build());
-        squared.recycle();
+        if (recycleSource)
+            squared.recycle();
         return circle;
     }
 

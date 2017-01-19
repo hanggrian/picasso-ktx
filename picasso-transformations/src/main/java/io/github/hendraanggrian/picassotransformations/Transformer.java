@@ -33,14 +33,47 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
 public abstract class Transformer implements Transformation {
 
     /**
-     * Creates new <tt>Bitmap</tt> with default configuration. Only used in subclasses of <tt>Transformer</tt>.
+     * Replacement of {@link Transformation#transform(Bitmap)}.
+     * Logic of image transformation should happen here.
+     *
+     * @param source        <tt>Bitmap</tt>, should not be null.
+     * @param recycleSource true if this transformation is used with <tt>Picasso</tt>.
+     * @return transformed <tt>Bitmap</tt>.
+     */
+    @NonNull
+    public abstract Bitmap transform(@NonNull Bitmap source, boolean recycleSource);
+
+    /**
+     * Implemented from <tt>Transformation</tt>.
      *
      * @param source <tt>Bitmap</tt>.
-     * @return empty <tt>Bitmap</tt>.
+     * @return transformed <tt>Bitmap</tt>.
+     */
+    @Override
+    public Bitmap transform(Bitmap source) {
+        return transform(source, true);
+    }
+
+    /**
+     * Creates new <tt>Bitmap</tt> with default configuration. Only used in subclasses of <tt>Transformer</tt>.
+     *
+     * @param source <tt>Bitmap</tt>, should not be null.
+     * @return empty <tt>Bitmap</tt>, never null.
      */
     @NonNull
     protected Bitmap createDefaultBitmap(@NonNull Bitmap source) {
         return Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
+    }
+
+    /**
+     * Transform <tt>Bitmap</tt> to <tt>Bitmap</tt>.
+     *
+     * @param source <tt>Bitmap</tt>, should not be null.
+     * @return <tt>Bitmap</tt>, never null.
+     */
+    @NonNull
+    public Bitmap transformBitmap(@NonNull Bitmap source) {
+        return transform(source, false);
     }
 
     /**
@@ -50,8 +83,8 @@ public abstract class Transformer implements Transformation {
      * @return <tt>Bitmap</tt>, never null.
      */
     @NonNull
-    public Bitmap transform(@NonNull Drawable source) {
-        return transform(((BitmapDrawable) source).getBitmap());
+    public Bitmap transformBitmap(@NonNull Drawable source) {
+        return transformBitmap(((BitmapDrawable) source).getBitmap());
     }
 
     /**
@@ -62,8 +95,8 @@ public abstract class Transformer implements Transformation {
      * @return <tt>Bitmap</tt>, never null.
      */
     @NonNull
-    public Bitmap transform(@NonNull Context context, @DrawableRes int sourceRes) {
-        return transform(ContextCompat.getDrawable(context, sourceRes));
+    public Bitmap transformBitmap(@NonNull Context context, @DrawableRes int sourceRes) {
+        return transformBitmap(ContextCompat.getDrawable(context, sourceRes));
     }
 
     /**
@@ -75,7 +108,7 @@ public abstract class Transformer implements Transformation {
      */
     @NonNull
     public Drawable transformDrawable(@NonNull Context context, @NonNull Bitmap source) {
-        return new BitmapDrawable(context.getResources(), transform(source));
+        return new BitmapDrawable(context.getResources(), transformBitmap(source));
     }
 
     /**
@@ -87,7 +120,7 @@ public abstract class Transformer implements Transformation {
      */
     @NonNull
     public Drawable transformDrawable(@NonNull Context context, @NonNull Drawable source) {
-        return new BitmapDrawable(context.getResources(), transform(source));
+        return new BitmapDrawable(context.getResources(), transformBitmap(source));
     }
 
     /**

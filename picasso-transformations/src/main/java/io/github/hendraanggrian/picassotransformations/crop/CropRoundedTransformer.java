@@ -5,6 +5,7 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.support.annotation.NonNull;
 
 import io.github.hendraanggrian.picassotransformations.Transformer;
 import io.github.hendraanggrian.picassotransformations.internal.PaintBuilder;
@@ -26,15 +27,17 @@ public class CropRoundedTransformer extends Transformer {
         this.margin = margin;
     }
 
+    @NonNull
     @Override
-    public Bitmap transform(Bitmap source) {
+    public Bitmap transform(@NonNull Bitmap source, boolean recycleSource) {
         final float right = source.getWidth() - margin;
         final float bottom = source.getHeight() - margin;
         final Bitmap target = createDefaultBitmap(source);
         new Canvas(target).drawRoundRect(new RectF(margin, margin, right, bottom), radius, radius, new PaintBuilder(Paint.ANTI_ALIAS_FLAG)
                 .shader(new BitmapShader(source, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP))
                 .build());
-        source.recycle();
+        if (recycleSource)
+            source.recycle();
         return target;
     }
 
