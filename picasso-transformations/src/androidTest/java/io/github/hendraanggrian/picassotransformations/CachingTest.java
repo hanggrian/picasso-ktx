@@ -15,11 +15,11 @@ import org.junit.runner.RunWith;
 
 import java.util.Random;
 
-import io.github.hendraanggrian.picassotransformations.color.ColorGrayscaleTransformation;
-import io.github.hendraanggrian.picassotransformations.color.ColorOverlayTransformation;
-import io.github.hendraanggrian.picassotransformations.crop.CropCircleTransformation;
-import io.github.hendraanggrian.picassotransformations.crop.CropRoundedTransformation;
-import io.github.hendraanggrian.picassotransformations.crop.CropSquareTransformation;
+import io.github.hendraanggrian.picassotransformations.color.ColorGrayscaleTransformer;
+import io.github.hendraanggrian.picassotransformations.color.ColorOverlayTransformer;
+import io.github.hendraanggrian.picassotransformations.crop.CropCircleTransformer;
+import io.github.hendraanggrian.picassotransformations.crop.CropRoundedTransformer;
+import io.github.hendraanggrian.picassotransformations.crop.CropSquareTransformer;
 
 /**
  * Made to test whether it's a good idea to keep references of Transformation in {@link java.util.WeakHashMap}.
@@ -42,7 +42,7 @@ public final class CachingTest extends BaseTest {
                 final Runnable runnable = this;
                 Picasso.with(getContext())
                         .load(android.R.drawable.alert_dark_frame)
-                        .transform(new CropCircleTransformation())
+                        .transform(new CropCircleTransformer())
                         .into(new TargetTest() {
                             @Override
                             void onBitmapLoaded(Bitmap bitmap) throws Throwable {
@@ -135,23 +135,23 @@ public final class CachingTest extends BaseTest {
             case 1:
                 return withCaching
                         ? Transformations.square()
-                        : new CropSquareTransformation();
+                        : new CropSquareTransformer();
             case 2:
                 return withCaching
                         ? Transformations.circle()
-                        : new CropCircleTransformation();
+                        : new CropCircleTransformer();
             case 3:
                 return withCaching
                         ? Transformations.rounded(25, 25)
-                        : new CropRoundedTransformation(25, 25);
+                        : new CropRoundedTransformer(25, 25);
             case 4:
                 return withCaching
                         ? Transformations.overlay(Color.RED)
-                        : new ColorOverlayTransformation(Color.RED);
+                        : new ColorOverlayTransformer(Color.RED);
             case 5:
                 return withCaching
                         ? Transformations.grayscale()
-                        : new ColorGrayscaleTransformation();
+                        : new ColorGrayscaleTransformer();
             default:
                 throw new RuntimeException("random error!");
         }

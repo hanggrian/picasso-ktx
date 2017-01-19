@@ -1,22 +1,34 @@
 ![logo](/art/logo.png) Picasso Transformations
 ==============================================
 Image transformations with Picasso. It uses `WeakHashMap` to cache transformations for faster reuse.
+In addition to transform image with Picasso, it can also be used to transform Bitmap to Drawable and vice-versa.
 
 ![demo](/art/demo.gif)
 
 Download
 --------
 ```gradle
-compile 'io.github.hendraanggrian:picasso-transformations:0.3.0@aar'
+compile 'io.github.hendraanggrian:picasso-transformations:0.4.0@aar'
 ```
 
 Usage
 -----
 ```java
+// single transformation
 Picasso.with(context)
     .load(image)
     .transform(Transformations.circle())
     .into(target);
+    
+// multiple transformation
+Picasso.with(context)
+    .load(image)
+    .transform(Arrays.asList(Transformations.circle(), Transformations.grayscale()))
+    .into(target);
+
+// it can also be used without Picasso
+Bitmap bitmap = Transformations.square().transform(this, R.drawable.ic_launcher);
+Drawable drawable = Transformations.overlay(this, R.color.colorAccent).transformDrawable(this, R.drawable.ic_launcher);
 ```
 
 

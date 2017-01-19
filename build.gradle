@@ -45,7 +45,7 @@ ext.bintray = [
         user    : 'hendraanggrian',
         group   : 'io.github.hendraanggrian',
         artifact: 'picasso-transformations',
-        version : '0.3.0',
+        version : '0.4.0',
         desc    : 'Image transformations with Picasso.',
         website : 'https://github.com/hendraanggrian/picasso-transformations'
 ]

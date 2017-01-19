@@ -2,6 +2,8 @@ package io.github.hendraanggrian.picassotransformationsdemo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
         Transformations.setDebug(true);
 
@@ -56,5 +59,12 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
                 .load(R.drawable.bg_test)
                 .transform(transformations)
                 .into(imageView);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        menu.findItem(R.id.item_info).setIcon(Transformations.overlay(this, R.color.colorAccent).transformDrawable(this, android.R.drawable.ic_dialog_info));
+        return true;
     }
 }

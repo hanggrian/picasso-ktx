@@ -9,15 +9,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.ColorUtils;
 import android.util.Log;
 
-import com.squareup.picasso.Transformation;
-
 import java.util.WeakHashMap;
 
-import io.github.hendraanggrian.picassotransformations.color.ColorGrayscaleTransformation;
-import io.github.hendraanggrian.picassotransformations.color.ColorOverlayTransformation;
-import io.github.hendraanggrian.picassotransformations.crop.CropCircleTransformation;
-import io.github.hendraanggrian.picassotransformations.crop.CropRoundedTransformation;
-import io.github.hendraanggrian.picassotransformations.crop.CropSquareTransformation;
+import io.github.hendraanggrian.picassotransformations.color.ColorGrayscaleTransformer;
+import io.github.hendraanggrian.picassotransformations.color.ColorOverlayTransformer;
+import io.github.hendraanggrian.picassotransformations.crop.CropCircleTransformer;
+import io.github.hendraanggrian.picassotransformations.crop.CropRoundedTransformer;
+import io.github.hendraanggrian.picassotransformations.crop.CropSquareTransformer;
 
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
@@ -27,7 +25,7 @@ public final class Transformations {
     private static final String TAG = "Transformations";
     private static boolean DEBUG;
 
-    private static volatile WeakHashMap<String, Transformation> TRANSFORMATIONS;
+    private static volatile WeakHashMap<String, Transformer> TRANSFORMATIONS;
 
     public static void setDebug(boolean debug) {
         DEBUG = debug;
@@ -35,56 +33,56 @@ public final class Transformations {
 
     //region crop
     @NonNull
-    public synchronized static Transformation square() {
-        return get(Key.fromTag(CropSquareTransformation.TAG));
+    public synchronized static Transformer square() {
+        return get(Transformer.Key.fromTag(CropSquareTransformer.TAG));
     }
 
     @NonNull
-    public synchronized static Transformation circle() {
-        return get(Key.fromTag(CropCircleTransformation.TAG));
+    public synchronized static Transformer circle() {
+        return get(Transformer.Key.fromTag(CropCircleTransformer.TAG));
     }
 
     @NonNull
-    public synchronized static Transformation rounded(int radius, int margin) {
+    public synchronized static Transformer rounded(int radius, int margin) {
         return rounded(radius, margin, false);
     }
 
     @NonNull
-    public synchronized static Transformation rounded(int radius, int margin, boolean useDp) {
+    public synchronized static Transformer rounded(int radius, int margin, boolean useDp) {
         return useDp
-                ? get(Key.fromTag(CropRoundedTransformation.TAG)
-                .put("radius", (int) (radius * Resources.getSystem().getDisplayMetrics().density))
-                .put("margin", (int) (margin * Resources.getSystem().getDisplayMetrics().density)))
-                : get(Key.fromTag(CropRoundedTransformation.TAG)
-                .put("radius", radius)
-                .put("margin", margin));
+                ? get(Transformer.Key.fromTag(CropRoundedTransformer.TAG)
+                .put(CropRoundedTransformer.NAME_RADIUS, (int) (radius * Resources.getSystem().getDisplayMetrics().density))
+                .put(CropRoundedTransformer.NAME_MARGIN, (int) (margin * Resources.getSystem().getDisplayMetrics().density)))
+                : get(Transformer.Key.fromTag(CropRoundedTransformer.TAG)
+                .put(CropRoundedTransformer.NAME_RADIUS, radius)
+                .put(CropRoundedTransformer.NAME_MARGIN, margin));
     }
     //endregion
 
     //region color
     @NonNull
-    public synchronized static Transformation overlay(@NonNull Context context, @ColorRes int colorRes) {
+    public synchronized static Transformer overlay(@NonNull Context context, @ColorRes int colorRes) {
         return overlay(ContextCompat.getColor(context, colorRes));
     }
 
     @NonNull
-    public synchronized static Transformation overlay(@NonNull Context context, @ColorRes int colorRes, int alpha) {
+    public synchronized static Transformer overlay(@NonNull Context context, @ColorRes int colorRes, int alpha) {
         return overlay(ContextCompat.getColor(context, colorRes), alpha);
     }
 
     @NonNull
-    public synchronized static Transformation overlay(@ColorInt int color) {
-        return get(Key.fromTag(ColorOverlayTransformation.TAG).put("color", color));
+    public synchronized static Transformer overlay(@ColorInt int color) {
+        return get(Transformer.Key.fromTag(ColorOverlayTransformer.TAG).put(ColorOverlayTransformer.NAME_COLOR, color));
     }
 
     @NonNull
-    public synchronized static Transformation overlay(@ColorInt int color, int alpha) {
-        return get(Key.fromTag(ColorOverlayTransformation.TAG).put("color", ColorUtils.setAlphaComponent(color, alpha)));
+    public synchronized static Transformer overlay(@ColorInt int color, int alpha) {
+        return get(Transformer.Key.fromTag(ColorOverlayTransformer.TAG).put(ColorOverlayTransformer.NAME_COLOR, ColorUtils.setAlphaComponent(color, alpha)));
     }
 
     @NonNull
-    public synchronized static Transformation grayscale() {
-        return get(Key.fromTag(ColorGrayscaleTransformation.TAG));
+    public synchronized static Transformer grayscale() {
+        return get(Transformer.Key.fromTag(ColorGrayscaleTransformer.TAG));
     }
     //endregion
 
@@ -94,7 +92,7 @@ public final class Transformations {
     }
 
     @NonNull
-    private synchronized static Transformation get(@NonNull Key key) {
+    private synchronized static Transformer get(@NonNull Transformer.Key key) {
         if (TRANSFORMATIONS == null) {
             if (DEBUG)
                 Log.d(TAG, "Initializing...");
@@ -108,9 +106,9 @@ public final class Transformations {
         } else {
             if (DEBUG)
                 Log.d(TAG, key + " unavailable, new instance cached.");
-            final Transformation transformation = key.toTransformation();
-            TRANSFORMATIONS.put(key.toString(), transformation);
-            return transformation;
+            final Transformer transformer = key.toTransformer();
+            TRANSFORMATIONS.put(key.toString(), transformer);
+            return transformer;
         }
     }
 }
