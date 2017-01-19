@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-        menu.findItem(R.id.item_info).setIcon(Transformations.overlay(this, R.color.colorAccent).transformDrawable(this, android.R.drawable.ic_dialog_info));
+        menu.findItem(R.id.item_info).setIcon(Transformations.overlay(this, R.color.colorAccent).toDrawable(this, android.R.drawable.ic_dialog_info));
         return true;
     }
 }

@@ -32,6 +32,17 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
  */
 public abstract class Transformer implements Transformation {
 
+    @Retention(SOURCE)
+    @StringDef({
+            CropSquareTransformer.TAG,
+            CropCircleTransformer.TAG,
+            CropRoundedTransformer.TAG,
+            ColorOverlayTransformer.TAG,
+            ColorGrayscaleTransformer.TAG
+    })
+    private @interface Tag {
+    }
+
     /**
      * Replacement of {@link Transformation#transform(Bitmap)}.
      * Logic of image transformation should happen here.
@@ -55,24 +66,13 @@ public abstract class Transformer implements Transformation {
     }
 
     /**
-     * Creates new <tt>Bitmap</tt> with default configuration. Only used in subclasses of <tt>Transformer</tt>.
-     *
-     * @param source <tt>Bitmap</tt>, should not be null.
-     * @return empty <tt>Bitmap</tt>, never null.
-     */
-    @NonNull
-    protected Bitmap createDefaultBitmap(@NonNull Bitmap source) {
-        return Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
-    }
-
-    /**
      * Transform <tt>Bitmap</tt> to <tt>Bitmap</tt>.
      *
      * @param source <tt>Bitmap</tt>, should not be null.
      * @return <tt>Bitmap</tt>, never null.
      */
     @NonNull
-    public Bitmap transformBitmap(@NonNull Bitmap source) {
+    public Bitmap toBitmap(@NonNull Bitmap source) {
         return transform(source, false);
     }
 
@@ -83,8 +83,8 @@ public abstract class Transformer implements Transformation {
      * @return <tt>Bitmap</tt>, never null.
      */
     @NonNull
-    public Bitmap transformBitmap(@NonNull Drawable source) {
-        return transformBitmap(((BitmapDrawable) source).getBitmap());
+    public Bitmap toBitmap(@NonNull Drawable source) {
+        return toBitmap(((BitmapDrawable) source).getBitmap());
     }
 
     /**
@@ -95,8 +95,8 @@ public abstract class Transformer implements Transformation {
      * @return <tt>Bitmap</tt>, never null.
      */
     @NonNull
-    public Bitmap transformBitmap(@NonNull Context context, @DrawableRes int sourceRes) {
-        return transformBitmap(ContextCompat.getDrawable(context, sourceRes));
+    public Bitmap toBitmap(@NonNull Context context, @DrawableRes int sourceRes) {
+        return toBitmap(ContextCompat.getDrawable(context, sourceRes));
     }
 
     /**
@@ -107,8 +107,8 @@ public abstract class Transformer implements Transformation {
      * @return <tt>Drawable</tt>, never null.
      */
     @NonNull
-    public Drawable transformDrawable(@NonNull Context context, @NonNull Bitmap source) {
-        return new BitmapDrawable(context.getResources(), transformBitmap(source));
+    public Drawable toDrawable(@NonNull Context context, @NonNull Bitmap source) {
+        return new BitmapDrawable(context.getResources(), toBitmap(source));
     }
 
     /**
@@ -119,8 +119,8 @@ public abstract class Transformer implements Transformation {
      * @return <tt>Drawable</tt>, never null.
      */
     @NonNull
-    public Drawable transformDrawable(@NonNull Context context, @NonNull Drawable source) {
-        return new BitmapDrawable(context.getResources(), transformBitmap(source));
+    public Drawable toDrawable(@NonNull Context context, @NonNull Drawable source) {
+        return new BitmapDrawable(context.getResources(), toBitmap(source));
     }
 
     /**
@@ -131,8 +131,19 @@ public abstract class Transformer implements Transformation {
      * @return <tt>Drawable</tt>, never null.
      */
     @NonNull
-    public Drawable transformDrawable(@NonNull Context context, @DrawableRes int sourceRes) {
-        return transformDrawable(context, ContextCompat.getDrawable(context, sourceRes));
+    public Drawable toDrawable(@NonNull Context context, @DrawableRes int sourceRes) {
+        return toDrawable(context, ContextCompat.getDrawable(context, sourceRes));
+    }
+
+    /**
+     * Creates new <tt>Bitmap</tt> with default configuration. Only used in subclasses of <tt>Transformer</tt>.
+     *
+     * @param source <tt>Bitmap</tt>, should not be null.
+     * @return empty <tt>Bitmap</tt>, never null.
+     */
+    @NonNull
+    protected Bitmap createDefaultBitmap(@NonNull Bitmap source) {
+        return Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
     }
 
     /**
@@ -217,17 +228,6 @@ public abstract class Transformer implements Transformation {
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
-        }
-
-        @Retention(SOURCE)
-        @StringDef({
-                CropSquareTransformer.TAG,
-                CropCircleTransformer.TAG,
-                CropRoundedTransformer.TAG,
-                ColorOverlayTransformer.TAG,
-                ColorGrayscaleTransformer.TAG
-        })
-        @interface Tag {
         }
 
         /**
