@@ -25,51 +25,48 @@ import io.github.hendraanggrian.picassotransformations.crop.CropSquareTransforme
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 /**
- * Superclass of all <tt>Transformation</tt>. In addition to transforming image with <tt>Picasso</tt>,
- * <tt>Transformer</tt> also transforms <tt>Bitmap</tt> to <tt>Drawable</tt> and vice versa.
+ * Superclass of all <tt>Transformation</tt>.
+ * In addition to function as <tt>Transformation</tt> for <tt>Picasso</tt>,
+ * <tt>Transformer</tt> can also independently transform bitmap to bitmap, bitmap to drawable,
+ * drawable to bitmap, and drawable to drawable using {@code toBitmap()} and {@code toDrawable().}
+ * <p>
+ * Do not explicitly trigger {@code transform()} as it will automatically recycle source bitmap,
+ * {@code transform()} should only be invoked by <tt>Picasso</tt>.
  *
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
 public abstract class Transformer implements Transformation {
 
-    @Retention(SOURCE)
-    @StringDef({
-            CropSquareTransformer.TAG,
-            CropCircleTransformer.TAG,
-            CropRoundedTransformer.TAG,
-            ColorOverlayTransformer.TAG,
-            ColorGrayscaleTransformer.TAG
-    })
-    private @interface Tag {
-    }
-
     /**
-     * Replacement of {@link Transformation#transform(Bitmap)}.
      * Logic of image transformation should happen here.
      *
-     * @param source        <tt>Bitmap</tt>, should not be null.
-     * @param recycleSource true if this transformation is used with <tt>Picasso</tt>.
+     * @param source        bitmap, should not be null.
+     * @param recycleSource true if source bitmap should be recycled,
+     *                      which is a required behavior of {@link Transformation#transform(Bitmap)}.
      * @return transformed <tt>Bitmap</tt>.
      */
     @NonNull
-    public abstract Bitmap transform(@NonNull Bitmap source, boolean recycleSource);
+    protected abstract Bitmap transform(@NonNull Bitmap source, boolean recycleSource);
 
     /**
-     * Implemented from <tt>Transformation</tt>.
+     * Implemented from <tt>Transformation</tt> and should only be invoked by <tt>Picasso</tt>.
+     * Calling this method outside <tt>Picasso</tt> will cause the source bitmap to be recycled and
+     * likely to cause errors.
      *
-     * @param source <tt>Bitmap</tt>.
-     * @return transformed <tt>Bitmap</tt>.
+     * @param source bitmap.
+     * @return transformed bitmap.
      */
+    @NonNull
     @Override
     public Bitmap transform(Bitmap source) {
         return transform(source, true);
     }
 
     /**
-     * Transform <tt>Bitmap</tt> to <tt>Bitmap</tt>.
+     * Transform source bitmap to target bitmap.
      *
-     * @param source <tt>Bitmap</tt>, should not be null.
-     * @return <tt>Bitmap</tt>, never null.
+     * @param source bitmap, should not be null or recycled.
+     * @return bitmap, never null.
      */
     @NonNull
     public Bitmap toBitmap(@NonNull Bitmap source) {
@@ -77,10 +74,10 @@ public abstract class Transformer implements Transformation {
     }
 
     /**
-     * Transform <tt>Drawable</tt> to <tt>Bitmap</tt>.
+     * Transform source drawable to target bitmap.
      *
-     * @param source <tt>Drawable</tt>, should not be null.
-     * @return <tt>Bitmap</tt>, never null.
+     * @param source drawable, should not be null.
+     * @return bitmap, never null.
      */
     @NonNull
     public Bitmap toBitmap(@NonNull Drawable source) {
@@ -88,11 +85,11 @@ public abstract class Transformer implements Transformation {
     }
 
     /**
-     * Transform <tt>Drawable</tt> from resources to <tt>Bitmap</tt>.
+     * Transform source drawable from resources to target bitmap.
      *
-     * @param context   <tt>Context</tt>, should not be null.
-     * @param sourceRes resource id of <tt>Drawable</tt>.
-     * @return <tt>Bitmap</tt>, never null.
+     * @param context   should not be null.
+     * @param sourceRes resource id of drawable.
+     * @return bitmap, never null.
      */
     @NonNull
     public Bitmap toBitmap(@NonNull Context context, @DrawableRes int sourceRes) {
@@ -100,11 +97,11 @@ public abstract class Transformer implements Transformation {
     }
 
     /**
-     * Transform <tt>Bitmap</tt> to <tt>Drawable</tt>.
+     * Transform source bitmap to target drawable.
      *
-     * @param context <tt>Context</tt>, should not be null.
-     * @param source  <tt>Bitmap</tt>, should not be null.
-     * @return <tt>Drawable</tt>, never null.
+     * @param context should not be null.
+     * @param source  bitmap, should not be null or recycled.
+     * @return drawable, never null.
      */
     @NonNull
     public Drawable toDrawable(@NonNull Context context, @NonNull Bitmap source) {
@@ -112,11 +109,11 @@ public abstract class Transformer implements Transformation {
     }
 
     /**
-     * Transform <tt>Drawable</tt> to <tt>Drawable</tt>.
+     * Transform source drawable to target drawable.
      *
-     * @param context <tt>Context</tt>, should not be null.
-     * @param source  <tt>Drawable</tt>, should not be null.
-     * @return <tt>Drawable</tt>, never null.
+     * @param context should not be null.
+     * @param source  drawable, should not be null.
+     * @return drawable, never null.
      */
     @NonNull
     public Drawable toDrawable(@NonNull Context context, @NonNull Drawable source) {
@@ -124,11 +121,11 @@ public abstract class Transformer implements Transformation {
     }
 
     /**
-     * Transform <tt>Drawable</tt> from resources to <tt>Drawable</tt>.
+     * Transform source drawable from resources to target drawable.
      *
-     * @param context   <tt>Context</tt>, should not be null.
-     * @param sourceRes resource id of <tt>Drawable</tt>.
-     * @return <tt>Drawable</tt>, never null.
+     * @param context   should not be null.
+     * @param sourceRes resource id of drawable.
+     * @return drawable, never null.
      */
     @NonNull
     public Drawable toDrawable(@NonNull Context context, @DrawableRes int sourceRes) {
@@ -136,10 +133,10 @@ public abstract class Transformer implements Transformation {
     }
 
     /**
-     * Creates new <tt>Bitmap</tt> with default configuration. Only used in subclasses of <tt>Transformer</tt>.
+     * Creates new bitmap with default configuration, only used in subclasses of <tt>Transformer</tt>.
      *
-     * @param source <tt>Bitmap</tt>, should not be null.
-     * @return empty <tt>Bitmap</tt>, never null.
+     * @param source bitmap, should not be null.
+     * @return empty bitmap, never null.
      */
     @NonNull
     protected Bitmap createDefaultBitmap(@NonNull Bitmap source) {
@@ -147,8 +144,8 @@ public abstract class Transformer implements Transformation {
     }
 
     /**
-     * <tt>JSONObject</tt> with builder pattern that will ultimately be converted to String
-     * that will be passed to {@link Transformation#key()}.
+     * Json object with builder pattern that will ultimately be converted to String for
+     * <tt>Picasso</tt> to use for caching purpose.
      */
     protected static final class Key extends JSONObject {
 
@@ -165,7 +162,7 @@ public abstract class Transformer implements Transformation {
          *
          * @param name  of this value.
          * @param value a json-supported object.
-         * @return this <tt>Key</tt>, never null.
+         * @return this key, never null.
          */
         @NonNull
         @Override
@@ -183,7 +180,7 @@ public abstract class Transformer implements Transformation {
          *
          * @param name  of this value.
          * @param value an int.
-         * @return this <tt>Key</tt>, never null.
+         * @return this key, never null.
          */
         @NonNull
         @Override
@@ -197,7 +194,7 @@ public abstract class Transformer implements Transformation {
         }
 
         /**
-         * Creates a new <tt>Transformation</tt> based on this <tt>Key</tt>'s properties.
+         * Creates a new <tt>Transformation</tt> based on this key's properties.
          *
          * @return a <tt>Transformation</tt>, never null.
          */
@@ -234,10 +231,21 @@ public abstract class Transformer implements Transformation {
          * Build a new key from a tag.
          *
          * @param tag must be one of {@link Tag}.
-         * @return a new <tt>Key</tt>.
+         * @return a new key.
          */
         public static Key fromTag(@NonNull @Tag String tag) {
             return new Key().put(NAME_TAG, tag);
         }
+    }
+
+    @Retention(SOURCE)
+    @StringDef({
+            CropSquareTransformer.TAG,
+            CropCircleTransformer.TAG,
+            CropRoundedTransformer.TAG,
+            ColorOverlayTransformer.TAG,
+            ColorGrayscaleTransformer.TAG
+    })
+    private @interface Tag {
     }
 }

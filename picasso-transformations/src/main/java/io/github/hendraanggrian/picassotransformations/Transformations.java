@@ -18,6 +18,22 @@ import io.github.hendraanggrian.picassotransformations.crop.CropRoundedTransform
 import io.github.hendraanggrian.picassotransformations.crop.CropSquareTransformer;
 
 /**
+ * Image transformations with <tt>Picasso</tt>, built using memory-friendly <tt>WeakHashMap</tt>.
+ * <p>
+ * To use with <tt>Picasso</tt>:
+ * <pre><code>
+ * Picasso.with(context)
+ *      .load(image)
+ *      .transform(Transformations.circle())
+ *      .into(target);
+ * </code></pre>
+ * <p>
+ * To manipulate image outside <tt>Picasso</tt>:
+ * <pre><code>
+ * Bitmap circledBitmap = Transformations.circle().toBitmap(...);
+ * Drawable grayscaleDrawable = Transformations.grayscale().toDrawable(...);
+ * </code></pre>
+ *
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
 public final class Transformations {
