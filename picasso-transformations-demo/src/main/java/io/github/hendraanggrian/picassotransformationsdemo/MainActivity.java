@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -64,7 +65,13 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-        menu.findItem(R.id.item_info).setIcon(Transformations.overlay(this, R.color.colorAccent).toDrawable(this, android.R.drawable.ic_dialog_info));
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.item_info)
+            item.setIcon(Transformations.overlay(this, R.color.colorAccent).toDrawable(this, android.R.drawable.ic_dialog_info));
         return true;
     }
 }

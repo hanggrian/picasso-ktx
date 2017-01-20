@@ -8,7 +8,7 @@ In addition to transform image with Picasso, it can also be used to transform Bi
 Download
 --------
 ```gradle
-compile 'io.github.hendraanggrian:picasso-transformations:0.4.1@aar'
+compile 'io.github.hendraanggrian:picasso-transformations:0.4.2aar'
 ```
 
 Usage
@@ -27,8 +27,8 @@ Picasso.with(context)
     .into(target);
 
 // it can also be used without Picasso
-Bitmap bitmap = Transformations.square().transformBitmap(this, R.drawable.ic_launcher);
-Drawable drawable = Transformations.overlay(this, R.color.colorAccent).transformDrawable(this, R.drawable.ic_launcher);
+Bitmap bitmap = Transformations.square().toBitmap(this, R.drawable.ic_launcher);
+Drawable drawable = Transformations.overlay(this, R.color.colorAccent).toDrawable(this, R.drawable.ic_launcher);
 ```
 
 
