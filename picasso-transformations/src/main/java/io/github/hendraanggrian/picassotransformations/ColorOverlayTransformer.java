@@ -1,4 +1,4 @@
-package io.github.hendraanggrian.picassotransformations.color;
+package io.github.hendraanggrian.picassotransformations;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -6,23 +6,24 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.support.annotation.ColorInt;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
-
-import io.github.hendraanggrian.picassotransformations.Transformer;
-import io.github.hendraanggrian.picassotransformations.internal.PaintBuilder;
 
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-public class ColorOverlayTransformer extends Transformer {
+class ColorOverlayTransformer extends Transformer {
 
-    public static final String TAG = "overlay";
-    public static final String NAME_COLOR = "color";
+    @ColorInt private final int color;
 
-    private int color;
-
-    public ColorOverlayTransformer(@ColorInt int color) {
+    ColorOverlayTransformer(@ColorInt int color) {
         this.color = color;
+    }
+
+    ColorOverlayTransformer(@ColorInt int color, @IntRange(from = 0x0, to = 0xFF) int alpha) {
+        if (alpha < 0 || alpha > 255)
+            throw new IllegalArgumentException("alpha must be between 0 and 255.");
+        this.color = (color & 0x00ffffff) | (alpha << 24);
     }
 
     @NonNull
@@ -39,6 +40,6 @@ public class ColorOverlayTransformer extends Transformer {
 
     @Override
     public String key() {
-        return Key.fromTag(TAG).put(NAME_COLOR, color).toString();
+        return Key.newInstance(this).put("color", color).toString();
     }
 }

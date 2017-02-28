@@ -1,4 +1,4 @@
-package io.github.hendraanggrian.picassotransformations.crop;
+package io.github.hendraanggrian.picassotransformations;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -6,14 +6,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 
-import io.github.hendraanggrian.picassotransformations.internal.PaintBuilder;
-
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-public class CropCircleTransformer extends CropSquareTransformer {
-
-    public static final String TAG = "circle";
+class CropCircleTransformer extends CropSquareTransformer {
 
     @NonNull
     @Override
@@ -31,6 +27,6 @@ public class CropCircleTransformer extends CropSquareTransformer {
 
     @Override
     public String key() {
-        return Key.fromTag(TAG).toString();
+        return Key.newInstance(this).toString();
     }
 }

@@ -1,16 +1,12 @@
-package io.github.hendraanggrian.picassotransformations.crop;
+package io.github.hendraanggrian.picassotransformations;
 
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 
-import io.github.hendraanggrian.picassotransformations.Transformer;
-
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-public class CropSquareTransformer extends Transformer {
-
-    public static final String TAG = "square";
+class CropSquareTransformer extends Transformer {
 
     @NonNull
     @Override
@@ -28,6 +24,6 @@ public class CropSquareTransformer extends Transformer {
 
     @Override
     public String key() {
-        return Key.fromTag(TAG).toString();
+        return Key.newInstance(this).toString();
     }
 }

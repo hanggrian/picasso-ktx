@@ -1,6 +1,6 @@
 ![logo](/art/logo.png) Picasso Transformations
 ==============================================
-Image transformations with Picasso. It uses `WeakHashMap` to cache transformations for faster reuse.
+Image transformations with Picasso.
 In addition to transform image with Picasso, it can also be used to transform Bitmap to Drawable and vice-versa.
 
 ![demo](/art/demo.gif)
@@ -8,7 +8,7 @@ In addition to transform image with Picasso, it can also be used to transform Bi
 Download
 --------
 ```gradle
-compile 'io.github.hendraanggrian:picasso-transformations:0.4.2aar'
+compile 'io.github.hendraanggrian:picasso-transformations:0.5.0aar'
 ```
 
 Usage

@@ -1,4 +1,4 @@
-package io.github.hendraanggrian.picassotransformations.color;
+package io.github.hendraanggrian.picassotransformations;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -6,15 +6,10 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.support.annotation.NonNull;
 
-import io.github.hendraanggrian.picassotransformations.Transformer;
-import io.github.hendraanggrian.picassotransformations.internal.PaintBuilder;
-
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-public class ColorGrayscaleTransformer extends Transformer {
-
-    public static final String TAG = "grayscale";
+class ColorGrayscaleTransformer extends Transformer {
 
     @NonNull
     @Override
@@ -32,6 +27,6 @@ public class ColorGrayscaleTransformer extends Transformer {
 
     @Override
     public String key() {
-        return Key.fromTag(TAG).toString();
+        return Key.newInstance(this).toString();
     }
 }

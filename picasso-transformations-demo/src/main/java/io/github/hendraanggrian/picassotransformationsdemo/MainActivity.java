@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         setContentView(R.layout.activity_main);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
-        Transformations.setDebug(true);
-
         imageView = (ImageView) findViewById(R.id.imageview);
         checkBox_CropSquare = (CheckBox) findViewById(R.id.checkbox_cropsquare);
         checkBox_CropCircle = (CheckBox) findViewById(R.id.checkbox_cropcircle);

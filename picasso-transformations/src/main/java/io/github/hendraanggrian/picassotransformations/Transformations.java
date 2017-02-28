@@ -4,21 +4,12 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.ColorUtils;
-import android.util.Log;
-
-import java.util.WeakHashMap;
-
-import io.github.hendraanggrian.picassotransformations.color.ColorGrayscaleTransformer;
-import io.github.hendraanggrian.picassotransformations.color.ColorOverlayTransformer;
-import io.github.hendraanggrian.picassotransformations.crop.CropCircleTransformer;
-import io.github.hendraanggrian.picassotransformations.crop.CropRoundedTransformer;
-import io.github.hendraanggrian.picassotransformations.crop.CropSquareTransformer;
 
 /**
- * Image transformations with <tt>Picasso</tt>, built using memory-friendly <tt>WeakHashMap</tt>.
+ * Image transformations with <tt>Picasso</tt>.
  * <p>
  * To use with <tt>Picasso</tt>:
  * <pre><code>
@@ -38,93 +29,55 @@ import io.github.hendraanggrian.picassotransformations.crop.CropSquareTransforme
  */
 public final class Transformations {
 
-    private static final String TAG = "Transformations";
-    private static boolean DEBUG;
-
-    private static volatile WeakHashMap<String, Transformer> TRANSFORMATIONS;
-
-    public static void setDebug(boolean debug) {
-        DEBUG = debug;
-    }
-
     //region crop
     @NonNull
-    public synchronized static Transformer square() {
-        return get(Transformer.Key.fromTag(CropSquareTransformer.TAG));
+    public static Transformer square() {
+        return new CropSquareTransformer();
     }
 
     @NonNull
-    public synchronized static Transformer circle() {
-        return get(Transformer.Key.fromTag(CropCircleTransformer.TAG));
+    public static Transformer circle() {
+        return new CropCircleTransformer();
     }
 
     @NonNull
-    public synchronized static Transformer rounded(int radius, int margin) {
+    public static Transformer rounded(int radius, int margin) {
         return rounded(radius, margin, false);
     }
 
     @NonNull
-    public synchronized static Transformer rounded(int radius, int margin, boolean useDp) {
-        return useDp
-                ? get(Transformer.Key.fromTag(CropRoundedTransformer.TAG)
-                .put(CropRoundedTransformer.NAME_RADIUS, (int) (radius * Resources.getSystem().getDisplayMetrics().density))
-                .put(CropRoundedTransformer.NAME_MARGIN, (int) (margin * Resources.getSystem().getDisplayMetrics().density)))
-                : get(Transformer.Key.fromTag(CropRoundedTransformer.TAG)
-                .put(CropRoundedTransformer.NAME_RADIUS, radius)
-                .put(CropRoundedTransformer.NAME_MARGIN, margin));
+    public static Transformer rounded(int radius, int margin, boolean useDp) {
+        return new CropRoundedTransformer(
+                useDp ? (int) (radius * Resources.getSystem().getDisplayMetrics().density) : radius,
+                useDp ? (int) (margin * Resources.getSystem().getDisplayMetrics().density) : margin
+        );
     }
     //endregion
 
     //region color
     @NonNull
-    public synchronized static Transformer overlay(@NonNull Context context, @ColorRes int colorRes) {
+    public static Transformer overlay(@NonNull Context context, @ColorRes int colorRes) {
         return overlay(ContextCompat.getColor(context, colorRes));
     }
 
     @NonNull
-    public synchronized static Transformer overlay(@NonNull Context context, @ColorRes int colorRes, int alpha) {
+    public static Transformer overlay(@NonNull Context context, @ColorRes int colorRes, int alpha) {
         return overlay(ContextCompat.getColor(context, colorRes), alpha);
     }
 
     @NonNull
-    public synchronized static Transformer overlay(@ColorInt int color) {
-        return get(Transformer.Key.fromTag(ColorOverlayTransformer.TAG).put(ColorOverlayTransformer.NAME_COLOR, color));
+    public static Transformer overlay(@ColorInt int color) {
+        return new ColorOverlayTransformer(color);
     }
 
     @NonNull
-    public synchronized static Transformer overlay(@ColorInt int color, int alpha) {
-        return get(Transformer.Key.fromTag(ColorOverlayTransformer.TAG).put(ColorOverlayTransformer.NAME_COLOR, ColorUtils.setAlphaComponent(color, alpha)));
+    public static Transformer overlay(@ColorInt int color, @IntRange(from = 0x0, to = 0xFF) int alpha) {
+        return new ColorOverlayTransformer(color, alpha);
     }
 
     @NonNull
-    public synchronized static Transformer grayscale() {
-        return get(Transformer.Key.fromTag(ColorGrayscaleTransformer.TAG));
+    public static Transformer grayscale() {
+        return new ColorGrayscaleTransformer();
     }
     //endregion
-
-    static void clearCache() {
-        if (TRANSFORMATIONS != null)
-            TRANSFORMATIONS.clear();
-    }
-
-    @NonNull
-    private synchronized static Transformer get(@NonNull Transformer.Key key) {
-        if (TRANSFORMATIONS == null) {
-            if (DEBUG)
-                Log.d(TAG, "Initializing...");
-            TRANSFORMATIONS = new WeakHashMap<>();
-        }
-
-        if (TRANSFORMATIONS.containsKey(key.toString())) {
-            if (DEBUG)
-                Log.d(TAG, key + " is available.");
-            return TRANSFORMATIONS.get(key.toString());
-        } else {
-            if (DEBUG)
-                Log.d(TAG, key + " unavailable, new instance cached.");
-            final Transformer transformer = key.toTransformer();
-            TRANSFORMATIONS.put(key.toString(), transformer);
-            return transformer;
-        }
-    }
 }

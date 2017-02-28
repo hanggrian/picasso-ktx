@@ -1,4 +1,4 @@
-package io.github.hendraanggrian.picassotransformations.internal;
+package io.github.hendraanggrian.picassotransformations;
 
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
@@ -9,30 +9,30 @@ import android.support.annotation.Nullable;
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-public class PaintBuilder {
+class PaintBuilder {
 
     @Nullable private Integer flag;
     @Nullable private ColorFilter colorFilter;
     @Nullable private Shader shader;
 
-    public PaintBuilder() {
+    PaintBuilder() {
     }
 
-    public PaintBuilder(int flag) {
+    PaintBuilder(int flag) {
         this.flag = flag;
     }
 
-    public PaintBuilder colorFilter(@NonNull ColorFilter colorFilter) {
+    PaintBuilder colorFilter(@NonNull ColorFilter colorFilter) {
         this.colorFilter = colorFilter;
         return this;
     }
 
-    public PaintBuilder shader(@NonNull Shader shader) {
+    PaintBuilder shader(@NonNull Shader shader) {
         this.shader = shader;
         return this;
     }
 
-    public Paint build() {
+    Paint build() {
         final Paint paint = flag != null
                 ? new Paint(flag)
                 : new Paint();
