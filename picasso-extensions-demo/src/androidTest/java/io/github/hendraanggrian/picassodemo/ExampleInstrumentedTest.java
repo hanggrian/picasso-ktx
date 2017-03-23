@@ -1,4 +1,4 @@
-package io.github.hendraanggrian.picassotransformationsdemo;
+package io.github.hendraanggrian.picassodemo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

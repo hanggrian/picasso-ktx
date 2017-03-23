@@ -1,87 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="io.github.hendraanggrian.picassotransformationsdemo.MainActivity">
+    tools:context="io.github.hendraanggrian.picassodemo.MainActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            app:subtitle="Picasso Transformations"
-            app:title="Demo"/>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
-
-            <ImageView
-                android:id="@+id/imageview"
-                android:layout_width="match_parent"
-                android:layout_height="256dp"
-                android:src="@drawable/bg_test"/>
-        </FrameLayout>
+            android:layout_height="?attr/actionBarSize"
+            app:title="Picasso Extensions"/>
     </android.support.design.widget.AppBarLayout>
 
-    <ScrollView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <CheckBox
-                android:id="@+id/checkbox_cropsquare"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="cropSquare()"
-                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"/>
-
-            <CheckBox
-                android:id="@+id/checkbox_cropcircle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="cropCircle()"
-                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"/>
-
-            <CheckBox
-                android:id="@+id/checkbox_croprounded"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="cropRounded()"
-                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"/>
-
-            <CheckBox
-                android:id="@+id/checkbox_colorOverlay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="colorOverlay()"
-                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"/>
-
-            <CheckBox
-                android:id="@+id/checkbox_grayscale"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="grayscale()"
-                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"/>
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+</android.support.design.widget.CoordinatorLayout>

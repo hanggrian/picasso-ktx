@@ -1,4 +1,4 @@
-package io.github.hendraanggrian.picassotransformationsdemo;
+package io.github.hendraanggrian.picassodemo;
 
 import org.junit.Test;
 
