@@ -1,1 +1,2 @@
-include ':picasso-transformations', ':picasso-transformations-demo'
+include ':picasso-extensions'
+include ':picasso-extensions-demo'
