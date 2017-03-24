@@ -54,7 +54,8 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
 
                 Picasso.with(this)
                         .load(editText.getText().toString())
-                        .into(Targets.background(view, Targets.SCALE_CENTER_INSIDE));
+                        .placeholder(R.mipmap.ic_launcher)
+                        .into(Targets.background(Targets.SCALE_CENTER_INSIDE, view));
                 break;
         }
     }

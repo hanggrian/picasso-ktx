@@ -7,27 +7,45 @@ Download
 Library are hosted in [jCenter](https://bintray.com/hendraanggrian/maven/picasso-extensions).
 
 ```gradle
-compile 'io.github.hendraanggrian:picasso-extensions:0.6.2'
+compile 'io.github.hendraanggrian:picasso-extensions:0.7.0'
 ```
 
-Target
-------
+Targets
+-------
 ![demo_target](/art/demo_target.gif)
 
-Automatically put progress bar while loading image.
+Target one or more ImageView or View's background with custom placeholder, or pre-loaded ProgressBar.
 
 ```java
 Picasso.with(context)
     .load(url)
-    .target(Targets.progress(imageView));
-
-// some options
-Targets.progress(imageView, true); // to animate
-Targets.progress(imageView).callback(callback); // to listen to Picasso events, may be Callback or Target.
+    .target(Targets.image(imageView).placeholder(Targets.PLACEHOLDER_PROGRESS));
 ```
 
-Transformation
---------------
+|          |                           ImageView's source                          |                                                                       View's background                                                                      |
+|----------|:---------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| single   | Targets.image(imageView)                                              | Targets.background(view)<br> Targets.background(scaleType, view)                                                                                             |
+| multiple | Targets.images(imageViews)<br> Targets.images(imageView1, imageView2) | Targets.backgrounds(views)<br> Targets.background(scaleType, views)<br> Targets.background(view1, view2)<br> Targets.background(scaleType, view1, view2)<br> |
+
+### Callback (single & multiple)
+Listen to Picasso events with Targets.
+ * `Targets.callback(OnBitmapLoaded, OnBitmapFailed, OnPrepareLoad)` - individual listeners mimicking Picasso Target
+ * `Targets.callback(OnBitmapLoaded, OnBitmapFailed)` - only listen to success & failed
+ * `Targets.callback(OnBitmapLoaded)` - only listen to success
+ * `Targets.callback(com.squareup.picasso.Target)` - native Picasso's Target
+ * `Targets.callback(com.squareup.picasso.Callback)` - native Picasso's Callback
+ 
+### Placeholder (single only)
+Display a temporary view that will be removed once Picasso has finished/failed to load the image.
+ * `Targets.placeholder(Targets.PLACEHOLDER_PROGRESS)` - progress bar placeholder
+ * `Targets.placeholder(view)` - custom view
+
+### Disable animation (single only)
+By default, animation are enabled (if not yet already enabled) by `LayoutTransition`.
+If this is not the expected behavior, manually disable it by calling `Targets.disableAnimation()`.
+
+Transformations
+---------------
 ![demo_transformation](/art/demo_transformation.gif)
 
 ```java
@@ -48,21 +66,10 @@ Bitmap bitmap = Transformations.square().toBitmap(this, R.drawable.ic_launcher);
 Drawable drawable = Transformations.overlay(this, R.color.colorAccent).toDrawable(this, R.drawable.ic_launcher);
 ```
 
-### Currently available transformations
-
-#### Square
-`Transformations.square();`
-
-#### Circle
-`Transformations.circle();`
-
-#### Rounded
-`Transformations.rounded(int radius, int margin);` to transform to rounded corners in px,
-or use `Transformations.rounded(int radius, int margin, boolean useDp);` to use dp.
-
-#### Overlay
-`Transformations.overlay(int color, int alpha);` to apply color overlay,
-or use `Transformations.cropRounded(Context context, int colorRes, int alpha);` to use color from resources.
-
-#### Grayscale
-`Transformations.grayscale();`
+|              |                                                         Transformations                                                         |
+|--------------|:-------------------------------------------------------------------------------------------------------------------------------:|
+| crop square  | Transformations.square()                                                                                                        |
+| crop circle  | Transformations.circle()                                                                                                        |
+| crop rounded | Transformations.rounded(radius)<br> Transformations.rounded(radius, margin)<br> Transformations.rounded(radius, margin, usedDp) |
+| overlay      | Transformations.overlay(color, alpha)<br> Transformations.overlay(context, colorRes, alpha)                                     |
+| grayscale    | Transformations.grayscale()                                                                                                     |

@@ -15,11 +15,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.hendraanggrian.picasso.target.Targets;
+import io.github.hendraanggrian.picasso.target.callback.OnBitmapFailed;
+import io.github.hendraanggrian.picasso.target.callback.OnBitmapLoaded;
+import io.github.hendraanggrian.picasso.target.callback.OnPrepareLoad;
 
 public class TargetActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -59,17 +61,17 @@ public class TargetActivity extends AppCompatActivity implements View.OnClickLis
 
                 Picasso.with(this)
                         .load(editText.getText().toString())
-                        .into(Targets.progress(imageView, true).callback(new Target() {
+                        .into(Targets.image(imageView).placeholder(Targets.PLACEHOLDER_PROGRESS).callback(new OnBitmapLoaded() {
                             @Override
                             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                                 Toast.makeText(TargetActivity.this, "Image successfully loaded.", Toast.LENGTH_SHORT).show();
                             }
-
+                        }, new OnBitmapFailed() {
                             @Override
                             public void onBitmapFailed(Drawable errorDrawable) {
                                 Toast.makeText(TargetActivity.this, "Image failed to load.", Toast.LENGTH_SHORT).show();
                             }
-
+                        }, new OnPrepareLoad() {
                             @Override
                             public void onPrepareLoad(Drawable placeHolderDrawable) {
                                 Toast.makeText(TargetActivity.this, "Picasso started loading.", Toast.LENGTH_SHORT).show();
