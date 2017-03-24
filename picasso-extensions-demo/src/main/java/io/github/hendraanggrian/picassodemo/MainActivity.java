@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new Adapter(this, Item.values()));
+
+        startActivity(new Intent(this, TestActivity.class));
     }
 
     static class Adapter extends RecyclerView.Adapter<Adapter.Holder> {

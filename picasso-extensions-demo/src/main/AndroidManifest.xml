@@ -18,8 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".TransformationActivity"/>
-        <activity android:name=".TargetActivity">
-        </activity>
+        <activity android:name=".TargetActivity"/>
+        <activity android:name=".TestActivity"/>
     </application>
 
 </manifest>

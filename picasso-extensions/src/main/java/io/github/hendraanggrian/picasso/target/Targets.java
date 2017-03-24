@@ -13,29 +13,39 @@ import android.widget.ProgressBar;
  */
 public final class Targets {
 
+    public static final int SCALE_DEFAULT = 0;
+    public static final int SCALE_CENTER_INSIDE = 1;
+
     @NonNull
-    public static PlaceholderTarget custom(@NonNull ImageView imageView, @NonNull View view) {
-        return custom(imageView, view, false);
+    public static Targeter background(@NonNull View view) {
+        return background(view, SCALE_DEFAULT);
     }
 
     @NonNull
-    public static PlaceholderTarget custom(@NonNull ImageView imageView, @NonNull View view, boolean animate) {
-        return new PlaceholderTarget(imageView, view, animate);
+    public static Targeter background(@NonNull View view, int scale) {
+        return new BackgroundTargeter(view, scale);
     }
 
     @NonNull
-    public static PlaceholderTarget progress(@NonNull ImageView imageView) {
+    public static Targeter progress(@NonNull ImageView imageView) {
         return progress(imageView, false);
     }
 
     @NonNull
-    public static PlaceholderTarget progress(@NonNull ImageView imageView, boolean animate) {
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.gravity = Gravity.CENTER;
-
+    public static Targeter progress(@NonNull ImageView imageView, boolean animate) {
         ProgressBar progressBar = new ProgressBar(imageView.getContext());
-        progressBar.setLayoutParams(layoutParams);
+        progressBar.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        ((FrameLayout.LayoutParams) progressBar.getLayoutParams()).gravity = Gravity.CENTER;
+        return new PlaceholderTargeter(imageView, progressBar, animate);
+    }
 
-        return new PlaceholderTarget(imageView, progressBar, animate);
+    @NonNull
+    public static Targeter customPlaceholder(@NonNull ImageView imageView, @NonNull View view) {
+        return customPlaceholder(imageView, view, false);
+    }
+
+    @NonNull
+    public static Targeter customPlaceholder(@NonNull ImageView imageView, @NonNull View view, boolean animate) {
+        return new PlaceholderTargeter(imageView, view, animate);
     }
 }
