@@ -20,7 +20,7 @@ task clean(type: Delete) {
 
 ext.android = [
         sdk       : [
-                'min'   : 9,
+                'min'   : 11,
                 'target': 25
         ],
         buildTools: '25.0.2',
@@ -45,8 +45,8 @@ ext.bintray = [
         user    : 'hendraanggrian',
         group   : 'io.github.hendraanggrian',
         artifact: 'picasso-extensions',
-        version : '0.5.0',
-        desc    : 'Image transformations with Picasso.',
+        version : '0.6.1',
+        desc    : 'Image manipulation with pre-loaded transformations and target placeholder.',
         website : 'https://github.com/hendraanggrian/picasso-extensions'
 ]
 

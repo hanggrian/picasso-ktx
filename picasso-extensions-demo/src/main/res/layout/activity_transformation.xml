@@ -18,7 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             app:navigationIcon="?homeAsUpIndicator"
-            app:subtitle="Extended"
             app:title="Transformations"/>
 
         <FrameLayout

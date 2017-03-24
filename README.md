@@ -1,18 +1,35 @@
 ![logo](/art/logo.png) Picasso Transformations
 ==============================================
-Image transformations with Picasso.
-In addition to transform image with Picasso, it can also be used to transform Bitmap to Drawable and vice-versa.
-
-![demo](/art/demo.gif)
+Image manipulation with pre-loaded transformations and target placeholder.
 
 Download
 --------
+Library are hosted in [jCenter](https://bintray.com/hendraanggrian/maven/picasso-extensions).
+
 ```gradle
-compile 'io.github.hendraanggrian:picasso-transformations:0.5.0aar'
+compile 'io.github.hendraanggrian:picasso-extensions:0.6.1'
 ```
 
-Usage
------
+Target
+------
+![demo_target](/art/demo_target.gif)
+
+Automatically put progress bar while loading image.
+
+```java
+Picasso.with(context)
+    .load(url)
+    .target(Targets.progress(imageView));
+
+// some options
+Targets.progress(imageView, true); // to animate
+Targets.progress(imageView).callback(callback); // to listen to Picasso events, may be Callback or Target.
+```
+
+Transformation
+--------------
+![demo_transformation](/art/demo_transformation.gif)
+
 ```java
 // single transformation
 Picasso.with(context)
@@ -31,9 +48,8 @@ Bitmap bitmap = Transformations.square().toBitmap(this, R.drawable.ic_launcher);
 Drawable drawable = Transformations.overlay(this, R.color.colorAccent).toDrawable(this, R.drawable.ic_launcher);
 ```
 
+### Currently available transformations
 
-Currently Available Transformations
------------------------------------
 #### Square
 `Transformations.square();`
 
