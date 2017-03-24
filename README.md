@@ -1,5 +1,5 @@
-![logo](/art/logo.png) Picasso Transformations
-==============================================
+![logo](/art/logo.png) Picasso Extensions
+=========================================
 Image manipulation with pre-loaded transformations and target placeholder.
 
 Download
