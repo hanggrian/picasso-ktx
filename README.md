@@ -7,7 +7,7 @@ Download
 Library are hosted in [jCenter](https://bintray.com/hendraanggrian/maven/picasso-extensions).
 
 ```gradle
-compile 'io.github.hendraanggrian:picasso-extensions:0.7.0'
+compile 'io.github.hendraanggrian:picasso-extensions:0.7.1'
 ```
 
 Targets

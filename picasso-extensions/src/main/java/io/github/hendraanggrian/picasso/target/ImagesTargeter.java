@@ -10,23 +10,23 @@ import com.squareup.picasso.Picasso;
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-class ImagesTarget extends MultipleTarget<Iterable<ImageView>> {
+class ImagesTargeter extends MultipleTargeter<Iterable<ImageView>> {
 
-    ImagesTarget(@NonNull Iterable<ImageView> imageViews) {
+    ImagesTargeter(@NonNull Iterable<ImageView> imageViews) {
         super(imageViews);
     }
 
     @Override
     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-        super.onBitmapLoaded(bitmap, from);
         for (ImageView imageView : getTarget())
             imageView.setImageBitmap(bitmap);
+        super.onBitmapLoaded(bitmap, from);
     }
 
     @Override
     public void onBitmapFailed(Drawable errorDrawable) {
-        super.onBitmapFailed(errorDrawable);
         for (ImageView imageView : getTarget())
             imageView.setImageDrawable(errorDrawable);
+        super.onBitmapFailed(errorDrawable);
     }
 }

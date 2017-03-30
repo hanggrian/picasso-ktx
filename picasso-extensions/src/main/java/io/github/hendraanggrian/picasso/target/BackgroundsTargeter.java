@@ -13,28 +13,28 @@ import com.squareup.picasso.Picasso;
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-class BackgroundsTarget extends MultipleTarget<Iterable<View>> {
+class BackgroundsTargeter extends MultipleTargeter<Iterable<View>> {
 
     @NonNull private final Scale scale;
 
-    BackgroundsTarget(int scaleCode, @NonNull Iterable<View> views) {
+    BackgroundsTargeter(int scaleCode, @NonNull Iterable<View> views) {
         super(views);
         this.scale = Scale.valueOf(scaleCode);
     }
 
     @Override
     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-        super.onBitmapLoaded(bitmap, from);
         for (View view : getTarget()) {
             Bitmap manipulated = scale.manipulate(bitmap, view.getWidth(), view.getHeight());
             ViewCompat.setBackground(view, new BitmapDrawable(Resources.getSystem(), manipulated));
         }
+        super.onBitmapLoaded(bitmap, from);
     }
 
     @Override
     public void onBitmapFailed(Drawable errorDrawable) {
-        super.onBitmapFailed(errorDrawable);
         for (View view : getTarget())
             ViewCompat.setBackground(view, errorDrawable);
+        super.onBitmapFailed(errorDrawable);
     }
 }

@@ -18,19 +18,16 @@ import io.github.hendraanggrian.picasso.internal.ViewGroupUtils;
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-public abstract class SingleTarget<View extends android.view.View> extends BaseTarget<View> {
+public abstract class SingleTargeter<View extends android.view.View> extends Targeter<View> {
 
     @NonNull private final ViewGroup placeholderContainer;
 
-    public SingleTarget(@NonNull View view) {
+    public SingleTargeter(@NonNull View view) {
         super(view);
         getTarget().setTag(this);
         placeholderContainer = new FrameLayout(view.getContext());
         placeholderContainer.setLayoutParams(view.getLayoutParams());
-
-        ViewGroup parent = ViewGroupUtils.getParent(view);
-        if (parent != null && parent.getLayoutTransition() == null)
-            parent.setLayoutTransition(new LayoutTransition());
+        transition(true);
     }
 
     @Override
@@ -40,19 +37,18 @@ public abstract class SingleTarget<View extends android.view.View> extends BaseT
 
     @Override
     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-        super.onBitmapLoaded(bitmap, from);
         ViewGroupUtils.replaceView(placeholderContainer, getTarget());
+        super.onBitmapLoaded(bitmap, from);
     }
 
     @Override
     public void onBitmapFailed(Drawable errorDrawable) {
-        super.onBitmapFailed(errorDrawable);
         ViewGroupUtils.replaceView(placeholderContainer, getTarget());
+        super.onBitmapFailed(errorDrawable);
     }
 
     @Override
     public final void onPrepareLoad(Drawable placeHolderDrawable) {
-        super.onPrepareLoad(placeHolderDrawable);
         if (placeHolderDrawable != null) {
             ImageView imageView = new ImageView(getTarget().getContext());
             imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -60,25 +56,29 @@ public abstract class SingleTarget<View extends android.view.View> extends BaseT
             placeholderContainer.addView(imageView, 0);
         }
         ViewGroupUtils.replaceView(getTarget(), placeholderContainer);
+        super.onPrepareLoad(placeHolderDrawable);
     }
 
     @NonNull
-    public SingleTarget<View> placeholder(@Targets.PlaceholderCode int placeholderCode) {
+    public SingleTargeter<View> placeholder(@Targets.PlaceholderCode int placeholderCode) {
         return placeholder(Placeholder.valueOf(placeholderCode).toView(getTarget().getContext()));
     }
 
     @NonNull
-    public SingleTarget<View> placeholder(@NonNull android.view.View placeholderView) {
+    public SingleTargeter<View> placeholder(@NonNull android.view.View placeholderView) {
         placeholderContainer.removeAllViews();
         placeholderContainer.addView(placeholderView);
         return this;
     }
 
     @NonNull
-    public SingleTarget<View> disableTransition() {
+    public SingleTargeter<View> transition(boolean enable) {
         ViewGroup parent = ViewGroupUtils.getParent(getTarget());
         if (parent != null)
-            parent.setLayoutTransition(null);
+            if (enable && parent.getLayoutTransition() == null)
+                parent.setLayoutTransition(new LayoutTransition());
+            else if (!enable)
+                parent.setLayoutTransition(null);
         return this;
     }
 

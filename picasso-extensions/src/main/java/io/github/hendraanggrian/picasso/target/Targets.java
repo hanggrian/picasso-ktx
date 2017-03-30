@@ -20,48 +20,48 @@ public final class Targets {
     public static final int SCALE_CENTER_INSIDE = 1;
 
     @NonNull
-    public static SingleTarget<ImageView> image(@NonNull ImageView imageView) {
-        return new ImageTarget(imageView);
+    public static SingleTargeter<ImageView> image(@NonNull ImageView imageView) {
+        return new ImageTargeter(imageView);
     }
 
     @NonNull
-    public static SingleTarget<View> background(@NonNull View view) {
+    public static SingleTargeter<View> background(@NonNull View view) {
         return background(SCALE_NO_SCALING, view);
     }
 
     @NonNull
-    public static SingleTarget<View> background(@ScaleCode int scale, @NonNull View view) {
-        return new BackgroundTarget(scale, view);
+    public static SingleTargeter<View> background(@ScaleCode int scale, @NonNull View view) {
+        return new BackgroundTargeter(scale, view);
     }
 
     @NonNull
-    public static MultipleTarget<Iterable<ImageView>> images(@NonNull ImageView... imageViews) {
+    public static MultipleTargeter<Iterable<ImageView>> images(@NonNull ImageView... imageViews) {
         return images(Arrays.asList(imageViews));
     }
 
     @NonNull
-    public static MultipleTarget<Iterable<ImageView>> images(@NonNull Iterable<ImageView> imageViews) {
-        return new ImagesTarget(imageViews);
+    public static MultipleTargeter<Iterable<ImageView>> images(@NonNull Iterable<ImageView> imageViews) {
+        return new ImagesTargeter(imageViews);
     }
 
     @NonNull
-    public static MultipleTarget<Iterable<View>> backgrounds(@NonNull View... views) {
+    public static MultipleTargeter<Iterable<View>> backgrounds(@NonNull View... views) {
         return backgrounds(SCALE_NO_SCALING, views);
     }
 
     @NonNull
-    public static MultipleTarget<Iterable<View>> backgrounds(@NonNull Iterable<View> views) {
+    public static MultipleTargeter<Iterable<View>> backgrounds(@NonNull Iterable<View> views) {
         return backgrounds(SCALE_NO_SCALING, views);
     }
 
     @NonNull
-    public static MultipleTarget<Iterable<View>> backgrounds(@ScaleCode int scale, @NonNull View... views) {
+    public static MultipleTargeter<Iterable<View>> backgrounds(@ScaleCode int scale, @NonNull View... views) {
         return backgrounds(scale, Arrays.asList(views));
     }
 
     @NonNull
-    public static MultipleTarget<Iterable<View>> backgrounds(@ScaleCode int scale, @NonNull Iterable<View> views) {
-        return new BackgroundsTarget(scale, views);
+    public static MultipleTargeter<Iterable<View>> backgrounds(@ScaleCode int scale, @NonNull Iterable<View> views) {
+        return new BackgroundsTargeter(scale, views);
     }
 
     @Retention(RetentionPolicy.SOURCE)

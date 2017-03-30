@@ -10,21 +10,21 @@ import com.squareup.picasso.Picasso;
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-class ImageTarget extends SingleTarget<ImageView> {
+class ImageTargeter extends SingleTargeter<ImageView> {
 
-    ImageTarget(@NonNull ImageView view) {
+    ImageTargeter(@NonNull ImageView view) {
         super(view);
     }
 
     @Override
     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-        super.onBitmapLoaded(bitmap, from);
         getTarget().setImageBitmap(bitmap);
+        super.onBitmapLoaded(bitmap, from);
     }
 
     @Override
     public void onBitmapFailed(Drawable errorDrawable) {
-        super.onBitmapFailed(errorDrawable);
         getTarget().setImageDrawable(errorDrawable);
+        super.onBitmapFailed(errorDrawable);
     }
 }

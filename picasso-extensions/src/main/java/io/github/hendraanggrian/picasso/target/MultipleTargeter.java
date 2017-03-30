@@ -6,9 +6,9 @@ import android.view.View;
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-public class MultipleTarget<Views extends Iterable<? extends View>> extends BaseTarget<Views> {
+public abstract class MultipleTargeter<Views extends Iterable<? extends View>> extends Targeter<Views> {
 
-    public MultipleTarget(@NonNull Views views) {
+    public MultipleTargeter(@NonNull Views views) {
         super(views);
     }
 

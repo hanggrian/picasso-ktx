@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -19,21 +20,21 @@ import io.github.hendraanggrian.picasso.target.callback.OnPrepareLoad;
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-public abstract class BaseTarget<T> implements Target {
+public abstract class Targeter<T> implements Target {
 
     public abstract void initTag(T target);
 
     @NonNull private final T target;
     @Nullable private Object callback;
 
-    public BaseTarget(@NonNull T target) {
+    public Targeter(@NonNull T target) {
         this.target = target;
         initTag(target);
     }
 
     @Override
     public boolean equals(Object obj) {
-        return obj != null && obj instanceof BaseTarget && ((BaseTarget) obj).target == target;
+        return obj != null && obj instanceof Targeter && ((Targeter) obj).target == target;
     }
 
     @Override
@@ -42,6 +43,7 @@ public abstract class BaseTarget<T> implements Target {
     }
 
     @Override
+    @CallSuper
     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
         if (callback != null && callback instanceof Target)
             ((Target) callback).onBitmapLoaded(bitmap, from);
@@ -50,6 +52,7 @@ public abstract class BaseTarget<T> implements Target {
     }
 
     @Override
+    @CallSuper
     public void onBitmapFailed(Drawable errorDrawable) {
         if (callback != null && callback instanceof Target)
             ((Target) callback).onBitmapFailed(errorDrawable);
@@ -58,23 +61,24 @@ public abstract class BaseTarget<T> implements Target {
     }
 
     @Override
+    @CallSuper
     public void onPrepareLoad(Drawable placeHolderDrawable) {
         if (callback != null && callback instanceof Target)
             ((Target) callback).onPrepareLoad(placeHolderDrawable);
     }
 
     @NonNull
-    public BaseTarget callback(@Nullable OnBitmapLoaded onBitmapLoaded) {
+    public Targeter callback(@Nullable OnBitmapLoaded onBitmapLoaded) {
         return callback(onBitmapLoaded, null, null);
     }
 
     @NonNull
-    public BaseTarget callback(@Nullable OnBitmapLoaded onBitmapLoaded, @Nullable OnBitmapFailed onBitmapFailed) {
+    public Targeter callback(@Nullable OnBitmapLoaded onBitmapLoaded, @Nullable OnBitmapFailed onBitmapFailed) {
         return callback(onBitmapLoaded, onBitmapFailed, null);
     }
 
     @NonNull
-    public BaseTarget callback(@Nullable final OnBitmapLoaded onBitmapLoaded, @Nullable final OnBitmapFailed onBitmapFailed, @Nullable final OnPrepareLoad onPrepareLoad) {
+    public Targeter callback(@Nullable final OnBitmapLoaded onBitmapLoaded, @Nullable final OnBitmapFailed onBitmapFailed, @Nullable final OnPrepareLoad onPrepareLoad) {
         return callback(new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -97,13 +101,13 @@ public abstract class BaseTarget<T> implements Target {
     }
 
     @NonNull
-    public BaseTarget callback(@NonNull Target callback) {
+    public Targeter callback(@NonNull Target callback) {
         this.callback = callback;
         return this;
     }
 
     @NonNull
-    public BaseTarget callback(@NonNull Callback callback) {
+    public Targeter callback(@NonNull Callback callback) {
         this.callback = callback;
         return this;
     }
