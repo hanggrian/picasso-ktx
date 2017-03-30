@@ -23,9 +23,9 @@ Picasso.with(context)
 ```
 
 |          |                           ImageView's source                          |                                                                       View's background                                                                      |
-|----------|:---------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| single   | Targets.image(imageView)                                              | Targets.background(view)<br> Targets.background(scaleType, view)                                                                                             |
-| multiple | Targets.images(imageViews)<br> Targets.images(imageView1, imageView2) | Targets.backgrounds(views)<br> Targets.background(scaleType, views)<br> Targets.background(view1, view2)<br> Targets.background(scaleType, view1, view2)<br> |
+|----------|-----------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| single   | `Targets.image(imageView)`                                              | `Targets.background(view)`<br> `Targets.background(scaleType, view)`                                                                                             |
+| multiple | `Targets.images(imageViews`)<br> `Targets.images(imageView1, imageView2)` | `Targets.backgrounds(views)<br> Targets.background(scaleType, views)`<br> `Targets.background(view1, view2)`<br> `Targets.background(scaleType, view1, view2)`<br> |
 
 ### Callback (single & multiple)
 Listen to Picasso events with Targets.
@@ -67,9 +67,9 @@ Drawable drawable = Transformations.overlay(this, R.color.colorAccent).toDrawabl
 ```
 
 |              |                                                         Transformations                                                         |
-|--------------|:-------------------------------------------------------------------------------------------------------------------------------:|
-| crop square  | Transformations.square()                                                                                                        |
-| crop circle  | Transformations.circle()                                                                                                        |
-| crop rounded | Transformations.rounded(radius)<br> Transformations.rounded(radius, margin)<br> Transformations.rounded(radius, margin, usedDp) |
-| overlay      | Transformations.overlay(color, alpha)<br> Transformations.overlay(context, colorRes, alpha)                                     |
-| grayscale    | Transformations.grayscale()                                                                                                     |
+|--------------|---------------------------------------------------------------------------------------------------------------------------------|
+| crop square  | `Transformations.square()`                                                                                                        |
+| crop circle  | `Transformations.circle()`                                                                                                        |
+| crop rounded | `Transformations.rounded(radius)`<br> `Transformations.rounded(radius, margin)<br> Transformations.rounded(radius, margin, usedDp)` |
+| overlay      | `Transformations.overlay(color, alpha)`<br> `Transformations.overlay(context, colorRes, alpha)`                                     |
+| grayscale    | `Transformations.grayscale()`                                                                                                     |
