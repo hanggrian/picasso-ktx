@@ -1,2 +1,2 @@
 include ':picasso-commons'
-include ':picasso-commons-example'
+include ':example'
