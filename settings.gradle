@@ -1,2 +1,2 @@
-include ':picasso-extensions'
-include ':picasso-extensions-demo'
+include ':picasso-commons'
+include ':picasso-commons-example'

@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath 'com.android.tools.build:gradle:2.3.1'
         classpath 'com.novoda:bintray-release:0.3.4'
     }
 }
@@ -36,18 +36,18 @@ ext.deps = [
                 'com.android.support.test.espresso:espresso-core:2.2.2'
         ],
         main       : [
-                'com.android.support:support-compat:25.3.0',
+                'com.android.support:support-compat:25.3.1',
                 'com.squareup.picasso:picasso:2.5.2'
         ]
 ]
 
 ext.bintray = [
         user    : 'hendraanggrian',
-        group   : 'io.github.hendraanggrian',
-        artifact: 'picasso-extensions',
-        version : '0.7.1',
+        group   : 'com.hendraanggrian',
+        artifact: 'picasso-commons',
+        version : '0.8.0',
         desc    : 'Image manipulation with pre-loaded transformations and target placeholder.',
-        website : 'https://github.com/hendraanggrian/picasso-extensions'
+        website : 'https://github.com/hendraanggrian/picasso-commons'
 ]
 
 //$ ./gradlew bintrayUpload -PbintrayUser=hendraanggrian -PbintrayKey= -PdryRun=false
