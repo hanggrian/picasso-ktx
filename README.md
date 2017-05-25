@@ -68,7 +68,8 @@ repositories {
 }
 
 dependencies {
-    compile 'com.hendraanggrian:picasso-commons:0.9.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.hendraanggrian:picasso-commons:0.9.0@aar'
 }
 ```
 
