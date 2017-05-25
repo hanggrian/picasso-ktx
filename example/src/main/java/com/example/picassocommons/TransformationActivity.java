@@ -57,7 +57,7 @@ public class TransformationActivity extends AppCompatActivity implements Compoun
         Picasso.with(this)
                 .load(R.drawable.bg_test)
                 .transform(transformations)
-                .into(Targets.image(imageView));
+                .into(Targets.placeholder(imageView));
     }
 
     @Override

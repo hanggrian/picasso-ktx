@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
@@ -38,8 +39,12 @@ class ColorOverlayTransformer extends Transformer {
         return target;
     }
 
+    @NonNull
     @Override
-    public String key() {
-        return Key.newInstance(this).put("color", color).toString();
+    protected Bundle keyBundle() {
+        Bundle bundle = new Bundle(2);
+        bundle.putString(EXTRA_KEY_TITLE, getClass().getSimpleName());
+        bundle.putString("color", String.valueOf(color));
+        return bundle;
     }
 }

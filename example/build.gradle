@@ -1,32 +1,30 @@
-apply plugin: 'com.android.application'
+apply plugin: plugin.android.app
+apply plugin: plugin.kotlin.android
+apply plugin: plugin.kotlin.kapt
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion config.sdk.target
+    buildToolsVersion config.buildTools
     defaultConfig {
         applicationId "com.example.picassocommons"
-        minSdkVersion 16
-        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion 16
+        targetSdkVersion config.sdk.target
+        testInstrumentationRunner config.testRunner
     }
     buildTypes {
-        release {
-            minifyEnabled false
+        debug {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    testCompile 'junit:junit:4.12'
-
     compile project(':picasso-commons')
 
+    compile deps.kotlin
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support:cardview-v7:25.3.1'
@@ -35,5 +33,14 @@ dependencies {
 
     compile 'com.afollestad.material-dialogs:core:0.9.4.3'
     compile 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    kapt 'com.jakewharton:butterknife-compiler:8.5.1'
+
+    androidTestCompile(deps.support.test.runner) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile(deps.support.test.espresso) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+
+    testCompile deps.junit
 }

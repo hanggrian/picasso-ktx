@@ -1,76 +1,42 @@
 package com.hendraanggrian.picasso.commons.target;
 
-import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.util.Arrays;
+import android.widget.ProgressBar;
 
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
 public final class Targets {
 
-    public static final int PLACEHOLDER_PROGRESS = 0;
-
-    public static final int SCALE_NO_SCALING = 0;
-    public static final int SCALE_CENTER_INSIDE = 1;
-
+    /**
+     * Set default progress bar as target's placeholder.
+     */
     @NonNull
-    public static SingleTargeter<ImageView> image(@NonNull ImageView imageView) {
-        return new ImageTargeter(imageView);
+    public static PlaceholderTarget placeholder(@NonNull ImageView target) {
+        ProgressBar progressBar = new ProgressBar(target.getContext());
+        progressBar.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        ((FrameLayout.LayoutParams) progressBar.getLayoutParams()).gravity = Gravity.CENTER;
+        return new PlaceholderTarget(target, progressBar);
     }
 
+    /**
+     * Set custom view as target's placeholder.
+     */
     @NonNull
-    public static SingleTargeter<View> background(@NonNull View view) {
-        return background(SCALE_NO_SCALING, view);
+    public static PlaceholderTarget placeholder(@NonNull ImageView target, @NonNull View placeholder) {
+        return new PlaceholderTarget(target, placeholder);
     }
 
-    @NonNull
-    public static SingleTargeter<View> background(@ScaleCode int scale, @NonNull View view) {
-        return new BackgroundTargeter(scale, view);
+    public interface OnSuccess {
+        void onSuccess();
     }
 
-    @NonNull
-    public static MultipleTargeter<Iterable<ImageView>> images(@NonNull ImageView... imageViews) {
-        return images(Arrays.asList(imageViews));
-    }
-
-    @NonNull
-    public static MultipleTargeter<Iterable<ImageView>> images(@NonNull Iterable<ImageView> imageViews) {
-        return new ImagesTargeter(imageViews);
-    }
-
-    @NonNull
-    public static MultipleTargeter<Iterable<View>> backgrounds(@NonNull View... views) {
-        return backgrounds(SCALE_NO_SCALING, views);
-    }
-
-    @NonNull
-    public static MultipleTargeter<Iterable<View>> backgrounds(@NonNull Iterable<View> views) {
-        return backgrounds(SCALE_NO_SCALING, views);
-    }
-
-    @NonNull
-    public static MultipleTargeter<Iterable<View>> backgrounds(@ScaleCode int scale, @NonNull View... views) {
-        return backgrounds(scale, Arrays.asList(views));
-    }
-
-    @NonNull
-    public static MultipleTargeter<Iterable<View>> backgrounds(@ScaleCode int scale, @NonNull Iterable<View> views) {
-        return new BackgroundsTargeter(scale, views);
-    }
-
-    @Retention(RetentionPolicy.SOURCE)
-    @IntDef({PLACEHOLDER_PROGRESS})
-    @interface PlaceholderCode {
-    }
-
-    @Retention(RetentionPolicy.SOURCE)
-    @IntDef({SCALE_NO_SCALING, SCALE_CENTER_INSIDE})
-    @interface ScaleCode {
+    public interface OnError {
+        void onError();
     }
 }

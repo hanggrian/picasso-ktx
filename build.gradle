@@ -1,14 +1,46 @@
 buildscript {
+    ext.plugin = [
+            android: [
+                    app: 'com.android.application',
+                    lib: 'com.android.library'
+            ],
+            kotlin : [
+                    android: 'kotlin-android',
+                    kapt   : 'kotlin-kapt'
+            ],
+            novoda : 'com.novoda.bintray-release'
+    ]
     repositories {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.1'
+        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.2-3'
         classpath 'com.novoda:bintray-release:0.3.4'
     }
 }
 
 allprojects {
+    ext.config = [
+            sdk       : [
+                    'min'   : 9,
+                    'target': 25
+            ],
+            buildTools: '25.0.3',
+            testRunner: 'android.support.test.runner.AndroidJUnitRunner'
+    ]
+    ext.deps = [
+            junit  : 'junit:junit:4.12',
+            support: [
+                    compat: 'com.android.support:support-compat:25.3.1',
+                    test  : [
+                            runner  : 'com.android.support.test:runner:0.5',
+                            espresso: 'com.android.support.test.espresso:espresso-core:2.2.2'
+                    ]
+            ],
+            picasso: 'com.squareup.picasso:picasso:2.5.2',
+            kotlin : 'org.jetbrains.kotlin:kotlin-stdlib-jre7:1.1.2-3'
+    ]
     repositories {
         jcenter()
     }
@@ -18,34 +50,11 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-ext.android = [
-        sdk       : [
-                'min'   : 11,
-                'target': 25
-        ],
-        buildTools: '25.0.2',
-        testRunner: 'android.support.test.runner.AndroidJUnitRunner'
-]
-
-ext.deps = [
-        test       : [
-                'junit:junit:4.12'
-        ],
-        androidTest: [
-                'com.android.support.test:runner:0.5',
-                'com.android.support.test.espresso:espresso-core:2.2.2'
-        ],
-        main       : [
-                'com.android.support:support-compat:25.3.1',
-                'com.squareup.picasso:picasso:2.5.2'
-        ]
-]
-
 ext.bintray = [
         user    : 'hendraanggrian',
         group   : 'com.hendraanggrian',
         artifact: 'picasso-commons',
-        version : '0.8.0',
+        version : '0.9.0',
         desc    : 'Image manipulation with pre-loaded transformations and target placeholder.',
         website : 'https://github.com/hendraanggrian/picasso-commons'
 ]

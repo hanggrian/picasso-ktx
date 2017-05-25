@@ -1,8 +1,6 @@
 package com.example.picassocommons;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,9 +13,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.hendraanggrian.picasso.commons.target.Targets;
-import com.hendraanggrian.picasso.commons.target.callback.OnBitmapFailed;
-import com.hendraanggrian.picasso.commons.target.callback.OnBitmapLoaded;
-import com.hendraanggrian.picasso.commons.target.callback.OnPrepareLoad;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -61,20 +56,15 @@ public class TargetActivity extends AppCompatActivity implements View.OnClickLis
 
                 Picasso.with(this)
                         .load(editText.getText().toString())
-                        .into(Targets.image(imageView).placeholder(Targets.PLACEHOLDER_PROGRESS).callback(new OnBitmapLoaded() {
+                        .into(Targets.placeholder(imageView).callback(new Targets.OnSuccess() {
                             @Override
-                            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            public void onSuccess() {
                                 Toast.makeText(TargetActivity.this, "Image successfully loaded.", Toast.LENGTH_SHORT).show();
                             }
-                        }, new OnBitmapFailed() {
+                        }, new Targets.OnError() {
                             @Override
-                            public void onBitmapFailed(Drawable errorDrawable) {
+                            public void onError() {
                                 Toast.makeText(TargetActivity.this, "Image failed to load.", Toast.LENGTH_SHORT).show();
-                            }
-                        }, new OnPrepareLoad() {
-                            @Override
-                            public void onPrepareLoad(Drawable placeHolderDrawable) {
-                                Toast.makeText(TargetActivity.this, "Picasso started loading.", Toast.LENGTH_SHORT).show();
                             }
                         }));
                 break;

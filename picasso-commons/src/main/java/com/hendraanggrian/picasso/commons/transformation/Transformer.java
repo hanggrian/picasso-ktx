@@ -4,14 +4,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
 import com.squareup.picasso.Transformation;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Superclass of all <tt>Transformation</tt>.
@@ -26,6 +24,8 @@ import org.json.JSONObject;
  */
 public abstract class Transformer implements Transformation {
 
+    static final String EXTRA_KEY_TITLE = "EXTRA_KEY_TITLE";
+
     /**
      * Logic of image transformation should happen here.
      *
@@ -36,6 +36,9 @@ public abstract class Transformer implements Transformation {
      */
     @NonNull
     protected abstract Bitmap transform(@NonNull Bitmap source, boolean recycleSource);
+
+    @NonNull
+    protected abstract Bundle keyBundle();
 
     /**
      * Implemented from <tt>Transformation</tt> and should only be invoked by <tt>Picasso</tt>.
@@ -49,6 +52,19 @@ public abstract class Transformer implements Transformation {
     @Override
     public Bitmap transform(Bitmap source) {
         return transform(source, true);
+    }
+
+    @Override
+    public String key() {
+        Bundle bundle = keyBundle();
+        String title = bundle.getString(EXTRA_KEY_TITLE);
+        bundle.remove(EXTRA_KEY_TITLE);
+        String attributes = "";
+        for (String key : bundle.keySet())
+            attributes += key + "=" + bundle.getString(key) + ", ";
+        if (attributes.endsWith(", "))
+            attributes = attributes.substring(0, attributes.length() - 2);
+        return title + "[{" + attributes + "}]";
     }
 
     /**
@@ -130,41 +146,5 @@ public abstract class Transformer implements Transformation {
     @NonNull
     protected Bitmap createDefaultBitmap(@NonNull Bitmap source) {
         return Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
-    }
-
-    /**
-     * Json object with builder pattern that will ultimately be converted to String for
-     * <tt>Picasso</tt> to use for caching purpose.
-     */
-    static final class Key extends JSONObject {
-
-        private Key() {
-            super();
-        }
-
-        @NonNull
-        public Key put(@NonNull String name, String value) {
-            try {
-                super.put(name, value);
-                return this;
-            } catch (JSONException e) {
-                throw new RuntimeException();
-            }
-        }
-
-        @NonNull
-        @Override
-        public Key put(@NonNull String name, int value) {
-            try {
-                super.put(name, value);
-                return this;
-            } catch (JSONException e) {
-                throw new RuntimeException();
-            }
-        }
-
-        static Key newInstance(@NonNull Transformer transformer) {
-            return new Key().put("name", transformer.getClass().getSimpleName());
-        }
     }
 }

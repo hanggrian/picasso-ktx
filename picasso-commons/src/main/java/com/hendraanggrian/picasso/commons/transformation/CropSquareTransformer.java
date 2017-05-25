@@ -1,6 +1,7 @@
 package com.hendraanggrian.picasso.commons.transformation;
 
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 /**
@@ -22,8 +23,11 @@ class CropSquareTransformer extends Transformer {
         return target;
     }
 
+    @NonNull
     @Override
-    public String key() {
-        return Key.newInstance(this).toString();
+    protected Bundle keyBundle() {
+        Bundle bundle = new Bundle(1);
+        bundle.putString(EXTRA_KEY_TITLE, getClass().getSimpleName());
+        return bundle;
     }
 }

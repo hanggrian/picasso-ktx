@@ -1,26 +1,31 @@
-apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: plugin.android.lib
+apply plugin: plugin.novoda
 
 android {
-    compileSdkVersion rootProject.android.sdk.target
-    buildToolsVersion rootProject.android.buildTools
+    compileSdkVersion config.sdk.target
+    buildToolsVersion config.buildTools
     defaultConfig {
-        minSdkVersion rootProject.android.sdk.min
-        targetSdkVersion rootProject.android.sdk.target
-        testInstrumentationRunner rootProject.android.testRunner
+        minSdkVersion config.sdk.min
+        targetSdkVersion config.sdk.target
+        testInstrumentationRunner config.testRunner
+    }
+    defaultConfig {
+        consumerProguardFiles 'proguard-rules.pro'
     }
 }
 
 dependencies {
-    deps.test.each { testCompile it }
-    deps.androidTest.each {
-        androidTestCompile(it, {
-            exclude group: 'com.android.support', module: 'support-annotations'
-        })
+    compile deps.support.compat
+    compile deps.picasso
+
+    androidTestCompile(deps.support.test.runner) {
+        exclude group: 'com.android.support', module: 'support-annotations'
     }
-    deps.main.each {
-        compile it
+    androidTestCompile(deps.support.test.espresso) {
+        exclude group: 'com.android.support', module: 'support-annotations'
     }
+
+    testCompile deps.junit
 }
 
 publish {

@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 /**
@@ -25,8 +26,11 @@ class CropCircleTransformer extends CropSquareTransformer {
         return circle;
     }
 
+    @NonNull
     @Override
-    public String key() {
-        return Key.newInstance(this).toString();
+    protected Bundle keyBundle() {
+        Bundle bundle = new Bundle(1);
+        bundle.putString(EXTRA_KEY_TITLE, getClass().getSimpleName());
+        return bundle;
     }
 }

@@ -58,7 +58,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <View
+        <ImageView
             android:id="@+id/view_target"
             android:layout_width="match_parent"
             android:layout_margin="8dp"

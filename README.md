@@ -1,52 +1,37 @@
-![logo](/art/logo.png) Picasso Extensions
-=========================================
+picasso-commons
+===============
 Image manipulation with pre-loaded transformations and target placeholder.
-
-Download
---------
-Library are hosted in [jCenter](https://bintray.com/hendraanggrian/maven/picasso-extensions).
-
-```gradle
-compile 'com.hendraanggrian:picasso-commons:0.8.0'
-```
 
 Targets
 -------
-![demo_target](/art/demo_target.gif)
+![demo_target][demo_target]
 
-Target one or more ImageView or View's background with custom placeholder, or pre-loaded ProgressBar.
+Load `ImageView` with progress bar or custom view placeholder.
 
 ```java
 Picasso.with(context)
     .load(url)
-    .target(Targets.image(imageView).placeholder(Targets.PLACEHOLDER_PROGRESS));
+    .target(Targets.placeholder(imageView));
 ```
-
-|          |                           ImageView's source                          |                                                                       View's background                                                                      |
-|----------|-----------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| single   | `Targets.image(imageView)`                                              | `Targets.background(view)`<br> `Targets.background(scaleType, view)`                                                                                             |
-| multiple | `Targets.images(imageViews`)<br> `Targets.images(imageView1, imageView2)` | `Targets.backgrounds(views)<br> Targets.background(scaleType, views)`<br> `Targets.background(view1, view2)`<br> `Targets.background(scaleType, view1, view2)`<br> |
-
-### Callback (single & multiple)
-Listen to Picasso events with Targets.
- * `Targets.callback(OnBitmapLoaded, OnBitmapFailed, OnPrepareLoad)` - individual listeners mimicking Picasso Target
- * `Targets.callback(OnBitmapLoaded, OnBitmapFailed)` - only listen to success & failed
- * `Targets.callback(OnBitmapLoaded)` - only listen to success
- * `Targets.callback(com.squareup.picasso.Target)` - native Picasso's Target
- * `Targets.callback(com.squareup.picasso.Callback)` - native Picasso's Callback
  
-### Placeholder (single only)
+#### Placeholder type
 Display a temporary view that will be removed once Picasso has finished/failed to load the image.
- * `Targets.placeholder(Targets.PLACEHOLDER_PROGRESS)` - progress bar placeholder
- * `Targets.placeholder(view)` - custom view
+ * `Targets.placeholder(View)` - progress bar placeholder
+ * `Targets.placeholder(ImageView, view)` - custom view placeholder
 
-### Disable animation (single only)
+#### Listen to events
+Listen to Picasso events with Targets.
+ * `Targets.callback(Targets.OnSuccess, Targets.OnError)` - only listen to success & failed, mimicking Picasso's Callback
+ * `Targets.callback(Targets.OnSuccess)` - only listen to success
+ * `Targets.callback(com.squareup.picasso.Callback)` - native Picasso's Callback
+
+#### Disable animation
 By default, animation are enabled (if not yet already enabled) by `LayoutTransition`.
-If this is not the expected behavior, manually disable it by calling `Targets.disableAnimation()`.
+If this is not the expected behavior, manually disable it by calling `Targets.transition(boolean)`.
 
 Transformations
 ---------------
-![demo_transformation](/art/demo_transformation.gif)
+![demo_transformation][demo_transformation]
 
 ```java
 // single transformation
@@ -66,6 +51,7 @@ Bitmap bitmap = Transformations.square().toBitmap(this, R.drawable.ic_launcher);
 Drawable drawable = Transformations.overlay(this, R.color.colorAccent).toDrawable(this, R.drawable.ic_launcher);
 ```
 
+#### Available transformations
 |              |                                                         Transformations                                                         |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------|
 | crop square  | `Transformations.square()`                                                                                                        |
@@ -73,3 +59,34 @@ Drawable drawable = Transformations.overlay(this, R.color.colorAccent).toDrawabl
 | crop rounded | `Transformations.rounded(radius)`<br> `Transformations.rounded(radius, margin)<br> Transformations.rounded(radius, margin, usedDp)` |
 | overlay      | `Transformations.overlay(color, alpha)`<br> `Transformations.overlay(context, colorRes, alpha)`                                     |
 | grayscale    | `Transformations.grayscale()`                                                                                                     |
+
+Download
+--------
+```gradle
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'com.hendraanggrian:picasso-commons:0.9.0'
+}
+```
+
+License
+-------
+    Copyright 2017 Hendra Anggrian
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+    
+[demo_target]: /art/demo_target.gif
+[demo_transformation]: /art/demo_transformation.gif

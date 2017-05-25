@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.hendraanggrian.picasso.commons.target.Targets;
 import com.squareup.picasso.Picasso;
@@ -22,7 +23,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.edittext_target) EditText editText;
     @BindView(R.id.button_target_clear) Button buttonClear;
     @BindView(R.id.button_target_go) Button buttonGo;
-    @BindView(R.id.view_target) View view;
+    @BindView(R.id.view_target) ImageView view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 Picasso.with(this)
                         .load(editText.getText().toString())
                         .placeholder(R.mipmap.ic_launcher)
-                        .into(Targets.background(Targets.SCALE_CENTER_INSIDE, view));
+                        .into(Targets.placeholder(view));
                 break;
         }
     }
