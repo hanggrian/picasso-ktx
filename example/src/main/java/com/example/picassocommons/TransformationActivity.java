@@ -1,7 +1,6 @@
 package com.example.picassocommons;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.CheckBox;
@@ -18,9 +17,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class TransformationActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
+public class TransformationActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener {
 
     @BindView(R.id.toolbar_transformation) Toolbar toolbar;
     @BindView(R.id.imageview_transformation) ImageView imageView;
@@ -31,10 +29,13 @@ public class TransformationActivity extends AppCompatActivity implements Compoun
     @BindView(R.id.checkbox_transformation_grayscale) CheckBox checkBox_Grayscale;
 
     @Override
+    protected int getContentView() {
+        return R.layout.activity_transformation;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transformation);
-        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         for (CheckBox checkBox : Arrays.asList(checkBox_CropSquare, checkBox_CropCircle, checkBox_CropRounded, checkBox_ColorOverlay, checkBox_Grayscale))
             checkBox.setOnCheckedChangeListener(this);

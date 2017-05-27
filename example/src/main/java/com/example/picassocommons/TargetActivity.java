@@ -2,7 +2,6 @@ package com.example.picassocommons;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,15 +9,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.hendraanggrian.picasso.commons.target.Targets;
+import com.hendraanggrian.support.utils.widget.Toasts;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class TargetActivity extends AppCompatActivity implements View.OnClickListener {
+public class TargetActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.toolbar_target) Toolbar toolbar;
     @BindView(R.id.edittext_target) EditText editText;
@@ -27,10 +25,13 @@ public class TargetActivity extends AppCompatActivity implements View.OnClickLis
     @BindView(R.id.imageview_target) ImageView imageView;
 
     @Override
+    protected int getContentView() {
+        return R.layout.activity_target;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_target);
-        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         buttonClear.setOnClickListener(this);
         buttonGo.setOnClickListener(this);
@@ -59,12 +60,12 @@ public class TargetActivity extends AppCompatActivity implements View.OnClickLis
                         .into(Targets.placeholder(imageView).callback(new Targets.OnSuccess() {
                             @Override
                             public void onSuccess() {
-                                Toast.makeText(TargetActivity.this, "Image successfully loaded.", Toast.LENGTH_SHORT).show();
+                                Toasts.showShort(TargetActivity.this, "Image successfully loaded.");
                             }
                         }, new Targets.OnError() {
                             @Override
                             public void onError() {
-                                Toast.makeText(TargetActivity.this, "Image failed to load.", Toast.LENGTH_SHORT).show();
+                                Toasts.showShort(TargetActivity.this, "Image failed to load.");
                             }
                         }));
                 break;

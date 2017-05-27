@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.hendraanggrian.support.utils.view.ViewGroups;
+import com.hendraanggrian.support.utils.view.Views;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -41,14 +43,14 @@ public class PlaceholderTarget extends Targeter {
 
     @Override
     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-        ViewGroupUtils.replaceView(placeholderContainer, target);
+        ViewGroups.replaceView(placeholderContainer, target);
         target.setImageBitmap(bitmap);
         super.onBitmapLoaded(bitmap, from);
     }
 
     @Override
     public void onBitmapFailed(Drawable errorDrawable) {
-        ViewGroupUtils.replaceView(placeholderContainer, target);
+        ViewGroups.replaceView(placeholderContainer, target);
         target.setImageDrawable(errorDrawable);
         super.onBitmapFailed(errorDrawable);
     }
@@ -61,12 +63,12 @@ public class PlaceholderTarget extends Targeter {
             imageView.setImageDrawable(placeHolderDrawable);
             placeholderContainer.addView(imageView, 0);
         }
-        ViewGroupUtils.replaceView(target, placeholderContainer);
+        ViewGroups.replaceView(target, placeholderContainer);
     }
 
     @NonNull
     public PlaceholderTarget transition(boolean enable) {
-        ViewGroup parent = ViewGroupUtils.getParent(target);
+        ViewGroup parent = Views.getParent(target);
         if (parent != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
             if (enable && parent.getLayoutTransition() == null)
                 parent.setLayoutTransition(new LayoutTransition());
