@@ -57,6 +57,7 @@ public class TargetActivity extends BaseActivity implements View.OnClickListener
 
                 Picasso.with(this)
                         .load(editText.getText().toString())
+                        .placeholder(R.mipmap.ic_launcher)
                         .into(Targets.placeholder(imageView).callback(new Targets.OnSuccess() {
                             @Override
                             public void onSuccess() {
