@@ -2,17 +2,21 @@ package com.example.picassocommons;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import com.hendraanggrian.support.utils.widget.Toasts;
 import com.squareup.picasso.Picassos;
 
-import butterknife.BindViews;
+import butterknife.BindView;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+/**
+ * @author Hendra Anggrian (hendraanggrian@gmail.com)
+ */
+public final class MainActivity extends BaseActivity {
 
-    @BindViews({R.id.button_main1, R.id.button_main2, R.id.button_main3}) Button[] buttons;
+    @BindView(R.id.button_main1) Button button1;
+    @BindView(R.id.button_main2) Button button2;
+    @BindView(R.id.button_main3) Button button3;
 
     @Override
     protected int getContentView() {
@@ -22,23 +26,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        for (Button button : buttons)
-            button.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button_main1:
-                startActivity(new Intent(this, TransformationActivity.class));
-                break;
-            case R.id.button_main2:
-                startActivity(new Intent(this, TargetActivity.class));
-                break;
-            case R.id.button_main3:
-                Picassos.getCache(this).clear();
-                Toasts.showShort(this, "Cache cleared");
-                break;
-        }
+        button1.setOnClickListener(v -> startActivity(new Intent(this, TransformationActivity.class)));
+        button2.setOnClickListener(v -> startActivity(new Intent(this, TargetActivity.class)));
+        button3.setOnClickListener(v -> {
+            Picassos.getCache(this).clear();
+            Toasts.showShort(this, "Cache cleared");
+        });
     }
 }

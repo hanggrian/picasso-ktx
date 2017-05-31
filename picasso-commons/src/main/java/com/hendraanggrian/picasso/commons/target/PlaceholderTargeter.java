@@ -18,13 +18,13 @@ import com.squareup.picasso.Picasso;
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-public class PlaceholderTarget extends Targeter {
+class PlaceholderTargeter extends Targeter {
 
     @NonNull private final ImageView target;
     @NonNull private final ViewGroup placeholderContainer;
     @Nullable private ImageView placeholder;
 
-    PlaceholderTarget(@NonNull ImageView target, @NonNull View placeholder) {
+    PlaceholderTargeter(@NonNull ImageView target, @NonNull View placeholder) {
         this.target = target;
         this.target.setTag(this);
         this.placeholderContainer = new FrameLayout(target.getContext());
@@ -35,7 +35,7 @@ public class PlaceholderTarget extends Targeter {
 
     @Override
     public boolean equals(Object obj) {
-        return obj != null && obj instanceof PlaceholderTarget && ((PlaceholderTarget) obj).target == target;
+        return obj != null && obj instanceof PlaceholderTargeter && ((PlaceholderTargeter) obj).target == target;
     }
 
     @Override
@@ -74,10 +74,11 @@ public class PlaceholderTarget extends Targeter {
             placeholderContainer.addView(placeholder, 0);
         }
         ViewGroups.replaceView(target, placeholderContainer);
+        super.onPrepareLoad(placeHolderDrawable);
     }
 
     @NonNull
-    public PlaceholderTarget transition(boolean enable) {
+    public PlaceholderTargeter transition(boolean enable) {
         ViewGroup parent = Views.getParent(target);
         if (parent != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
             if (enable && parent.getLayoutTransition() == null)

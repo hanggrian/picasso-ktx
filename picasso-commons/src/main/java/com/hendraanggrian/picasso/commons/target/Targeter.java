@@ -6,55 +6,72 @@ import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-abstract class Targeter implements Target {
+public abstract class Targeter implements Target {
 
-    @Nullable private Callback callback;
+    @Nullable private Target callback;
 
     @Override
     @CallSuper
     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
         if (callback != null)
-            callback.onSuccess();
+            callback.onBitmapLoaded(bitmap, from);
     }
 
     @Override
     @CallSuper
     public void onBitmapFailed(Drawable errorDrawable) {
         if (callback != null)
-            callback.onError();
+            callback.onBitmapFailed(errorDrawable);
+    }
+
+    @Override
+    @CallSuper
+    public void onPrepareLoad(Drawable placeHolderDrawable) {
+        if (callback != null)
+            callback.onPrepareLoad(placeHolderDrawable);
     }
 
     @NonNull
-    public Targeter callback(@Nullable Targets.OnSuccess onSuccess) {
-        return callback(onSuccess, null);
+    public Targeter callback(@Nullable OnTargetLoaded loaded) {
+        return callback(loaded, null);
     }
 
     @NonNull
-    public Targeter callback(@Nullable final Targets.OnSuccess onSuccess, @Nullable final Targets.OnError onError) {
-        return callback(new Callback() {
+    public Targeter callback(@Nullable OnTargetLoaded loaded, @Nullable OnTargetFailed failed) {
+        return callback(loaded, failed, null);
+    }
+
+    @NonNull
+    public Targeter callback(@Nullable final OnTargetLoaded loaded, @Nullable final OnTargetFailed failed, @Nullable final OnTargetPrepare prepare) {
+        return callback(new Target() {
             @Override
-            public void onSuccess() {
-                if (onSuccess != null)
-                    onSuccess.onSuccess();
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                if (loaded != null)
+                    loaded.onBitmapLoaded(bitmap, from);
             }
 
             @Override
-            public void onError() {
-                if (onError != null)
-                    onError.onError();
+            public void onBitmapFailed(Drawable errorDrawable) {
+                if (failed != null)
+                    failed.onBitmapFailed(errorDrawable);
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+                if (prepare != null)
+                    prepare.onPrepareLoad(placeHolderDrawable);
             }
         });
     }
 
     @NonNull
-    public Targeter callback(@Nullable Callback callback) {
+    public Targeter callback(@Nullable Target callback) {
         this.callback = callback;
         return this;
     }

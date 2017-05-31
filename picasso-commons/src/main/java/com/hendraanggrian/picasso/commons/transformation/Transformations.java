@@ -29,6 +29,9 @@ import android.support.v4.content.ContextCompat;
  */
 public final class Transformations {
 
+    private Transformations() {
+    }
+
     //region crop
     @NonNull
     public static Transformer square() {

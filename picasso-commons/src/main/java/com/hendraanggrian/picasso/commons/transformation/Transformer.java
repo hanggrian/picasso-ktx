@@ -28,11 +28,6 @@ public abstract class Transformer implements Transformation {
 
     /**
      * Logic of image transformation should happen here.
-     *
-     * @param source        bitmap, should not be null.
-     * @param recycleSource true if source bitmap should be recycled,
-     *                      which is a required behavior of {@link Transformation#transform(Bitmap)}.
-     * @return transformed <tt>Bitmap</tt>.
      */
     @NonNull
     protected abstract Bitmap transform(@NonNull Bitmap source, boolean recycleSource);
@@ -44,9 +39,6 @@ public abstract class Transformer implements Transformation {
      * Implemented from <tt>Transformation</tt> and should only be invoked by <tt>Picasso</tt>.
      * Calling this method outside <tt>Picasso</tt> will cause the source bitmap to be recycled and
      * likely to cause errors.
-     *
-     * @param source bitmap.
-     * @return transformed bitmap.
      */
     @NonNull
     @Override
@@ -69,9 +61,6 @@ public abstract class Transformer implements Transformation {
 
     /**
      * Transform source bitmap to target bitmap.
-     *
-     * @param source bitmap, should not be null or recycled.
-     * @return bitmap, never null.
      */
     @NonNull
     public Bitmap toBitmap(@NonNull Bitmap source) {
@@ -80,9 +69,6 @@ public abstract class Transformer implements Transformation {
 
     /**
      * Transform source drawable to target bitmap.
-     *
-     * @param source drawable, should not be null.
-     * @return bitmap, never null.
      */
     @NonNull
     public Bitmap toBitmap(@NonNull Drawable source) {
@@ -91,10 +77,6 @@ public abstract class Transformer implements Transformation {
 
     /**
      * Transform source drawable from resources to target bitmap.
-     *
-     * @param context   should not be null.
-     * @param sourceRes resource id of drawable.
-     * @return bitmap, never null.
      */
     @NonNull
     public Bitmap toBitmap(@NonNull Context context, @DrawableRes int sourceRes) {
@@ -103,10 +85,6 @@ public abstract class Transformer implements Transformation {
 
     /**
      * Transform source bitmap to target drawable.
-     *
-     * @param context should not be null.
-     * @param source  bitmap, should not be null or recycled.
-     * @return drawable, never null.
      */
     @NonNull
     public Drawable toDrawable(@NonNull Context context, @NonNull Bitmap source) {
@@ -115,10 +93,6 @@ public abstract class Transformer implements Transformation {
 
     /**
      * Transform source drawable to target drawable.
-     *
-     * @param context should not be null.
-     * @param source  drawable, should not be null.
-     * @return drawable, never null.
      */
     @NonNull
     public Drawable toDrawable(@NonNull Context context, @NonNull Drawable source) {
@@ -127,10 +101,6 @@ public abstract class Transformer implements Transformation {
 
     /**
      * Transform source drawable from resources to target drawable.
-     *
-     * @param context   should not be null.
-     * @param sourceRes resource id of drawable.
-     * @return drawable, never null.
      */
     @NonNull
     public Drawable toDrawable(@NonNull Context context, @DrawableRes int sourceRes) {
@@ -139,9 +109,6 @@ public abstract class Transformer implements Transformation {
 
     /**
      * Creates new bitmap with default configuration, only used in subclasses of <tt>Transformer</tt>.
-     *
-     * @param source bitmap, should not be null.
-     * @return empty bitmap, never null.
      */
     @NonNull
     protected Bitmap createDefaultBitmap(@NonNull Bitmap source) {

@@ -13,30 +13,25 @@ import android.widget.ProgressBar;
  */
 public final class Targets {
 
+    private Targets() {
+    }
+
     /**
      * Set default progress bar as target's placeholder.
      */
     @NonNull
-    public static PlaceholderTarget placeholder(@NonNull ImageView target) {
+    public static Targeter placeholder(@NonNull ImageView target) {
         ProgressBar progressBar = new ProgressBar(target.getContext());
         progressBar.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         ((FrameLayout.LayoutParams) progressBar.getLayoutParams()).gravity = Gravity.CENTER;
-        return new PlaceholderTarget(target, progressBar);
+        return new PlaceholderTargeter(target, progressBar);
     }
 
     /**
      * Set custom view as target's placeholder.
      */
     @NonNull
-    public static PlaceholderTarget placeholder(@NonNull ImageView target, @NonNull View placeholder) {
-        return new PlaceholderTarget(target, placeholder);
-    }
-
-    public interface OnSuccess {
-        void onSuccess();
-    }
-
-    public interface OnError {
-        void onError();
+    public static Targeter placeholder(@NonNull ImageView target, @NonNull View placeholder) {
+        return new PlaceholderTargeter(target, placeholder);
     }
 }

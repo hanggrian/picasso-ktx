@@ -1,68 +1,40 @@
 buildscript {
-    ext.plugin = [
-            android: [
-                    app: 'com.android.application',
-                    lib: 'com.android.library'
-            ],
-            kotlin : [
-                    android: 'kotlin-android',
-                    kapt   : 'kotlin-kapt'
-            ],
-            novoda : 'com.novoda.bintray-release'
-    ]
     repositories {
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.2'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.2-3'
         classpath 'com.novoda:bintray-release:0.3.4'
     }
 }
 
 allprojects {
-    ext.config = [
+    ext.versions = [
+            // android
             sdk       : [
                     'min'   : 9,
                     'target': 25
             ],
             buildTools: '25.0.3',
-            testRunner: 'android.support.test.runner.AndroidJUnitRunner'
-    ]
-    ext.deps = [
-            junit      : 'junit:junit:4.12',
-            support    : [
-                    appcompat: 'com.android.support:appcompat-v7:25.3.1',
-                    design   : 'com.android.support:design:25.3.1',
-                    test     : [
-                            runner  : 'com.android.support.test:runner:0.5',
-                            espresso: 'com.android.support.test.espresso:espresso-core:2.2.2'
-                    ]
-            ],
-            utils      : 'com.hendraanggrian:support-utils:0.7',
-            picasso    : 'com.squareup.picasso:picasso:2.5.2',
-            butterknife: [
-                    main     : 'com.jakewharton:butterknife:8.5.1',
-                    processor: 'com.jakewharton:butterknife-compiler:8.5.1'
-            ],
-            kotlin     : 'org.jetbrains.kotlin:kotlin-stdlib-jre7:1.1.2-3'
+
+            // dependencies
+            support   : '25.3.1',
+            utils     : '0.7',
+            picasso   : '2.5.2',
+
+            release   : '0.10.2'
     ]
     repositories {
         jcenter()
+    }
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-ext.bintray = [
-        user    : 'hendraanggrian',
-        group   : 'com.hendraanggrian',
-        artifact: 'picasso-commons',
-        version : '0.10.1',
-        desc    : 'Image manipulation with pre-loaded transformations and target placeholder.',
-        website : 'https://github.com/hendraanggrian/picasso-commons'
-]
 
 //$ ./gradlew bintrayUpload -PbintrayUser=hendraanggrian -PbintrayKey= -PdryRun=false
