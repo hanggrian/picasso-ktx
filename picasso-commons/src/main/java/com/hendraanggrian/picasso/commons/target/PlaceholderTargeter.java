@@ -20,16 +20,28 @@ import com.squareup.picasso.Picasso;
  */
 class PlaceholderTargeter extends Targeter {
 
+    private static final String TAG = "com.hendraanggrian.picasso.commons.target.PlaceholderTargeter";
+
+    @NonNull private final ViewGroup parent;
     @NonNull private final ImageView target;
+    private int targetPosition;
     @NonNull private final ViewGroup placeholderContainer;
     @Nullable private ImageView placeholder;
 
     PlaceholderTargeter(@NonNull ImageView target, @NonNull View placeholder) {
+        this.parent = (ViewGroup) target.getParent();
         this.target = target;
         this.target.setTag(this);
+        for (int i = 0; i < parent.getChildCount(); i++) {
+            if (parent.getChildAt(i) == target) {
+                targetPosition = i;
+                break;
+            }
+        }
         this.placeholderContainer = new FrameLayout(target.getContext());
         this.placeholderContainer.setLayoutParams(target.getLayoutParams());
         this.placeholderContainer.addView(placeholder);
+        this.placeholderContainer.setTag(TAG);
         transition(true);
     }
 
@@ -49,7 +61,8 @@ class PlaceholderTargeter extends Targeter {
             ViewGroups.removeViews(placeholderContainer, placeholder);
             placeholder = null;
         }
-        ViewGroups.replaceView(placeholderContainer, target);
+        removePlaceholders();
+        target.setVisibility(View.VISIBLE);
         target.setImageBitmap(bitmap);
         super.onBitmapLoaded(bitmap, from);
     }
@@ -60,7 +73,8 @@ class PlaceholderTargeter extends Targeter {
             ViewGroups.removeViews(placeholderContainer, placeholder);
             placeholder = null;
         }
-        ViewGroups.replaceView(placeholderContainer, target);
+        removePlaceholders();
+        target.setVisibility(View.VISIBLE);
         target.setImageDrawable(errorDrawable);
         super.onBitmapFailed(errorDrawable);
     }
@@ -73,7 +87,9 @@ class PlaceholderTargeter extends Targeter {
             placeholder.setImageDrawable(placeHolderDrawable);
             placeholderContainer.addView(placeholder, 0);
         }
-        ViewGroups.replaceView(target, placeholderContainer);
+        removePlaceholders();
+        parent.addView(placeholderContainer, targetPosition);
+        target.setVisibility(View.GONE);
         super.onPrepareLoad(placeHolderDrawable);
     }
 
@@ -86,5 +102,15 @@ class PlaceholderTargeter extends Targeter {
             else if (!enable)
                 parent.setLayoutTransition(null);
         return this;
+    }
+
+    private void removePlaceholders() {
+        for (int i = 0; i < parent.getChildCount(); i++) {
+            View child = parent.getChildAt(i);
+            Object tag = child.getTag();
+            if (tag != null && tag.equals(TAG)) {
+                parent.removeView(child);
+            }
+        }
     }
 }
