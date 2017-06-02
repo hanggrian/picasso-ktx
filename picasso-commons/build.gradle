@@ -8,14 +8,16 @@ android {
     defaultConfig {
         minSdkVersion versions.sdk.min
         targetSdkVersion versions.sdk.target
-        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
         consumerProguardFiles 'proguard-rules.pro'
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 }
 
 dependencies {
     compile "com.squareup.picasso:picasso:$versions.picasso"
     compile "com.hendraanggrian:support-utils:$versions.utils"
+    compile "com.hendraanggrian:bundler:$versions.bundler"
+    annotationProcessor "com.hendraanggrian:bundler-compiler:$versions.bundler"
 }
 
 publish {

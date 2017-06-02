@@ -29,8 +29,6 @@ class CropCircleTransformer extends CropSquareTransformer {
     @NonNull
     @Override
     protected Bundle keyBundle() {
-        Bundle bundle = new Bundle(1);
-        bundle.putString(EXTRA_KEY_TITLE, getClass().getSimpleName());
-        return bundle;
+        return Bundle.EMPTY;
     }
 }
