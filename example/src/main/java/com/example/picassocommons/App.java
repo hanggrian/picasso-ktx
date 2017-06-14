@@ -2,7 +2,6 @@ package com.example.picassocommons;
 
 import android.app.Application;
 
-import com.hendraanggrian.bundler.Bundler;
 import com.squareup.picasso.Picassos;
 
 import butterknife.ButterKnife;
@@ -17,6 +16,5 @@ public class App extends Application {
         super.onCreate();
         Picassos.setDebug(BuildConfig.DEBUG);
         ButterKnife.setDebug(BuildConfig.DEBUG);
-        Bundler.setDebug(BuildConfig.DEBUG);
     }
 }

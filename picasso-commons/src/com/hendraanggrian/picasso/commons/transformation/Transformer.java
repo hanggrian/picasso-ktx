@@ -8,9 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 
-import com.hendraanggrian.bundler.Bundler;
+import com.hendraanggrian.support.utils.util.Logs;
 import com.squareup.picasso.Picassos;
 import com.squareup.picasso.Transformation;
 
@@ -26,6 +25,8 @@ import com.squareup.picasso.Transformation;
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
 public abstract class Transformer implements Transformation {
+
+    static final String KEY_NAME = "KEY_NAME";
 
     /**
      * Logic of image transformation should happen here.
@@ -49,9 +50,18 @@ public abstract class Transformer implements Transformation {
 
     @Override
     public String key() {
-        String key = Bundler.toString(getClass(), keyBundle());
-        if (Picassos.isDebug())
-            Log.d(Picassos.TAG, key);
+        Bundle bundle = keyBundle();
+        String name = bundle.getString(KEY_NAME);
+        bundle.remove(KEY_NAME);
+        String content = "";
+        for (String key : bundle.keySet()) {
+            content += key + "=" + bundle.get(key) + ", ";
+        }
+        if (content.endsWith(", ")) {
+            content = content.substring(0, content.length() - 2);
+        }
+        String key = name + "[" + content + "]";
+        if (Picassos.isDebug()) Logs.d(Picassos.TAG, key);
         return key;
     }
 

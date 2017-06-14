@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso;
  */
 class PlaceholderTargeter extends Targeter {
 
-    private static final String TAG = "com.hendraanggrian.picasso.commons.target.PlaceholderTargeter";
+    private static final String TAG = "PlaceholderTargeter";
 
     @NonNull private final ViewGroup parent;
     @NonNull private final ImageView target;
@@ -78,11 +78,13 @@ class PlaceholderTargeter extends Targeter {
     @NonNull
     public PlaceholderTargeter transition(boolean enable) {
         ViewGroup parent = (ViewGroup) target.getParent();
-        if (parent != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-            if (enable && parent.getLayoutTransition() == null)
+        if (parent != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            if (enable && parent.getLayoutTransition() == null) {
                 parent.setLayoutTransition(new LayoutTransition());
-            else if (!enable)
+            } else if (!enable) {
                 parent.setLayoutTransition(null);
+            }
+        }
         return this;
     }
 }

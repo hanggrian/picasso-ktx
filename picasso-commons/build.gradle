@@ -9,15 +9,17 @@ android {
         minSdkVersion versions.sdk.min
         targetSdkVersion versions.sdk.target
         consumerProguardFiles 'proguard-rules.pro'
-        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+    }
+    sourceSets {
+        main.manifest.srcFile 'AndroidManifest.xml'
+        main.java.srcDirs 'src'
     }
 }
 
 dependencies {
+    compile "com.android.support:support-compat:$versions.support"
     compile "com.squareup.picasso:picasso:$versions.picasso"
     compile "com.hendraanggrian:support-utils:$versions.utils"
-    compile "com.hendraanggrian:bundler:$versions.bundler"
-    annotationProcessor "com.hendraanggrian:bundler-compiler:$versions.bundler"
 }
 
 publish {

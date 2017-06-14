@@ -10,15 +10,14 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 
-import com.hendraanggrian.bundler.BindExtra;
-import com.hendraanggrian.bundler.Bundler;
-
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
 class ColorOverlayTransformer extends Transformer {
 
-    @BindExtra @ColorInt int color;
+    private static final String TAG = "ColorOverlayTransformer";
+
+    @ColorInt private int color;
 
     ColorOverlayTransformer(@ColorInt int color) {
         this.color = color;
@@ -45,6 +44,9 @@ class ColorOverlayTransformer extends Transformer {
     @NonNull
     @Override
     protected Bundle keyBundle() {
-        return Bundler.wrap(getClass(), color);
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_NAME, TAG);
+        bundle.putInt("color", color);
+        return bundle;
     }
 }

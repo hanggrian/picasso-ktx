@@ -12,6 +12,8 @@ import android.support.annotation.NonNull;
  */
 class ColorGrayscaleTransformer extends Transformer {
 
+    private static final String TAG = "ColorGrayscaleTransformer";
+
     @NonNull
     @Override
     public Bitmap transform(@NonNull Bitmap source, boolean recycleSource) {
@@ -29,6 +31,8 @@ class ColorGrayscaleTransformer extends Transformer {
     @NonNull
     @Override
     protected Bundle keyBundle() {
-        return Bundle.EMPTY;
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_NAME, TAG);
+        return bundle;
     }
 }

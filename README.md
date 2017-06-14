@@ -65,11 +65,11 @@ Download
 ```gradle
 repositories {
     jcenter()
+    maven { url "https://maven.google.com" }
 }
 
 dependencies {
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.hendraanggrian:picasso-commons:0.11.6'
+    compile 'com.hendraanggrian:picasso-commons:0.12.0'
 }
 ```
 

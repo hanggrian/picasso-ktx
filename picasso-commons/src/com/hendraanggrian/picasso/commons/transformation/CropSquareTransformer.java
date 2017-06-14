@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
  */
 class CropSquareTransformer extends Transformer {
 
+    private static final String TAG = "CropSquareTransformer";
+
     @NonNull
     @Override
     public Bitmap transform(@NonNull Bitmap source, boolean recycleSource) {
@@ -26,6 +28,8 @@ class CropSquareTransformer extends Transformer {
     @NonNull
     @Override
     protected Bundle keyBundle() {
-        return Bundle.EMPTY;
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_NAME, TAG);
+        return bundle;
     }
 }

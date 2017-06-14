@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'com.android.tools.build:gradle:2.3.3'
         classpath 'com.novoda:bintray-release:0.3.4'
     }
 }
@@ -18,15 +18,19 @@ allprojects {
             buildTools: '25.0.3',
 
             // dependencies
-            support   : '25.3.1',
+            support   : '25.4.0',
             picasso   : '2.5.2',
-            utils     : '0.10',
-            bundler   : '0.4.1',
+            utils     : '0.12',
 
-            release   : '0.11.6'
+            release   : '0.12.0'
     ]
     repositories {
         jcenter()
+        maven { url "https://maven.google.com" }
+    }
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
     }
 }
 

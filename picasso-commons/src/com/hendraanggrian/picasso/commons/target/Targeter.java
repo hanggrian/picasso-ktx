@@ -19,22 +19,25 @@ public abstract class Targeter implements Target {
     @Override
     @CallSuper
     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-        if (callback != null)
+        if (callback != null) {
             callback.onBitmapLoaded(bitmap, from);
+        }
     }
 
     @Override
     @CallSuper
     public void onBitmapFailed(Drawable errorDrawable) {
-        if (callback != null)
+        if (callback != null) {
             callback.onBitmapFailed(errorDrawable);
+        }
     }
 
     @Override
     @CallSuper
     public void onPrepareLoad(Drawable placeHolderDrawable) {
-        if (callback != null)
+        if (callback != null) {
             callback.onPrepareLoad(placeHolderDrawable);
+        }
     }
 
     @NonNull
@@ -52,20 +55,23 @@ public abstract class Targeter implements Target {
         return callback(new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                if (loaded != null)
+                if (loaded != null) {
                     loaded.onBitmapLoaded(bitmap, from);
+                }
             }
 
             @Override
             public void onBitmapFailed(Drawable errorDrawable) {
-                if (failed != null)
+                if (failed != null) {
                     failed.onBitmapFailed(errorDrawable);
+                }
             }
 
             @Override
             public void onPrepareLoad(Drawable placeHolderDrawable) {
-                if (prepare != null)
+                if (prepare != null) {
                     prepare.onPrepareLoad(placeHolderDrawable);
+                }
             }
         });
     }
