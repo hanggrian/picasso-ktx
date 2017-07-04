@@ -13,10 +13,8 @@ import android.support.annotation.NonNull;
  */
 class CropRoundedTransformer extends Transformer {
 
-    private static final String TAG = "CropRoundedTransformer";
-
-    private int margin;
-    private int radius;
+    private final int margin;
+    private final int radius;
 
     CropRoundedTransformer(int radius, int margin) {
         this.radius = radius;
@@ -25,15 +23,18 @@ class CropRoundedTransformer extends Transformer {
 
     @NonNull
     @Override
-    public Bitmap transform(@NonNull Bitmap source, boolean recycleSource) {
-        final float right = source.getWidth() - margin;
-        final float bottom = source.getHeight() - margin;
-        final Bitmap target = createDefaultBitmap(source);
-        new Canvas(target).drawRoundRect(new RectF(margin, margin, right, bottom), radius, radius, new PaintBuilder(Paint.ANTI_ALIAS_FLAG)
-                .shader(new BitmapShader(source, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP))
-                .build());
-        if (recycleSource)
+    public Bitmap transform(@NonNull Bitmap source, boolean shouldRecycle) {
+        float right = source.getWidth() - margin;
+        float bottom = source.getHeight() - margin;
+        Bitmap target = createDefaultBitmap(source);
+
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setShader(new BitmapShader(source, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP));
+        new Canvas(target).drawRoundRect(new RectF(margin, margin, right, bottom), radius, radius, paint);
+
+        if (shouldRecycle) {
             source.recycle();
+        }
         return target;
     }
 
@@ -41,7 +42,7 @@ class CropRoundedTransformer extends Transformer {
     @Override
     protected Bundle keyBundle() {
         Bundle bundle = new Bundle();
-        bundle.putString(KEY_NAME, TAG);
+        bundle.putString(KEY_NAME, "CropRoundedTransformer");
         bundle.putInt("margin", margin);
         bundle.putInt("radius", radius);
         return bundle;

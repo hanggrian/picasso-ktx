@@ -28,11 +28,11 @@ allprojects {
             espresso  : '2.2.2',
             junit     : '4.12',
 
-            release   : '0.12.1'
+            release   : '0.12.2'
     ]
     repositories {
-        jcenter()
         maven { url "https://maven.google.com" }
+        jcenter()
     }
     tasks.withType(Javadoc) {
         options.addStringOption('Xdoclint:none', '-quiet')

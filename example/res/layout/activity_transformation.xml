@@ -80,6 +80,14 @@
                 android:layout_marginTop="8dp"
                 android:text="grayscale()"
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"/>
+
+            <CheckBox
+                android:id="@+id/checkBoxMask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="mask()"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

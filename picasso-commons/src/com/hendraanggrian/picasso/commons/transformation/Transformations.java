@@ -2,8 +2,10 @@ package com.hendraanggrian.picasso.commons.transformation;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -75,12 +77,30 @@ public final class Transformations {
 
     @NonNull
     public static Transformer overlay(@ColorInt int color, @IntRange(from = 0x0, to = 0xFF) int alpha) {
-        return new ColorOverlayTransformer(color, alpha);
+        if (alpha < 0 || alpha > 255) {
+            throw new IllegalArgumentException("alpha must be between 0 and 255.");
+        }
+        color = (color & 0x00ffffff) | (alpha << 24);
+        return new ColorOverlayTransformer(color);
     }
 
     @NonNull
     public static Transformer grayscale() {
         return new ColorGrayscaleTransformer();
+    }
+
+    @NonNull
+    public static Transformer mask(@NonNull Drawable mask) {
+        return new MaskTransformer(mask);
+    }
+
+    @NonNull
+    public static Transformer mask(@NonNull Context context, @DrawableRes int maskId) {
+        Drawable mask = ContextCompat.getDrawable(context, maskId);
+        if (mask == null) {
+            throw new IllegalArgumentException("maskId is invalid");
+        }
+        return new MaskTransformer(mask);
     }
     //endregion
 }

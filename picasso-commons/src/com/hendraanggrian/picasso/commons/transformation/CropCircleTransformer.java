@@ -12,19 +12,20 @@ import android.support.annotation.NonNull;
  */
 class CropCircleTransformer extends CropSquareTransformer {
 
-    private static final String TAG = "CropCircleTransformer";
-
     @NonNull
     @Override
-    public Bitmap transform(@NonNull Bitmap source, boolean recycleSource) {
+    public Bitmap transform(@NonNull Bitmap source, boolean shouldRecycle) {
         float r = Math.min(source.getWidth(), source.getHeight()) / 2f;
-        final Bitmap squared = super.transform(source, recycleSource);
-        final Bitmap circle = createDefaultBitmap(source);
-        new Canvas(circle).drawCircle(r, r, r, new PaintBuilder(Paint.ANTI_ALIAS_FLAG)
-                .shader(new BitmapShader(squared, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP))
-                .build());
-        if (recycleSource)
+        Bitmap squared = super.transform(source, shouldRecycle);
+        Bitmap circle = createDefaultBitmap(source);
+
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setShader(new BitmapShader(squared, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP));
+        new Canvas(circle).drawCircle(r, r, r, paint);
+
+        if (shouldRecycle) {
             squared.recycle();
+        }
         return circle;
     }
 
@@ -32,7 +33,7 @@ class CropCircleTransformer extends CropSquareTransformer {
     @Override
     protected Bundle keyBundle() {
         Bundle bundle = new Bundle();
-        bundle.putString(KEY_NAME, TAG);
+        bundle.putString(KEY_NAME, "CropCircleTransformer");
         return bundle;
     }
 }

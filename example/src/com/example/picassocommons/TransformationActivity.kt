@@ -21,19 +21,33 @@ class TransformationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transformation)
         setSupportActionBar(toolbar)
-        for (checkBox in Arrays.asList<CheckBox>(checkBoxCropSquare, checkBoxCropCircle, checkBoxCropRounded, checkBoxColorOverlay, checkBoxGrayscale)) {
+        for (checkBox in Arrays.asList<CheckBox>(
+                checkBoxCropSquare,
+                checkBoxCropCircle,
+                checkBoxCropRounded,
+                checkBoxColorOverlay,
+                checkBoxGrayscale,
+                checkBoxMask)) {
             checkBox.setOnCheckedChangeListener { _, _ ->
                 val transformations = ArrayList<Transformation>()
-                if (checkBoxCropSquare.isChecked)
+                if (checkBoxCropSquare.isChecked) {
                     transformations.add(Transformations.square())
-                if (checkBoxCropCircle.isChecked)
+                }
+                if (checkBoxCropCircle.isChecked) {
                     transformations.add(Transformations.circle())
-                if (checkBoxCropRounded.isChecked)
+                }
+                if (checkBoxCropRounded.isChecked) {
                     transformations.add(Transformations.rounded(25, 10, true))
-                if (checkBoxColorOverlay.isChecked)
+                }
+                if (checkBoxColorOverlay.isChecked) {
                     transformations.add(Transformations.overlay(Themes.getColor(this, R.attr.colorAccent, -1), 150))
-                if (checkBoxGrayscale.isChecked)
+                }
+                if (checkBoxGrayscale.isChecked) {
                     transformations.add(Transformations.grayscale())
+                }
+                if (checkBoxMask.isChecked) {
+                    transformations.add(Transformations.mask(this, R.drawable.mask))
+                }
                 Picasso.with(this)
                         .load(R.drawable.bg_test)
                         .transform(transformations)

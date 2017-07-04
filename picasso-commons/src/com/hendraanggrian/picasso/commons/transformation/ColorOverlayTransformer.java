@@ -7,7 +7,6 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
-import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 
 /**
@@ -15,29 +14,24 @@ import android.support.annotation.NonNull;
  */
 class ColorOverlayTransformer extends Transformer {
 
-    private static final String TAG = "ColorOverlayTransformer";
-
-    @ColorInt private int color;
+    @ColorInt private final int color;
 
     ColorOverlayTransformer(@ColorInt int color) {
         this.color = color;
     }
 
-    ColorOverlayTransformer(@ColorInt int color, @IntRange(from = 0x0, to = 0xFF) int alpha) {
-        if (alpha < 0 || alpha > 255)
-            throw new IllegalArgumentException("alpha must be between 0 and 255.");
-        this.color = (color & 0x00ffffff) | (alpha << 24);
-    }
-
     @NonNull
     @Override
-    public Bitmap transform(@NonNull Bitmap source, boolean recycleSource) {
-        final Bitmap target = createDefaultBitmap(source);
-        new Canvas(target).drawBitmap(source, 0, 0, new PaintBuilder(Paint.ANTI_ALIAS_FLAG)
-                .colorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP))
-                .build());
-        if (recycleSource)
+    public Bitmap transform(@NonNull Bitmap source, boolean shouldRecycle) {
+        Bitmap target = createDefaultBitmap(source);
+
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP));
+        new Canvas(target).drawBitmap(source, 0, 0, paint);
+
+        if (shouldRecycle) {
             source.recycle();
+        }
         return target;
     }
 
@@ -45,7 +39,7 @@ class ColorOverlayTransformer extends Transformer {
     @Override
     protected Bundle keyBundle() {
         Bundle bundle = new Bundle();
-        bundle.putString(KEY_NAME, TAG);
+        bundle.putString(KEY_NAME, "ColorOverlayTransformer");
         bundle.putInt("color", color);
         return bundle;
     }

@@ -32,7 +32,7 @@ public abstract class Transformer implements Transformation {
      * Logic of image transformation should happen here.
      */
     @NonNull
-    protected abstract Bitmap transform(@NonNull Bitmap source, boolean recycleSource);
+    protected abstract Bitmap transform(@NonNull Bitmap source, boolean shouldRecycle);
 
     @NonNull
     protected abstract Bundle keyBundle();
