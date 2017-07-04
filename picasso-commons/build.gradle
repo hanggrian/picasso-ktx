@@ -9,10 +9,16 @@ android {
         minSdkVersion versions.sdk.min
         targetSdkVersion versions.sdk.target
         consumerProguardFiles 'proguard-rules.pro'
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
     sourceSets {
         main.manifest.srcFile 'AndroidManifest.xml'
         main.java.srcDirs 'src'
+        androidTest.setRoot('tests')
+        androidTest.manifest.srcFile 'tests/AndroidManifest.xml'
+        androidTest.java.srcDir 'tests/src'
+        androidTest.res.srcDir 'tests/res'
+        androidTest.resources.srcDir 'tests/src'
     }
 }
 
@@ -20,6 +26,17 @@ dependencies {
     compile "com.android.support:support-compat:$versions.support"
     compile "com.squareup.picasso:picasso:$versions.picasso"
     compile "com.hendraanggrian:support-utils:$versions.utils"
+    androidTestCompile "com.android.support:design:$versions.support"
+    androidTestCompile("com.android.support.test:runner:$versions.runner") {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile("com.android.support.test.espresso:espresso-core:$versions.espresso") {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile("com.android.support.test.espresso:espresso-intents:$versions.espresso") {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    testCompile "junit:junit:$versions.junit"
 }
 
 publish {

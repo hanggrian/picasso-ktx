@@ -21,10 +21,18 @@ public final class Targets {
      */
     @NonNull
     public static Targeter placeholder(@NonNull ImageView target) {
+        return placeholder(target, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    }
+
+    /**
+     * Set progress bar with defined width and height as target's placeholder.
+     */
+    @NonNull
+    public static Targeter placeholder(@NonNull ImageView target, int progressBarWidth, int progressBarHeight) {
         ProgressBar progressBar = new ProgressBar(target.getContext());
-        progressBar.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        progressBar.setLayoutParams(new FrameLayout.LayoutParams(progressBarWidth, progressBarHeight));
         ((FrameLayout.LayoutParams) progressBar.getLayoutParams()).gravity = Gravity.CENTER;
-        return new PlaceholderTargeter(target, progressBar);
+        return placeholder(target, progressBar);
     }
 
     /**

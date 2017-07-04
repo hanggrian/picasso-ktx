@@ -20,9 +20,15 @@ allprojects {
             // dependencies
             support   : '25.4.0',
             picasso   : '2.5.2',
-            utils     : '0.12',
+            utils     : '0.13',
 
-            release   : '0.12.0'
+            // tests
+            rules     : '0.5',
+            runner    : '0.5',
+            espresso  : '2.2.2',
+            junit     : '4.12',
+
+            release   : '0.12.1'
     ]
     repositories {
         jcenter()
