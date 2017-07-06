@@ -69,7 +69,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.hendraanggrian:picasso-commons:0.12.1'
+    compile 'com.hendraanggrian:picasso-commons:0.12.3'
 }
 ```
 

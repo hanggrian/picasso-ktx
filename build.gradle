@@ -20,7 +20,7 @@ allprojects {
             // dependencies
             support   : '25.4.0',
             picasso   : '2.5.2',
-            utils     : '0.13',
+            utils     : '0.15',
 
             // tests
             rules     : '0.5',
@@ -28,7 +28,7 @@ allprojects {
             espresso  : '2.2.2',
             junit     : '4.12',
 
-            release   : '0.12.2'
+            release   : '0.12.3'
     ]
     repositories {
         maven { url "https://maven.google.com" }

@@ -47,7 +47,9 @@ class PlaceholderTargeter extends Targeter {
 
     @Override
     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-        ViewGroups.removeViews(parent, ViewGroups.findViewsWithTag(parent, TAG, false));
+        for (View view : ViewGroups.findViewsWithTag(parent, TAG)) {
+            parent.removeView(view);
+        }
         target.setVisibility(View.VISIBLE);
         target.setImageBitmap(bitmap);
         super.onBitmapLoaded(bitmap, from);
@@ -55,7 +57,9 @@ class PlaceholderTargeter extends Targeter {
 
     @Override
     public void onBitmapFailed(Drawable errorDrawable) {
-        ViewGroups.removeViews(parent, ViewGroups.findViewsWithTag(parent, TAG, false));
+        for (View view : ViewGroups.findViewsWithTag(parent, TAG)) {
+            parent.removeView(view);
+        }
         target.setVisibility(View.VISIBLE);
         target.setImageDrawable(errorDrawable);
         super.onBitmapFailed(errorDrawable);
@@ -69,7 +73,9 @@ class PlaceholderTargeter extends Targeter {
             placeholderView.setImageDrawable(placeHolderDrawable);
             placeholder.addView(placeholderView, 0);
         }
-        ViewGroups.removeViews(parent, ViewGroups.findViewsWithTag(parent, TAG, false));
+        for (View view : ViewGroups.findViewsWithTag(parent, TAG)) {
+            parent.removeView(view);
+        }
         parent.addView(placeholder, parent.indexOfChild(target));
         target.setVisibility(View.GONE);
         super.onPrepareLoad(placeHolderDrawable);

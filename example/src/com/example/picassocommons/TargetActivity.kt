@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.hendraanggrian.picasso.commons.target.Targets
-import com.hendraanggrian.support.utils.view.InputMethods
+import com.hendraanggrian.support.utils.view.SoftInputs
 import com.hendraanggrian.support.utils.widget.Toasts
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_target.*
@@ -20,7 +20,7 @@ class TargetActivity : AppCompatActivity() {
         setContentView(R.layout.activity_target)
         buttonClear.setOnClickListener { editText!!.setText("") }
         buttonGo.setOnClickListener {
-            InputMethods.hideSoftInput(this)
+            SoftInputs.hideNotAlways(this)
             Picasso.with(this)
                     .load(editText.text.toString())
                     .into(Targets.placeholder(imageView)

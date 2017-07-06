@@ -40,7 +40,7 @@ class TransformationActivity : AppCompatActivity() {
                     transformations.add(Transformations.rounded(25, 10, true))
                 }
                 if (checkBoxColorOverlay.isChecked) {
-                    transformations.add(Transformations.overlay(Themes.getColor(this, R.attr.colorAccent, -1), 150))
+                    transformations.add(Transformations.overlay(Themes.getColor(this, R.attr.colorAccent), 150))
                 }
                 if (checkBoxGrayscale.isChecked) {
                     transformations.add(Transformations.grayscale())
