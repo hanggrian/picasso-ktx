@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.hendraanggrian.picasso.commons.target.Targets
-import com.hendraanggrian.support.utils.view.SoftInputs
-import com.hendraanggrian.support.utils.widget.Toasts
-import com.squareup.picasso.Picasso
+import com.hendraanggrian.support.utils.view.hideInput
+import com.squareup.picasso.picassoLoad
 import kotlinx.android.synthetic.main.activity_target.*
+import org.jetbrains.anko.toast
 
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
@@ -20,16 +20,15 @@ class TargetActivity : AppCompatActivity() {
         setContentView(R.layout.activity_target)
         buttonClear.setOnClickListener { editText!!.setText("") }
         buttonGo.setOnClickListener {
-            SoftInputs.hideNotAlways(this)
-            Picasso.with(this)
-                    .load(editText.text.toString())
+            hideInput()
+            picassoLoad(editText.text.toString())
                     .into(Targets.placeholder(imageView)
                             .callback({ _, _ ->
-                                Toasts.showShort(this, "Loaded.")
+                                toast("Loaded.")
                             }, {
-                                Toasts.showShort(this, "Failed.")
+                                toast("Failed.")
                             }, {
-                                Toasts.showShort(this, "Prepare...")
+                                toast("Prepare...")
                             }))
         }
     }

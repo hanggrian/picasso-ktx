@@ -1,14 +1,4 @@
 buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-        classpath 'com.novoda:bintray-release:0.3.4'
-    }
-}
-
-allprojects {
     ext.versions = [
             // android
             sdk       : [
@@ -18,9 +8,13 @@ allprojects {
             buildTools: '25.0.3',
 
             // dependencies
+            kotlin        : [
+                    stdlib: '1.1.3-2',
+                    anko  : '0.10.1'
+            ],
             support   : '25.4.0',
             picasso   : '2.5.2',
-            utils     : '0.15',
+            utils     : '0.21',
 
             // tests
             rules     : '0.5',
@@ -28,15 +22,26 @@ allprojects {
             espresso  : '2.2.2',
             junit     : '4.12',
 
-            release   : '0.12.3'
+            release   : '0.13.0'
     ]
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin.stdlib"
+        classpath 'com.novoda:bintray-release:0.3.4'
+    }
+}
+
+allprojects {
     repositories {
         maven { url "https://maven.google.com" }
         jcenter()
     }
     tasks.withType(Javadoc) {
-        options.addStringOption('Xdoclint:none', '-quiet')
-        options.addStringOption('encoding', 'UTF-8')
+        excludes = ['**/*.kt']
     }
 }
 

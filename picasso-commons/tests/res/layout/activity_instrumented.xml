@@ -14,7 +14,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            app:title="socialview Instrumented Test"/>
+            app:title="picasso-commons test"/>
 
         <FrameLayout
             android:layout_width="match_parent"

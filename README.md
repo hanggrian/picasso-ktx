@@ -60,6 +60,19 @@ Drawable drawable = Transformations.overlay(this, R.color.colorAccent).toDrawabl
 | overlay      | `Transformations.overlay(color, alpha)`<br> `Transformations.overlay(context, colorRes, alpha)`                                     |
 | grayscale    | `Transformations.grayscale()`                                                                                                     |
 
+Kotlin
+------
+Several Kotlin extension functions:
+```java
+class MyActivity : Activity {
+
+    override fun onCreate(bundle : Bundle?) {
+        picassoLoad(url)
+            .into(imageView)
+    }
+}
+```
+
 Download
 --------
 ```gradle
@@ -69,7 +82,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.hendraanggrian:picasso-commons:0.12.3'
+    compile 'com.hendraanggrian:picasso-commons:0.13.0'
 }
 ```
 

@@ -10,6 +10,6 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Picassos.setDebug(BuildConfig.DEBUG)
+        Picassos.isDebug = BuildConfig.DEBUG
     }
 }
