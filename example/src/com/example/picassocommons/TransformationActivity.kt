@@ -8,7 +8,7 @@ import com.hendraanggrian.picasso.commons.target.Targets
 import com.hendraanggrian.picasso.commons.transformation.Transformations
 import com.hendraanggrian.support.utils.content.colorAttr
 import com.squareup.picasso.Transformation
-import com.squareup.picasso.picassoLoad
+import com.squareup.picasso.load
 import kotlinx.android.synthetic.main.activity_transformation.*
 import java.util.*
 
@@ -48,7 +48,7 @@ class TransformationActivity : AppCompatActivity() {
                 if (checkBoxMask.isChecked) {
                     transformations.add(Transformations.mask(this, R.drawable.mask))
                 }
-                picassoLoad(R.drawable.bg_test)
+                load(R.drawable.bg_test)
                         .transform(transformations)
                         .into(Targets.placeholder(imageView))
             }

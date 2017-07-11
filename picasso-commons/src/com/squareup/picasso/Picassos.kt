@@ -11,11 +11,13 @@ import java.io.File
 object Picassos {
     val TAG = "Picassos"
     var isDebug: Boolean = false
+
+    fun getCache(picasso: Picasso): Cache = picasso.cache
 }
 
-fun Context.picassoCache(): Cache = Picasso.with(this).cache
+fun Picasso.getCache(): Cache = cache
 
-fun Context.picassoLoad(uri: Uri): RequestCreator = Picasso.with(this).load(uri)
-fun Context.picassoLoad(path: String): RequestCreator = Picasso.with(this).load(path)
-fun Context.picassoLoad(file: File): RequestCreator = Picasso.with(this).load(file)
-fun Context.picassoLoad(@AnyRes resourceId: Int): RequestCreator = Picasso.with(this).load(resourceId)
+fun Context.load(uri: Uri): RequestCreator = Picasso.with(this).load(uri)
+fun Context.load(path: String): RequestCreator = Picasso.with(this).load(path)
+fun Context.load(file: File): RequestCreator = Picasso.with(this).load(file)
+fun Context.load(@AnyRes resourceId: Int): RequestCreator = Picasso.with(this).load(resourceId)
