@@ -6,9 +6,9 @@ import android.view.MenuItem
 import android.widget.CheckBox
 import com.hendraanggrian.picasso.commons.target.Targets
 import com.hendraanggrian.picasso.commons.transformation.Transformations
-import com.hendraanggrian.support.utils.content.colorAttr
+import com.hendraanggrian.support.utils.content.getColor
 import com.squareup.picasso.Transformation
-import com.squareup.picasso.load
+import com.squareup.picasso.getPicasso
 import kotlinx.android.synthetic.main.activity_transformation.*
 import java.util.*
 
@@ -40,7 +40,7 @@ class TransformationActivity : AppCompatActivity() {
                     transformations.add(Transformations.rounded(25, 10, true))
                 }
                 if (checkBoxColorOverlay.isChecked) {
-                    transformations.add(Transformations.overlay(R.attr.colorAccent.colorAttr(this), 150))
+                    transformations.add(Transformations.overlay(theme.getColor(R.attr.colorAccent, true), 150))
                 }
                 if (checkBoxGrayscale.isChecked) {
                     transformations.add(Transformations.grayscale())
@@ -48,7 +48,7 @@ class TransformationActivity : AppCompatActivity() {
                 if (checkBoxMask.isChecked) {
                     transformations.add(Transformations.mask(this, R.drawable.mask))
                 }
-                load(R.drawable.bg_test)
+                getPicasso().load(R.drawable.bg_test)
                         .transform(transformations)
                         .into(Targets.placeholder(imageView))
             }

@@ -20,8 +20,8 @@ internal class PlaceholderTargeter(private val target: ImageView, placeholderVie
         private val TAG = "PlaceholderTargeter"
     }
 
-    private val parent: ViewGroup = target.parent as ViewGroup
-    private val placeholder: ViewGroup = FrameLayout(target.context)
+    private val parent = target.parent as ViewGroup
+    private val placeholder = FrameLayout(target.context)
 
     init {
         this.target.tag = this
@@ -31,9 +31,9 @@ internal class PlaceholderTargeter(private val target: ImageView, placeholderVie
         transition(true)
     }
 
-    override fun equals(other: Any?): Boolean = other != null && other is PlaceholderTargeter && other.target === target
+    override fun equals(other: Any?) = other != null && other is PlaceholderTargeter && other.target === target
 
-    override fun hashCode(): Int = target.hashCode()
+    override fun hashCode() = target.hashCode()
 
     override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
         for (view in parent.findViewsWithTag(TAG)) {

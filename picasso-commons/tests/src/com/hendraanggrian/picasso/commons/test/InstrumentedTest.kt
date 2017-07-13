@@ -13,7 +13,7 @@ import android.view.View
 import android.widget.ImageView
 import com.hendraanggrian.picasso.commons.target.Targets
 import com.hendraanggrian.picasso.commons.transformation.Transformations
-import com.squareup.picasso.picassoLoad
+import com.squareup.picasso.getPicasso
 import org.hamcrest.Matcher
 import org.junit.FixMethodOrder
 import org.junit.Rule
@@ -42,7 +42,8 @@ class InstrumentedTest {
                             override fun getConstraints(): Matcher<View> = isAssignableFrom(ImageView::class.java)
                             override fun getDescription(): String = "test1_transformation()"
                             override fun perform(uiController: UiController, view: View) = getTargetContext()
-                                    .picassoLoad(R.drawable.bg_test)
+                                    .getPicasso()
+                                    .load(R.drawable.bg_test)
                                     .transform(Transformations.circle())
                                     .into(view as ImageView)
                         },
@@ -57,7 +58,8 @@ class InstrumentedTest {
                             override fun getConstraints(): Matcher<View> = isAssignableFrom(ImageView::class.java)
                             override fun getDescription(): String = "test2_placeholder()"
                             override fun perform(uiController: UiController, view: View) = getTargetContext()
-                                    .picassoLoad("https://i.ytimg.com/vi/yaqe1qesQ8c/maxresdefault.jpg")
+                                    .getPicasso()
+                                    .load("https://i.ytimg.com/vi/yaqe1qesQ8c/maxresdefault.jpg")
                                     .into(Targets.placeholder(view as ImageView))
                         },
                         delay())

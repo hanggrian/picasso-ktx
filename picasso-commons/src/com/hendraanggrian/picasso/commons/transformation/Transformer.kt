@@ -36,7 +36,7 @@ abstract class Transformer : Transformation {
      * Calling this method outside <tt>Picasso</tt> will cause the source bitmap to be recycled and
      * likely to cause errors.
      */
-    override fun transform(source: Bitmap): Bitmap = transform(source, true)
+    override fun transform(source: Bitmap) = transform(source, true)
 
     override fun key(): String {
         val bundle = keyBundle()
@@ -54,5 +54,5 @@ abstract class Transformer : Transformation {
         return key
     }
 
-    protected fun createDefaultBitmap(source: Bitmap): Bitmap = Bitmap.createBitmap(source.width, source.height, Bitmap.Config.ARGB_8888)
+    protected fun createDefaultBitmap(source: Bitmap) = Bitmap.createBitmap(source.width, source.height, Bitmap.Config.ARGB_8888)
 }
