@@ -8,7 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
-import com.hendraanggrian.support.utils.view.findViewsWithTag
+import com.hendraanggrian.kota.view.findViewsWithTag
+import com.hendraanggrian.kota.view.removeViews
 import com.squareup.picasso.Picasso
 
 /**
@@ -36,18 +37,14 @@ internal class PlaceholderTargeter(private val target: ImageView, placeholderVie
     override fun hashCode() = target.hashCode()
 
     override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
-        for (view in parent.findViewsWithTag(TAG)) {
-            parent.removeView(view)
-        }
+        parent.removeViews(*parent.findViewsWithTag(TAG).toTypedArray())
         target.visibility = View.VISIBLE
         target.setImageBitmap(bitmap)
         super.onBitmapLoaded(bitmap, from)
     }
 
     override fun onBitmapFailed(errorDrawable: Drawable?) {
-        for (view in parent.findViewsWithTag(TAG)) {
-            parent.removeView(view)
-        }
+        parent.removeViews(*parent.findViewsWithTag(TAG).toTypedArray())
         target.visibility = View.VISIBLE
         target.setImageDrawable(errorDrawable)
         super.onBitmapFailed(errorDrawable)
@@ -60,9 +57,7 @@ internal class PlaceholderTargeter(private val target: ImageView, placeholderVie
             placeholderView.setImageDrawable(placeHolderDrawable)
             placeholder.addView(placeholderView, 0)
         }
-        for (view in parent.findViewsWithTag(TAG)) {
-            parent.removeView(view)
-        }
+        parent.removeViews(*parent.findViewsWithTag(TAG).toTypedArray())
         parent.addView(placeholder, parent.indexOfChild(target))
         target.visibility = View.GONE
         super.onPrepareLoad(placeHolderDrawable)

@@ -3,8 +3,8 @@ package com.example.picassocommons
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import com.hendraanggrian.kota.view.hideInput
 import com.hendraanggrian.picasso.commons.target.Targets
-import com.hendraanggrian.support.utils.view.hideInput
 import com.squareup.picasso.getPicasso
 import kotlinx.android.synthetic.main.activity_target.*
 import org.jetbrains.anko.toast

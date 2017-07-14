@@ -6,10 +6,8 @@ import android.content.Context
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
 object Picassos {
-    val TAG = "Picassos"
+    internal val TAG = "Picassos"
     var isDebug: Boolean = false
-
-    fun getCache(picasso: Picasso): Cache = picasso.cache
 }
 
 fun Context.getPicasso(): Picasso = Picasso.with(this)

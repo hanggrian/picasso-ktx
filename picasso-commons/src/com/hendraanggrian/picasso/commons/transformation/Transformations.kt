@@ -1,12 +1,12 @@
 package com.hendraanggrian.picasso.commons.transformation
 
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.support.annotation.ColorInt
 import android.support.annotation.DrawableRes
 import android.support.annotation.IntRange
-import android.support.v4.content.ContextCompat
+import com.hendraanggrian.kota.content.getDrawable2
+import com.hendraanggrian.kota.content.toPx
 
 /**
  * Image transformations with <tt>Picasso</tt>.
@@ -38,8 +38,8 @@ object Transformations {
 
     @JvmOverloads
     fun rounded(radius: Int, margin: Int, useDp: Boolean = false): Transformer = CropRoundedTransformer(
-            if (useDp) (radius * Resources.getSystem().displayMetrics.density).toInt() else radius,
-            if (useDp) (margin * Resources.getSystem().displayMetrics.density).toInt() else margin)
+            if (useDp) radius.toPx() else radius,
+            if (useDp) margin.toPx() else margin)
     //endregion
 
     //region color
@@ -56,6 +56,6 @@ object Transformations {
 
     fun mask(mask: Drawable): Transformer = MaskTransformer(mask)
 
-    fun mask(context: Context, @DrawableRes maskId: Int): Transformer = MaskTransformer(ContextCompat.getDrawable(context, maskId) ?: throw IllegalArgumentException("maskId is invalid"))
+    fun mask(context: Context, @DrawableRes maskId: Int): Transformer = MaskTransformer(context.getDrawable2(maskId))
     //endregion
 }

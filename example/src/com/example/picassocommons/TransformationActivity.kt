@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.CheckBox
+import com.hendraanggrian.kota.content.getColor
 import com.hendraanggrian.picasso.commons.target.Targets
 import com.hendraanggrian.picasso.commons.transformation.Transformations
-import com.hendraanggrian.support.utils.content.getColor
 import com.squareup.picasso.Transformation
 import com.squareup.picasso.getPicasso
 import kotlinx.android.synthetic.main.activity_transformation.*
@@ -29,27 +29,27 @@ class TransformationActivity : AppCompatActivity() {
                 checkBoxGrayscale,
                 checkBoxMask)) {
             checkBox.setOnCheckedChangeListener { _, _ ->
-                val transformations = ArrayList<Transformation>()
-                if (checkBoxCropSquare.isChecked) {
-                    transformations.add(Transformations.square())
-                }
-                if (checkBoxCropCircle.isChecked) {
-                    transformations.add(Transformations.circle())
-                }
-                if (checkBoxCropRounded.isChecked) {
-                    transformations.add(Transformations.rounded(25, 10, true))
-                }
-                if (checkBoxColorOverlay.isChecked) {
-                    transformations.add(Transformations.overlay(theme.getColor(R.attr.colorAccent, true), 150))
-                }
-                if (checkBoxGrayscale.isChecked) {
-                    transformations.add(Transformations.grayscale())
-                }
-                if (checkBoxMask.isChecked) {
-                    transformations.add(Transformations.mask(this, R.drawable.mask))
-                }
                 getPicasso().load(R.drawable.bg_test)
-                        .transform(transformations)
+                        .transform(ArrayList<Transformation>().apply {
+                            if (checkBoxCropSquare.isChecked) {
+                                add(Transformations.square())
+                            }
+                            if (checkBoxCropCircle.isChecked) {
+                                add(Transformations.circle())
+                            }
+                            if (checkBoxCropRounded.isChecked) {
+                                add(Transformations.rounded(25, 10, true))
+                            }
+                            if (checkBoxColorOverlay.isChecked) {
+                                add(Transformations.overlay(theme.getColor(R.attr.colorAccent, true), 150))
+                            }
+                            if (checkBoxGrayscale.isChecked) {
+                                add(Transformations.grayscale())
+                            }
+                            if (checkBoxMask.isChecked) {
+                                add(Transformations.mask(this@TransformationActivity, R.drawable.mask))
+                            }
+                        })
                         .into(Targets.placeholder(imageView))
             }
         }
