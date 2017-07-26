@@ -3,7 +3,6 @@ package com.hendraanggrian.picasso.commons.target
 import android.animation.LayoutTransition
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -21,14 +20,14 @@ internal class PlaceholderTargeter(private val target: ImageView, placeholderVie
         private val TAG = "PlaceholderTargeter"
     }
 
-    private val parent = target.parent as ViewGroup
-    private val placeholder = FrameLayout(target.context)
+    private val rootView = target.parent as ViewGroup
+    private val placeholderLayout = FrameLayout(target.context)
 
     init {
-        this.target.tag = this
-        this.placeholder.layoutParams = target.layoutParams
-        this.placeholder.addView(placeholderView)
-        this.placeholder.tag = TAG
+        target.tag = this
+        placeholderLayout.layoutParams = target.layoutParams
+        placeholderLayout.addView(placeholderView)
+        placeholderLayout.tag = TAG
         transition(true)
     }
 
@@ -37,14 +36,14 @@ internal class PlaceholderTargeter(private val target: ImageView, placeholderVie
     override fun hashCode() = target.hashCode()
 
     override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
-        parent.removeViews(*parent.findViewsWithTag(TAG).toTypedArray())
+        rootView.removeViews(*rootView.findViewsWithTag(TAG).toTypedArray())
         target.visibility = View.VISIBLE
         target.setImageBitmap(bitmap)
         super.onBitmapLoaded(bitmap, from)
     }
 
     override fun onBitmapFailed(errorDrawable: Drawable?) {
-        parent.removeViews(*parent.findViewsWithTag(TAG).toTypedArray())
+        rootView.removeViews(*rootView.findViewsWithTag(TAG).toTypedArray())
         target.visibility = View.VISIBLE
         target.setImageDrawable(errorDrawable)
         super.onBitmapFailed(errorDrawable)
@@ -52,25 +51,22 @@ internal class PlaceholderTargeter(private val target: ImageView, placeholderVie
 
     override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
         if (placeHolderDrawable != null) {
-            val placeholderView = ImageView(target.context)
-            placeholderView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-            placeholderView.setImageDrawable(placeHolderDrawable)
-            placeholder.addView(placeholderView, 0)
+            placeholderLayout.addView(ImageView(target.context).apply {
+                layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                setImageDrawable(placeHolderDrawable)
+            }, 0)
         }
-        parent.removeViews(*parent.findViewsWithTag(TAG).toTypedArray())
-        parent.addView(placeholder, parent.indexOfChild(target))
+        rootView.removeViews(*rootView.findViewsWithTag(TAG).toTypedArray())
+        rootView.addView(placeholderLayout, rootView.indexOfChild(target))
         target.visibility = View.GONE
         super.onPrepareLoad(placeHolderDrawable)
     }
 
     fun transition(enable: Boolean): PlaceholderTargeter {
-        val parent = target.parent as ViewGroup
-        if (Build.VERSION.SDK_INT >= 11) {
-            if (enable && parent.layoutTransition == null) {
-                parent.layoutTransition = LayoutTransition()
-            } else if (!enable) {
-                parent.layoutTransition = null
-            }
+        if (enable && rootView.layoutTransition == null) {
+            rootView.layoutTransition = LayoutTransition()
+        } else if (!enable) {
+            rootView.layoutTransition = null
         }
         return this
     }

@@ -1,33 +1,23 @@
 package com.hendraanggrian.picasso.commons.transformation
 
 import android.graphics.*
-import android.os.Bundle
+import com.squareup.picasso.Transformation
 
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-internal class CropRoundedTransformer(private val radius: Int, private val margin: Int) : Transformer() {
+internal class CropRoundedTransformer(private val radius: Int, private val margin: Int) : Transformation {
 
-    override fun transform(source: Bitmap, shouldRecycle: Boolean): Bitmap {
+    override fun transform(source: Bitmap): Bitmap {
         val right = (source.width - margin).toFloat()
         val bottom = (source.height - margin).toFloat()
-        val target = createDefaultBitmap(source)
-
-        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-        paint.shader = BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
-        Canvas(target).drawRoundRect(RectF(margin.toFloat(), margin.toFloat(), right, bottom), radius.toFloat(), radius.toFloat(), paint)
-
-        if (shouldRecycle) {
-            source.recycle()
-        }
+        val target = Bitmap.createBitmap(source.width, source.height, Bitmap.Config.ARGB_8888)
+        Canvas(target).drawRoundRect(RectF(margin.toFloat(), margin.toFloat(), right, bottom), radius.toFloat(), radius.toFloat(), Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            shader = BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+        })
+        source.recycle()
         return target
     }
 
-    override fun keyBundle(): Bundle {
-        val bundle = Bundle()
-        bundle.putString(Transformer.KEY_NAME, "CropRoundedTransformer")
-        bundle.putInt("margin", margin)
-        bundle.putInt("radius", radius)
-        return bundle
-    }
+    override fun key() = "CropRoundedTransformer[margin=$margin, radius=$radius]"
 }

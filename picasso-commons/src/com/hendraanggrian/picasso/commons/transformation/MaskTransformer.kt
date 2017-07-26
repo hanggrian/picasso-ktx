@@ -1,40 +1,35 @@
 package com.hendraanggrian.picasso.commons.transformation
 
+import android.content.Context
 import android.graphics.*
-import android.graphics.drawable.Drawable
-import android.os.Bundle
+import android.support.annotation.DrawableRes
+import com.hendraanggrian.kota.content.getDrawable2
+import com.squareup.picasso.Transformation
 import java.lang.ref.WeakReference
 
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-internal class MaskTransformer(private val mask: Drawable) : Transformer() {
+internal class MaskTransformer(private val context: Context, @DrawableRes private val resId: Int) : Transformation {
 
     companion object {
         private var paint: WeakReference<Paint>? = null
     }
 
-    override fun transform(source: Bitmap, shouldRecycle: Boolean): Bitmap {
+    override fun transform(source: Bitmap): Bitmap {
         val width = source.width
         val height = source.height
-        val result = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-
-        val canvas = Canvas(result)
+        val target = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(target)
+        val mask = context.getDrawable2(resId)
         mask.setBounds(0, 0, width, height)
         mask.draw(canvas)
         canvas.drawBitmap(source, 0f, 0f, getPaint())
-
-        if (shouldRecycle) {
-            source.recycle()
-        }
-        return result
+        source.recycle()
+        return target
     }
 
-    override fun keyBundle(): Bundle {
-        val bundle = Bundle()
-        bundle.putString(Transformer.KEY_NAME, "MaskTransformer")
-        return bundle
-    }
+    override fun key() = context.resources.getResourceEntryName(resId).let { "MaskTransformer[maskId=$it]" }
 
     private fun getPaint(): Paint {
         var instance: Paint?

@@ -1,30 +1,23 @@
 package com.hendraanggrian.picasso.commons.transformation
 
 import android.graphics.Bitmap
-import android.os.Bundle
+import com.squareup.picasso.Transformation
 
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-internal open class CropSquareTransformer : Transformer() {
+internal class CropSquareTransformer : Transformation {
 
-    override fun transform(source: Bitmap, shouldRecycle: Boolean): Bitmap {
+    override fun transform(source: Bitmap): Bitmap {
         val size = Math.min(source.width, source.height)
-        val target = Bitmap.createBitmap(source,
-                (source.width - size) / 2,
-                (source.height - size) / 2,
-                size,
-                size)
-
-        if (source != target && shouldRecycle) {
+        val width = (source.width - size) / 2
+        val height = (source.height - size) / 2
+        val target = Bitmap.createBitmap(source, width, height, size, size)
+        if (target != source) {
             source.recycle()
         }
         return target
     }
 
-    override fun keyBundle(): Bundle {
-        val bundle = Bundle()
-        bundle.putString(Transformer.KEY_NAME, "CropSquareTransformer")
-        return bundle
-    }
+    override fun key() = "CropSquareTransformer"
 }

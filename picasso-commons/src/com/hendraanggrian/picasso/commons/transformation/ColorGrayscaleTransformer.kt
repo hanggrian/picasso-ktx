@@ -1,31 +1,21 @@
 package com.hendraanggrian.picasso.commons.transformation
 
 import android.graphics.*
-import android.os.Bundle
+import com.squareup.picasso.Transformation
 
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-internal class ColorGrayscaleTransformer : Transformer() {
+internal class ColorGrayscaleTransformer : Transformation {
 
-    override fun transform(source: Bitmap, shouldRecycle: Boolean): Bitmap {
-        val target = createDefaultBitmap(source)
-
-        val saturation = ColorMatrix()
-        saturation.setSaturation(0f)
-        val paint = Paint()
-        paint.colorFilter = ColorMatrixColorFilter(saturation)
-        Canvas(target).drawBitmap(source, 0f, 0f, paint)
-
-        if (shouldRecycle) {
-            source.recycle()
-        }
+    override fun transform(source: Bitmap): Bitmap {
+        val target = Bitmap.createBitmap(source.width, source.height, Bitmap.Config.ARGB_8888)
+        Canvas(target).drawBitmap(source, 0f, 0f, Paint().apply {
+            colorFilter = ColorMatrixColorFilter(ColorMatrix().apply { setSaturation(0f) })
+        })
+        source.recycle()
         return target
     }
 
-    override fun keyBundle(): Bundle {
-        val bundle = Bundle()
-        bundle.putString(Transformer.KEY_NAME, "ColorGrayscaleTransformer")
-        return bundle
-    }
+    override fun key() = "ColorGrayscaleTransformer"
 }

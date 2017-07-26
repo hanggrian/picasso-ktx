@@ -15,14 +15,11 @@ object Targets {
     /**
      * Set progress bar with defined width and height as target's placeholder.
      */
-    @JvmOverloads fun placeholder(
-            target: ImageView,
-            progressBarWidth: Int = ViewGroup.LayoutParams.WRAP_CONTENT,
-            progressBarHeight: Int = ViewGroup.LayoutParams.WRAP_CONTENT): Targeter = PlaceholderTargeter(target, ProgressBar(target.context).apply {
-        layoutParams = FrameLayout.LayoutParams(progressBarWidth, progressBarHeight).apply {
-            gravity = Gravity.CENTER
-        }
-    })
+    @JvmOverloads
+    fun placeholder(target: ImageView, progressWidth: Int = ViewGroup.LayoutParams.WRAP_CONTENT, progressHeight: Int = ViewGroup.LayoutParams.WRAP_CONTENT): Targeter =
+            PlaceholderTargeter(target, ProgressBar(target.context).apply {
+                layoutParams = FrameLayout.LayoutParams(progressWidth, progressHeight).apply { gravity = Gravity.CENTER }
+            })
 
     /**
      * Set custom view as target's placeholder.

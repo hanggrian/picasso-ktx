@@ -78,12 +78,12 @@ Download
 --------
 ```gradle
 repositories {
-    maven { url "https://maven.google.com" }
+    maven { url 'https://maven.google.com' }
     jcenter()
 }
 
 dependencies {
-    compile 'com.hendraanggrian:picasso-commons:0.13.1'
+    compile 'com.hendraanggrian:picasso-commons:0.14.0'
 }
 ```
 

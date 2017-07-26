@@ -1,31 +1,34 @@
 package com.hendraanggrian.picasso.commons.transformation
 
 import android.graphics.*
-import android.os.Bundle
+import com.squareup.picasso.Transformation
+
 
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-internal class CropCircleTransformer : CropSquareTransformer() {
+internal class CropCircleTransformer : Transformation {
 
-    override fun transform(source: Bitmap, shouldRecycle: Boolean): Bitmap {
-        val r = Math.min(source.width, source.height) / 2f
-        val squared = super.transform(source, shouldRecycle)
-        val circle = createDefaultBitmap(source)
-
-        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-        paint.shader = BitmapShader(squared, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
-        Canvas(circle).drawCircle(r, r, r, paint)
-
-        if (shouldRecycle) {
-            squared.recycle()
-        }
-        return circle
+    override fun transform(source: Bitmap): Bitmap {
+        val size = Math.min(source.width, source.height)
+        val width = (source.width - size) / 2
+        val height = (source.height - size) / 2
+        val target = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+        val r = size / 2f
+        Canvas(target).drawCircle(r, r, r, Paint().apply {
+            val shader = BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+            if (width != 0 || height != 0) {
+                // source isn't square, move viewport to center
+                val matrix = Matrix()
+                matrix.setTranslate(-width.toFloat(), -height.toFloat())
+                shader.setLocalMatrix(matrix)
+            }
+            this.shader = shader
+            this.isAntiAlias = true
+        })
+        source.recycle()
+        return target
     }
 
-    override fun keyBundle(): Bundle {
-        val bundle = Bundle()
-        bundle.putString(Transformer.KEY_NAME, "CropCircleTransformer")
-        return bundle
-    }
+    override fun key() = "CropCircleTransformer"
 }

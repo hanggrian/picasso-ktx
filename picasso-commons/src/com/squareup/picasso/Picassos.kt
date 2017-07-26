@@ -11,4 +11,4 @@ object Picassos {
 }
 
 fun Context.getPicasso(): Picasso = Picasso.with(this)
-fun Picasso.getCache(): Cache = cache
+fun Picasso.getCache(): Cache = cache // memory cache, not storage

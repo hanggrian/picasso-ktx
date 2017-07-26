@@ -3,7 +3,6 @@ package com.example.picassocommons
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import android.widget.CheckBox
 import com.hendraanggrian.kota.content.getColor
 import com.hendraanggrian.picasso.commons.target.Targets
 import com.hendraanggrian.picasso.commons.transformation.Transformations
@@ -21,13 +20,7 @@ class TransformationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transformation)
         setSupportActionBar(toolbar)
-        for (checkBox in Arrays.asList<CheckBox>(
-                checkBoxCropSquare,
-                checkBoxCropCircle,
-                checkBoxCropRounded,
-                checkBoxColorOverlay,
-                checkBoxGrayscale,
-                checkBoxMask)) {
+        for (checkBox in listOf(checkBoxCropSquare, checkBoxCropCircle, checkBoxCropRounded, checkBoxColorOverlay, checkBoxGrayscale, checkBoxMask)) {
             checkBox.setOnCheckedChangeListener { _, _ ->
                 getPicasso().load(R.drawable.bg_test)
                         .transform(ArrayList<Transformation>().apply {
@@ -41,7 +34,7 @@ class TransformationActivity : AppCompatActivity() {
                                 add(Transformations.rounded(25, 10, true))
                             }
                             if (checkBoxColorOverlay.isChecked) {
-                                add(Transformations.overlay(theme.getColor(R.attr.colorAccent, true), 150))
+                                add(Transformations.overlay(theme.getColor(R.attr.colorAccent, true)))
                             }
                             if (checkBoxGrayscale.isChecked) {
                                 add(Transformations.grayscale())
