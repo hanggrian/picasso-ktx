@@ -6,10 +6,9 @@ android {
     compileSdkVersion versions.sdk.target
     buildToolsVersion versions.buildTools
     defaultConfig {
-        applicationId 'com.example.picassocommons'
-        versionCode 1
+        applicationId 'com.example.picassoutils'
         versionName '1.0'
-        minSdkVersion 16
+        minSdkVersion versions.sdk.min
         targetSdkVersion versions.sdk.target
     }
     sourceSets {
@@ -20,7 +19,7 @@ android {
     }
     buildTypes {
         debug {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
@@ -34,7 +33,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin.stdlib"
     compile "org.jetbrains.anko:anko-commons:$versions.kotlin.anko"
 
-    compile project(':picasso-commons')
+    compile project(':picasso-utils')
 
     compile "com.android.support:appcompat-v7:$versions.support"
     compile "com.android.support:design:$versions.support"

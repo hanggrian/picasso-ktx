@@ -1,6 +1,6 @@
-picasso-commons
-===============
-Image manipulation with pre-loaded transformations and target placeholder.
+picasso-utils
+=============
+Handy extension to Picasso with pre-loaded transformations and target placeholder.
 
 Targets
 -------
@@ -83,7 +83,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.hendraanggrian:picasso-commons:0.14.0'
+    compile 'com.hendraanggrian:picasso-utils:0.1.0'
 }
 ```
 
