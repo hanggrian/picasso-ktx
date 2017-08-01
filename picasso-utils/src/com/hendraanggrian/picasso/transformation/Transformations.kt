@@ -4,7 +4,7 @@ import android.content.Context
 import android.support.annotation.ColorInt
 import android.support.annotation.DrawableRes
 import android.support.annotation.IntRange
-import com.hendraanggrian.kota.content.res.toPx
+import com.hendraanggrian.kota.content.toPx
 import com.squareup.picasso.Transformation
 
 /**

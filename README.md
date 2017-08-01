@@ -9,9 +9,9 @@ Targets
 Load `ImageView` with progress bar or custom view placeholder.
 
 ```java
-Picasso.with(context)
-    .load(url)
-    .target(Targets.placeholder(imageView));
+picasso(url)
+    .transform(Transformations.circle())
+    .into(Targets.placeholder(imageView));
 ```
  
 #### Placeholder type
@@ -83,7 +83,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.hendraanggrian:picasso-utils:0.1.0'
+    compile 'com.hendraanggrian:picasso-utils:0.2.0'
 }
 ```
 

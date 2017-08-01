@@ -3,11 +3,11 @@ package com.example.picassoutils
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import com.hendraanggrian.kota.content.res.getColor
+import com.hendraanggrian.kota.content.getColor
+import com.hendraanggrian.picasso.picasso
 import com.hendraanggrian.picasso.target.Targets
 import com.hendraanggrian.picasso.transformation.Transformations
 import com.squareup.picasso.Transformation
-import com.squareup.picasso.getPicasso
 import kotlinx.android.synthetic.main.activity_transformation.*
 import java.util.*
 
@@ -22,7 +22,7 @@ class TransformationActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         for (checkBox in listOf(checkBoxCropSquare, checkBoxCropCircle, checkBoxCropRounded, checkBoxColorOverlay, checkBoxGrayscale, checkBoxMask)) {
             checkBox.setOnCheckedChangeListener { _, _ ->
-                getPicasso().load(R.drawable.bg_test)
+                picasso(R.drawable.bg_test)
                         .transform(ArrayList<Transformation>().apply {
                             if (checkBoxCropSquare.isChecked) {
                                 add(Transformations.square())

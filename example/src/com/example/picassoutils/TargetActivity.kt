@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.hendraanggrian.kota.view.hideInput
+import com.hendraanggrian.picasso.picasso
 import com.hendraanggrian.picasso.target.Targets
-import com.squareup.picasso.getPicasso
 import kotlinx.android.synthetic.main.activity_target.*
 import org.jetbrains.anko.toast
 
@@ -21,7 +21,7 @@ class TargetActivity : AppCompatActivity() {
         buttonClear.setOnClickListener { editText!!.setText("") }
         buttonGo.setOnClickListener {
             hideInput()
-            getPicasso().load(editText.text.toString())
+            picasso(editText.text.toString())
                     .into(Targets.placeholder(imageView)
                             .callback({ _, _ ->
                                 toast("Loaded.")
