@@ -1,3 +1,5 @@
+@file:JvmName("Transformations")
+
 package com.hendraanggrian.picasso.transformation
 
 import android.content.Context

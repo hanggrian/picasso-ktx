@@ -1,3 +1,5 @@
+@file:JvmName("Picassos")
+
 package com.hendraanggrian.picasso
 
 import android.content.Context

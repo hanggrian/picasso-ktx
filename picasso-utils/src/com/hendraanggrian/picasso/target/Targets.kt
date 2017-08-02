@@ -1,3 +1,5 @@
+@file:JvmName("Targets")
+
 package com.hendraanggrian.picasso.target
 
 import android.view.Gravity
