@@ -11,6 +11,7 @@ import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.view.View
 import android.widget.ImageView
+import com.hendraanggrian.picasso.R
 import com.hendraanggrian.picasso.picasso
 import com.hendraanggrian.picasso.target.Targets
 import com.hendraanggrian.picasso.transformation.Transformations
@@ -58,7 +59,7 @@ class InstrumentedTest {
                             override fun getDescription(): String = "test2_placeholder()"
                             override fun perform(uiController: UiController, view: View) = getTargetContext()
                                     .picasso("https://i.ytimg.com/vi/yaqe1qesQ8c/maxresdefault.jpg")
-                                    .into(Targets.placeholder(view as ImageView))
+                                    .into(Targets.progress(view as ImageView))
                         },
                         delay())
     }

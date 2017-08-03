@@ -43,7 +43,7 @@ class TransformationActivity : AppCompatActivity() {
                                 add(Transformations.mask(this@TransformationActivity, R.drawable.mask))
                             }
                         })
-                        .into(Targets.placeholder(imageView))
+                        .into(Targets.progress(imageView))
             }
         }
     }

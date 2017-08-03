@@ -14,7 +14,7 @@ buildscript {
             ],
             support   : '26.0.0',
             picasso   : '2.5.2',
-            kota      : '0.4.0',
+            kota      : '0.5.0',
 
             // tests
             rules     : '0.5',
@@ -22,7 +22,7 @@ buildscript {
             espresso  : '2.2.2',
             junit     : '4.12',
 
-            release   : '0.2.1'
+            release   : '0.2.2'
     ]
     repositories {
         jcenter()

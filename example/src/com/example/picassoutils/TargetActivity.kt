@@ -22,7 +22,7 @@ class TargetActivity : AppCompatActivity() {
         buttonGo.setOnClickListener {
             hideInput()
             picasso(editText.text.toString())
-                    .into(Targets.placeholder(imageView)
+                    .into(Targets.progress(imageView)
                             .callback({ _, _ ->
                                 toast("Loaded.")
                             }, {
