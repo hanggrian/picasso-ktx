@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
-import com.hendraanggrian.kota.view.findAllViewsWithTag
-import com.hendraanggrian.kota.view.removeAllViews
+import com.hendraanggrian.common.view.getChilds
+import com.hendraanggrian.common.view.setVisibleThen
 import com.squareup.picasso.Picasso
 
 /**
@@ -36,16 +36,14 @@ internal class PlaceholderTargeter(private val target: ImageView, placeholderVie
     override fun hashCode() = target.hashCode()
 
     override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
-        rootView.removeAllViews(*rootView.findAllViewsWithTag(TAG).toTypedArray())
-        target.visibility = View.VISIBLE
-        target.setImageBitmap(bitmap)
+        clearPlaceholderViews()
+        target.setVisibleThen(true) { setImageBitmap(bitmap) }
         super.onBitmapLoaded(bitmap, from)
     }
 
     override fun onBitmapFailed(errorDrawable: Drawable?) {
-        rootView.removeAllViews(*rootView.findAllViewsWithTag(TAG).toTypedArray())
-        target.visibility = View.VISIBLE
-        target.setImageDrawable(errorDrawable)
+        clearPlaceholderViews()
+        target.setVisibleThen(true) { setImageDrawable(errorDrawable) }
         super.onBitmapFailed(errorDrawable)
     }
 
@@ -56,7 +54,7 @@ internal class PlaceholderTargeter(private val target: ImageView, placeholderVie
                 setImageDrawable(placeHolderDrawable)
             }, 0)
         }
-        rootView.removeAllViews(*rootView.findAllViewsWithTag(TAG).toTypedArray())
+        clearPlaceholderViews()
         rootView.addView(placeholderLayout, rootView.indexOfChild(target))
         target.visibility = View.GONE
         super.onPrepareLoad(placeHolderDrawable)
@@ -70,4 +68,8 @@ internal class PlaceholderTargeter(private val target: ImageView, placeholderVie
         }
         return this
     }
+
+    private fun clearPlaceholderViews(): Unit = rootView.getChilds()
+            .filter { it.tag == TAG }
+            .forEach { rootView.removeView(it) }
 }

@@ -3,7 +3,6 @@ package com.hendraanggrian.picasso.transformation
 import android.graphics.*
 import com.squareup.picasso.Transformation
 
-
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */

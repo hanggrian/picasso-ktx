@@ -1,5 +1,3 @@
-@file:JvmName("Targets")
-
 package com.hendraanggrian.picasso.target
 
 import android.view.Gravity
@@ -18,13 +16,18 @@ object Targets {
      * Set progress bar with defined width and height as target's placeholder.
      */
     @JvmOverloads
-    fun progress(target: ImageView, progressBarSize: Int = ViewGroup.LayoutParams.WRAP_CONTENT): Targeter =
-            PlaceholderTargeter(target, ProgressBar(target.context).apply {
-                layoutParams = FrameLayout.LayoutParams(progressBarSize, progressBarSize).apply { gravity = Gravity.CENTER }
-            })
+    fun progress(
+            target: ImageView,
+            progressBarSize: Int = ViewGroup.LayoutParams.WRAP_CONTENT
+    ): Targeter = PlaceholderTargeter(target, ProgressBar(target.context).apply {
+        layoutParams = FrameLayout.LayoutParams(progressBarSize, progressBarSize).apply { gravity = Gravity.CENTER }
+    })
 
     /**
      * Set custom view as target's placeholder.
      */
-    fun custom(target: ImageView, placeholder: View): Targeter = PlaceholderTargeter(target, placeholder)
+    fun custom(
+            target: ImageView,
+            placeholder: View
+    ): Targeter = PlaceholderTargeter(target, placeholder)
 }

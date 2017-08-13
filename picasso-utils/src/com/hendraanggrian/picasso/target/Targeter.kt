@@ -1,5 +1,3 @@
-@file:JvmName("Targeter")
-
 package com.hendraanggrian.picasso.target
 
 import android.graphics.Bitmap

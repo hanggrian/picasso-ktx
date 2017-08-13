@@ -1,12 +1,9 @@
-@file:JvmName("Transformations")
-
 package com.hendraanggrian.picasso.transformation
 
 import android.content.Context
 import android.support.annotation.ColorInt
 import android.support.annotation.DrawableRes
 import android.support.annotation.IntRange
-import com.hendraanggrian.kota.content.toPx
 import com.squareup.picasso.Transformation
 
 /**
@@ -19,10 +16,7 @@ object Transformations {
 
     fun circle(): Transformation = CropCircleTransformer()
 
-    @JvmOverloads
-    fun rounded(radius: Int, margin: Int, useDp: Boolean = false): Transformation = CropRoundedTransformer(
-            if (useDp) radius.toPx() else radius,
-            if (useDp) margin.toPx() else margin)
+    fun rounded(radius: Int, margin: Int): Transformation = CropRoundedTransformer(radius, margin)
     //endregion
 
     //region color

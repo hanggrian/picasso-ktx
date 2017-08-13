@@ -16,9 +16,9 @@ class TargetActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setSupportActionBar(toolbar)
         setContentView(R.layout.activity_target)
-        buttonClear.setOnClickListener { editText!!.setText("") }
+        setSupportActionBar(toolbar)
+        buttonClear.setOnClickListener { editText.setText("") }
         buttonGo.setOnClickListener {
             hideInput()
             picasso(editText.text.toString())

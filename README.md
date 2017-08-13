@@ -83,7 +83,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.hendraanggrian:picasso-utils:0.2.2'
+    compile 'com.hendraanggrian:picasso-utils:0.2.4'
 }
 ```
 

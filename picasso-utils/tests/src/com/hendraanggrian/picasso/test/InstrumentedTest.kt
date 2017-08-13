@@ -11,7 +11,6 @@ import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.view.View
 import android.widget.ImageView
-import com.hendraanggrian.picasso.R
 import com.hendraanggrian.picasso.picasso
 import com.hendraanggrian.picasso.target.Targets
 import com.hendraanggrian.picasso.transformation.Transformations

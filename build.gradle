@@ -13,8 +13,8 @@ buildscript {
                     anko  : '0.10.1'
             ],
             support   : '26.0.0',
+            kota      : '0.7.0',
             picasso   : '2.5.2',
-            kota      : '0.5.0',
 
             // tests
             rules     : '0.5',
@@ -22,7 +22,7 @@ buildscript {
             espresso  : '2.2.2',
             junit     : '4.12',
 
-            release   : '0.2.2'
+            release   : '0.2.4'
     ]
     repositories {
         jcenter()
@@ -48,4 +48,7 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-//$ ./gradlew bintrayUpload -PbintrayUser=hendraanggrian -PbintrayKey= -PdryRun=false
+/** QUICK LINT CHECK BEFORE UPLOAD
+ ./gradlew picasso-utils:clean picasso-utils:build
+ ./gradlew picasso-utils:bintrayUpload -PdryRun=false -PbintrayUser=hendraanggrian -PbintrayKey=
+ */

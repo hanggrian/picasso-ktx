@@ -3,7 +3,7 @@ package com.hendraanggrian.picasso.transformation
 import android.content.Context
 import android.graphics.*
 import android.support.annotation.DrawableRes
-import com.hendraanggrian.kota.content.getDrawable2
+import com.hendraanggrian.common.content.getDrawable2
 import com.squareup.picasso.Transformation
 import java.lang.ref.WeakReference
 

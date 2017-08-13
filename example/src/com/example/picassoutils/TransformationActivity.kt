@@ -3,7 +3,8 @@ package com.example.picassoutils
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import com.hendraanggrian.kota.content.getColor
+import com.hendraanggrian.kota.content.getColor2
+import com.hendraanggrian.kota.content.toPx
 import com.hendraanggrian.picasso.picasso
 import com.hendraanggrian.picasso.target.Targets
 import com.hendraanggrian.picasso.transformation.Transformations
@@ -31,10 +32,10 @@ class TransformationActivity : AppCompatActivity() {
                                 add(Transformations.circle())
                             }
                             if (checkBoxCropRounded.isChecked) {
-                                add(Transformations.rounded(25, 10, true))
+                                add(Transformations.rounded(25.toPx(), 10.toPx()))
                             }
                             if (checkBoxColorOverlay.isChecked) {
-                                add(Transformations.overlay(theme.getColor(R.attr.colorAccent, true)))
+                                add(Transformations.overlay(theme.getColor2(R.attr.colorAccent)))
                             }
                             if (checkBoxGrayscale.isChecked) {
                                 add(Transformations.grayscale())
