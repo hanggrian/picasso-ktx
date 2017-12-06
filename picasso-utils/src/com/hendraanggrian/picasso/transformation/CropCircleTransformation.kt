@@ -3,10 +3,7 @@ package com.hendraanggrian.picasso.transformation
 import android.graphics.*
 import com.squareup.picasso.Transformation
 
-/**
- * @author Hendra Anggrian (hendraanggrian@gmail.com)
- */
-internal class CropCircleTransformer : Transformation {
+internal class CropCircleTransformation : Transformation {
 
     override fun transform(source: Bitmap): Bitmap {
         val size = Math.min(source.width, source.height)
@@ -29,5 +26,5 @@ internal class CropCircleTransformer : Transformation {
         return target
     }
 
-    override fun key() = "CropCircleTransformer"
+    override fun key() = "CropCircleTransformation"
 }

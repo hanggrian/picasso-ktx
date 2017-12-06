@@ -6,31 +6,26 @@ import android.support.annotation.DrawableRes
 import android.support.annotation.IntRange
 import com.squareup.picasso.Transformation
 
-/**
- * @author Hendra Anggrian (hendraanggrian@gmail.com)
- */
 object Transformations {
 
     //region crop
-    fun square(): Transformation = CropSquareTransformer()
+    fun square(): Transformation = CropSquareTransformation()
 
-    fun circle(): Transformation = CropCircleTransformer()
+    fun circle(): Transformation = CropCircleTransformation()
 
-    fun rounded(radius: Int, margin: Int): Transformation = CropRoundedTransformer(radius, margin)
+    fun rounded(radius: Int, margin: Int): Transformation = CropRoundedTransformation(radius, margin)
     //endregion
 
     //region color
     @JvmOverloads
     fun overlay(@ColorInt color: Int, @IntRange(from = 0x0, to = 0xFF) alpha: Int? = null): Transformation {
-        if (alpha == null) {
-            return ColorOverlayTransformer(color)
-        }
+        if (alpha == null) return ColorOverlayTransformation(color)
         check(alpha in 0..255, { "alpha must be between 0 and 255." })
-        return ColorOverlayTransformer(color and 0x00ffffff or (alpha shl 24))
+        return ColorOverlayTransformation(color and 0x00ffffff or (alpha shl 24))
     }
 
-    fun grayscale(): Transformation = ColorGrayscaleTransformer()
+    fun grayscale(): Transformation = ColorGrayscaleTransformation()
 
-    fun mask(context: Context, @DrawableRes maskId: Int): Transformation = MaskTransformer(context, maskId)
+    fun mask(context: Context, @DrawableRes maskId: Int): Transformation = MaskTransformation(context, maskId)
     //endregion
 }

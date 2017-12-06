@@ -3,10 +3,7 @@ package com.hendraanggrian.picasso.transformation
 import android.graphics.*
 import com.squareup.picasso.Transformation
 
-/**
- * @author Hendra Anggrian (hendraanggrian@gmail.com)
- */
-internal class ColorGrayscaleTransformer : Transformation {
+internal class ColorGrayscaleTransformation : Transformation {
 
     override fun transform(source: Bitmap): Bitmap {
         val target = Bitmap.createBitmap(source.width, source.height, Bitmap.Config.ARGB_8888)
@@ -17,5 +14,5 @@ internal class ColorGrayscaleTransformer : Transformation {
         return target
     }
 
-    override fun key() = "ColorGrayscaleTransformer"
+    override fun key() = "ColorGrayscaleTransformation"
 }

@@ -7,9 +7,6 @@ import android.support.annotation.CallSuper
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 
-/**
- * @author Hendra Anggrian (hendraanggrian@gmail.com)
- */
 abstract class Targeter : Target {
 
     private var callback: Target? = null
@@ -35,9 +32,11 @@ abstract class Targeter : Target {
     }
 
     @JvmOverloads
-    fun callback(loaded: ((bitmap: Bitmap, from: Picasso.LoadedFrom) -> Unit)?,
-                 failed: ((errorDrawable: Drawable?) -> Unit)? = null,
-                 prepare: ((placeholderDrawable: Drawable?) -> Unit)? = null): Targeter = callback(object : Target {
+    fun callback(
+            loaded: ((bitmap: Bitmap, from: Picasso.LoadedFrom) -> Unit)?,
+            failed: ((errorDrawable: Drawable?) -> Unit)? = null,
+            prepare: ((placeholderDrawable: Drawable?) -> Unit)? = null
+    ): Targeter = callback(object : Target {
         override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
             loaded?.invoke(bitmap, from)
         }

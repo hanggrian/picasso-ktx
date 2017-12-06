@@ -11,9 +11,6 @@ import com.hendraanggrian.common.view.getChilds
 import com.hendraanggrian.common.view.setVisibleThen
 import com.squareup.picasso.Picasso
 
-/**
- * @author Hendra Anggrian (hendraanggrian@gmail.com)
- */
 internal class PlaceholderTargeter(private val target: ImageView, placeholderView: View) : Targeter() {
 
     companion object {
@@ -61,15 +58,14 @@ internal class PlaceholderTargeter(private val target: ImageView, placeholderVie
     }
 
     fun transition(enable: Boolean): PlaceholderTargeter {
-        if (enable && rootView.layoutTransition == null) {
-            rootView.layoutTransition = LayoutTransition()
-        } else if (!enable) {
-            rootView.layoutTransition = null
+        when {
+            enable && rootView.layoutTransition == null -> rootView.layoutTransition = LayoutTransition()
+            !enable -> rootView.layoutTransition = null
         }
         return this
     }
 
-    private fun clearPlaceholderViews(): Unit = rootView.getChilds()
+    private fun clearPlaceholderViews() = rootView.getChilds()
             .filter { it.tag == TAG }
             .forEach { rootView.removeView(it) }
 }

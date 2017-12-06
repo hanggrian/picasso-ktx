@@ -3,15 +3,13 @@ package com.example.picassoutils
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import com.hendraanggrian.kota.view.hideInput
+import android.view.inputmethod.InputMethodManager.HIDE_IMPLICIT_ONLY
 import com.hendraanggrian.picasso.picasso
 import com.hendraanggrian.picasso.target.Targets
+import kota.inputMethodManager
+import kota.toast
 import kotlinx.android.synthetic.main.activity_target.*
-import org.jetbrains.anko.toast
 
-/**
- * @author Hendra Anggrian (hendraanggrian@gmail.com)
- */
 class TargetActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +18,7 @@ class TargetActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         buttonClear.setOnClickListener { editText.setText("") }
         buttonGo.setOnClickListener {
-            hideInput()
+            inputMethodManager!!.hideSoftInputFromWindow(it.windowToken, HIDE_IMPLICIT_ONLY)
             picasso(editText.text.toString())
                     .into(Targets.progress(imageView)
                             .callback({ _, _ ->
