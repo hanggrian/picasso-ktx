@@ -1,4 +1,3 @@
-@file:JvmName("Picassos")
 @file:Suppress("NOTHING_TO_INLINE")
 
 package com.hendraanggrian.picasso
@@ -20,8 +19,3 @@ inline fun Fragment.picasso(file: File?): RequestCreator = with(if (SDK_INT < 23
 inline fun Fragment.picasso(path: String?): RequestCreator = with(if (SDK_INT < 23) activity else context).load(path)
 inline fun Fragment.picasso(resourceId: Int): RequestCreator = with(if (SDK_INT < 23) activity else context).load(resourceId)
 inline fun Fragment.picasso(uri: Uri?): RequestCreator = with(if (SDK_INT < 23) activity else context).load(uri)
-
-inline fun android.support.v4.app.Fragment.picasso(file: File?): RequestCreator = with(context).load(file)
-inline fun android.support.v4.app.Fragment.picasso(path: String?): RequestCreator = with(context).load(path)
-inline fun android.support.v4.app.Fragment.picasso(resourceId: Int): RequestCreator = with(context).load(resourceId)
-inline fun android.support.v4.app.Fragment.picasso(uri: Uri?): RequestCreator = with(context).load(uri)

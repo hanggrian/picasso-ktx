@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.hendraanggrian.picasso.picasso
-import com.hendraanggrian.picasso.target.Targets
-import com.hendraanggrian.picasso.transformation.Transformations
+import com.hendraanggrian.picasso.Targets
+import com.hendraanggrian.picasso.Transformations
 import com.squareup.picasso.Transformation
 import kota.resources.dp
 import kota.resources.getColorAttr

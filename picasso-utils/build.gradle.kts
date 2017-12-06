@@ -12,7 +12,7 @@ android {
         targetSdkVersion(targetSdk)
         versionName = bintrayPublish
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("proguard-rules.pro")
+        consumerProguardFiles("proguard.pro")
     }
     sourceSets {
         getByName("main") {
@@ -33,14 +33,15 @@ android {
 
 dependencies {
     compile(kotlin("stdlib", kotlinVersion))
+    compile(support("support-compat", supportVersion))
     compile(square("picasso", picassoVersion))
-    compile("com.hendraanggrian:kota:0.7.0")
 
     testImplementation(junit(junitVersion))
 
     androidTestImplementation(support("design", supportVersion))
     androidTestImplementation(support("runner", runnerVersion, "test"))
     androidTestImplementation(support("espresso-core", espressoVersion, "test", "espresso"))
+    androidTestImplementation(hendraanggrian("kota", kotaVersion))
 }
 
 publish {

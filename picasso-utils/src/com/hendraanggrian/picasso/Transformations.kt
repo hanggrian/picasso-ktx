@@ -1,9 +1,10 @@
-package com.hendraanggrian.picasso.transformation
+package com.hendraanggrian.picasso
 
 import android.content.Context
 import android.support.annotation.ColorInt
 import android.support.annotation.DrawableRes
 import android.support.annotation.IntRange
+import com.hendraanggrian.picasso.transformation.*
 import com.squareup.picasso.Transformation
 
 object Transformations {
@@ -25,7 +26,7 @@ object Transformations {
     }
 
     fun grayscale(): Transformation = ColorGrayscaleTransformation()
+    //endregion
 
     fun mask(context: Context, @DrawableRes maskId: Int): Transformation = MaskTransformation(context, maskId)
-    //endregion
 }

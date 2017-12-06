@@ -67,7 +67,7 @@ Several Kotlin extension functions:
 class MyActivity : Activity {
 
     override fun onCreate(bundle : Bundle?) {
-        load(url)
+        picasso(url)
             .transform(Transformations.circle())
             .into(imageView)
     }
@@ -78,12 +78,12 @@ Download
 --------
 ```gradle
 repositories {
-    maven { url 'https://maven.google.com' }
+    google()
     jcenter()
 }
 
 dependencies {
-    compile 'com.hendraanggrian:picasso-utils:0.2.4'
+    compile 'com.hendraanggrian:picasso-utils:0.3'
 }
 ```
 

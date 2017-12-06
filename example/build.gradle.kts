@@ -25,11 +25,11 @@ android {
     buildTypes {
         getByName("debug") {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard.pro")
         }
         getByName("release") {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard.pro")
         }
     }
     lintOptions {
@@ -47,7 +47,5 @@ dependencies {
     compile(support("design", supportVersion))
     compile(support("percent", supportVersion))
 
-    compile(hendraanggrian("kota", "0.21"))
+    compile(hendraanggrian("kota", kotaVersion))
 }
-
-fun DependencyHandler.hendraanggrian(module: String, version: String) = "com.hendraanggrian:$module:$version"

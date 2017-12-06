@@ -1,18 +1,22 @@
 package com.hendraanggrian.picasso.transformation
 
 import android.graphics.*
+import android.graphics.Bitmap.Config.ARGB_8888
+import android.graphics.Bitmap.createBitmap
+import android.graphics.Shader.TileMode.CLAMP
 import com.squareup.picasso.Transformation
+import java.lang.Math.min
 
 internal class CropCircleTransformation : Transformation {
 
     override fun transform(source: Bitmap): Bitmap {
-        val size = Math.min(source.width, source.height)
+        val size = min(source.width, source.height)
         val width = (source.width - size) / 2
         val height = (source.height - size) / 2
-        val target = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+        val target = createBitmap(size, size, ARGB_8888)
         val r = size / 2f
         Canvas(target).drawCircle(r, r, r, Paint().apply {
-            val shader = BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+            val shader = BitmapShader(source, CLAMP, CLAMP)
             if (width != 0 || height != 0) {
                 // source isn't square, move viewport to center
                 val matrix = Matrix()

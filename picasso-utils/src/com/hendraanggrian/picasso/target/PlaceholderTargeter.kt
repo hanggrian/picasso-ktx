@@ -5,16 +5,15 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.FrameLayout
 import android.widget.ImageView
-import com.hendraanggrian.common.view.getChilds
-import com.hendraanggrian.common.view.setVisibleThen
 import com.squareup.picasso.Picasso
 
 internal class PlaceholderTargeter(private val target: ImageView, placeholderView: View) : Targeter() {
 
     companion object {
-        private val TAG = "PlaceholderTargeter"
+        private const val TAG = "PlaceholderTargeter"
     }
 
     private val rootView = target.parent as ViewGroup
@@ -28,7 +27,7 @@ internal class PlaceholderTargeter(private val target: ImageView, placeholderVie
         transition(true)
     }
 
-    override fun equals(other: Any?) = other != null && other is PlaceholderTargeter && other.target === target
+    override fun equals(other: Any?) = other != null && other is PlaceholderTargeter && other.target == target
 
     override fun hashCode() = target.hashCode()
 
@@ -47,13 +46,13 @@ internal class PlaceholderTargeter(private val target: ImageView, placeholderVie
     override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
         if (placeHolderDrawable != null) {
             placeholderLayout.addView(ImageView(target.context).apply {
-                layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
                 setImageDrawable(placeHolderDrawable)
             }, 0)
         }
         clearPlaceholderViews()
         rootView.addView(placeholderLayout, rootView.indexOfChild(target))
-        target.visibility = View.GONE
+        target.isVisible = false
         super.onPrepareLoad(placeHolderDrawable)
     }
 
@@ -65,7 +64,7 @@ internal class PlaceholderTargeter(private val target: ImageView, placeholderVie
         return this
     }
 
-    private fun clearPlaceholderViews() = rootView.getChilds()
+    private fun clearPlaceholderViews() = rootView.childs
             .filter { it.tag == TAG }
             .forEach { rootView.removeView(it) }
 }

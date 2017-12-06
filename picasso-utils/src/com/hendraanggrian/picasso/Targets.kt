@@ -1,4 +1,4 @@
-package com.hendraanggrian.picasso.target
+package com.hendraanggrian.picasso
 
 import android.view.Gravity.CENTER
 import android.view.View
@@ -6,6 +6,8 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.ProgressBar
+import com.hendraanggrian.picasso.target.PlaceholderTargeter
+import com.hendraanggrian.picasso.target.Targeter
 
 object Targets {
 

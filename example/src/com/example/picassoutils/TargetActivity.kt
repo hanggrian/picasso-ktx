@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager.HIDE_IMPLICIT_ONLY
 import com.hendraanggrian.picasso.picasso
-import com.hendraanggrian.picasso.target.Targets
+import com.hendraanggrian.picasso.Targets
 import kota.inputMethodManager
 import kota.toast
 import kotlinx.android.synthetic.main.activity_target.*

@@ -1,6 +1,7 @@
 package com.hendraanggrian.picasso.transformation
 
 import android.graphics.Bitmap
+import android.graphics.Bitmap.createBitmap
 import com.squareup.picasso.Transformation
 
 internal class CropSquareTransformation : Transformation {
@@ -9,7 +10,7 @@ internal class CropSquareTransformation : Transformation {
         val size = Math.min(source.width, source.height)
         val width = (source.width - size) / 2
         val height = (source.height - size) / 2
-        val target = Bitmap.createBitmap(source, width, height, size, size)
+        val target = createBitmap(source, width, height, size, size)
         if (target != source) {
             source.recycle()
         }

@@ -9,44 +9,44 @@ import com.squareup.picasso.Target
 
 abstract class Targeter : Target {
 
-    private var callback: Target? = null
+    private var mCallback: Target? = null
 
     @CallSuper
     override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
-        callback?.onBitmapLoaded(bitmap, from)
+        mCallback?.onBitmapLoaded(bitmap, from)
     }
 
     @CallSuper
     override fun onBitmapFailed(errorDrawable: Drawable?) {
-        callback?.onBitmapFailed(errorDrawable)
+        mCallback?.onBitmapFailed(errorDrawable)
     }
 
     @CallSuper
     override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-        callback?.onPrepareLoad(placeHolderDrawable)
+        mCallback?.onPrepareLoad(placeHolderDrawable)
     }
 
     fun callback(callback: Target?): Targeter {
-        this.callback = callback
+        this.mCallback = callback
         return this
     }
 
     @JvmOverloads
     fun callback(
-            loaded: ((bitmap: Bitmap, from: Picasso.LoadedFrom) -> Unit)?,
-            failed: ((errorDrawable: Drawable?) -> Unit)? = null,
-            prepare: ((placeholderDrawable: Drawable?) -> Unit)? = null
+            onLoaded: ((bitmap: Bitmap, from: Picasso.LoadedFrom) -> Unit)?,
+            onFailed: ((errorDrawable: Drawable?) -> Unit)? = null,
+            onPrepare: ((placeholderDrawable: Drawable?) -> Unit)? = null
     ): Targeter = callback(object : Target {
         override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
-            loaded?.invoke(bitmap, from)
+            onLoaded?.invoke(bitmap, from)
         }
 
         override fun onBitmapFailed(errorDrawable: Drawable?) {
-            failed?.invoke(errorDrawable)
+            onFailed?.invoke(errorDrawable)
         }
 
         override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-            prepare?.invoke(placeHolderDrawable)
+            onPrepare?.invoke(placeHolderDrawable)
         }
     })
 }
