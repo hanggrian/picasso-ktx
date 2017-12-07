@@ -27,7 +27,7 @@ abstract class Targeter : Target {
     }
 
     fun callback(callback: Target?): Targeter {
-        this.mCallback = callback
+        mCallback = callback
         return this
     }
 

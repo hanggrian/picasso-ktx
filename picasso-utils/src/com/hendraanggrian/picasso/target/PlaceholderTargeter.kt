@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.FrameLayout
 import android.widget.ImageView
+import com.hendraanggrian.picasso.childs
+import com.hendraanggrian.picasso.isVisible
 import com.squareup.picasso.Picasso
 
 internal class PlaceholderTargeter(private val target: ImageView, placeholderView: View) : Targeter() {
@@ -33,13 +35,15 @@ internal class PlaceholderTargeter(private val target: ImageView, placeholderVie
 
     override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
         clearPlaceholderViews()
-        target.setVisibleThen(true) { setImageBitmap(bitmap) }
+        target.isVisible = true
+        target.setImageBitmap(bitmap)
         super.onBitmapLoaded(bitmap, from)
     }
 
     override fun onBitmapFailed(errorDrawable: Drawable?) {
         clearPlaceholderViews()
-        target.setVisibleThen(true) { setImageDrawable(errorDrawable) }
+        target.isVisible = true
+        target.setImageDrawable(errorDrawable)
         super.onBitmapFailed(errorDrawable)
     }
 

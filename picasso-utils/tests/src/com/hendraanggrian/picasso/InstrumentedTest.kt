@@ -13,7 +13,6 @@ import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.view.View
 import android.widget.ImageView
-import com.hendraanggrian.picasso.target.isVisible
 import com.hendraanggrian.picasso.test.R
 import org.junit.Rule
 import org.junit.Test

@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package com.hendraanggrian.picasso.target
+package com.hendraanggrian.picasso
 
 /** Mini version of [kota][https://github.com/hendraanggrian/kota] */
 
@@ -16,11 +16,3 @@ internal inline var View.isVisible: Boolean
     set(visible) {
         visibility = if (visible) VISIBLE else GONE
     }
-
-internal inline fun <V : View> V.setVisibleThen(
-        visible: Boolean,
-        block: V.() -> Unit
-) {
-    isVisible = visible
-    if (visibility == VISIBLE) block(this)
-}
