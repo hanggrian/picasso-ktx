@@ -10,7 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/example" />
-            <option value="$PROJECT_DIR$/picasso-utils" />
+            <option value="$PROJECT_DIR$/pikasso" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/buildSrc/buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/buildSrc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/buildSrc/buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/buildSrc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
       <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
       <module fileurl="file://$PROJECT_DIR$/picasso-commons.iml" filepath="$PROJECT_DIR$/picasso-commons.iml" />
       <module fileurl="file://$PROJECT_DIR$/picasso-commons-example/picasso-commons-example.iml" filepath="$PROJECT_DIR$/picasso-commons-example/picasso-commons-example.iml" />
@@ -15,6 +17,8 @@
       <module fileurl="file://$PROJECT_DIR$/picasso-transformations/picasso-transformations-picasso-transformations.iml" filepath="$PROJECT_DIR$/picasso-transformations/picasso-transformations-picasso-transformations.iml" />
       <module fileurl="file://$PROJECT_DIR$/picasso-utils.iml" filepath="$PROJECT_DIR$/picasso-utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/picasso-utils/picasso-utils-picasso-utils.iml" filepath="$PROJECT_DIR$/picasso-utils/picasso-utils-picasso-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pikasso.iml" filepath="$PROJECT_DIR$/pikasso.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pikasso/pikasso-pikasso.iml" filepath="$PROJECT_DIR$/pikasso/pikasso-pikasso.iml" />
     </modules>
   </component>
 </project>

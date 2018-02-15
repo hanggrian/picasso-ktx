@@ -1,7 +1,9 @@
+import org.gradle.kotlin.dsl.kotlin
+
 plugins {
-    id("com.android.application")
+    `android-app`
     kotlin("android")
-    id("kotlin-android-extensions")
+    kotlin("android.extensions")
 }
 
 android {
@@ -10,7 +12,7 @@ android {
     defaultConfig {
         minSdkVersion(minSdk)
         targetSdkVersion(targetSdk)
-        applicationId = "com.example.picassoutils"
+        applicationId = "com.example.pikasso"
         versionCode = 1
         versionName = "1.0"
     }
@@ -38,7 +40,7 @@ android {
 }
 
 dependencies {
-    compile(project(":picasso-utils"))
+    compile(project(":pikasso"))
 
     compile(kotlin("stdlib", kotlinVersion))
 

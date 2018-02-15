@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.picassoutils">
+    package="com.example.pikasso">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,13 +10,13 @@
         android:label="picasso-utils"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.pikasso.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TransformationActivity" />
-        <activity android:name=".TargetActivity" />
+        <activity android:name="com.example.pikasso.TransformationActivity" />
+        <activity android:name="com.example.pikasso.TargetActivity" />
     </application>
 </manifest>
