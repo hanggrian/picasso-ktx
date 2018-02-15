@@ -11,7 +11,7 @@ import android.graphics.PorterDuffColorFilter
 import android.support.annotation.ColorInt
 import com.squareup.picasso.Transformation
 
-internal class ColorOverlayTransformation(@ColorInt private val color: Int) : Transformation {
+class ColorOverlayTransformation(@ColorInt private val color: Int) : Transformation {
 
     override fun transform(source: Bitmap): Bitmap {
         val target = createBitmap(source.width, source.height, ARGB_8888)

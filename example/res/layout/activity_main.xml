@@ -35,10 +35,10 @@
                 android:text="Transform image loaded with Picasso."/>
 
             <Button
-                android:id="@+id/button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:onClick="transformationsExample"
                 android:text="see example"/>
 
             <TextView
@@ -48,7 +48,7 @@
                 android:text="Display progress while loading image with Picasso."/>
 
             <Button
-                android:id="@+id/button2"
+                android:onClick="targetsExample"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"

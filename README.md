@@ -63,7 +63,7 @@ Drawable drawable = Transformations.overlay(this, R.color.colorAccent).toDrawabl
 Kotlin
 ------
 Several Kotlin extension functions:
-```java
+```kotlin
 class MyActivity : Activity {
 
     override fun onCreate(bundle : Bundle?) {

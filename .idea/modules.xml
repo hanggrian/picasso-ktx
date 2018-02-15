@@ -18,6 +18,8 @@
       <module fileurl="file://$PROJECT_DIR$/picasso-utils.iml" filepath="$PROJECT_DIR$/picasso-utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/picasso-utils/picasso-utils-picasso-utils.iml" filepath="$PROJECT_DIR$/picasso-utils/picasso-utils-picasso-utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/pikasso.iml" filepath="$PROJECT_DIR$/pikasso.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pikasso.iml" filepath="$PROJECT_DIR$/pikasso.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pikasso/pikasso-pikasso.iml" filepath="$PROJECT_DIR$/pikasso/pikasso-pikasso.iml" />
       <module fileurl="file://$PROJECT_DIR$/pikasso/pikasso-pikasso.iml" filepath="$PROJECT_DIR$/pikasso/pikasso-pikasso.iml" />
     </modules>
   </component>

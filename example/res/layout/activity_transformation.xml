@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,18 +16,17 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             app:navigationIcon="?homeAsUpIndicator"
-            app:title="Transformations"/>
+            app:title="Transformations" />
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="256dp"
-                android:src="@drawable/bg_test"/>
+                android:src="@drawable/bg_test" />
         </FrameLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -46,48 +44,48 @@
                 android:id="@+id/checkBoxCropSquare"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="cropSquare()"
-                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"/>
+                android:text="cropSquare"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle" />
 
             <CheckBox
                 android:id="@+id/checkBoxCropCircle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="cropCircle()"
-                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"/>
+                android:text="cropCircle"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle" />
 
             <CheckBox
                 android:id="@+id/checkBoxCropRounded"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="cropRounded()"
-                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"/>
+                android:text="cropRounded"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle" />
 
             <CheckBox
                 android:id="@+id/checkBoxColorOverlay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="colorOverlay()"
-                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"/>
+                android:text="colorOverlay"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle" />
 
             <CheckBox
                 android:id="@+id/checkBoxGrayscale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="grayscale()"
-                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"/>
+                android:text="grayscale"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle" />
 
             <CheckBox
                 android:id="@+id/checkBoxMask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="mask()"
-                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"/>
+                android:text="mask"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

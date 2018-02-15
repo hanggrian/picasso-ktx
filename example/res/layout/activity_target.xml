@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,14 +15,15 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="?homeAsUpIndicator"
-            app:title="Target"/>
+            app:title="Target" />
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
+            android:layout_marginRight="16dp"
+            android:hint="Image url" />
 
         <android.support.v7.widget.ButtonBarLayout
             android:layout_width="match_parent"
@@ -35,20 +35,21 @@
             app:allowStacking="false">
 
             <Button
-                android:id="@+id/buttonClear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?selectableItemBackground"
+                android:onClick="clear"
                 android:text="Clear"
-                android:textColor="?colorAccent"/>
+                android:textColor="?colorAccent" />
 
             <Button
                 android:id="@+id/buttonGo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?selectableItemBackground"
+                android:onClick="go"
                 android:text="Go"
-                android:textColor="?colorAccent"/>
+                android:textColor="?colorAccent" />
         </android.support.v7.widget.ButtonBarLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -63,6 +64,6 @@
             android:layout_margin="8dp"
             android:adjustViewBounds="true"
             android:scaleType="centerInside"
-            app:layout_heightPercent="100%"/>
+            app:layout_heightPercent="100%" />
     </android.support.percent.PercentFrameLayout>
 </android.support.design.widget.CoordinatorLayout>

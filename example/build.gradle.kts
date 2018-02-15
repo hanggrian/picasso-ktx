@@ -34,20 +34,14 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard.pro")
         }
     }
-    lintOptions {
-        isAbortOnError = false
-    }
 }
 
 dependencies {
     compile(project(":pikasso"))
-
     compile(kotlin("stdlib", kotlinVersion))
-
     compile(support("appcompat-v7", supportVersion))
     compile(support("cardview-v7", supportVersion))
     compile(support("design", supportVersion))
     compile(support("percent", supportVersion))
-
     compile(hendraanggrian("kota", kotaVersion))
 }

@@ -6,8 +6,8 @@ buildscript {
     dependencies {
         classpath(android())
         classpath(kotlin("gradle-plugin", kotlinVersion))
-        classpath(bintrayRelease())
         classpath(dokkaAndroid())
+        classpath(bintrayRelease())
     }
 }
 
@@ -15,9 +15,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-    }
-    tasks.withType(Javadoc::class.java).all {
-        isEnabled = false
     }
 }
 

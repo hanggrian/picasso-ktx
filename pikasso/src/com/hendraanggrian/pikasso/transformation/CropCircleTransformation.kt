@@ -11,7 +11,7 @@ import android.graphics.Shader.TileMode.CLAMP
 import com.squareup.picasso.Transformation
 import java.lang.Math.min
 
-internal class CropCircleTransformation : Transformation {
+class CropCircleTransformation : Transformation {
 
     override fun transform(source: Bitmap): Bitmap {
         val size = min(source.width, source.height)

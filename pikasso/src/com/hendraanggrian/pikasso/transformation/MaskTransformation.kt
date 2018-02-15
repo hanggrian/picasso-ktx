@@ -13,7 +13,7 @@ import android.support.v4.content.ContextCompat.getDrawable
 import com.squareup.picasso.Transformation
 import java.lang.ref.WeakReference
 
-internal class MaskTransformation(private val context: Context, @DrawableRes private val resId: Int) : Transformation {
+class MaskTransformation(private val context: Context, @DrawableRes private val resId: Int) : Transformation {
 
     companion object {
         private var PAINT: WeakReference<Paint>? = null

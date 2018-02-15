@@ -9,7 +9,7 @@ import android.graphics.ColorMatrixColorFilter
 import android.graphics.Paint
 import com.squareup.picasso.Transformation
 
-internal class ColorGrayscaleTransformation : Transformation {
+class ColorGrayscaleTransformation : Transformation {
 
     override fun transform(source: Bitmap): Bitmap {
         val target = createBitmap(source.width, source.height, ARGB_8888)

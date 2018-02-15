@@ -50,7 +50,7 @@ class InstrumentedTest {
                     override fun getDescription() = "placeholder"
                     override fun perform(uiController: UiController, view: View) = getTargetContext()
                             .picasso("https://i.ytimg.com/vi/yaqe1qesQ8c/maxresdefault.jpg")
-                            .into(Targets.progress(view as ImageView))
+                            .into(Progresses.bar(view as ImageView))
                 },
                 delay())
     }

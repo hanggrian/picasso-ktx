@@ -11,7 +11,7 @@ import android.graphics.RectF
 import android.graphics.Shader.TileMode.CLAMP
 import com.squareup.picasso.Transformation
 
-internal class CropRoundedTransformation(private val radius: Int, private val margin: Int) : Transformation {
+class CropRoundedTransformation(private val radius: Int, private val margin: Int) : Transformation {
 
     override fun transform(source: Bitmap): Bitmap {
         val right = (source.width - margin).toFloat()

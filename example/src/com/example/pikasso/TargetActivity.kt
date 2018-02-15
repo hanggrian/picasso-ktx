@@ -3,9 +3,10 @@ package com.example.pikasso
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.view.View
 import android.view.inputmethod.InputMethodManager.HIDE_IMPLICIT_ONLY
-import com.hendraanggrian.pikasso.Targets
 import com.hendraanggrian.pikasso.picasso
+import com.hendraanggrian.pikasso.toProgressBarTarget
 import kota.inputMethodManager
 import kota.toast
 import kotlinx.android.synthetic.main.activity_target.*
@@ -16,19 +17,17 @@ class TargetActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_target)
         setSupportActionBar(toolbar)
-        buttonClear.setOnClickListener { editText.setText("") }
-        buttonGo.setOnClickListener {
-            inputMethodManager!!.hideSoftInputFromWindow(it.windowToken, HIDE_IMPLICIT_ONLY)
-            picasso(editText.text.toString())
-                .into(Targets.progress(imageView)
-                    .callback({ _, _ ->
-                        toast("Loaded.")
-                    }, {
-                        toast("Failed.")
-                    }, {
-                        toast("Prepare...")
-                    }))
-        }
+    }
+
+    fun clear(view: View) = editText.setText("")
+
+    fun go(view: View) {
+        inputMethodManager!!.hideSoftInputFromWindow(view.windowToken, HIDE_IMPLICIT_ONLY)
+        picasso(editText.text.toString())
+            .into(imageView.toProgressBarTarget()
+                .onLoaded { _, _ -> toast("Loaded.") }
+                .onFailed { toast("Failed.") }
+                .onPrepare { toast("Prepare...") })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

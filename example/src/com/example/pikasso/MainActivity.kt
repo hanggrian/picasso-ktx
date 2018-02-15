@@ -3,14 +3,16 @@ package com.example.pikasso
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import android.view.View
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        button1.setOnClickListener { startActivity(Intent(this, TransformationActivity::class.java)) }
-        button2.setOnClickListener { startActivity(Intent(this, TargetActivity::class.java)) }
     }
+
+    fun transformationsExample(view: View) = startActivity(Intent(this, TransformationActivity::class.java))
+
+    fun targetsExample(view: View) = startActivity(Intent(this, TargetActivity::class.java))
 }

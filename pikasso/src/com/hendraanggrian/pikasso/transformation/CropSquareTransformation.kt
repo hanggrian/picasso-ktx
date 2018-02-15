@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.Bitmap.createBitmap
 import com.squareup.picasso.Transformation
 
-internal class CropSquareTransformation : Transformation {
+class CropSquareTransformation : Transformation {
 
     override fun transform(source: Bitmap): Bitmap {
         val size = Math.min(source.width, source.height)
