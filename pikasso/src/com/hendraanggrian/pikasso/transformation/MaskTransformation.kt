@@ -39,9 +39,7 @@ class MaskTransformation(private val context: Context, @DrawableRes private val 
             var instance: Paint?
             if (PAINT != null) {
                 instance = PAINT!!.get()
-                if (instance != null) {
-                    return instance
-                }
+                if (instance != null) return instance
             }
             instance = Paint()
             instance.xfermode = PorterDuffXfermode(SRC_IN)

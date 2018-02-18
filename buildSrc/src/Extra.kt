@@ -30,8 +30,8 @@ val Plugin.`bintray-release` get() = id("com.novoda.bintray-release")
 fun Dependency.ktlint(): org.gradle.api.artifacts.Dependency = add("ktlint", "com.github.shyiko:ktlint:0.15.0")
 fun Dependency.support(module: String, version: String, vararg suffixes: String) = "${StringBuilder("com.android.support").apply { suffixes.forEach { append(".$it") } }}:$module:$version"
 fun Dependency.square(module: String, version: String) = "com.squareup.$module:$module:$version"
-fun Dependency.junit() = "junit:junit:4.12"
 fun Dependency.hendraanggrian(module: String, version: String) = "com.hendraanggrian:$module:$version"
+fun Dependency.junit() = "junit:junit:4.12"
 
 private typealias Dependency = org.gradle.api.artifacts.dsl.DependencyHandler
 private typealias Plugin = org.gradle.plugin.use.PluginDependenciesSpec

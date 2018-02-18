@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-    fun transformationsExample(view: View) = startActivity(Intent(this, TransformationActivity::class.java))
+    fun transformations(view: View) = startActivity(Intent(this, TransformationActivity::class.java))
 
-    fun targetsExample(view: View) = startActivity(Intent(this, TargetActivity::class.java))
+    fun targets(view: View) = startActivity(Intent(this, TargetActivity::class.java))
 }

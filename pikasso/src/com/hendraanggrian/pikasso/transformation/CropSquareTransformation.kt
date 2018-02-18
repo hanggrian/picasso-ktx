@@ -11,9 +11,7 @@ class CropSquareTransformation : Transformation {
         val width = (source.width - size) / 2
         val height = (source.height - size) / 2
         val target = createBitmap(source, width, height, size, size)
-        if (target != source) {
-            source.recycle()
-        }
+        if (target != source) source.recycle()
         return target
     }
 

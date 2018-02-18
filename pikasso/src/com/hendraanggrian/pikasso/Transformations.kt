@@ -23,14 +23,14 @@ inline fun RequestCreator.rounded(
     margin: Int
 ): RequestCreator = transform(CropRoundedTransformation(radius, margin))
 
-fun RequestCreator.overlay(
+inline fun RequestCreator.overlay(
+    @ColorInt color: Int
+): RequestCreator = transform(ColorOverlayTransformation(color))
+
+inline fun RequestCreator.overlay(
     @ColorInt color: Int,
-    @IntRange(from = 0x0, to = 0xFF) alpha: Int? = null
-): RequestCreator {
-    if (alpha == null) return transform(ColorOverlayTransformation(color))
-    check(alpha in 0..255, { "Alpha must be between 0 and 255" })
-    return transform(ColorOverlayTransformation(color and 0x00ffffff or (alpha shl 24)))
-}
+    @IntRange(from = 0x0, to = 0xFF) alpha: Int
+): RequestCreator = transform(ColorOverlayTransformation(color, alpha))
 
 inline fun RequestCreator.grayscale(): RequestCreator = transform(ColorGrayscaleTransformation())
 

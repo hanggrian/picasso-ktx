@@ -21,7 +21,10 @@ class TransformationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transformation)
         setSupportActionBar(toolbar)
-        listOf(checkBoxCropSquare, checkBoxCropCircle, checkBoxCropRounded, checkBoxColorOverlay, checkBoxGrayscale, checkBoxMask).forEach {
+        listOf(
+            checkBoxCropSquare, checkBoxCropCircle, checkBoxCropRounded,
+            checkBoxColorOverlay, checkBoxGrayscale, checkBoxMask
+        ).forEach {
             it.setOnCheckedChangeListener { _, _ ->
                 picasso(R.drawable.bg_test)
                     .apply {
