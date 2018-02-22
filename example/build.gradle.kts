@@ -37,11 +37,11 @@ android {
 }
 
 dependencies {
-    compile(project(":pikasso"))
-    compile(kotlin("stdlib", kotlinVersion))
-    compile(support("appcompat-v7", supportVersion))
-    compile(support("cardview-v7", supportVersion))
-    compile(support("design", supportVersion))
-    compile(support("percent", supportVersion))
-    compile(hendraanggrian("kota", kotaVersion))
+    implementation(project(":pikasso"))
+    implementation(kotlin("stdlib", kotlinVersion))
+    implementation(support("appcompat-v7", supportVersion))
+    implementation(support("cardview-v7", supportVersion))
+    implementation(support("design", supportVersion))
+    implementation(support("percent", supportVersion))
+    implementation(hendraanggrian("kota", kotaVersion))
 }
