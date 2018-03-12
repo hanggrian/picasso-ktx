@@ -12,8 +12,8 @@ import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.view.View
 import android.widget.ImageView
+import androidx.view.isGone
 import com.hendraanggrian.pikasso.test.R
-import kota.isVisible
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -50,7 +50,7 @@ class InstrumentedTest {
                 override fun getDescription() = "placeholder"
                 override fun perform(uiController: UiController, view: View) = picasso
                     .load("https://i.ytimg.com/vi/yaqe1qesQ8c/maxresdefault.jpg")
-                    .into(Progresses.bar(view as ImageView))
+                    .into((view as ImageView).toProgressTarget())
             },
             delay())
     }
@@ -67,7 +67,7 @@ class InstrumentedTest {
                 }
 
                 override fun onFinish() {
-                    progressBar.isVisible = false
+                    progressBar.isGone = true
                 }
             }.start()
             uiController.loopMainThreadForAtLeast(DELAY_COUNTDOWN)

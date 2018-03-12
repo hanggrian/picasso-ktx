@@ -9,7 +9,7 @@ import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Shader.TileMode.CLAMP
 import com.squareup.picasso.Transformation
-import java.lang.Math.min
+import kotlin.math.min
 
 class CropCircleTransformation : Transformation {
 
@@ -20,15 +20,12 @@ class CropCircleTransformation : Transformation {
         val target = createBitmap(size, size, ARGB_8888)
         val r = size / 2f
         Canvas(target).drawCircle(r, r, r, Paint().apply {
-            val shader = BitmapShader(source, CLAMP, CLAMP)
-            if (width != 0 || height != 0) {
-                // source isn't square, move viewport to center
-                val matrix = Matrix()
-                matrix.setTranslate(-width.toFloat(), -height.toFloat())
-                shader.setLocalMatrix(matrix)
-            }
-            this.shader = shader
-            this.isAntiAlias = true
+            isAntiAlias = true
+            shader = BitmapShader(source, CLAMP, CLAMP)
+            // source isn't square, move viewport to center
+            if (width != 0 || height != 0) shader.setLocalMatrix(Matrix().apply {
+                setTranslate(-width.toFloat(), -height.toFloat())
+            })
         })
         source.recycle()
         return target

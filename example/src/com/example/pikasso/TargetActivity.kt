@@ -5,8 +5,9 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager.HIDE_IMPLICIT_ONLY
+import com.hendraanggrian.pikasso.into
 import com.hendraanggrian.pikasso.picasso
-import com.hendraanggrian.pikasso.toProgressBarTarget
+import com.hendraanggrian.pikasso.toProgressTarget
 import kota.inputMethodManager
 import kota.toast
 import kotlinx.android.synthetic.main.activity_target.*
@@ -19,15 +20,19 @@ class TargetActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
     }
 
-    fun clear(view: View) = editText.setText("")
+    fun clear(v: View) = editText.setText("")
 
     fun go(view: View) {
         inputMethodManager!!.hideSoftInputFromWindow(view.windowToken, HIDE_IMPLICIT_ONLY)
-        picasso(editText.text.toString())
-            .into(imageView.toProgressBarTarget()
-                .onLoaded { _, _ -> toast("Loaded.") }
-                .onFailed { toast("Failed.") }
-                .onPrepare { toast("Prepare...") })
+        picasso.load(editText.text.toString())
+            .into(imageView.toProgressTarget()) {
+                onSuccess {
+                    toast("Success")
+                }
+                onError {
+                    toast("Error")
+                }
+            }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

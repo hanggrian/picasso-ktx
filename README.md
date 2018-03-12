@@ -36,6 +36,18 @@ Picasso.get().load(url).into(imageView, object : Callback {
         
     }
 })
+
+Picasso.get().load(url).into(object : Target {
+    override fun onBitmapFailed(e: Exception, errorDrawable: Drawable?) {
+        
+    }
+    override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
+        
+    }
+    override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+        
+    }
+})
 ```
 
 Pikasso:
@@ -48,69 +60,84 @@ picasso.load(url).into(imageView) {
     
     }
 }
+
+picasso.load(url).into {
+    onFailed { e, drawable ->
+    
+    }
+    onLoaded { bitmap, from ->
+    
+    }
+    onPrepare { drawable ->
+    
+    }
+}
 ```
 
 Transformations
 ---------------
 ![demo_transformation][demo_transformation]
 
-```java
+```kotlin
 // single transformation
 Picasso.with(context)
     .load(image)
-    .transform(Transformations.circle())
-    .into(target);
+    .circle()
+    .into(target)
     
 // multiple transformation
 Picasso.with(context)
     .load(image)
-    .transform(Arrays.asList(Transformations.circle(), Transformations.grayscale()))
-    .into(target);
-
-// it can also be used without Picasso
-Bitmap bitmap = Transformations.square().toBitmap(this, R.drawable.ic_launcher);
-Drawable drawable = Transformations.overlay(this, R.color.colorAccent).toDrawable(this, R.drawable.ic_launcher);
+    .transform(listOf(CropCircleTransformation(), ColorGrayscaleTransformation()))
+    .into(target)
 ```
 
 #### Available transformations
-|              |                                                         Transformations                                                         |
-|--------------|---------------------------------------------------------------------------------------------------------------------------------|
-| crop square  | `Transformations.square()`                                                                                                        |
-| crop circle  | `Transformations.circle()`                                                                                                        |
-| crop rounded | `Transformations.rounded(radius)`<br> `Transformations.rounded(radius, margin)<br> Transformations.rounded(radius, margin, usedDp)` |
-| overlay      | `Transformations.overlay(color, alpha)`<br> `Transformations.overlay(context, colorRes, alpha)`                                     |
-| grayscale    | `Transformations.grayscale()`                                                                                                     |
+|              |                                                         Transformations             |
+|--------------|-------------------------------------------------------------------------------------|
+| crop square  | `square()`                                                                          |
+| crop circle  | `circle()`                                                                          |
+| crop rounded | `rounded(radius)`<br> `rounded(radius, margin)<br> rounded(radius, margin, usedDp)` |
+| overlay      | `overlay(color, alpha)`<br> `overlay(context, colorRes, alpha)`                     |
+| grayscale    | `grayscale()`                                                                       |
 
-Targets
--------
+Placeholder target
+------------------
 ![demo_target][demo_target]
 
 Load `ImageView` with progress bar or custom view placeholder.
 
 ```java
-picasso(url)
+picasso.load(url)
     .transform(Transformations.circle())
     .into(Targets.placeholder(imageView));
 ```
  
 #### Placeholder type
 Display a temporary view that will be removed once Picasso has finished/failed to load the image.
- * `Targets.placeholder(View)` - progress bar placeholder
- * `Targets.placeholder(ImageView, view)` - custom view placeholder
+ * `into(imageView.toProgressTarget())` - progress bar placeholder
+ * `into(imageView.toHorizontalProgressTarget())` - horizontal progress placeholder
+ * `into(imageView.toTarget(customView))` - custom view placeholder
 
 #### Listen to events
-Listen to Picasso events with Targets.
- * `Targets.callback(Targets.OnSuccess, Targets.OnError)` - only listen to success & failed, mimicking Picasso's Callback
- * `Targets.callback(Targets.OnSuccess)` - only listen to success
- * `Targets.callback(com.squareup.picasso.Callback)` - native Picasso's Callback
+Listen to Picasso events with placeholder target with callback DSL.
+
+```kotlin
+into(imageView.toProgressTarget()) {
+    onSuccess {
+        
+    }
+}
+```
 
 #### Disable animation
 By default, animation are enabled (if not yet already enabled) by `LayoutTransition`.
-If this is not the expected behavior, manually disable it by calling `Targets.transition(boolean)`.
+If this is not the expected behavior, 
+manually disable it by calling `imageView.toProgressTarget().transition(false)`.
 
 License
 -------
-    Copyright 2017 Hendra Anggrian
+    Copyright 2018 Hendra Anggrian
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

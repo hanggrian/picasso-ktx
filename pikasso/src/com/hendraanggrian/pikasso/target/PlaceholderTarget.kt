@@ -4,16 +4,20 @@ import android.animation.LayoutTransition
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.FrameLayout
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
+import com.squareup.picasso.Target
 
-class PlaceholderProgress(private val target: ImageView, placeholder: View) : ProgressTarget() {
+/** Modified [Target] that displays custom view when image is loading. */
+class PlaceholderTarget(private val target: ImageView, placeholder: View) : Target {
 
-    companion object {
-        private const val TAG = "PlaceholderProgress"
+    private companion object {
+        const val TAG = "PlaceholderTarget"
     }
 
     private val placeholderLayout = FrameLayout(target.context)
@@ -26,21 +30,22 @@ class PlaceholderProgress(private val target: ImageView, placeholder: View) : Pr
         transition(true)
     }
 
-    override fun equals(other: Any?) = other != null && other is PlaceholderProgress && other.target == target
+    override fun equals(other: Any?) = other != null &&
+        other is PlaceholderTarget &&
+        other.target == target
+
     override fun hashCode() = target.hashCode()
 
     override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
         clearPlaceholders()
         target.isVisible = true
         target.setImageBitmap(bitmap)
-        super.onBitmapLoaded(bitmap, from)
     }
 
     override fun onBitmapFailed(e: Exception, errorDrawable: Drawable?) {
         clearPlaceholders()
         target.isVisible = true
         target.setImageDrawable(errorDrawable)
-        super.onBitmapFailed(e, errorDrawable)
     }
 
     override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
@@ -53,12 +58,12 @@ class PlaceholderProgress(private val target: ImageView, placeholder: View) : Pr
         clearPlaceholders()
         targetParent.addView(placeholderLayout, targetParent.indexOfChild(target))
         target.isVisible = false
-        super.onPrepareLoad(placeHolderDrawable)
     }
 
-    fun transition(enable: Boolean): PlaceholderProgress {
+    fun transition(enable: Boolean): PlaceholderTarget {
         when {
-            enable && targetParent.layoutTransition == null -> targetParent.layoutTransition = LayoutTransition()
+            enable && targetParent.layoutTransition == null ->
+                targetParent.layoutTransition = LayoutTransition()
             !enable -> targetParent.layoutTransition = null
         }
         return this
@@ -70,11 +75,12 @@ class PlaceholderProgress(private val target: ImageView, placeholder: View) : Pr
         .filter { it.tag == TAG }
         .forEach { targetParent.removeView(it) }
 
-    private inline val ViewGroup.childs: List<View> get() = (0 until childCount).map { getChildAt(it) }
+    private inline val ViewGroup.childs: List<View>
+        get() = (0 until childCount).map { getChildAt(it) }
 
     private inline var View.isVisible: Boolean
-        get() = visibility == View.VISIBLE
+        get() = visibility == VISIBLE
         set(visible) {
-            visibility = if (visible) View.VISIBLE else View.GONE
+            visibility = if (visible) VISIBLE else GONE
         }
 }

@@ -9,17 +9,14 @@ import android.graphics.Paint.ANTI_ALIAS_FLAG
 import android.graphics.PorterDuff.Mode.SRC_ATOP
 import android.graphics.PorterDuffColorFilter
 import android.support.annotation.ColorInt
-import android.support.annotation.IntRange
 import com.squareup.picasso.Transformation
 
 class ColorOverlayTransformation(@ColorInt private val color: Int) : Transformation {
 
-    constructor(@ColorInt color: Int, @IntRange(from = 0, to = 255) alpha: Int) :
-        this(color and 0x00ffffff or (alpha shl 24))
-
     override fun transform(source: Bitmap): Bitmap {
         val target = createBitmap(source.width, source.height, ARGB_8888)
         Canvas(target).drawBitmap(source, 0f, 0f, Paint(ANTI_ALIAS_FLAG).apply {
+            isAntiAlias = true
             colorFilter = PorterDuffColorFilter(color, SRC_ATOP)
         })
         source.recycle()

@@ -2,8 +2,10 @@ package com.example.pikasso
 
 import android.graphics.Color.RED
 import android.os.Bundle
+import android.support.v4.content.ContextCompat.getDrawable
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.widget.CheckBox
 import com.hendraanggrian.pikasso.circle
 import com.hendraanggrian.pikasso.grayscale
 import com.hendraanggrian.pikasso.mask
@@ -11,7 +13,8 @@ import com.hendraanggrian.pikasso.overlay
 import com.hendraanggrian.pikasso.picasso
 import com.hendraanggrian.pikasso.rounded
 import com.hendraanggrian.pikasso.square
-import com.hendraanggrian.pikasso.toHorizontalProgressTarget
+import com.hendraanggrian.pikasso.toProgressTarget
+import kota.childs
 import kota.resources.dp
 import kotlinx.android.synthetic.main.activity_transformation.*
 
@@ -21,21 +24,19 @@ class TransformationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transformation)
         setSupportActionBar(toolbar)
-        listOf(
-            checkBoxCropSquare, checkBoxCropCircle, checkBoxCropRounded,
-            checkBoxColorOverlay, checkBoxGrayscale, checkBoxMask
-        ).forEach {
+        checkBoxes.childs.map { it as CheckBox }.forEach {
             it.setOnCheckedChangeListener { _, _ ->
-                picasso(R.drawable.bg_test)
+                picasso.load(R.drawable.bg_test)
                     .apply {
-                        if (checkBoxCropSquare.isChecked) square()
-                        if (checkBoxCropCircle.isChecked) circle()
-                        if (checkBoxCropRounded.isChecked) rounded(25.dp, 10.dp)
-                        if (checkBoxColorOverlay.isChecked) overlay(RED)
-                        if (checkBoxGrayscale.isChecked) grayscale()
-                        if (checkBoxMask.isChecked) mask(this@TransformationActivity, R.drawable.mask)
+                        if (cropSquare.isChecked) square()
+                        if (cropCircle.isChecked) circle()
+                        if (cropRounded.isChecked) rounded(25.dp, 10.dp)
+                        if (colorOverlay.isChecked) overlay(RED)
+                        if (colorGrayscale.isChecked) grayscale()
+                        if (mask.isChecked) mask(
+                            getDrawable(this@TransformationActivity, R.drawable.mask)!!)
                     }
-                    .into(imageView.toHorizontalProgressTarget())
+                    .into(imageView.toProgressTarget())
             }
         }
     }

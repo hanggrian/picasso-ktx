@@ -43,14 +43,15 @@ val ktlint by configurations.creating
 
 dependencies {
     compile(kotlin("stdlib", kotlinVersion))
-    compile(support("support-compat", supportVersion))
+    compile(support("support-annotations", supportVersion))
     compile(square("picasso", picassoVersion))
 
     testImplementation(junit())
+    androidTestImplementation(kotlin("test", kotlinVersion))
     androidTestImplementation(support("design", supportVersion))
     androidTestImplementation(support("runner", runnerVersion, "test"))
     androidTestImplementation(support("espresso-core", espressoVersion, "test", "espresso"))
-    androidTestImplementation(hendraanggrian("kota", kotaVersion))
+    androidTestImplementation(androidKtx())
 
     ktlint(ktlint())
 }
@@ -76,7 +77,7 @@ tasks {
         args("--android", "-F", "src/**/*.kt")
     }
 
-    val dokka by tasks.getting(DokkaTask::class) {
+    val dokka by getting(DokkaTask::class) {
         outputDirectory = "$buildDir/docs"
         doFirst { file(outputDirectory).deleteRecursively() }
     }

@@ -17,15 +17,19 @@ class CropRoundedTransformation(
 ) : Transformation {
 
     override fun transform(source: Bitmap): Bitmap {
-        val right = (source.width - margin).toFloat()
-        val bottom = (source.height - margin).toFloat()
         val target = createBitmap(source.width, source.height, ARGB_8888)
-        Canvas(target).drawRoundRect(RectF(margin.toFloat(), margin.toFloat(), right, bottom), radius.toFloat(), radius.toFloat(), Paint(ANTI_ALIAS_FLAG).apply {
+        Canvas(target).drawRoundRect(RectF(
+            margin.toFloat(),
+            margin.toFloat(),
+            (source.width - margin).toFloat(),
+            (source.height - margin).toFloat()
+        ), radius.toFloat(), radius.toFloat(), Paint(ANTI_ALIAS_FLAG).apply {
+            isAntiAlias = true
             shader = BitmapShader(source, CLAMP, CLAMP)
         })
         source.recycle()
         return target
     }
 
-    override fun key() = "CropRoundedTransformation[margin=$margin, radius=$radius]"
+    override fun key() = "CropRoundedTransformation[radius=$radius, margin=$margin]"
 }

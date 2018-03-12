@@ -16,6 +16,8 @@ fun DependencyHandler.hendraanggrian(module: String, version: String) = "com.hen
 
 fun DependencyHandler.junit() = "junit:junit:$junitVersion"
 
+fun DependencyHandler.androidKtx() = "androidx.core:core-ktx:$ktxVersion"
+
 fun DependencyHandler.ktlint() = "com.github.shyiko:ktlint:$ktlintVersion"
 
 fun DependencyHandler.dokka() = "org.jetbrains.dokka:dokka-android-gradle-plugin:$dokkaVersion"
