@@ -1,33 +1,54 @@
-picasso-utils
-=============
+Pikasso
+=======
 Handy extension to Picasso with pre-loaded transformations and target placeholder.
 
-Targets
--------
-![demo_target][demo_target]
+Download
+--------
+```gradle
+repositories {
+    google()
+    jcenter()
+}
 
-Load `ImageView` with progress bar or custom view placeholder.
-
-```java
-picasso(url)
-    .transform(Transformations.circle())
-    .into(Targets.placeholder(imageView));
+dependencies {
+    compile 'com.hendraanggrian:pikasso:0.1'
+}
 ```
- 
-#### Placeholder type
-Display a temporary view that will be removed once Picasso has finished/failed to load the image.
- * `Targets.placeholder(View)` - progress bar placeholder
- * `Targets.placeholder(ImageView, view)` - custom view placeholder
 
-#### Listen to events
-Listen to Picasso events with Targets.
- * `Targets.callback(Targets.OnSuccess, Targets.OnError)` - only listen to success & failed, mimicking Picasso's Callback
- * `Targets.callback(Targets.OnSuccess)` - only listen to success
- * `Targets.callback(com.squareup.picasso.Callback)` - native Picasso's Callback
+Global instance
+---------------
+Call `picasso` to get global instance of `Picasso`, it is equivalent to `Picasso.get()`.
+This is the only root-level accessor in this library.
 
-#### Disable animation
-By default, animation are enabled (if not yet already enabled) by `LayoutTransition`.
-If this is not the expected behavior, manually disable it by calling `Targets.transition(boolean)`.
+```kotlin
+picasso.load(url).into(imageView)
+```
+
+Callback DSL
+------------
+Traditional:
+```kotlin
+Picasso.get().load(url).into(imageView, object : Callback {
+    override fun onSuccess() {
+        
+    }
+    override fun onError(e: Exception) {
+        
+    }
+})
+```
+
+Pikasso:
+```kotlin
+picasso.load(url).into(imageView) {
+    onSuccess {
+        
+    }
+    onFailed {
+    
+    }
+}
+```
 
 Transformations
 ---------------
@@ -60,32 +81,32 @@ Drawable drawable = Transformations.overlay(this, R.color.colorAccent).toDrawabl
 | overlay      | `Transformations.overlay(color, alpha)`<br> `Transformations.overlay(context, colorRes, alpha)`                                     |
 | grayscale    | `Transformations.grayscale()`                                                                                                     |
 
-Kotlin
-------
-Several Kotlin extension functions:
-```kotlin
-class MyActivity : Activity {
+Targets
+-------
+![demo_target][demo_target]
 
-    override fun onCreate(bundle : Bundle?) {
-        picasso(url)
-            .transform(Transformations.circle())
-            .into(imageView)
-    }
-}
+Load `ImageView` with progress bar or custom view placeholder.
+
+```java
+picasso(url)
+    .transform(Transformations.circle())
+    .into(Targets.placeholder(imageView));
 ```
+ 
+#### Placeholder type
+Display a temporary view that will be removed once Picasso has finished/failed to load the image.
+ * `Targets.placeholder(View)` - progress bar placeholder
+ * `Targets.placeholder(ImageView, view)` - custom view placeholder
 
-Download
---------
-```gradle
-repositories {
-    google()
-    jcenter()
-}
+#### Listen to events
+Listen to Picasso events with Targets.
+ * `Targets.callback(Targets.OnSuccess, Targets.OnError)` - only listen to success & failed, mimicking Picasso's Callback
+ * `Targets.callback(Targets.OnSuccess)` - only listen to success
+ * `Targets.callback(com.squareup.picasso.Callback)` - native Picasso's Callback
 
-dependencies {
-    compile 'com.hendraanggrian:picasso-utils:0.3'
-}
-```
+#### Disable animation
+By default, animation are enabled (if not yet already enabled) by `LayoutTransition`.
+If this is not the expected behavior, manually disable it by calling `Targets.transition(boolean)`.
 
 License
 -------

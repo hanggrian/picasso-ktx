@@ -9,7 +9,7 @@ import com.squareup.picasso.Target
 abstract class ProgressTarget : Target {
 
     private var _onLoaded: ((Bitmap, LoadedFrom) -> Unit)? = null
-    private var _onFailed: ((Drawable?) -> Unit)? = null
+    private var _onFailed: ((e: Exception, Drawable?) -> Unit)? = null
     private var _onPrepare: ((Drawable?) -> Unit)? = null
 
     @CallSuper
@@ -18,8 +18,8 @@ abstract class ProgressTarget : Target {
     }
 
     @CallSuper
-    override fun onBitmapFailed(errorDrawable: Drawable?) {
-        _onFailed?.invoke(errorDrawable)
+    override fun onBitmapFailed(e: Exception, errorDrawable: Drawable?) {
+        _onFailed?.invoke(e, errorDrawable)
     }
 
     @CallSuper
@@ -32,7 +32,7 @@ abstract class ProgressTarget : Target {
         return this
     }
 
-    fun onFailed(failed: (Drawable?) -> Unit): ProgressTarget {
+    fun onFailed(failed: (e: Exception, Drawable?) -> Unit): ProgressTarget {
         _onFailed = failed
         return this
     }

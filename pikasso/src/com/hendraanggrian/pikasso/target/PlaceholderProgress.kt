@@ -36,11 +36,11 @@ class PlaceholderProgress(private val target: ImageView, placeholder: View) : Pr
         super.onBitmapLoaded(bitmap, from)
     }
 
-    override fun onBitmapFailed(errorDrawable: Drawable?) {
+    override fun onBitmapFailed(e: Exception, errorDrawable: Drawable?) {
         clearPlaceholders()
         target.isVisible = true
         target.setImageDrawable(errorDrawable)
-        super.onBitmapFailed(errorDrawable)
+        super.onBitmapFailed(e, errorDrawable)
     }
 
     override fun onPrepareLoad(placeHolderDrawable: Drawable?) {

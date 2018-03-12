@@ -6,7 +6,8 @@ buildscript {
     dependencies {
         classpath(android())
         classpath(kotlin("gradle-plugin", kotlinVersion))
-        classpath(dokkaAndroid())
+        classpath(dokka())
+        classpath(gitPublish())
         classpath(bintrayRelease())
     }
 }
@@ -26,6 +27,6 @@ task<Wrapper>("wrapper") {
     gradleVersion = "4.4.1"
 }
 
-/** QUICK UPLOAD
-./gradlew picasso-utils:bintrayUpload -PdryRun=false -PbintrayUser=hendraanggrian -PbintrayKey=
+/** bintray upload snippet
+./gradlew bintrayUpload -PdryRun=false -PbintrayUser=hendraanggrian -PbintrayKey=
  */

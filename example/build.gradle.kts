@@ -1,7 +1,7 @@
 import org.gradle.kotlin.dsl.kotlin
 
 plugins {
-    `android-app`
+    `android-application`
     kotlin("android")
     kotlin("android.extensions")
 }

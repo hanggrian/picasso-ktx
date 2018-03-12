@@ -13,7 +13,10 @@ import android.support.v4.content.ContextCompat.getDrawable
 import com.squareup.picasso.Transformation
 import java.lang.ref.WeakReference
 
-class MaskTransformation(private val context: Context, @DrawableRes private val resId: Int) : Transformation {
+class MaskTransformation(
+    private val context: Context,
+    @DrawableRes private val resId: Int
+) : Transformation {
 
     companion object {
         private var PAINT: WeakReference<Paint>? = null
@@ -32,7 +35,8 @@ class MaskTransformation(private val context: Context, @DrawableRes private val 
         return target
     }
 
-    override fun key() = "MaskTransformation[maskId=${context.resources.getResourceEntryName(resId)}]"
+    override fun key() =
+        "MaskTransformation[resId=${context.resources.getResourceEntryName(resId)}]"
 
     private val paint: Paint
         get() {

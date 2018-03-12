@@ -1,10 +1,12 @@
-import org.gradle.api.tasks.JavaExec
 import org.gradle.kotlin.dsl.kotlin
+import org.gradle.language.base.plugins.LifecycleBasePlugin.*
+import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
     `android-library`
     kotlin("android")
-    `dokka-android`
+    `dokka`
+    `git-publish`
     `bintray-release`
 }
 
@@ -16,7 +18,6 @@ android {
         targetSdkVersion(targetSdk)
         versionName = releaseVersion
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("proguard.pro")
     }
     sourceSets {
         getByName("main") {
@@ -33,40 +34,58 @@ android {
             resources.srcDir("tests/src")
         }
     }
+    libraryVariants.all {
+        generateBuildConfig.enabled = false
+    }
 }
 
-configurations.create("ktlint")
+val ktlint by configurations.creating
 
 dependencies {
     compile(kotlin("stdlib", kotlinVersion))
     compile(support("support-compat", supportVersion))
     compile(square("picasso", picassoVersion))
-    ktlint()
+
     testImplementation(junit())
     androidTestImplementation(support("design", supportVersion))
     androidTestImplementation(support("runner", runnerVersion, "test"))
     androidTestImplementation(support("espresso-core", espressoVersion, "test", "espresso"))
     androidTestImplementation(hendraanggrian("kota", kotaVersion))
+
+    ktlint(ktlint())
 }
 
-task<JavaExec>("ktlint") {
-    group = "verification"
-    inputs.dir("src")
-    outputs.dir("src")
-    description = "Check Kotlin code style."
-    classpath = configurations["ktlint"]
-    main = "com.github.shyiko.ktlint.Main"
-    args("src/**/*.kt")
-}
-tasks["check"].dependsOn(tasks["ktlint"])
-task<JavaExec>("ktlintFormat") {
-    group = "formatting"
-    inputs.dir("src")
-    outputs.dir("src")
-    description = "Fix Kotlin code style deviations."
-    classpath = configurations["ktlint"]
-    main = "com.github.shyiko.ktlint.Main"
-    args("-F", "src/**/*.kt")
+tasks {
+    "ktlint"(JavaExec::class) {
+        get("check").dependsOn(this)
+        group = VERIFICATION_GROUP
+        inputs.dir("src")
+        outputs.dir("src")
+        description = "Check Kotlin code style."
+        classpath = ktlint
+        main = "com.github.shyiko.ktlint.Main"
+        args("--android", "src/**/*.kt")
+    }
+    "ktlintFormat"(JavaExec::class) {
+        group = "formatting"
+        inputs.dir("src")
+        outputs.dir("src")
+        description = "Fix Kotlin code style deviations."
+        classpath = ktlint
+        main = "com.github.shyiko.ktlint.Main"
+        args("--android", "-F", "src/**/*.kt")
+    }
+
+    val dokka by tasks.getting(DokkaTask::class) {
+        outputDirectory = "$buildDir/docs"
+        doFirst { file(outputDirectory).deleteRecursively() }
+    }
+    gitPublish {
+        repoUri = releaseWeb
+        branch = "gh-pages"
+        contents.from(dokka.outputDirectory)
+    }
+    get("gitPublishCopy").dependsOn(dokka)
 }
 
 publish {

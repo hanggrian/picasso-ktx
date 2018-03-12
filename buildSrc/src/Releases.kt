@@ -1,0 +1,6 @@
+const val releaseUser = "hendraanggrian"
+const val releaseGroup = "com.hendraanggrian"
+const val releaseArtifact = "pikasso"
+const val releaseVersion = "0.1"
+const val releaseDesc = "Handy extension to Picasso with pre-loaded transformations and target placeholder"
+const val releaseWeb = "https://github.com/hendraanggrian/pikasso"
