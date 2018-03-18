@@ -31,5 +31,5 @@ class CropCircleTransformation : Transformation {
         return target
     }
 
-    override fun key() = "CropCircleTransformation"
+    override fun key() = "CropCircleTransformation()"
 }

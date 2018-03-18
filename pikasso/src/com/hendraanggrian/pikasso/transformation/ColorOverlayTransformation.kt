@@ -23,5 +23,5 @@ class ColorOverlayTransformation(@ColorInt private val color: Int) : Transformat
         return target
     }
 
-    override fun key() = "ColorOverlayTransformation[color=$color]"
+    override fun key() = "ColorOverlayTransformation(color=$color)"
 }

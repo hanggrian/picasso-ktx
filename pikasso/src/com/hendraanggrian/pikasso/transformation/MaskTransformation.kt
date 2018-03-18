@@ -24,5 +24,5 @@ class MaskTransformation(private val drawable: Drawable) : Transformation {
         return target
     }
 
-    override fun key() = "MaskTransformation"
+    override fun key() = "MaskTransformation()"
 }
