@@ -10,6 +10,7 @@ $dokka.location:com.hendraanggrian.pikasso$into(com.squareup.picasso.RequestCrea
 $dokka.location:com.hendraanggrian.pikasso$into(com.squareup.picasso.RequestCreator, kotlin.Function1((com.hendraanggrian.pikasso.TargetBuilder, kotlin.Unit)))com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/into.html
 $dokka.location:com.hendraanggrian.pikasso$mask(com.squareup.picasso.RequestCreator, android.graphics.drawable.Drawable)com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/mask.html
 $dokka.location:com.hendraanggrian.pikasso$overlay(com.squareup.picasso.RequestCreator, kotlin.Int)com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/overlay.html
+$dokka.location:com.hendraanggrian.pikasso$rounded(com.squareup.picasso.RequestCreator, kotlin.Float, kotlin.Float)com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/rounded.html
 $dokka.location:com.hendraanggrian.pikasso$rounded(com.squareup.picasso.RequestCreator, kotlin.Int, kotlin.Int)com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/rounded.html
 $dokka.location:com.hendraanggrian.pikasso$square(com.squareup.picasso.RequestCreator)com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/square.html
 $dokka.location:com.hendraanggrian.pikasso$toHorizontalProgressTarget(android.widget.ImageView, kotlin.Int)com.hendraanggrian.pikasso/android.widget.-image-view/to-horizontal-progress-target.html
