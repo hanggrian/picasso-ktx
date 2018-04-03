@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.hendraanggrian:pikasso:0.1'
+    compile 'com.hendraanggrian:pikasso:0.2'
 }
 ```
 

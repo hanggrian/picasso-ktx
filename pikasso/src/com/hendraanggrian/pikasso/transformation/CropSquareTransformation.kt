@@ -19,5 +19,5 @@ class CropSquareTransformation : Transformation {
         return target
     }
 
-    override fun key() = "CropSquareTransformation($width=width, height=$height)"
+    override fun key() = "CropSquareTransformation(width=$width, height=$height)"
 }

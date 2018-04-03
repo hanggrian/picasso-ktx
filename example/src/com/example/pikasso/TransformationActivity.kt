@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat.getDrawable
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.CheckBox
+import androidx.core.view.children
 import com.hendraanggrian.pikasso.circle
 import com.hendraanggrian.pikasso.grayscale
 import com.hendraanggrian.pikasso.mask
@@ -14,8 +15,6 @@ import com.hendraanggrian.pikasso.picasso
 import com.hendraanggrian.pikasso.rounded
 import com.hendraanggrian.pikasso.square
 import com.hendraanggrian.pikasso.toProgressTarget
-import kota.childs
-import kota.resources.dp
 import kotlinx.android.synthetic.main.activity_transformation.*
 
 class TransformationActivity : AppCompatActivity() {
@@ -24,13 +23,15 @@ class TransformationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transformation)
         setSupportActionBar(toolbar)
-        checkBoxes.childs.map { it as CheckBox }.forEach {
+        checkBoxes.children.map { it as CheckBox }.forEach {
             it.setOnCheckedChangeListener { _, _ ->
                 picasso.load(R.drawable.bg_test)
                     .apply {
                         if (cropSquare.isChecked) square()
                         if (cropCircle.isChecked) circle()
-                        if (cropRounded.isChecked) rounded(25.dp, 10.dp)
+                        if (cropRounded.isChecked) rounded(
+                            resources.getDimension(R.dimen.image_radius),
+                            resources.getDimension(R.dimen.image_margin))
                         if (colorOverlay.isChecked) overlay(RED)
                         if (colorGrayscale.isChecked) grayscale()
                         if (mask.isChecked) mask(

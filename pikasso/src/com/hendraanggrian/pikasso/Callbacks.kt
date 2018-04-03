@@ -6,11 +6,22 @@ import android.graphics.drawable.Drawable
 import android.support.annotation.IdRes
 import android.widget.ImageView
 import android.widget.RemoteViews
+import com.hendraanggrian.pikasso.internal._Callback
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.RequestCreator
 import com.squareup.picasso.Target
 import java.lang.Exception
+
+/** Interface to create [Callback] with Kotlin DSL. */
+interface CallbackBuilder {
+
+    /** Invoked when image is successfully loaded. */
+    fun onSuccess(callback: () -> Unit)
+
+    /** Invoked when image failed to load. */
+    fun onError(callback: (e: Exception) -> Unit)
+}
 
 /**
  * Completes the request without target while listening to its callback with Kotlin DSL.
@@ -76,35 +87,3 @@ inline fun RequestCreator.into(
     appWidgetIds: IntArray,
     callback: CallbackBuilder.() -> Unit
 ) = into(remoteViews, viewId, appWidgetIds, _Callback().apply(callback))
-
-/** Interface to create [Callback] with Kotlin DSL. */
-interface CallbackBuilder {
-
-    /** Invoked when image is successfully loaded. */
-    fun onSuccess(callback: () -> Unit)
-
-    /** Invoked when image failed to load. */
-    fun onError(callback: (e: Exception) -> Unit)
-}
-
-@PublishedApi
-internal class _Callback : Callback, CallbackBuilder {
-    private var _onSuccess: (() -> Unit)? = null
-    private var _onError: ((Exception) -> Unit)? = null
-
-    override fun onSuccess(callback: () -> Unit) {
-        _onSuccess = callback
-    }
-
-    override fun onSuccess() {
-        _onSuccess?.invoke()
-    }
-
-    override fun onError(callback: (e: Exception) -> Unit) {
-        _onError = callback
-    }
-
-    override fun onError(e: Exception) {
-        _onError?.invoke(e)
-    }
-}

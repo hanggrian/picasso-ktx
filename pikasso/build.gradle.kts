@@ -11,12 +11,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(targetSdk)
-    buildToolsVersion(buildTools)
+    compileSdkVersion(SDK_TARGET)
+    buildToolsVersion(BUILD_TOOLS)
     defaultConfig {
-        minSdkVersion(minSdk)
-        targetSdkVersion(targetSdk)
-        versionName = releaseVersion
+        minSdkVersion(SDK_MIN)
+        targetSdkVersion(SDK_TARGET)
+        versionName = RELEASE_VERSION
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
     }
     sourceSets {
@@ -35,22 +35,22 @@ android {
         }
     }
     libraryVariants.all {
-        generateBuildConfig.enabled = false
+        generateBuildConfig?.enabled = false
     }
 }
 
 val ktlint by configurations.creating
 
 dependencies {
-    compile(kotlin("stdlib", kotlinVersion))
-    compile(support("support-annotations", supportVersion))
-    compile(square("picasso", picassoVersion))
+    api(kotlin("stdlib", VERSION_KOTLIN))
+    api(square("picasso", VERSION_PICASSO))
+    compileOnly(support("support-annotations", VERSION_SUPPORT))
 
     testImplementation(junit())
-    androidTestImplementation(kotlin("test", kotlinVersion))
-    androidTestImplementation(support("design", supportVersion))
-    androidTestImplementation(support("runner", runnerVersion, "test"))
-    androidTestImplementation(support("espresso-core", espressoVersion, "test", "espresso"))
+    androidTestImplementation(kotlin("test", VERSION_KOTLIN))
+    androidTestImplementation(support("design", VERSION_SUPPORT))
+    androidTestImplementation(support("runner", VERSION_RUNNER, "test"))
+    androidTestImplementation(support("espresso-core", VERSION_ESPRESSO, "test", "espresso"))
     androidTestImplementation(androidKtx())
 
     ktlint(ktlint())
@@ -82,7 +82,7 @@ tasks {
         doFirst { file(outputDirectory).deleteRecursively() }
     }
     gitPublish {
-        repoUri = releaseWeb
+        repoUri = RELEASE_WEBSITE
         branch = "gh-pages"
         contents.from(dokka.outputDirectory)
     }
@@ -90,10 +90,10 @@ tasks {
 }
 
 publish {
-    userOrg = releaseUser
-    groupId = releaseGroup
-    artifactId = releaseArtifact
-    publishVersion = releaseVersion
-    desc = releaseDesc
-    website = releaseWeb
+    userOrg = RELEASE_USER
+    groupId = RELEASE_GROUP
+    artifactId = RELEASE_ARTIFACT
+    publishVersion = RELEASE_VERSION
+    desc = RELEASE_DESC
+    website = RELEASE_WEBSITE
 }

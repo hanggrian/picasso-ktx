@@ -12,18 +12,18 @@ import android.graphics.Shader.TileMode.CLAMP
 import com.squareup.picasso.Transformation
 
 class CropRoundedTransformation(
-    private val radius: Int,
-    private val margin: Int
+    private val radius: Float,
+    private val margin: Float
 ) : Transformation {
+
+    constructor(radius: Int, margin: Int) : this(radius.toFloat(), margin.toFloat())
 
     override fun transform(source: Bitmap): Bitmap {
         val target = createBitmap(source.width, source.height, ARGB_8888)
-        Canvas(target).drawRoundRect(RectF(
-            margin.toFloat(),
-            margin.toFloat(),
-            (source.width - margin).toFloat(),
-            (source.height - margin).toFloat()
-        ), radius.toFloat(), radius.toFloat(), Paint(ANTI_ALIAS_FLAG).apply {
+        Canvas(target).drawRoundRect(RectF(margin, margin,
+            (source.width - margin),
+            (source.height - margin)
+        ), radius, radius, Paint(ANTI_ALIAS_FLAG).apply {
             isAntiAlias = true
             shader = BitmapShader(source, CLAMP, CLAMP)
         })

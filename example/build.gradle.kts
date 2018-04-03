@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(targetSdk)
-    buildToolsVersion(buildTools)
+    compileSdkVersion(SDK_TARGET)
+    buildToolsVersion(BUILD_TOOLS)
     defaultConfig {
-        minSdkVersion(minSdk)
-        targetSdkVersion(targetSdk)
+        minSdkVersion(SDK_MIN)
+        targetSdkVersion(SDK_TARGET)
         applicationId = "com.example.pikasso"
         versionCode = 1
         versionName = "1.0"
@@ -38,10 +38,10 @@ android {
 
 dependencies {
     implementation(project(":pikasso"))
-    implementation(kotlin("stdlib", kotlinVersion))
-    implementation(support("appcompat-v7", supportVersion))
-    implementation(support("cardview-v7", supportVersion))
-    implementation(support("design", supportVersion))
-    implementation(support("percent", supportVersion))
-    implementation(hendraanggrian("kota", kotaVersion))
+    implementation(kotlin("stdlib", VERSION_KOTLIN))
+    implementation(support("appcompat-v7", VERSION_SUPPORT))
+    implementation(support("cardview-v7", VERSION_SUPPORT))
+    implementation(support("design", VERSION_SUPPORT))
+    implementation(support("percent", VERSION_SUPPORT))
+    implementation(androidKtx())
 }

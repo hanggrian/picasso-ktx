@@ -21,6 +21,10 @@ inline fun RequestCreator.circle(): RequestCreator =
     transform(CropCircleTransformation())
 
 /** Transform image to rounded edge with defined radius and margin. */
+inline fun RequestCreator.rounded(radius: Float, margin: Float): RequestCreator =
+    transform(CropRoundedTransformation(radius, margin))
+
+/** Transform image to rounded edge with defined radius and margin. */
 inline fun RequestCreator.rounded(radius: Int, margin: Int): RequestCreator =
     transform(CropRoundedTransformation(radius, margin))
 

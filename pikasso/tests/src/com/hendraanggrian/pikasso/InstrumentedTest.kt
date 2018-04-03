@@ -12,7 +12,7 @@ import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.view.View
 import android.widget.ImageView
-import androidx.view.isGone
+import androidx.core.view.isGone
 import com.hendraanggrian.pikasso.test.R
 import org.junit.Rule
 import org.junit.Test
@@ -61,9 +61,12 @@ class InstrumentedTest {
         override fun perform(uiController: UiController, view: View) {
             val progressBar = rule.activity.progressBar
             object : CountDownTimer(DELAY_COUNTDOWN, 100) {
-                override fun onTick(millisUntilFinished: Long) = when {
-                    SDK_INT >= 24 -> progressBar.setProgress((progressBar.max * millisUntilFinished / DELAY_COUNTDOWN).toInt(), true)
-                    else -> progressBar.progress = (progressBar.max * millisUntilFinished / DELAY_COUNTDOWN).toInt()
+                override fun onTick(millisUntilFinished: Long) = (progressBar.max *
+                    millisUntilFinished / DELAY_COUNTDOWN).toInt().let { progress ->
+                    when {
+                        SDK_INT >= 24 -> progressBar.setProgress(progress, true)
+                        else -> progressBar.progress = progress
+                    }
                 }
 
                 override fun onFinish() {
