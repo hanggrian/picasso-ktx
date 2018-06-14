@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package com.hendraanggrian.pikasso
 
 import com.squareup.picasso.Picasso

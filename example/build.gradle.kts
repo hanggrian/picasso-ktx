@@ -34,6 +34,10 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard.pro")
         }
     }
+    lintOptions {
+        isAbortOnError = false
+    }
+
 }
 
 dependencies {

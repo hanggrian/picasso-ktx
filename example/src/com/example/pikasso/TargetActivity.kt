@@ -24,8 +24,7 @@ class TargetActivity : AppCompatActivity() {
     fun clear(v: View) = editText.setText("")
 
     fun go(view: View) {
-        systemService<InputMethodManager>().hideSoftInputFromWindow(view.windowToken,
-            HIDE_IMPLICIT_ONLY)
+        systemService<InputMethodManager>().hideSoftInputFromWindow(view.windowToken, HIDE_IMPLICIT_ONLY)
         picasso.load(editText.text.toString())
             .into(imageView.toProgressTarget()) {
                 onSuccess {

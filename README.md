@@ -1,5 +1,9 @@
 Pikasso
 =======
+[![Download](https://api.bintray.com/packages/hendraanggrian/maven/pikasso/images/download.svg) ](https://bintray.com/hendraanggrian/maven/pikasso/_latestVersion)
+[![Build Status](https://travis-ci.org/hendraanggrian/pikasso.svg)](https://travis-ci.org/hendraanggrian/pikasso)
+[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
+
 Handy extension to Picasso with pre-loaded transformations and target placeholder.
 
 Download
@@ -11,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.hendraanggrian:pikasso:0.2'
+    compile "com.hendraanggrian:pikasso:$version"
 }
 ```
 

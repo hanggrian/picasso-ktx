@@ -13,7 +13,6 @@ import android.support.test.runner.AndroidJUnit4
 import android.view.View
 import android.widget.ImageView
 import androidx.core.view.isGone
-import com.hendraanggrian.pikasso.test.R
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
