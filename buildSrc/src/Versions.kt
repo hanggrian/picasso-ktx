@@ -14,7 +14,7 @@ const val VERSION_RULES = "1.0.2"
 
 internal const val VERSION_ANDROID_PLUGIN = "3.1.3"
 internal const val VERSION_JUNIT = "4.12"
-internal const val VERSION_KTX = "0.3"
+internal const val VERSION_ANKO = "0.10.5"
 internal const val VERSION_KTLINT = "0.23.1"
 internal const val VERSION_DOKKA = "0.9.17"
 internal const val VERSION_GIT_PUBLISH = "0.3.3"

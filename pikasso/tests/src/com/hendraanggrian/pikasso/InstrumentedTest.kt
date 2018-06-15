@@ -11,8 +11,8 @@ import android.support.test.filters.LargeTest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.view.View
+import android.view.View.GONE
 import android.widget.ImageView
-import androidx.core.view.isGone
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -69,7 +69,7 @@ class InstrumentedTest {
                 }
 
                 override fun onFinish() {
-                    progressBar.isGone = true
+                    progressBar.visibility = GONE
                 }
             }.start()
             uiController.loopMainThreadForAtLeast(DELAY_COUNTDOWN)

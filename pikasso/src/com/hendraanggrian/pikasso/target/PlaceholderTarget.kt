@@ -38,13 +38,13 @@ class PlaceholderTarget(private val target: ImageView, placeholder: View) : Targ
 
     override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
         clearPlaceholders()
-        target.isVisible = true
+        target.visibility = VISIBLE
         target.setImageBitmap(bitmap)
     }
 
     override fun onBitmapFailed(e: Exception, errorDrawable: Drawable?) {
         clearPlaceholders()
-        target.isVisible = true
+        target.visibility = VISIBLE
         target.setImageDrawable(errorDrawable)
     }
 
@@ -57,7 +57,7 @@ class PlaceholderTarget(private val target: ImageView, placeholder: View) : Targ
         }
         clearPlaceholders()
         targetParent.addView(placeholderLayout, targetParent.indexOfChild(target))
-        target.isVisible = false
+        target.visibility = GONE
     }
 
     fun transition(enable: Boolean): PlaceholderTarget {
@@ -77,10 +77,4 @@ class PlaceholderTarget(private val target: ImageView, placeholder: View) : Targ
 
     private inline val ViewGroup.childs: List<View>
         get() = (0 until childCount).map { getChildAt(it) }
-
-    private inline var View.isVisible: Boolean
-        get() = visibility == VISIBLE
-        set(visible) {
-            visibility = if (visible) VISIBLE else GONE
-        }
 }

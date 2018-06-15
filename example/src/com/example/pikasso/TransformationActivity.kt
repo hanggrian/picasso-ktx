@@ -6,7 +6,6 @@ import android.support.v4.content.ContextCompat.getDrawable
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.CheckBox
-import androidx.core.view.children
 import com.hendraanggrian.pikasso.circle
 import com.hendraanggrian.pikasso.grayscale
 import com.hendraanggrian.pikasso.mask
@@ -16,6 +15,7 @@ import com.hendraanggrian.pikasso.rounded
 import com.hendraanggrian.pikasso.square
 import com.hendraanggrian.pikasso.toProgressTarget
 import kotlinx.android.synthetic.main.activity_transformation.*
+import org.jetbrains.anko.forEachChild
 
 class TransformationActivity : AppCompatActivity() {
 
@@ -23,8 +23,8 @@ class TransformationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transformation)
         setSupportActionBar(toolbar)
-        checkBoxes.children.map { it as CheckBox }.forEach {
-            it.setOnCheckedChangeListener { _, _ ->
+        checkBoxes.forEachChild {
+            (it as CheckBox).setOnCheckedChangeListener { _, _ ->
                 picasso.load(R.drawable.bg_test)
                     .apply {
                         if (cropSquare.isChecked) square()

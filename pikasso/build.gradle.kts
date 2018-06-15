@@ -48,11 +48,11 @@ dependencies {
 
     testImplementation(junit())
     androidTestImplementation(kotlin("test", VERSION_KOTLIN))
+    androidTestImplementation(anko("commons"))
     androidTestImplementation(support("design", VERSION_SUPPORT))
     androidTestImplementation(support("espresso-core", VERSION_ESPRESSO, "test", "espresso"))
     androidTestImplementation(support("runner", VERSION_RUNNER, "test"))
     androidTestImplementation(support("rules", VERSION_RULES, "test"))
-    androidTestImplementation(androidKtx())
 
     ktlint(ktlint())
 }

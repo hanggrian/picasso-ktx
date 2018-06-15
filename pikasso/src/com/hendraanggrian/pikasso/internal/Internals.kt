@@ -11,8 +11,7 @@ import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import java.lang.Exception
 
-@PublishedApi
-internal class _Callback : Callback, CallbackBuilder {
+@PublishedApi internal class _Callback : Callback, CallbackBuilder {
     private var onSuccess: (() -> Unit)? = null
     private var onError: ((Exception) -> Unit)? = null
 
@@ -33,8 +32,7 @@ internal class _Callback : Callback, CallbackBuilder {
     }
 }
 
-@PublishedApi
-internal class _Target : Target, TargetBuilder {
+@PublishedApi internal class _Target : Target, TargetBuilder {
     private var onLoaded: ((Bitmap, Picasso.LoadedFrom) -> Unit)? = null
     private var onFailed: ((Exception, Drawable?) -> Unit)? = null
     private var onPrepare: ((Drawable?) -> Unit)? = null

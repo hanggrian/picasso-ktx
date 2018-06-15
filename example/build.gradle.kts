@@ -43,9 +43,9 @@ android {
 dependencies {
     implementation(project(":pikasso"))
     implementation(kotlin("stdlib", VERSION_KOTLIN))
+    implementation(anko("commons"))
     implementation(support("appcompat-v7", VERSION_SUPPORT))
     implementation(support("cardview-v7", VERSION_SUPPORT))
     implementation(support("design", VERSION_SUPPORT))
     implementation(support("percent", VERSION_SUPPORT))
-    implementation(androidKtx())
 }
