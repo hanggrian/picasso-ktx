@@ -16,6 +16,7 @@ import android.widget.ImageView
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import com.hendraanggrian.pikasso.test.R
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
