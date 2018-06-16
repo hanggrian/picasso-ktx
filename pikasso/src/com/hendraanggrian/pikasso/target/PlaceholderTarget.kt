@@ -71,10 +71,5 @@ class PlaceholderTarget(private val target: ImageView, placeholder: View) : Targ
 
     private inline val targetParent: ViewGroup get() = target.parent as ViewGroup
 
-    private fun clearPlaceholders() = targetParent.childs
-        .filter { it.tag == TAG }
-        .forEach { targetParent.removeView(it) }
-
-    private inline val ViewGroup.childs: List<View>
-        get() = (0 until childCount).map { getChildAt(it) }
+    private fun clearPlaceholders() = targetParent.removeView(placeholderLayout)
 }

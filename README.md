@@ -84,14 +84,12 @@ Transformations
 
 ```kotlin
 // single transformation
-Picasso.with(context)
-    .load(image)
+picasso.load(image)
     .circle()
     .into(target)
     
 // multiple transformation
-Picasso.with(context)
-    .load(image)
+picasso.load(image)
     .transform(listOf(CropCircleTransformation(), ColorGrayscaleTransformation()))
     .into(target)
 ```
@@ -113,8 +111,8 @@ Load `ImageView` with progress bar or custom view placeholder.
 
 ```java
 picasso.load(url)
-    .transform(Transformations.circle())
-    .into(Targets.placeholder(imageView));
+    .circle()
+    .into(imageView.toProgressTarget());
 ```
  
 #### Placeholder type
@@ -124,15 +122,7 @@ Display a temporary view that will be removed once Picasso has finished/failed t
  * `into(imageView.toTarget(customView))` - custom view placeholder
 
 #### Listen to events
-Listen to Picasso events with placeholder target with callback DSL.
-
-```kotlin
-into(imageView.toProgressTarget()) {
-    onSuccess {
-        
-    }
-}
-```
+Not yet supported.
 
 #### Disable animation
 By default, animation are enabled (if not yet already enabled) by `LayoutTransition`.

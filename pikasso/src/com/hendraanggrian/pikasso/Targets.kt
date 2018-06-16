@@ -3,6 +3,7 @@ package com.hendraanggrian.pikasso
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.Gravity
+import android.view.Gravity.BOTTOM
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -30,14 +31,18 @@ interface TargetBuilder {
 }
 
 /** Sets circular progress bar with defined width and height. */
-fun ImageView.toProgressTarget(size: Int = WRAP_CONTENT): Target {
+fun ImageView.toProgressTarget(
+    size: Int = WRAP_CONTENT
+): Target {
     val progressBar = ProgressBar(context)
     progressBar.layoutParams = LayoutParams(size, size).apply { gravity = Gravity.CENTER }
     return PlaceholderTarget(this, progressBar)
 }
 
 /** Sets horizontal progress with defined gravity. */
-fun ImageView.toHorizontalProgressTarget(gravity: Int = Gravity.BOTTOM): Target {
+fun ImageView.toHorizontalProgressTarget(
+    gravity: Int = BOTTOM
+): Target {
     val progressBar = ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal)
     progressBar.layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT).apply {
         this.gravity = gravity
@@ -48,13 +53,19 @@ fun ImageView.toHorizontalProgressTarget(gravity: Int = Gravity.BOTTOM): Target 
 
 /** Set custom view as target's placeholder. */
 @Suppress("NOTHING_TO_INLINE")
-inline fun ImageView.toTarget(placeholder: View): Target =
-    PlaceholderTarget(this, placeholder)
+inline fun ImageView.toTarget(
+    placeholder: View
+): Target = PlaceholderTarget(this, placeholder)
 
 /**
  * Completes the request into a [Target] with Kotlin DSL, returning the [Target] created.
  *
  * @see RequestCreator.into
  */
-inline fun RequestCreator.into(target: TargetBuilder.() -> Unit): Target =
-    _Target().apply(target).also { into(it) }
+inline fun RequestCreator.into(
+    builder: TargetBuilder.() -> Unit
+): Target {
+    val target = _Target().apply(builder)
+    into(target)
+    return target
+}

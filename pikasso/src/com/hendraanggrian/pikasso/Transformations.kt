@@ -21,21 +21,26 @@ inline fun RequestCreator.circle(): RequestCreator =
     transform(CropCircleTransformation())
 
 /** Transform image to rounded edge with defined radius and margin. */
-inline fun RequestCreator.rounded(radius: Float, margin: Float): RequestCreator =
-    transform(CropRoundedTransformation(radius, margin))
+inline fun RequestCreator.rounded(
+    radius: Float,
+    margin: Float
+): RequestCreator = transform(CropRoundedTransformation(radius, margin))
 
 /** Transform image to rounded edge with defined radius and margin. */
-inline fun RequestCreator.rounded(radius: Int, margin: Int): RequestCreator =
-    transform(CropRoundedTransformation(radius, margin))
+inline fun RequestCreator.rounded(
+    radius: Int,
+    margin: Int
+): RequestCreator = transform(CropRoundedTransformation(radius, margin))
 
 /** Transform image to overlay color, transparency may be applied. */
-inline fun RequestCreator.overlay(@ColorInt color: Int): RequestCreator =
-    transform(ColorOverlayTransformation(color))
+inline fun RequestCreator.overlay(
+    @ColorInt color: Int
+): RequestCreator = transform(ColorOverlayTransformation(color))
 
 /** Transform image to grayscale color. */
-inline fun RequestCreator.grayscale(): RequestCreator =
-    transform(ColorGrayscaleTransformation())
+inline fun RequestCreator.grayscale(): RequestCreator = transform(ColorGrayscaleTransformation())
 
 /** Transform image to masked. */
-inline fun RequestCreator.mask(drawable: Drawable): RequestCreator =
-    transform(MaskTransformation(drawable))
+inline fun RequestCreator.mask(
+    drawable: Drawable
+): RequestCreator = transform(MaskTransformation(drawable))

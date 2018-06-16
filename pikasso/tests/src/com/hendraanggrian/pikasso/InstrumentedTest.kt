@@ -13,10 +13,10 @@ import android.support.test.runner.AndroidJUnit4
 import android.view.View
 import android.view.View.GONE
 import android.widget.ImageView
+import com.hendraanggrian.pikasso.test.R
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import com.hendraanggrian.pikasso.test.R
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
@@ -28,8 +28,7 @@ class InstrumentedTest {
 
     @Rule @JvmField var rule = ActivityTestRule(InstrumentedActivity::class.java)
 
-    @Test
-    fun transformation() {
+    @Test fun transformation() {
         onView(withId(R.id.imageView)).perform(
             object : ViewAction {
                 override fun getConstraints() = isAssignableFrom(ImageView::class.java)
@@ -42,8 +41,7 @@ class InstrumentedTest {
             delay())
     }
 
-    @Test
-    fun placeholder() {
+    @Test fun placeholder() {
         onView(withId(R.id.imageView)).perform(
             object : ViewAction {
                 override fun getConstraints() = isAssignableFrom(ImageView::class.java)

@@ -1,16 +1,12 @@
 package com.hendraanggrian.pikasso
 
 import android.app.Notification
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.support.annotation.IdRes
 import android.widget.ImageView
 import android.widget.RemoteViews
 import com.hendraanggrian.pikasso.internal._Callback
 import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
 import com.squareup.picasso.RequestCreator
-import com.squareup.picasso.Target
 import java.lang.Exception
 
 /** Interface to create [Callback] with Kotlin DSL. */
@@ -28,38 +24,19 @@ interface CallbackBuilder {
  *
  * @see RequestCreator.fetch
  */
-inline fun RequestCreator.fetch(callback: CallbackBuilder.() -> Unit) =
-    fetch(_Callback().apply(callback))
-
-/**
- * Completes the request into a [Target] while listening to its callback with Kotlin DSL.
- *
- * @see RequestCreator.into
- */
-inline fun RequestCreator.into(target: Target, callback: CallbackBuilder.() -> Unit) =
-    _Callback().apply(callback).let {
-        into(object : Target {
-            override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
-                target.onBitmapLoaded(bitmap, from)
-                it.onSuccess()
-            }
-
-            override fun onBitmapFailed(e: Exception, drawable: Drawable?) {
-                target.onBitmapFailed(e, drawable)
-                it.onError(e)
-            }
-
-            override fun onPrepareLoad(drawable: Drawable?) = target.onPrepareLoad(drawable)
-        })
-    }
+inline fun RequestCreator.fetch(
+    builder: CallbackBuilder.() -> Unit
+) = fetch(_Callback().apply(builder))
 
 /**
  * Completes the request into an [ImageView] while listening to its callback with Kotlin DSL.
  *
  * @see RequestCreator.into
  */
-inline fun RequestCreator.into(target: ImageView, callback: CallbackBuilder.() -> Unit) =
-    into(target, _Callback().apply(callback))
+inline fun RequestCreator.into(
+    target: ImageView,
+    callback: CallbackBuilder.() -> Unit
+) = into(target, _Callback().apply(callback))
 
 /**
  * Completes the request into a [Notification] while listening to its callback with Kotlin DSL.

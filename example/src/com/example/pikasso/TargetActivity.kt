@@ -6,11 +6,9 @@ import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.view.inputmethod.InputMethodManager.HIDE_IMPLICIT_ONLY
-import com.hendraanggrian.pikasso.into
 import com.hendraanggrian.pikasso.picasso
 import com.hendraanggrian.pikasso.toProgressTarget
 import kotlinx.android.synthetic.main.activity_target.*
-import org.jetbrains.anko.toast
 
 class TargetActivity : AppCompatActivity() {
 
@@ -25,14 +23,7 @@ class TargetActivity : AppCompatActivity() {
     fun go(view: View) {
         (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager)
             .hideSoftInputFromWindow(view.windowToken, HIDE_IMPLICIT_ONLY)
-        picasso.load(editText.text.toString()).into(imageView.toProgressTarget()) {
-            onSuccess {
-                toast("Success")
-            }
-            onError {
-                toast("Error")
-            }
-        }
+        picasso.load(editText.text.toString()).into(imageView.toProgressTarget())
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
