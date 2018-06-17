@@ -10,6 +10,8 @@ fun DependencyHandler.support(module: String, version: String, vararg suffixes: 
         suffixes.forEach { append(".$it") }
     }}:$module:$version"
 
+fun DependencyHandler.hendraanggrian(module: String, version: String) = "com.hendraanggrian:$module:$version"
+
 fun DependencyHandler.square(module: String, version: String) = "com.squareup.$module:$module:$version"
 
 fun DependencyHandler.junit() = "junit:junit:$VERSION_JUNIT"

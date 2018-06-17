@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/clearItem"
+        android:icon="@drawable/ic_clear"
+        android:title="Clear"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/pasteItem"
+        android:icon="@drawable/ic_paste"
+        android:title="Paste"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/sendItem"
+        android:icon="@drawable/ic_send"
+        android:title="Send"
+        app:showAsAction="always" />
+
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/progressItem"
+            android:checked="true"
+            android:title="Progress" />
+
+        <item
+            android:id="@+id/horizontalItem"
+            android:title="Horizontal" />
+    </group>
+</menu>

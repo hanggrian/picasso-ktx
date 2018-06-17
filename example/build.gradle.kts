@@ -1,10 +1,13 @@
 import org.gradle.kotlin.dsl.kotlin
+import org.jetbrains.kotlin.gradle.dsl.Coroutines.ENABLE
 
 plugins {
     `android-application`
     kotlin("android")
     kotlin("android.extensions")
 }
+
+kotlin.experimental.coroutines = ENABLE
 
 android {
     compileSdkVersion(SDK_TARGET)
@@ -42,10 +45,16 @@ android {
 
 dependencies {
     implementation(project(":pikasso"))
+
     implementation(kotlin("stdlib", VERSION_KOTLIN))
     implementation(anko("commons"))
+    implementation(anko("design"))
+    implementation(anko("sdk25-coroutines"))
+
     implementation(support("appcompat-v7", VERSION_SUPPORT))
     implementation(support("cardview-v7", VERSION_SUPPORT))
     implementation(support("design", VERSION_SUPPORT))
     implementation(support("percent", VERSION_SUPPORT))
+
+    implementation(hendraanggrian("errorbar", VERSION_SUPPORT))
 }

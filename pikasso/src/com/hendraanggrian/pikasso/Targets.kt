@@ -30,33 +30,6 @@ interface TargetBuilder {
     fun onPrepare(callback: (Drawable?) -> Unit)
 }
 
-/** Sets circular progress bar with defined width and height. */
-fun ImageView.toProgressTarget(
-    size: Int = WRAP_CONTENT
-): Target {
-    val progressBar = ProgressBar(context)
-    progressBar.layoutParams = LayoutParams(size, size).apply { gravity = Gravity.CENTER }
-    return PlaceholderTarget(this, progressBar)
-}
-
-/** Sets horizontal progress with defined gravity. */
-fun ImageView.toHorizontalProgressTarget(
-    gravity: Int = BOTTOM
-): Target {
-    val progressBar = ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal)
-    progressBar.layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT).apply {
-        this.gravity = gravity
-    }
-    progressBar.isIndeterminate = true
-    return PlaceholderTarget(this, progressBar)
-}
-
-/** Set custom view as target's placeholder. */
-@Suppress("NOTHING_TO_INLINE")
-inline fun ImageView.toTarget(
-    placeholder: View
-): Target = PlaceholderTarget(this, placeholder)
-
 /**
  * Completes the request into a [Target] with Kotlin DSL, returning the [Target] created.
  *
@@ -68,4 +41,31 @@ inline fun RequestCreator.into(
     val target = _Target().apply(builder)
     into(target)
     return target
+}
+
+/** Set custom view as target's placeholder. */
+@Suppress("NOTHING_TO_INLINE")
+inline fun ImageView.toTarget(
+    placeholder: View
+): Target = PlaceholderTarget(this, placeholder)
+
+/** Sets circular progress bar with defined width and height. */
+fun ImageView.toProgressTarget(
+    size: Int = WRAP_CONTENT
+): Target {
+    val progressBar = ProgressBar(context)
+    progressBar.layoutParams = LayoutParams(size, size).apply { gravity = Gravity.CENTER }
+    return toTarget(progressBar)
+}
+
+/** Sets horizontal progress with defined gravity. */
+fun ImageView.toHorizontalProgressTarget(
+    gravity: Int = BOTTOM
+): Target {
+    val progressBar = ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal)
+    progressBar.layoutParams = LayoutParams(MATCH_PARENT, WRAP_CONTENT).apply {
+        this.gravity = gravity
+    }
+    progressBar.isIndeterminate = true
+    return toTarget(progressBar)
 }
