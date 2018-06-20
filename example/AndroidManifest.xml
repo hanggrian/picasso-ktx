@@ -16,9 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TransformationActivity" />
+        <activity android:name=".TransformationsActivity" />
         <activity
-            android:name=".TargetActivity"
+            android:name=".PlaceholdersActivity"
             android:windowSoftInputMode="adjustResize" />
     </application>
 </manifest>

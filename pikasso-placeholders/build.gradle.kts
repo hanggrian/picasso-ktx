@@ -30,8 +30,6 @@ android {
             setRoot("tests")
             manifest.srcFile("tests/AndroidManifest.xml")
             java.srcDir("tests/src")
-            res.srcDir("tests/res")
-            resources.srcDir("tests/src")
         }
     }
     libraryVariants.all {

@@ -6,23 +6,38 @@ Pikasso
 
 Handy extension to Picasso with pre-loaded transformations and target placeholder.
 
+Consists of several parts:
+ * *Pikasso Commons*: .
+ * *Pikasso Transformations*: .
+ * *Pikasso Placeholders*: .
+ * *Pikasso Palette*: .
+
 Download
 --------
-```gradle
-repositories {
-    google()
-    jcenter()
-}
+All artifacts are hosted on [jcenter].
+To download all of them, use main library:
 
+```gradle
 dependencies {
-    compile "com.hendraanggrian:pikasso:$version"
+    compile 'com.hendraanggrian.pikasso:pikasso:$version'
 }
 ```
 
-Picasso instance
-----------------
+Or download separate library if only specific feature is desired:
+
+```gradle
+dependencies {
+    compile "com.hendraanggrian.pikasso:pikasso-commons:$version"
+    compile "com.hendraanggrian.pikasso:pikasso-transformations:$version"
+    compile "com.hendraanggrian.pikasso:pikasso-placeholders:$version"
+    compile "com.hendraanggrian.pikasso:pikasso-palette:$version" 
+}
+```
+
+Pikasso Commons
+---------------
 Call `picasso` to get global instance of `Picasso`.
-Or `buildPicasso` to invoke `Picasso.Builder`. 
+Or buildPicasso to invoke Picasso.Builder.
 
 ```kotlin
 picasso.load(url).into(imageView)
@@ -37,14 +52,6 @@ val myPicasso = buildPicasso {
 myPicasso.load(url).into(imageView)
 ```
 
-Loading images can also be executed with invoke operator.
-
-```kotlin
-picasso(url).into(imageView)
-```
-
-Kotlin DSL for Callback and Target
-----------------------------------
 Clean declaration of `Callback` when loading images into `ImageView`. 
 
 ```kotlin
@@ -65,8 +72,8 @@ picasso(url).into {
 }
 ```
 
-Transformations
----------------
+Pikasso Transformations
+-----------------------
 ![demo_transformation][demo_transformation]
 
 ```kotlin
@@ -90,8 +97,8 @@ picasso(url)
 | overlay      | `overlay(color, alpha)`<br> `overlay(context, colorRes, alpha)`                     |
 | grayscale    | `grayscale()`                                                                       |
 
-Placeholder target
-------------------
+Pikasso Placeholders
+--------------------
 ![demo_target][demo_target]
 
 Load `ImageView` with progress bar or custom view placeholder.
@@ -114,6 +121,10 @@ By default, animation are enabled (if not yet already enabled) by `LayoutTransit
 If this is not the expected behavior,
 manually disable it by calling `imageView.toProgressTarget().transition(false)`.
 
+Pikasso Palette
+---------------
+
+
 License
 -------
     Copyright 2018 Hendra Anggrian
@@ -130,5 +141,6 @@ License
     See the License for the specific language governing permissions and
     limitations under the License.
 
+[jcenter]: https://bintray.com/hendraanggrian/pikasso
 [demo_target]: /art/demo_target.gif
 [demo_transformation]: /art/demo_transformation.gif

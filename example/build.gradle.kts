@@ -43,10 +43,10 @@ android {
 }
 
 dependencies {
-    implementation(project(":pikasso-transformations"))
-    implementation(project(":pikasso-placeholders"))
+    implementation(project(":pikasso"))
 
     implementation(kotlin("stdlib", VERSION_KOTLIN))
+
     implementation(anko("commons"))
     implementation(anko("design"))
     implementation(anko("sdk25-coroutines"))

@@ -4,9 +4,8 @@ import com.hendraanggrian.pikasso.CallbackBuilder
 import com.squareup.picasso.Callback
 import java.lang.Exception
 
-@PublishedApi
 @Suppress("ClassName")
-internal class _Callback : Callback, CallbackBuilder {
+open class _Callback : Callback, CallbackBuilder {
     private var onSuccess: (() -> Unit)? = null
     private var onError: ((Exception) -> Unit)? = null
 

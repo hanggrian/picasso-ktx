@@ -41,13 +41,8 @@ val ktlint by configurations.creating
 
 dependencies {
     api(kotlin("stdlib", VERSION_KOTLIN))
-    api(square("picasso", VERSION_PICASSO)) {
-        exclude("com.android.support")
-    }
-
-    implementation(support("support-annotations", VERSION_SUPPORT))
-    implementation(support("support-compat", VERSION_SUPPORT))
-    implementation(support("exifinterface", VERSION_SUPPORT))
+    api(project(":pikasso-commons"))
+    api(support("palette-v7", VERSION_SUPPORT))
 
     testImplementation(junit())
     androidTestImplementation(project(":testing"))
@@ -85,7 +80,7 @@ tasks {
 publish {
     userOrg = RELEASE_USER
     groupId = RELEASE_GROUP
-    artifactId = "$RELEASE_ARTIFACT-commons"
+    artifactId = "$RELEASE_ARTIFACT-palette"
     publishVersion = RELEASE_VERSION
     desc = RELEASE_DESC
     website = RELEASE_WEBSITE

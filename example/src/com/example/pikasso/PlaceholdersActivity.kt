@@ -10,16 +10,16 @@ import android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN
 import android.view.inputmethod.InputMethodManager.HIDE_IMPLICIT_ONLY
 import android.widget.ImageView
 import com.hendraanggrian.pikasso.picasso
-import com.hendraanggrian.pikasso.targets.toHorizontalProgressTarget
-import com.hendraanggrian.pikasso.targets.toProgressTarget
+import com.hendraanggrian.pikasso.placeholders.toHorizontalProgressTarget
+import com.hendraanggrian.pikasso.placeholders.toProgressTarget
 import com.squareup.picasso.Target
-import kotlinx.android.synthetic.main.activity_target.*
+import kotlinx.android.synthetic.main.activity_placeholders.*
 import org.jetbrains.anko.contentView
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.sdk25.coroutines.textChangedListener
 
-class TargetActivity : AppCompatActivity() {
+class PlaceholdersActivity : AppCompatActivity() {
 
     private var clearItem: MenuItem? = null
     private var targetConverter: (ImageView) -> Target = { it.toProgressTarget() }
@@ -27,7 +27,7 @@ class TargetActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setSoftInputMode(SOFT_INPUT_STATE_HIDDEN)
-        setContentView(R.layout.activity_target)
+        setContentView(R.layout.activity_placeholders)
         setSupportActionBar(toolbar)
         supportActionBar!!.title = null
         input.textChangedListener {

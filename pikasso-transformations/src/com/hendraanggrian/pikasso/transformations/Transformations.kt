@@ -29,10 +29,10 @@ inline fun RequestCreator.rounded(
 /** Transform image to overlay color, transparency may be applied. */
 inline fun RequestCreator.overlay(
     @ColorInt color: Int
-): RequestCreator = transform(ColorOverlayTransformation(color))
+): RequestCreator = transform(OverlayTransformation(color))
 
 /** Transform image to grayscale color. */
-inline fun RequestCreator.grayscale(): RequestCreator = transform(ColorGrayscaleTransformation())
+inline fun RequestCreator.grayscale(): RequestCreator = transform(GrayscaleTransformation())
 
 /** Transform image to masked. */
 inline fun RequestCreator.mask(

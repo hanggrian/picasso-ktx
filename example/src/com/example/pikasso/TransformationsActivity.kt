@@ -8,23 +8,23 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.CheckBox
 import com.hendraanggrian.pikasso.picasso
-import com.hendraanggrian.pikasso.targets.toProgressTarget
+import com.hendraanggrian.pikasso.placeholders.toProgressTarget
 import com.hendraanggrian.pikasso.transformations.circle
 import com.hendraanggrian.pikasso.transformations.grayscale
 import com.hendraanggrian.pikasso.transformations.mask
 import com.hendraanggrian.pikasso.transformations.overlay
 import com.hendraanggrian.pikasso.transformations.rounded
 import com.hendraanggrian.pikasso.transformations.square
-import kotlinx.android.synthetic.main.activity_transformation.*
+import kotlinx.android.synthetic.main.activity_transformations.*
 import org.jetbrains.anko.contentView
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.forEachChild
 
-class TransformationActivity : AppCompatActivity() {
+class TransformationsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_transformation)
+        setContentView(R.layout.activity_transformations)
         setSupportActionBar(toolbar)
         supportActionBar!!.title = null
         checkBoxes.forEachChild {
@@ -36,7 +36,7 @@ class TransformationActivity : AppCompatActivity() {
                         if (cropRounded.isChecked) rounded(dip(25), dip(10))
                         if (colorOverlay.isChecked) overlay(RED)
                         if (colorGrayscale.isChecked) grayscale()
-                        if (mask.isChecked) mask(getDrawable(this@TransformationActivity, R.drawable.mask)!!)
+                        if (mask.isChecked) mask(getDrawable(this@TransformationsActivity, R.drawable.mask)!!)
                     }
                     .into(imageView.toProgressTarget())
             }
