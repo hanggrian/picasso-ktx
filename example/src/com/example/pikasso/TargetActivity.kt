@@ -10,8 +10,8 @@ import android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN
 import android.view.inputmethod.InputMethodManager.HIDE_IMPLICIT_ONLY
 import android.widget.ImageView
 import com.hendraanggrian.pikasso.picasso
-import com.hendraanggrian.pikasso.toHorizontalProgressTarget
-import com.hendraanggrian.pikasso.toProgressTarget
+import com.hendraanggrian.pikasso.targets.toHorizontalProgressTarget
+import com.hendraanggrian.pikasso.targets.toProgressTarget
 import com.squareup.picasso.Target
 import kotlinx.android.synthetic.main.activity_target.*
 import org.jetbrains.anko.contentView

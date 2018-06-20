@@ -19,73 +19,48 @@ dependencies {
 }
 ```
 
-Getting instance
+Picasso instance
 ----------------
 Call `picasso` to get global instance of `Picasso`.
+Or `buildPicasso` to invoke `Picasso.Builder`. 
 
 ```kotlin
 picasso.load(url).into(imageView)
-```
 
-Or build them using `Picasso.Builder` DSL.
-
-```kotlin
-val picasso = picasso {
+val myPicasso = buildPicasso {
     loggingEnabled(true)
     memoryCache(Cache.NONE)
     listener { picasso, uri, exception ->
 
     }
 }
-picasso.load(url).into(imageView)
+myPicasso.load(url).into(imageView)
 ```
 
-Callback DSL
-------------
-Traditional:
+Loading images can also be executed with invoke operator.
+
 ```kotlin
-Picasso.get().load(url).into(imageView, object : Callback {
-    override fun onSuccess() {
-
-    }
-    override fun onError(e: Exception) {
-
-    }
-})
-
-Picasso.get().load(url).into(object : Target {
-    override fun onBitmapFailed(e: Exception, errorDrawable: Drawable?) {
-
-    }
-    override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
-
-    }
-    override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-
-    }
-})
+picasso(url).into(imageView)
 ```
 
-Pikasso:
+Kotlin DSL for Callback and Target
+----------------------------------
+Clean declaration of `Callback` when loading images into `ImageView`. 
+
 ```kotlin
-picasso.load(url).into(imageView) {
+picasso(url).into(imageView) {
     onSuccess {
-
-    }
-    onFailed {
-
+        celebrate()
     }
 }
+```
 
-picasso.load(url).into {
-    onFailed { e, drawable ->
+Or into `Target` with Kotlin DSL.
 
-    }
+```kotlin
+picasso(url).into {
     onLoaded { bitmap, from ->
-
-    }
-    onPrepare { drawable ->
-
+        process(bitmap)
     }
 }
 ```
@@ -96,14 +71,14 @@ Transformations
 
 ```kotlin
 // single transformation
-picasso.load(image)
+picasso(url)
     .circle()
-    .into(target)
+    .into(imageView)
 
 // multiple transformation
-picasso.load(image)
+picasso(url)
     .transform(listOf(CropCircleTransformation(), ColorGrayscaleTransformation()))
-    .into(target)
+    .into(imageView)
 ```
 
 #### Available transformations
@@ -122,9 +97,7 @@ Placeholder target
 Load `ImageView` with progress bar or custom view placeholder.
 
 ```java
-picasso.load(url)
-    .circle()
-    .into(imageView.toProgressTarget());
+picasso(url).into(imageView.toProgressTarget());
 ```
 
 #### Placeholder type

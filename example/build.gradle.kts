@@ -40,11 +40,11 @@ android {
     lintOptions {
         isAbortOnError = false
     }
-
 }
 
 dependencies {
-    implementation(project(":pikasso"))
+    implementation(project(":pikasso-transformations"))
+    implementation(project(":pikasso-placeholders"))
 
     implementation(kotlin("stdlib", VERSION_KOTLIN))
     implementation(anko("commons"))
