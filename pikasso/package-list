@@ -1,5 +1,6 @@
 $dokka.format:html
 $dokka.linkExtension:html
+$dokka.location:com.hendraanggrian.pikasso$buildPicasso(android.content.Context, kotlin.Function1((com.squareup.picasso.Picasso.Builder, kotlin.Unit)))com.hendraanggrian.pikasso/android.content.-context/build-picasso.html
 $dokka.location:com.hendraanggrian.pikasso$circle(com.squareup.picasso.RequestCreator)com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/circle.html
 $dokka.location:com.hendraanggrian.pikasso$fetch(com.squareup.picasso.RequestCreator, kotlin.Function1((com.hendraanggrian.pikasso.CallbackBuilder, kotlin.Unit)))com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/fetch.html
 $dokka.location:com.hendraanggrian.pikasso$grayscale(com.squareup.picasso.RequestCreator)com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/grayscale.html
@@ -7,9 +8,12 @@ $dokka.location:com.hendraanggrian.pikasso$into(com.squareup.picasso.RequestCrea
 $dokka.location:com.hendraanggrian.pikasso$into(com.squareup.picasso.RequestCreator, android.widget.RemoteViews, kotlin.Int, kotlin.Int, android.app.Notification, kotlin.String, kotlin.Function1((com.hendraanggrian.pikasso.CallbackBuilder, kotlin.Unit)))com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/into.html
 $dokka.location:com.hendraanggrian.pikasso$into(com.squareup.picasso.RequestCreator, android.widget.RemoteViews, kotlin.Int, kotlin.IntArray, kotlin.Function1((com.hendraanggrian.pikasso.CallbackBuilder, kotlin.Unit)))com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/into.html
 $dokka.location:com.hendraanggrian.pikasso$into(com.squareup.picasso.RequestCreator, kotlin.Function1((com.hendraanggrian.pikasso.TargetBuilder, kotlin.Unit)))com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/into.html
+$dokka.location:com.hendraanggrian.pikasso$invoke(com.squareup.picasso.Picasso, android.net.Uri)com.hendraanggrian.pikasso/com.squareup.picasso.-picasso/invoke.html
+$dokka.location:com.hendraanggrian.pikasso$invoke(com.squareup.picasso.Picasso, java.io.File)com.hendraanggrian.pikasso/com.squareup.picasso.-picasso/invoke.html
+$dokka.location:com.hendraanggrian.pikasso$invoke(com.squareup.picasso.Picasso, kotlin.CharSequence)com.hendraanggrian.pikasso/com.squareup.picasso.-picasso/invoke.html
+$dokka.location:com.hendraanggrian.pikasso$invoke(com.squareup.picasso.Picasso, kotlin.Int)com.hendraanggrian.pikasso/com.squareup.picasso.-picasso/invoke.html
 $dokka.location:com.hendraanggrian.pikasso$mask(com.squareup.picasso.RequestCreator, android.graphics.drawable.Drawable)com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/mask.html
 $dokka.location:com.hendraanggrian.pikasso$overlay(com.squareup.picasso.RequestCreator, kotlin.Int)com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/overlay.html
-$dokka.location:com.hendraanggrian.pikasso$picasso(android.content.Context, kotlin.Function1((com.squareup.picasso.Picasso.Builder, kotlin.Unit)))com.hendraanggrian.pikasso/android.content.-context/picasso.html
 $dokka.location:com.hendraanggrian.pikasso$rounded(com.squareup.picasso.RequestCreator, kotlin.Float, kotlin.Float)com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/rounded.html
 $dokka.location:com.hendraanggrian.pikasso$rounded(com.squareup.picasso.RequestCreator, kotlin.Int, kotlin.Int)com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/rounded.html
 $dokka.location:com.hendraanggrian.pikasso$square(com.squareup.picasso.RequestCreator)com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/square.html
