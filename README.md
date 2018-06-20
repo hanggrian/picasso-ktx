@@ -19,12 +19,24 @@ dependencies {
 }
 ```
 
-Global instance
----------------
-Call `picasso` to get global instance of `Picasso`, it is equivalent to `Picasso.get()`.
-This is the only root-level accessor in this library.
+Getting instance
+----------------
+Call `picasso` to get global instance of `Picasso`.
 
 ```kotlin
+picasso.load(url).into(imageView)
+```
+
+Or build them using `Picasso.Builder` DSL.
+
+```kotlin
+val picasso = picasso {
+    loggingEnabled(true)
+    memoryCache(Cache.NONE)
+    listener { picasso, uri, exception ->
+
+    }
+}
 picasso.load(url).into(imageView)
 ```
 
@@ -34,22 +46,22 @@ Traditional:
 ```kotlin
 Picasso.get().load(url).into(imageView, object : Callback {
     override fun onSuccess() {
-        
+
     }
     override fun onError(e: Exception) {
-        
+
     }
 })
 
 Picasso.get().load(url).into(object : Target {
     override fun onBitmapFailed(e: Exception, errorDrawable: Drawable?) {
-        
+
     }
     override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
-        
+
     }
     override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-        
+
     }
 })
 ```
@@ -58,22 +70,22 @@ Pikasso:
 ```kotlin
 picasso.load(url).into(imageView) {
     onSuccess {
-        
+
     }
     onFailed {
-    
+
     }
 }
 
 picasso.load(url).into {
     onFailed { e, drawable ->
-    
+
     }
     onLoaded { bitmap, from ->
-    
+
     }
     onPrepare { drawable ->
-    
+
     }
 }
 ```
@@ -87,7 +99,7 @@ Transformations
 picasso.load(image)
     .circle()
     .into(target)
-    
+
 // multiple transformation
 picasso.load(image)
     .transform(listOf(CropCircleTransformation(), ColorGrayscaleTransformation()))
@@ -114,7 +126,7 @@ picasso.load(url)
     .circle()
     .into(imageView.toProgressTarget());
 ```
- 
+
 #### Placeholder type
 Display a temporary view that will be removed once Picasso has finished/failed to load the image.
  * `into(imageView.toProgressTarget())` - progress bar placeholder
@@ -126,7 +138,7 @@ Not yet supported.
 
 #### Disable animation
 By default, animation are enabled (if not yet already enabled) by `LayoutTransition`.
-If this is not the expected behavior, 
+If this is not the expected behavior,
 manually disable it by calling `imageView.toProgressTarget().transition(false)`.
 
 License
@@ -144,6 +156,6 @@ License
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-    
+
 [demo_target]: /art/demo_target.gif
 [demo_transformation]: /art/demo_transformation.gif
