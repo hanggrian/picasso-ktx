@@ -1,4 +1,4 @@
-package com.example.pikasso
+package com.example.pikasso.util
 
 import android.content.ClipboardManager
 import android.content.Context

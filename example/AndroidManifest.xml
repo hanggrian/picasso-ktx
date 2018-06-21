@@ -20,5 +20,6 @@
         <activity
             android:name=".PlaceholdersActivity"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".PaletteActivity" />
     </application>
 </manifest>

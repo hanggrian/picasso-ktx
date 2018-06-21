@@ -55,7 +55,7 @@ myPicasso.load(url).into(imageView)
 Clean declaration of `Callback` when loading images into `ImageView`. 
 
 ```kotlin
-picasso(url).into(imageView) {
+picasso.load(url).into(imageView) {
     onSuccess {
         celebrate()
     }
@@ -65,7 +65,7 @@ picasso(url).into(imageView) {
 Or into `Target` with Kotlin DSL.
 
 ```kotlin
-picasso(url).into {
+picasso.load(url).into {
     onLoaded { bitmap, from ->
         process(bitmap)
     }
@@ -78,12 +78,12 @@ Pikasso Transformations
 
 ```kotlin
 // single transformation
-picasso(url)
+picasso.load(url)
     .circle()
     .into(imageView)
 
 // multiple transformation
-picasso(url)
+picasso.load(url)
     .transform(listOf(CropCircleTransformation(), ColorGrayscaleTransformation()))
     .into(imageView)
 ```
@@ -123,7 +123,32 @@ manually disable it by calling `imageView.toProgressTarget().transition(false)`.
 
 Pikasso Palette
 ---------------
+Get a palette synchronously from `RequestCreator`.
 
+```kotlin
+val palette = picasso.load(url).palette
+val vibrant = palette.getVibrantColor(defaultColor)
+```
+
+Or asynchronously.
+
+```kotlin
+picasso.load(url).palette { palette ->
+    vibrant {
+        title.setTextColor(it)
+    }
+}
+```
+
+Alternatively, you can also load image to target image and extract its palette. 
+
+```kotlin
+picasso.load(url).palette(imageView) { palette ->
+    muted {
+        layout.setBackgroundColor(it)
+    }
+}
+```
 
 License
 -------

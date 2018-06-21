@@ -1,9 +1,7 @@
 package com.hendraanggrian.pikasso
 
-import com.squareup.picasso.Callback
 import java.lang.Exception
 
-/** Interface to create [Callback] with Kotlin DSL. */
 interface CallbackBuilder {
 
     /** Invoked when image is successfully loaded. */

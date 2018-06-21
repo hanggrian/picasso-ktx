@@ -9,9 +9,12 @@ import android.view.MenuItem
 import android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN
 import android.view.inputmethod.InputMethodManager.HIDE_IMPLICIT_ONLY
 import android.widget.ImageView
-import com.hendraanggrian.pikasso.picasso
+import com.example.pikasso.util.clipboardManager
+import com.example.pikasso.util.inputMethodManager
+import com.hendraanggrian.pikasso.buildPicasso
 import com.hendraanggrian.pikasso.placeholders.toHorizontalProgressTarget
 import com.hendraanggrian.pikasso.placeholders.toProgressTarget
+import com.squareup.picasso.Cache.NONE
 import com.squareup.picasso.Target
 import kotlinx.android.synthetic.main.activity_placeholders.*
 import org.jetbrains.anko.contentView
@@ -61,7 +64,7 @@ class PlaceholdersActivity : AppCompatActivity() {
                 input.text.isNullOrBlank() -> snackbar(contentView!!, "Needs url.")
                 else -> {
                     inputMethodManager.hideSoftInputFromWindow(contentView!!.windowToken, HIDE_IMPLICIT_ONLY)
-                    picasso.load(input.text.toString()).into(targetConverter(image))
+                    buildPicasso { memoryCache(NONE) }.load(input.text?.toString()).into(targetConverter(image))
                 }
             }
             R.id.progressItem -> {

@@ -37,7 +37,7 @@ class PaletteTest : InstrumentedTest() {
                 override fun getDescription() = "palette"
                 override fun perform(uiController: UiController, view: View) = picasso
                     .load(R.drawable.bg_test)
-                    .intoPalette(view as ImageView) {
+                    .palette(view as ImageView) {
                         vibrant {
                             assertEquals(Palette.from((view.drawable as BitmapDrawable).bitmap).generate().getVibrantColor(TRANSPARENT), it)
                         }

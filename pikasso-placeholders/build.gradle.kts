@@ -80,7 +80,7 @@ tasks {
 publish {
     userOrg = RELEASE_USER
     groupId = RELEASE_GROUP
-    artifactId = "$RELEASE_ARTIFACT-targets"
+    artifactId = "$RELEASE_ARTIFACT-placeholders"
     publishVersion = RELEASE_VERSION
     desc = RELEASE_DESC
     website = RELEASE_WEBSITE
