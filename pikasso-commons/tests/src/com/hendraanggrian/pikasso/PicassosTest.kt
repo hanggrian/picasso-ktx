@@ -8,9 +8,7 @@ import kotlin.test.assertTrue
 
 class PicassosTest {
 
-    @Test fun pikasso() {
-        assertTrue(picasso == Picasso.get())
-    }
+    @Test fun pikasso() = assertTrue(picasso == Picasso.get())
 
     @Test fun buildPicasso() {
         assertNotNull(getTargetContext().buildPicasso {

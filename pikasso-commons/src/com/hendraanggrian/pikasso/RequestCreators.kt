@@ -16,7 +16,7 @@ import com.squareup.picasso.Target
  */
 inline fun RequestCreator.fetch(
     builder: CallbackBuilder.() -> Unit
-) = fetch(_Callback().apply(builder))
+): Unit = fetch(_Callback().apply(builder))
 
 /**
  * Completes the request into an [ImageView] while listening to its callback with Kotlin DSL.
@@ -26,7 +26,7 @@ inline fun RequestCreator.fetch(
 inline fun RequestCreator.into(
     target: ImageView,
     callback: CallbackBuilder.() -> Unit
-) = into(target, _Callback().apply(callback))
+): Unit = into(target, _Callback().apply(callback))
 
 /**
  * Completes the request into a [Notification] while listening to its callback with Kotlin DSL.
@@ -40,7 +40,7 @@ inline fun RequestCreator.into(
     notification: Notification,
     notificationTag: String?,
     callback: CallbackBuilder.() -> Unit
-) = into(remoteViews, viewId, notificationId, notification, notificationTag,
+): Unit = into(remoteViews, viewId, notificationId, notification, notificationTag,
     _Callback().apply(callback))
 
 /**
@@ -53,7 +53,7 @@ inline fun RequestCreator.into(
     @IdRes viewId: Int,
     appWidgetIds: IntArray,
     callback: CallbackBuilder.() -> Unit
-) = into(remoteViews, viewId, appWidgetIds, _Callback().apply(callback))
+): Unit = into(remoteViews, viewId, appWidgetIds, _Callback().apply(callback))
 
 /**
  * Completes the request into a [Target] with Kotlin DSL, returning the [Target] created.

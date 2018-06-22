@@ -44,4 +44,10 @@ interface PaletteBuilder {
         @ColorInt defaultColor: Int = Color.TRANSPARENT,
         block: (Int) -> Unit
     ) = block(palette.getDarkMutedColor(defaultColor))
+
+    /** Use dominant. */
+    fun dominant(
+        @ColorInt defaultColor: Int = Color.TRANSPARENT,
+        block: (Int) -> Unit
+    ) = block(palette.getDominantColor(defaultColor))
 }

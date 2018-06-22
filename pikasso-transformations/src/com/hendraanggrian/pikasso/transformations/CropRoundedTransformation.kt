@@ -31,5 +31,5 @@ class CropRoundedTransformation(
         return target
     }
 
-    override fun key() = "CropRoundedTransformation(radius=$radius, margin=$margin)"
+    override fun key(): String = "CropRoundedTransformation(radius=$radius, margin=$margin)"
 }

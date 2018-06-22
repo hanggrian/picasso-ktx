@@ -20,5 +20,5 @@ class GrayscaleTransformation : Transformation {
         return target
     }
 
-    override fun key() = "GrayscaleTransformation()"
+    override fun key(): String = "GrayscaleTransformation()"
 }

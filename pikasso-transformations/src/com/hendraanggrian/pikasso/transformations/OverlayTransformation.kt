@@ -23,5 +23,5 @@ class OverlayTransformation(@ColorInt private val color: Int) : Transformation {
         return target
     }
 
-    override fun key() = "OverlayTransformation(color=$color)"
+    override fun key(): String = "OverlayTransformation(color=$color)"
 }

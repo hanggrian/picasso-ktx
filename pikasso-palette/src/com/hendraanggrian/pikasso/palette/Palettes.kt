@@ -27,7 +27,7 @@ inline fun RequestCreator.palette(
 inline fun RequestCreator.palette(
     target: ImageView,
     noinline builder: PaletteBuilder.() -> Unit
-) = into(target) {
+): Unit = into(target) {
     onSuccess {
         Palette.from((target.drawable as BitmapDrawable).bitmap)
             .generate { _PaletteBuilder(it).apply(builder) }

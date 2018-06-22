@@ -16,6 +16,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.hendraanggrian.pikasso.buildPicasso
+import com.hendraanggrian.pikasso.demo.BuildConfig.DEBUG
 import com.hendraanggrian.pikasso.into
 import com.hendraanggrian.pikasso.placeholders.toHorizontalProgressTarget
 import com.hendraanggrian.pikasso.placeholders.toProgressTarget
@@ -49,7 +50,10 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
         setContentView(R.layout.activity_demo)
         setSupportActionBar(toolbar)
 
-        picasso = buildPicasso { memoryCache(NONE) }
+        picasso = buildPicasso {
+            loggingEnabled(DEBUG)
+            memoryCache(NONE)
+        }
 
         fragment = DemoFragment()
         supportFragmentManager.beginTransaction()
