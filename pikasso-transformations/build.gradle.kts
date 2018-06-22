@@ -41,8 +41,9 @@ val ktlint by configurations.creating
 
 dependencies {
     api(kotlin("stdlib", VERSION_KOTLIN))
-    api(project(":pikasso-commons"))
-    compileOnly(support("support-annotations", VERSION_SUPPORT))
+    api(project(":$RELEASE_ARTIFACT-commons"))
+
+    implementation(support("support-annotations", VERSION_SUPPORT))
 
     testImplementation(junit())
     androidTestImplementation(project(":testing"))

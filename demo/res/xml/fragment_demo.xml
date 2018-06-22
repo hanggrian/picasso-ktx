@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v7.preference.PreferenceCategory android:title="Source">
+
+        <android.support.v7.preference.EditTextPreference
+            android:key="input"
+            android:title="Input URL" />
+    </android.support.v7.preference.PreferenceCategory>
+
+    <android.support.v7.preference.PreferenceCategory android:title="Transformations">
+
+        <android.support.v7.preference.CheckBoxPreference
+            android:key="cropCircle"
+            android:title="Crop circle" />
+
+        <android.support.v7.preference.CheckBoxPreference
+            android:key="cropRounded"
+            android:title="Crop rounded" />
+
+        <android.support.v7.preference.CheckBoxPreference
+            android:key="cropSquare"
+            android:title="Crop square" />
+
+        <android.support.v7.preference.CheckBoxPreference
+            android:key="grayscale"
+            android:title="Grayscale" />
+
+        <android.support.v7.preference.CheckBoxPreference
+            android:layout_height="wrap_content"
+            android:key="mask"
+            android:title="Mask" />
+        <android.support.v7.preference.CheckBoxPreference
+            android:key="overlay"
+            android:title="Overlay" />
+    </android.support.v7.preference.PreferenceCategory>
+
+    <android.support.v7.preference.PreferenceCategory android:title="Placeholders">
+
+        <android.support.v7.preference.ListPreference
+            android:entries="@array/placeholders"
+            android:entryValues="@array/placeholders_values"
+            android:key="progress"
+            android:title="Placeholder" />
+    </android.support.v7.preference.PreferenceCategory>
+</android.support.v7.preference.PreferenceScreen>

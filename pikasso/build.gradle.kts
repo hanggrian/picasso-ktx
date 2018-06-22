@@ -26,10 +26,10 @@ android {
 }
 
 dependencies {
-    api(project(":pikasso-commons"))
-    api(project(":pikasso-transformations"))
-    api(project(":pikasso-placeholders"))
-    api(project(":pikasso-palette"))
+    api(project(":$RELEASE_ARTIFACT-commons"))
+    api(project(":$RELEASE_ARTIFACT-transformations"))
+    api(project(":$RELEASE_ARTIFACT-placeholders"))
+    api(project(":$RELEASE_ARTIFACT-palette"))
 }
 
 gitPublish {
@@ -37,17 +37,17 @@ gitPublish {
     branch = "gh-pages"
     contents.from(
         "pages",
-        "../pikasso-commons/build/docs",
-        "../pikasso-transformations/build/docs",
-        "../pikasso-placeholders/build/docs",
-        "../pikasso-palette/build/docs")
+        "../$RELEASE_ARTIFACT-commons/build/docs",
+        "../$RELEASE_ARTIFACT-transformations/build/docs",
+        "../$RELEASE_ARTIFACT-placeholders/build/docs",
+        "../$RELEASE_ARTIFACT-palette/build/docs")
 }
 
 tasks["gitPublishCopy"].dependsOn(
-    ":pikasso-commons:dokka",
-    ":pikasso-transformations:dokka",
-    ":pikasso-placeholders:dokka",
-    ":pikasso-palette:dokka")
+    ":$RELEASE_ARTIFACT-commons:dokka",
+    ":$RELEASE_ARTIFACT-transformations:dokka",
+    ":$RELEASE_ARTIFACT-placeholders:dokka",
+    ":$RELEASE_ARTIFACT-palette:dokka")
 
 publish {
     userOrg = RELEASE_USER

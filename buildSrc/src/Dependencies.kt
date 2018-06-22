@@ -5,6 +5,10 @@ fun DependencyHandler.android() = "com.android.tools.build:gradle:$VERSION_ANDRO
 inline val PluginDependenciesSpec.`android-library` get() = id("com.android.library")
 inline val PluginDependenciesSpec.`android-application` get() = id("com.android.application")
 
+fun DependencyHandler.photoView() = "com.github.chrisbanes:PhotoView:$VERSION_PHOTOVIEW"
+
+fun DependencyHandler.slidingUpPanel() = "com.sothree.slidinguppanel:library:$VERSION_SLIDINGUPPANEL"
+
 fun DependencyHandler.support(module: String, version: String, vararg suffixes: String) =
     "${StringBuilder("com.android.support").apply {
         suffixes.forEach { append(".$it") }

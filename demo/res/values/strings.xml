@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pikasso demo</string>
+
+    <string name="expand">Expand</string>
+    <string name="collapse">Collapse</string>
+    <string name="load">Load</string>
+
+    <string-array name="placeholders">
+        <item>Centered progress bar</item>
+        <item>Bottom horizontal progress</item>
+    </string-array>
+
+    <string-array name="placeholders_values">
+        <item>progress</item>
+        <item>horizontalProgress</item>
+    </string-array>
+</resources>

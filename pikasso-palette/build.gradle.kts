@@ -41,7 +41,7 @@ val ktlint by configurations.creating
 
 dependencies {
     api(kotlin("stdlib", VERSION_KOTLIN))
-    api(project(":pikasso-commons"))
+    api(project(":$RELEASE_ARTIFACT-commons"))
     api(support("palette-v7", VERSION_SUPPORT))
 
     testImplementation(junit())

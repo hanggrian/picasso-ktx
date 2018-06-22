@@ -13,6 +13,8 @@ const val VERSION_RUNNER = "1.0.2"
 const val VERSION_RULES = "1.0.2"
 
 internal const val VERSION_ANDROID_PLUGIN = "3.1.3"
+internal const val VERSION_PHOTOVIEW = "2.0.0"
+internal const val VERSION_SLIDINGUPPANEL = "3.4.0"
 internal const val VERSION_JUNIT = "4.12"
 internal const val VERSION_ANKO = "0.10.5"
 internal const val VERSION_KTLINT = "0.23.1"

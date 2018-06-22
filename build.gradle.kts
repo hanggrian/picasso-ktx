@@ -16,6 +16,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven("https://jitpack.io")
     }
     tasks.withType<Javadoc> {
         isEnabled = false
