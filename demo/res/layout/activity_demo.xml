@@ -2,7 +2,7 @@
 <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/panel"
+    android:id="@+id/panelLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="bottom"
@@ -11,10 +11,15 @@
     app:umanoShadowHeight="8dp"
     tools:context=".DemoActivity">
 
-    <com.github.chrisbanes.photoview.PhotoView
-        android:id="@+id/target"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <com.github.chrisbanes.photoview.PhotoView
+            android:id="@+id/photoView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -26,19 +31,21 @@
             android:layout_height="?actionBarSize"
             android:foreground="?selectableItemBackground"
             android:onClick="toggleExpand"
-            app:title="No image" />
+            app:title="@string/no_image" />
 
         <FrameLayout
-            android:id="@+id/preferences"
+            android:id="@+id/frameLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <Button
+            android:id="@+id/button"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:onClick="load"
             android:text="@string/load" />
     </android.support.design.widget.AppBarLayout>
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>

@@ -4,34 +4,34 @@
     <android.support.v7.preference.PreferenceCategory android:title="Source">
 
         <android.support.v7.preference.EditTextPreference
-            android:key="input"
+            android:key="inputPreference"
             android:title="Input URL" />
     </android.support.v7.preference.PreferenceCategory>
 
     <android.support.v7.preference.PreferenceCategory android:title="Transformations">
 
         <android.support.v7.preference.CheckBoxPreference
-            android:key="cropCircle"
+            android:key="cropCirclePreference"
             android:title="Crop circle" />
 
         <android.support.v7.preference.CheckBoxPreference
-            android:key="cropRounded"
+            android:key="cropRoundedPreference"
             android:title="Crop rounded" />
 
         <android.support.v7.preference.CheckBoxPreference
-            android:key="cropSquare"
+            android:key="cropSquarePreference"
             android:title="Crop square" />
 
         <android.support.v7.preference.CheckBoxPreference
-            android:key="grayscale"
+            android:key="grayscalePreference"
             android:title="Grayscale" />
 
         <android.support.v7.preference.CheckBoxPreference
-            android:layout_height="wrap_content"
-            android:key="mask"
+            android:key="maskPreference"
             android:title="Mask" />
+
         <android.support.v7.preference.CheckBoxPreference
-            android:key="overlay"
+            android:key="overlayPreference"
             android:title="Overlay" />
     </android.support.v7.preference.PreferenceCategory>
 
@@ -40,7 +40,7 @@
         <android.support.v7.preference.ListPreference
             android:entries="@array/placeholders"
             android:entryValues="@array/placeholders_values"
-            android:key="progress"
+            android:key="placeholdersPreference"
             android:title="Placeholder" />
     </android.support.v7.preference.PreferenceCategory>
 </android.support.v7.preference.PreferenceScreen>

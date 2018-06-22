@@ -1,4 +1,5 @@
 import org.gradle.kotlin.dsl.kotlin
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.Coroutines.ENABLE
 
 plugins {
@@ -6,8 +7,6 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
 }
-
-kotlin.experimental.coroutines = ENABLE
 
 android {
     compileSdkVersion(SDK_TARGET)
@@ -37,10 +36,9 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard.pro")
         }
     }
-    lintOptions {
-        isAbortOnError = false
-    }
 }
+
+val ktlint by configurations.creating
 
 dependencies {
     implementation(project(":$RELEASE_ARTIFACT"))
@@ -48,8 +46,6 @@ dependencies {
     implementation(kotlin("stdlib", VERSION_KOTLIN))
 
     implementation(anko("commons"))
-    implementation(anko("design"))
-    implementation(anko("sdk25-coroutines"))
 
     implementation(support("appcompat-v7", VERSION_SUPPORT))
     implementation(support("cardview-v7", VERSION_SUPPORT))
@@ -60,4 +56,29 @@ dependencies {
     implementation(slidingUpPanel())
     implementation(photoView())
     implementation(hendraanggrian("errorbar", VERSION_SUPPORT))
+
+    ktlint(ktlint())
+}
+
+
+tasks {
+    "ktlint"(JavaExec::class) {
+        get("check").dependsOn(this)
+        group = LifecycleBasePlugin.VERIFICATION_GROUP
+        inputs.dir("src")
+        outputs.dir("src")
+        description = "Check Kotlin code style."
+        classpath = ktlint
+        main = "com.github.shyiko.ktlint.Main"
+        args("--android", "src/**/*.kt")
+    }
+    "ktlintFormat"(JavaExec::class) {
+        group = "formatting"
+        inputs.dir("src")
+        outputs.dir("src")
+        description = "Fix Kotlin code style deviations."
+        classpath = ktlint
+        main = "com.github.shyiko.ktlint.Main"
+        args("--android", "-F", "src/**/*.kt")
+    }
 }

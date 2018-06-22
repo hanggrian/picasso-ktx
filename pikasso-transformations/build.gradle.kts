@@ -54,7 +54,7 @@ dependencies {
 tasks {
     "ktlint"(JavaExec::class) {
         get("check").dependsOn(this)
-        group = VERIFICATION_GROUP
+        group = LifecycleBasePlugin.VERIFICATION_GROUP
         inputs.dir("src")
         outputs.dir("src")
         description = "Check Kotlin code style."

@@ -1,6 +1,5 @@
 import com.android.build.gradle.api.AndroidSourceSet
 import org.gradle.kotlin.dsl.kotlin
-import org.gradle.language.base.plugins.LifecycleBasePlugin.*
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
@@ -58,7 +57,7 @@ dependencies {
 tasks {
     "ktlint"(JavaExec::class) {
         get("check").dependsOn(this)
-        group = VERIFICATION_GROUP
+        group = LifecycleBasePlugin.VERIFICATION_GROUP
         inputs.dir("src")
         outputs.dir("src")
         description = "Check Kotlin code style."
