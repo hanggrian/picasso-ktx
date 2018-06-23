@@ -2,11 +2,11 @@
 
 package com.hendraanggrian.pikasso.palette
 
-import android.graphics.drawable.BitmapDrawable
 import android.support.v7.graphics.Palette
 import android.widget.ImageView
 import com.hendraanggrian.pikasso.into
 import com.hendraanggrian.pikasso.palette.internal._PaletteBuilder
+import com.hendraanggrian.pikasso.palette.internal._PaletteCallbackBuilder
 import com.squareup.picasso.RequestCreator
 import com.squareup.picasso.Target
 
@@ -26,10 +26,5 @@ inline fun RequestCreator.palette(
 /** Build the [Palette] asynchronously from loaded target image. */
 inline fun RequestCreator.palette(
     target: ImageView,
-    noinline builder: PaletteBuilder.() -> Unit
-): Unit = into(target) {
-    onSuccess {
-        Palette.from((target.drawable as BitmapDrawable).bitmap)
-            .generate { _PaletteBuilder(it).apply(builder) }
-    }
-}
+    noinline builder: PaletteCallbackBuilder.() -> Unit
+): Unit = into(target, _PaletteCallbackBuilder(target).apply(builder))

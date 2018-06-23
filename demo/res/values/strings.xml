@@ -22,4 +22,12 @@
         <item>progress</item>
         <item>horizontalProgress</item>
     </string-array>
+
+    <string name="vibrant">Vibrant</string>
+    <string name="light_vibrant">Light vibrant</string>
+    <string name="dark_vibrant">Dark vibrant</string>
+    <string name="muted">Muted</string>
+    <string name="light_muted">Light muted</string>
+    <string name="dark_muted">Dark muted</string>
+    <string name="dominant">Dominant</string>
 </resources>

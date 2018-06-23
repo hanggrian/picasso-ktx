@@ -10,44 +10,44 @@ interface PaletteBuilder {
     val palette: Palette
 
     /** Use vibrant color. */
-    fun vibrant(
+    fun useVibrant(
         @ColorInt defaultColor: Int = Color.TRANSPARENT,
         block: (Int) -> Unit
-    ) = block(palette.getVibrantColor(defaultColor))
+    ): Unit = block(palette.getVibrantColor(defaultColor))
 
-    /** Use light vibrant color. */
-    fun lightVibrant(
+    /** Use light useVibrant color. */
+    fun useLightVibrant(
         @ColorInt defaultColor: Int = Color.TRANSPARENT,
         block: (Int) -> Unit
-    ) = block(palette.getLightVibrantColor(defaultColor))
+    ): Unit = block(palette.getLightVibrantColor(defaultColor))
 
-    /** Use dark vibrant color. */
-    fun darkVibrant(
+    /** Use dark useVibrant color. */
+    fun useDarkVibrant(
         @ColorInt defaultColor: Int = Color.TRANSPARENT,
         block: (Int) -> Unit
-    ) = block(palette.getDarkVibrantColor(defaultColor))
+    ): Unit = block(palette.getDarkVibrantColor(defaultColor))
 
     /** Use muted color. */
-    fun muted(
+    fun useMuted(
         @ColorInt defaultColor: Int = Color.TRANSPARENT,
         block: (Int) -> Unit
-    ) = block(palette.getMutedColor(defaultColor))
+    ): Unit = block(palette.getMutedColor(defaultColor))
 
     /** Use light muted color. */
-    fun lightMuted(
+    fun useLightMuted(
         @ColorInt defaultColor: Int = Color.TRANSPARENT,
         block: (Int) -> Unit
-    ) = block(palette.getLightMutedColor(defaultColor))
+    ): Unit = block(palette.getLightMutedColor(defaultColor))
 
     /** Use dark muted color. */
-    fun darkMuted(
+    fun useDarkMuted(
         @ColorInt defaultColor: Int = Color.TRANSPARENT,
         block: (Int) -> Unit
-    ) = block(palette.getDarkMutedColor(defaultColor))
+    ): Unit = block(palette.getDarkMutedColor(defaultColor))
 
     /** Use dominant. */
-    fun dominant(
+    fun useDominant(
         @ColorInt defaultColor: Int = Color.TRANSPARENT,
         block: (Int) -> Unit
-    ) = block(palette.getDominantColor(defaultColor))
+    ): Unit = block(palette.getDominantColor(defaultColor))
 }

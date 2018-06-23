@@ -38,47 +38,40 @@
             android:background="?android:windowBackground"
             android:orientation="vertical">
 
-            <com.hendraanggrian.pikasso.demo.PaletteDisplayView
-                android:id="@+id/vibrantView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/vibrantToolbar"
+                style="@style/PaletteToolbar"
+                app:title="@string/vibrant" />
 
-            <com.hendraanggrian.pikasso.demo.PaletteDisplayView
-                android:id="@+id/lightVibrantView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/lightVibrantToolbar"
+                style="@style/PaletteToolbar"
+                app:title="@string/light_vibrant" />
 
-            <com.hendraanggrian.pikasso.demo.PaletteDisplayView
-                android:id="@+id/darkVibrantView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/darkVibrantToolbar"
+                style="@style/PaletteToolbar"
+                app:title="@string/dark_vibrant" />
 
-            <com.hendraanggrian.pikasso.demo.PaletteDisplayView
-                android:id="@+id/mutedView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/mutedToolbar"
+                style="@style/PaletteToolbar"
+                app:title="@string/muted" />
 
-            <com.hendraanggrian.pikasso.demo.PaletteDisplayView
-                android:id="@+id/lightMutedView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/lightMutedToolbar"
+                style="@style/PaletteToolbar"
+                app:title="@string/light_muted" />
 
-            <com.hendraanggrian.pikasso.demo.PaletteDisplayView
-                android:id="@+id/darkMutedView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/darkMutedToolbar"
+                style="@style/PaletteToolbar"
+                app:title="@string/dark_muted" />
 
-            <com.hendraanggrian.pikasso.demo.PaletteDisplayView
-                android:id="@+id/dominantView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/dominantToolbar"
+                style="@style/PaletteToolbar"
+                app:title="@string/dominant" />
         </LinearLayout>
     </android.support.v4.widget.DrawerLayout>
 

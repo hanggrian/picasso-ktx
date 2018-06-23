@@ -6,18 +6,22 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.content.res.Configuration
+import android.graphics.Color
 import android.graphics.Color.RED
 import android.os.Bundle
+import android.support.annotation.ColorInt
 import android.support.design.widget.Errorbar
 import android.support.design.widget.indefiniteErrorbar
 import android.support.v4.content.ContextCompat.getDrawable
 import android.support.v4.util.PatternsCompat.WEB_URL
+import android.support.v4.view.GravityCompat.START
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
 import com.hendraanggrian.pikasso.buildPicasso
-import com.hendraanggrian.pikasso.into
+import com.hendraanggrian.pikasso.palette.palette
 import com.hendraanggrian.pikasso.placeholders.toHorizontalProgressTarget
 import com.hendraanggrian.pikasso.placeholders.toProgressTarget
 import com.hendraanggrian.pikasso.transformations.CropCircleTransformation
@@ -96,9 +100,12 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
             }
         }
 
-        errorbar = photoView.indefiniteErrorbar("Slide up panel below to start loading") {
+        errorbar = photoView.indefiniteErrorbar("Expand panel below to start loading") {
             setBackground(R.drawable.errorbar_bg_cloud)
             setIcon(R.drawable.errorbar_ic_cloud)
+            setAction(R.string.expand) {
+                panelLayout.panelState = EXPANDED
+            }
         }
     }
 
@@ -112,6 +119,11 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
         fragment.preferenceScreen.sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) drawerLayout.openDrawer(START)
+        return false
+    }
+
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         drawerToggle.syncState()
@@ -122,17 +134,21 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
         drawerToggle.onConfigurationChanged(newConfig)
     }
 
-    override fun onPanelSlide(panel: View?, slideOffset: Float) {}
+    override fun onPanelSlide(panel: View, slideOffset: Float) {}
 
     override fun onPanelStateChanged(panel: View, previousState: PanelState, state: PanelState) {
-        if (state == EXPANDED) {
-            pasteItem.isVisible = true
-            toggleExpandItem.icon = getDrawable(this@DemoActivity, R.drawable.ic_collapse)
-            toggleExpandItem.title = getString(R.string.collapse)
-        } else if (state == COLLAPSED) {
-            pasteItem.isVisible = false
-            toggleExpandItem.icon = getDrawable(this@DemoActivity, R.drawable.ic_expand)
-            toggleExpandItem.title = getString(R.string.expand)
+        when {
+            state == EXPANDED -> {
+                pasteItem.isVisible = true
+                toggleExpandItem.icon = getDrawable(this@DemoActivity, R.drawable.ic_collapse)
+                toggleExpandItem.title = getString(R.string.collapse)
+            }
+            state == COLLAPSED -> {
+                pasteItem.isVisible = false
+                toggleExpandItem.icon = getDrawable(this@DemoActivity, R.drawable.ic_expand)
+                toggleExpandItem.title = getString(R.string.expand)
+            }
+            drawerLayout.isDrawerOpen(START) -> drawerLayout.closeDrawer(START)
         }
     }
 
@@ -162,8 +178,15 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
                 if (fragment.overlayPreference.isChecked) it += OverlayTransformation(RED)
             })
         when (fragment.placeholdersPreference.value) {
-            "none" -> request.into(photoView) {
+            "none" -> request.palette(photoView) {
                 onSuccess {
+                    useVibrant { vibrantToolbar assign it }
+                    useLightVibrant { lightVibrantToolbar assign it }
+                    useDarkVibrant { darkVibrantToolbar assign it }
+                    useMuted { mutedToolbar assign it }
+                    useLightMuted { lightMutedToolbar assign it }
+                    useDarkMuted { darkMutedToolbar assign it }
+                    useDominant { dominantToolbar assign it }
                     toolbar2.title = getString(R.string.success)
                 }
                 onError {
@@ -172,6 +195,22 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
             }
             "progress" -> request.into(photoView.toProgressTarget())
             "horizontalProgress" -> request.into(photoView.toHorizontalProgressTarget())
+        }
+    }
+
+    private companion object {
+
+        infix fun Toolbar.assign(@ColorInt color: Int) {
+            setBackgroundColor(color)
+            subtitle = "#%06X".format(0xFFFFFF and color)
+
+            if (Color.red(color) + Color.green(color) + Color.blue(color) / 3 < 127.5) {
+                setTitleTextAppearance(context, R.style.TextAppearance_AppCompat_Small)
+                setSubtitleTextAppearance(context, R.style.TextAppearance_AppCompat_Subhead)
+            } else {
+                setTitleTextAppearance(context, R.style.TextAppearance_AppCompat_Small_Inverse)
+                setSubtitleTextAppearance(context, R.style.TextAppearance_AppCompat_Subhead_Inverse)
+            }
         }
     }
 }
