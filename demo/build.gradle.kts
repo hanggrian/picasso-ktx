@@ -46,7 +46,9 @@ dependencies {
     implementation(kotlin("stdlib", VERSION_KOTLIN))
 
     implementation(anko("commons"))
+    implementation(anko("sdk25"))
 
+    implementation(support("support-annotations", VERSION_SUPPORT))
     implementation(support("appcompat-v7", VERSION_SUPPORT))
     implementation(support("cardview-v7", VERSION_SUPPORT))
     implementation(support("preference-v14", VERSION_SUPPORT))

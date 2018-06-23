@@ -5,18 +5,18 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
+import android.content.res.Configuration
 import android.graphics.Color.RED
 import android.os.Bundle
 import android.support.design.widget.Errorbar
 import android.support.design.widget.indefiniteErrorbar
 import android.support.v4.content.ContextCompat.getDrawable
 import android.support.v4.util.PatternsCompat.WEB_URL
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.hendraanggrian.pikasso.buildPicasso
-import com.hendraanggrian.pikasso.demo.BuildConfig.DEBUG
 import com.hendraanggrian.pikasso.into
 import com.hendraanggrian.pikasso.placeholders.toHorizontalProgressTarget
 import com.hendraanggrian.pikasso.placeholders.toProgressTarget
@@ -30,7 +30,7 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelSlideListener
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState.COLLAPSED
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState.EXPANDED
-import com.squareup.picasso.Cache.NONE
+import com.squareup.picasso.Cache
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Transformation
 import kotlinx.android.synthetic.main.activity_demo.*
@@ -38,32 +38,63 @@ import org.jetbrains.anko.dip
 
 class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreferenceChangeListener {
 
-    lateinit var picasso: Picasso
-    lateinit var errorbar: Errorbar
+    private val fragment = DemoFragment()
 
-    lateinit var fragment: DemoFragment
+    lateinit var picasso: Picasso
+    lateinit var drawerToggle: ActionBarDrawerToggle
+
     lateinit var pasteItem: MenuItem
     lateinit var toggleExpandItem: MenuItem
+    lateinit var errorbar: Errorbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_demo)
         setSupportActionBar(toolbar)
-
-        picasso = buildPicasso {
-            loggingEnabled(DEBUG)
-            memoryCache(NONE)
+        supportActionBar!!.run {
+            title = ""
+            setDisplayHomeAsUpEnabled(true)
+            setHomeButtonEnabled(true)
         }
 
-        fragment = DemoFragment()
+        picasso = buildPicasso {
+            loggingEnabled(BuildConfig.DEBUG)
+            memoryCache(Cache.NONE)
+        }
+        drawerToggle = ActionBarDrawerToggle(this, drawerLayout, 0, 0).apply {
+            isDrawerIndicatorEnabled = true
+        }
+        drawerLayout.addDrawerListener(drawerToggle)
+
         supportFragmentManager.beginTransaction()
-            .replace(R.id.frameLayout, fragment.also {
-                panelLayout.setScrollableView(it.view)
-            })
+            .replace(R.id.frameLayout, fragment)
             .commitNow()
         onSharedPreferenceChanged(fragment.preferenceScreen.sharedPreferences,
             fragment.inputPreference.key)
+        panelLayout.setScrollableView(fragment.view)
         panelLayout.addPanelSlideListener(this)
+
+        toolbar2.inflateMenu(R.menu.activity_demo)
+        pasteItem = toolbar2.menu.findItem(R.id.pasteItem).apply {
+            setOnMenuItemClickListener {
+                fragment.listView.smoothScrollToPosition(0)
+                (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).run {
+                    if (hasPrimaryClip() && primaryClipDescription
+                            .hasMimeType(MIMETYPE_TEXT_PLAIN)) {
+                        val clipboard = primaryClip.getItemAt(0).text.toString()
+                        fragment.inputPreference.text = clipboard
+                        fragment.onPreferenceChange(fragment.inputPreference, clipboard) // trigger
+                    }
+                }
+                true
+            }
+        }
+        toggleExpandItem = toolbar2.menu.findItem(R.id.toggleExpandItem).apply {
+            setOnMenuItemClickListener {
+                toolbar2.performClick()
+                true
+            }
+        }
 
         errorbar = photoView.indefiniteErrorbar("Slide up panel below to start loading") {
             setBackground(R.drawable.errorbar_bg_cloud)
@@ -81,29 +112,14 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
         fragment.preferenceScreen.sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.activity_demo, menu)
-        pasteItem = menu.findItem(R.id.pasteItem)
-        toggleExpandItem = menu.findItem(R.id.toggleExpandItem)
-        return true
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        drawerToggle.syncState()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item) {
-            pasteItem -> {
-                fragment.listView.smoothScrollToPosition(0)
-                (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).run {
-                    if (hasPrimaryClip() && primaryClipDescription
-                            .hasMimeType(MIMETYPE_TEXT_PLAIN)) {
-                        val clipboard = primaryClip.getItemAt(0).text.toString()
-                        fragment.inputPreference.text = clipboard
-                        fragment.onPreferenceChange(fragment.inputPreference, clipboard) // trigger
-                    }
-                }
-            }
-            toggleExpandItem -> toolbar.performClick()
-        }
-        return true
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        drawerToggle.onConfigurationChanged(newConfig)
     }
 
     override fun onPanelSlide(panel: View?, slideOffset: Float) {}
@@ -132,7 +148,7 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
 
     fun load(@Suppress("UNUSED_PARAMETER") view: View) {
         if (errorbar.isShown) errorbar.dismiss()
-        toolbar.title = getString(R.string.loading)
+        toolbar2.title = getString(R.string.loading)
         panelLayout.panelState = COLLAPSED
         val request = picasso.load(fragment.inputPreference.text)
             .transform(mutableListOf<Transformation>().also {
@@ -148,10 +164,10 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
         when (fragment.placeholdersPreference.value) {
             "none" -> request.into(photoView) {
                 onSuccess {
-                    toolbar.title = getString(R.string.success)
+                    toolbar2.title = getString(R.string.success)
                 }
                 onError {
-                    toolbar.title = getString(R.string.error)
+                    toolbar2.title = getString(R.string.error)
                 }
             }
             "progress" -> request.into(photoView.toProgressTarget())
