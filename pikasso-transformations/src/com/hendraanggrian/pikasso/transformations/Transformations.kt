@@ -4,6 +4,12 @@ package com.hendraanggrian.pikasso.transformations
 
 import android.graphics.drawable.Drawable
 import android.support.annotation.ColorInt
+import com.hendraanggrian.pikasso.transformations.internal.CropCircleTransformation
+import com.hendraanggrian.pikasso.transformations.internal.CropRoundedTransformation
+import com.hendraanggrian.pikasso.transformations.internal.CropSquareTransformation
+import com.hendraanggrian.pikasso.transformations.internal.GrayscaleTransformation
+import com.hendraanggrian.pikasso.transformations.internal.MaskTransformation
+import com.hendraanggrian.pikasso.transformations.internal.OverlayTransformation
 import com.squareup.picasso.RequestCreator
 
 /** Transform image to square. */

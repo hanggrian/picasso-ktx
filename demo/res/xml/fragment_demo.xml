@@ -34,13 +34,4 @@
             android:key="overlayPreference"
             android:title="Overlay" />
     </android.support.v7.preference.PreferenceCategory>
-
-    <android.support.v7.preference.PreferenceCategory android:title="Placeholders">
-
-        <android.support.v7.preference.ListPreference
-            android:entries="@array/placeholders"
-            android:entryValues="@array/placeholders_values"
-            android:key="placeholdersPreference"
-            android:title="Placeholder" />
-    </android.support.v7.preference.PreferenceCategory>
 </android.support.v7.preference.PreferenceScreen>

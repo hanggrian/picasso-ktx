@@ -22,10 +22,10 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import com.hendraanggrian.pikasso.buildPicasso
 import com.hendraanggrian.pikasso.palette.palette
-import com.hendraanggrian.pikasso.placeholders.toHorizontalProgressTarget
-import com.hendraanggrian.pikasso.placeholders.toProgressTarget
 import com.hendraanggrian.pikasso.transformations.circle
 import com.hendraanggrian.pikasso.transformations.grayscale
 import com.hendraanggrian.pikasso.transformations.mask
@@ -155,7 +155,7 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         if (key == fragment.inputPreference.key) {
-            button.isEnabled = WEB_URL.toRegex().matches(sharedPreferences.getString(key, null))
+            button.isEnabled = WEB_URL.toRegex().matches(sharedPreferences.getString(key, ""))
         }
     }
 
@@ -166,16 +166,19 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
     fun load(@Suppress("UNUSED_PARAMETER") view: View) {
         if (errorbar.isShown) errorbar.dismiss()
         toolbar2.title = getString(R.string.loading)
+        progressBar.visibility = VISIBLE
         panelLayout.panelState = COLLAPSED
-        val request = picasso.load(fragment.inputPreference.text)
-        if (fragment.cropCirclePreference.isChecked) request.circle()
-        if (fragment.cropRoundedPreference.isChecked) request.rounded(dip(25), dip(10))
-        if (fragment.cropSquarePreference.isChecked) request.square()
-        if (fragment.grayscalePreference.isChecked) request.grayscale()
-        if (fragment.maskPreference.isChecked) request.mask(getDrawable(this, R.drawable.mask)!!)
-        if (fragment.overlayPreference.isChecked) request.overlay(RED)
-        when (fragment.placeholdersPreference.value) {
-            "none" -> request.palette(photoView) {
+        picasso.load(fragment.inputPreference.text)
+            .apply {
+                if (fragment.cropCirclePreference.isChecked) circle()
+                if (fragment.cropRoundedPreference.isChecked) rounded(dip(25), dip(10))
+                if (fragment.cropSquarePreference.isChecked) square()
+                if (fragment.grayscalePreference.isChecked) grayscale()
+                if (fragment.maskPreference.isChecked) mask(getDrawable(this@DemoActivity,
+                    R.drawable.mask)!!)
+                if (fragment.overlayPreference.isChecked) overlay(RED)
+            }
+            .palette(photoView) {
                 onSuccess {
                     useVibrant { vibrantToolbar assign it }
                     useLightVibrant { lightVibrantToolbar assign it }
@@ -185,14 +188,13 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
                     useDarkMuted { darkMutedToolbar assign it }
                     useDominant { dominantToolbar assign it }
                     toolbar2.title = getString(R.string.success)
+                    progressBar.visibility = GONE
                 }
                 onError {
                     toolbar2.title = getString(R.string.error)
+                    progressBar.visibility = GONE
                 }
             }
-            "progress" -> request.into(photoView.toProgressTarget())
-            "horizontalProgress" -> request.into(photoView.toHorizontalProgressTarget())
-        }
     }
 
     private companion object {

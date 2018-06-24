@@ -11,18 +11,6 @@
     <string name="success">Success</string>
     <string name="error">Error</string>
 
-    <string-array name="placeholders">
-        <item>None</item>
-        <item>Centered progress bar</item>
-        <item>Bottom horizontal progress</item>
-    </string-array>
-
-    <string-array name="placeholders_values">
-        <item>none</item>
-        <item>progress</item>
-        <item>horizontalProgress</item>
-    </string-array>
-
     <string name="vibrant">Vibrant</string>
     <string name="light_vibrant">Light vibrant</string>
     <string name="dark_vibrant">Dark vibrant</string>

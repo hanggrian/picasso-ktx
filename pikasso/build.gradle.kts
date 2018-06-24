@@ -13,13 +13,8 @@ android {
         minSdkVersion(SDK_MIN)
         targetSdkVersion(SDK_TARGET)
         versionName = RELEASE_VERSION
-        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
     }
-    sourceSets {
-        getByName("main") {
-            manifest.srcFile("AndroidManifest.xml")
-        }
-    }
+    sourceSets["main"].manifest.srcFile("AndroidManifest.xml")
     libraryVariants.all {
         generateBuildConfig?.enabled = false
     }
@@ -28,7 +23,6 @@ android {
 dependencies {
     api(project(":$RELEASE_ARTIFACT-commons"))
     api(project(":$RELEASE_ARTIFACT-transformations"))
-    api(project(":$RELEASE_ARTIFACT-placeholders"))
     api(project(":$RELEASE_ARTIFACT-palette"))
 }
 
@@ -39,14 +33,12 @@ gitPublish {
         "pages",
         "../$RELEASE_ARTIFACT-commons/build/docs",
         "../$RELEASE_ARTIFACT-transformations/build/docs",
-        "../$RELEASE_ARTIFACT-placeholders/build/docs",
         "../$RELEASE_ARTIFACT-palette/build/docs")
 }
 
 tasks["gitPublishCopy"].dependsOn(
     ":$RELEASE_ARTIFACT-commons:dokka",
     ":$RELEASE_ARTIFACT-transformations:dokka",
-    ":$RELEASE_ARTIFACT-placeholders:dokka",
     ":$RELEASE_ARTIFACT-palette:dokka")
 
 publish {

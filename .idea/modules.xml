@@ -8,7 +8,6 @@
       <module fileurl="file://$PROJECT_DIR$/pikasso-commons/pikasso-commons.iml" filepath="$PROJECT_DIR$/pikasso-commons/pikasso-commons.iml" />
       <module fileurl="file://$PROJECT_DIR$/pikasso-palette/pikasso-palette.iml" filepath="$PROJECT_DIR$/pikasso-palette/pikasso-palette.iml" />
       <module fileurl="file://$PROJECT_DIR$/pikasso/pikasso-pikasso.iml" filepath="$PROJECT_DIR$/pikasso/pikasso-pikasso.iml" />
-      <module fileurl="file://$PROJECT_DIR$/pikasso-placeholders/pikasso-placeholders.iml" filepath="$PROJECT_DIR$/pikasso-placeholders/pikasso-placeholders.iml" />
       <module fileurl="file://$PROJECT_DIR$/pikasso-transformations/pikasso-transformations.iml" filepath="$PROJECT_DIR$/pikasso-transformations/pikasso-transformations.iml" />
       <module fileurl="file://$PROJECT_DIR$/testing/testing.iml" filepath="$PROJECT_DIR$/testing/testing.iml" />
     </modules>
