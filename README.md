@@ -4,7 +4,7 @@ Pikasso
 [![Build Status](https://travis-ci.org/hendraanggrian/pikasso.svg)](https://travis-ci.org/hendraanggrian/pikasso)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
-![demo_transformation][demo_transformation]
+![demo_transformations][demo_transformations]
 ![demo_palette][demo_palette]
 
 Kotlin extensions for Picasso image loader.
