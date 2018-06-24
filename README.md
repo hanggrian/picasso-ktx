@@ -148,5 +148,5 @@ License
     limitations under the License.
 
 [jcenter]: https://bintray.com/hendraanggrian/pikasso
-[demo_transformation]: /art/demo_transformation.gif
+[demo_transformations]: /art/demo_transformations.gif
 [demo_palette]: /art/demo_palette.gif
