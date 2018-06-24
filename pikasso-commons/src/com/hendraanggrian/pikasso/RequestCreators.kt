@@ -62,8 +62,7 @@ inline fun RequestCreator.into(
  */
 inline fun RequestCreator.into(
     builder: TargetBuilder.() -> Unit
-): Target {
-    val target = _Target().apply(builder)
-    into(target)
-    return target
+): Target = _Target().also {
+    it.builder()
+    into(it)
 }

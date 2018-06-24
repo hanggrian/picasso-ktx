@@ -8,20 +8,27 @@ import com.hendraanggrian.pikasso.palette.PaletteCallbackBuilder
 import com.squareup.picasso.Callback
 import java.lang.Exception
 
+@PublishedApi
 @Suppress("ClassName")
-class _PaletteCallbackBuilder(private val target: ImageView) : Callback, PaletteCallbackBuilder {
-    private var onSuccess: (PaletteBuilder.(Palette) -> Unit)? = null
+internal class _PaletteCallbackBuilder(
+    private val target: ImageView,
+    private val asynchronous: Boolean
+) : Callback, PaletteCallbackBuilder {
+    private var onSuccess: (PaletteBuilder.() -> Unit)? = null
     private var onError: ((Exception) -> Unit)? = null
 
-    override fun onSuccess(callback: PaletteBuilder.(Palette) -> Unit) {
+    override fun onSuccess(callback: PaletteBuilder.() -> Unit) {
         onSuccess = callback
     }
 
     override fun onSuccess() {
-        Palette.from((target.drawable as BitmapDrawable).bitmap)
-            .generate { palette ->
-                if (onSuccess != null) onSuccess!!.invoke(_PaletteBuilder(palette), palette)
+        if (onSuccess != null) {
+            val builder = Palette.from((target.drawable as BitmapDrawable).bitmap)
+            when {
+                asynchronous -> builder.generate { onSuccess!!.invoke(_PaletteBuilder(it)) }
+                else -> onSuccess!!.invoke(_PaletteBuilder(builder.generate()))
             }
+        }
     }
 
     override fun onError(callback: (e: Exception) -> Unit) {

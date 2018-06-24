@@ -3,5 +3,6 @@ package com.hendraanggrian.pikasso.palette.internal
 import android.support.v7.graphics.Palette
 import com.hendraanggrian.pikasso.palette.PaletteBuilder
 
+@PublishedApi
 @Suppress("ClassName")
-class _PaletteBuilder(override val palette: Palette) : PaletteBuilder
+internal class _PaletteBuilder(override val palette: Palette) : PaletteBuilder
