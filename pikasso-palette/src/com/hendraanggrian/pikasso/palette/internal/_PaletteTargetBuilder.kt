@@ -27,9 +27,9 @@ internal class _PaletteTargetBuilder(
             val builder = Palette.from(bitmap)
             when {
                 asynchronous -> builder.generate {
-                    onLoaded!!.invoke(_PaletteBuilder(it), bitmap, from)
+                    onLoaded!!.invoke(PaletteBuilder.from(it), bitmap, from)
                 }
-                else -> onLoaded!!.invoke(_PaletteBuilder(builder.generate()), bitmap, from)
+                else -> onLoaded!!.invoke(PaletteBuilder.from(builder.generate()), bitmap, from)
             }
         }
     }

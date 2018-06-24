@@ -6,8 +6,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.content.res.Configuration
-import android.graphics.Color
 import android.graphics.Color.RED
+import android.graphics.Color.blue
+import android.graphics.Color.green
+import android.graphics.Color.red
 import android.os.Bundle
 import android.support.annotation.ColorInt
 import android.support.design.widget.Errorbar
@@ -24,19 +26,18 @@ import com.hendraanggrian.pikasso.buildPicasso
 import com.hendraanggrian.pikasso.palette.palette
 import com.hendraanggrian.pikasso.placeholders.toHorizontalProgressTarget
 import com.hendraanggrian.pikasso.placeholders.toProgressTarget
-import com.hendraanggrian.pikasso.transformations.CropCircleTransformation
-import com.hendraanggrian.pikasso.transformations.CropRoundedTransformation
-import com.hendraanggrian.pikasso.transformations.CropSquareTransformation
-import com.hendraanggrian.pikasso.transformations.GrayscaleTransformation
-import com.hendraanggrian.pikasso.transformations.MaskTransformation
-import com.hendraanggrian.pikasso.transformations.OverlayTransformation
+import com.hendraanggrian.pikasso.transformations.circle
+import com.hendraanggrian.pikasso.transformations.grayscale
+import com.hendraanggrian.pikasso.transformations.mask
+import com.hendraanggrian.pikasso.transformations.overlay
+import com.hendraanggrian.pikasso.transformations.rounded
+import com.hendraanggrian.pikasso.transformations.square
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelSlideListener
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState.COLLAPSED
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState.EXPANDED
 import com.squareup.picasso.Cache
 import com.squareup.picasso.Picasso
-import com.squareup.picasso.Transformation
 import kotlinx.android.synthetic.main.activity_demo.*
 import org.jetbrains.anko.dip
 
@@ -167,16 +168,12 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
         toolbar2.title = getString(R.string.loading)
         panelLayout.panelState = COLLAPSED
         val request = picasso.load(fragment.inputPreference.text)
-            .transform(mutableListOf<Transformation>().also {
-                if (fragment.cropCirclePreference.isChecked) it += CropCircleTransformation()
-                if (fragment.cropRoundedPreference.isChecked) it +=
-                    CropRoundedTransformation(dip(25), dip(10))
-                if (fragment.cropSquarePreference.isChecked) it += CropSquareTransformation()
-                if (fragment.grayscalePreference.isChecked) it += GrayscaleTransformation()
-                if (fragment.maskPreference.isChecked) it +=
-                    MaskTransformation(getDrawable(this, R.drawable.mask)!!)
-                if (fragment.overlayPreference.isChecked) it += OverlayTransformation(RED)
-            })
+        if (fragment.cropCirclePreference.isChecked) request.circle()
+        if (fragment.cropRoundedPreference.isChecked) request.rounded(dip(25), dip(10))
+        if (fragment.cropSquarePreference.isChecked) request.square()
+        if (fragment.grayscalePreference.isChecked) request.grayscale()
+        if (fragment.maskPreference.isChecked) request.mask(getDrawable(this, R.drawable.mask)!!)
+        if (fragment.overlayPreference.isChecked) request.overlay(RED)
         when (fragment.placeholdersPreference.value) {
             "none" -> request.palette(photoView) {
                 onSuccess {
@@ -204,7 +201,7 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
             setBackgroundColor(color)
             subtitle = "#%06X".format(0xFFFFFF and color)
 
-            if (Color.red(color) + Color.green(color) + Color.blue(color) / 3 < 127.5) {
+            if ((red(color) + green(color) + blue(color)) / 3 < 127.5) {
                 setTitleTextAppearance(context, R.style.TextAppearance_AppCompat_Small)
                 setSubtitleTextAppearance(context, R.style.TextAppearance_AppCompat_Subhead)
             } else {

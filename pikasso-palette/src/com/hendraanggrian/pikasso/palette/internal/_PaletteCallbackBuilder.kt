@@ -25,8 +25,8 @@ internal class _PaletteCallbackBuilder(
         if (onSuccess != null) {
             val builder = Palette.from((target.drawable as BitmapDrawable).bitmap)
             when {
-                asynchronous -> builder.generate { onSuccess!!.invoke(_PaletteBuilder(it)) }
-                else -> onSuccess!!.invoke(_PaletteBuilder(builder.generate()))
+                asynchronous -> builder.generate { onSuccess!!.invoke(PaletteBuilder.from(it)) }
+                else -> onSuccess!!.invoke(PaletteBuilder.from(builder.generate()))
             }
         }
     }

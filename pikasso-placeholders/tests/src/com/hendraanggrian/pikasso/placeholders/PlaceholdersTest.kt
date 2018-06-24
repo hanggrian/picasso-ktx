@@ -1,4 +1,4 @@
-package com.hendraanggrian.pikasso.transformations
+package com.hendraanggrian.pikasso.placeholders
 
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.UiController
@@ -11,7 +11,6 @@ import android.support.test.runner.AndroidJUnit4
 import android.view.View
 import android.widget.ImageView
 import com.hendraanggrian.pikasso.picasso
-import com.hendraanggrian.pikasso.placeholders.toProgressTarget
 import com.hendraanggrian.pikasso.test.InstrumentedActivity
 import com.hendraanggrian.pikasso.test.InstrumentedTest
 import com.hendraanggrian.pikasso.test.R

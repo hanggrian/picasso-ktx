@@ -12,6 +12,6 @@
 
     <application android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <uses-library android:name="android.test.runner" />
-        <activity android:name=".InstrumentedActivity" />
+        <activity android:name="com.hendraanggrian.pikasso.test.InstrumentedActivity" />
     </application>
 </manifest>

@@ -1,12 +1,9 @@
 package com.hendraanggrian.pikasso.palette
 
-import java.lang.Exception
+import com.hendraanggrian.pikasso.BaseCallbackBuilder
 
-interface PaletteCallbackBuilder {
+interface PaletteCallbackBuilder : BaseCallbackBuilder {
 
     /** Invoked when image is successfully loaded. */
     fun onSuccess(callback: PaletteBuilder.() -> Unit)
-
-    /** Invoked when image failed to load. */
-    fun onError(callback: (e: Exception) -> Unit)
 }

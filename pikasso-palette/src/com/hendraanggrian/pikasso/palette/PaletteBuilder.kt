@@ -50,4 +50,11 @@ interface PaletteBuilder {
         @ColorInt defaultColor: Int = Color.TRANSPARENT,
         block: (Int) -> Unit
     ): Unit = block(palette.getDominantColor(defaultColor))
+
+    companion object {
+
+        internal fun from(palette: Palette): PaletteBuilder = object : PaletteBuilder {
+            override val palette: Palette = palette
+        }
+    }
 }
