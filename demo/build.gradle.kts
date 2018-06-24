@@ -15,7 +15,7 @@ android {
         minSdkVersion(SDK_MIN)
         targetSdkVersion(SDK_TARGET)
         versionName = RELEASE_VERSION
-        applicationId = "$RELEASE_GROUP.$RELEASE_ARTIFACT.demo"
+        applicationId = "$RELEASE_GROUP.demo"
         versionCode = 1
     }
     sourceSets {
