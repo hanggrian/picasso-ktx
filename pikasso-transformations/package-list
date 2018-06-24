@@ -1,0 +1,10 @@
+$dokka.format:html
+$dokka.linkExtension:html
+$dokka.location:com.hendraanggrian.pikasso.transformations$circle(com.squareup.picasso.RequestCreator)com.hendraanggrian.pikasso.transformations/com.squareup.picasso.-request-creator/circle.html
+$dokka.location:com.hendraanggrian.pikasso.transformations$grayscale(com.squareup.picasso.RequestCreator)com.hendraanggrian.pikasso.transformations/com.squareup.picasso.-request-creator/grayscale.html
+$dokka.location:com.hendraanggrian.pikasso.transformations$mask(com.squareup.picasso.RequestCreator, android.graphics.drawable.Drawable)com.hendraanggrian.pikasso.transformations/com.squareup.picasso.-request-creator/mask.html
+$dokka.location:com.hendraanggrian.pikasso.transformations$overlay(com.squareup.picasso.RequestCreator, kotlin.Int)com.hendraanggrian.pikasso.transformations/com.squareup.picasso.-request-creator/overlay.html
+$dokka.location:com.hendraanggrian.pikasso.transformations$rounded(com.squareup.picasso.RequestCreator, kotlin.Float, kotlin.Float)com.hendraanggrian.pikasso.transformations/com.squareup.picasso.-request-creator/rounded.html
+$dokka.location:com.hendraanggrian.pikasso.transformations$rounded(com.squareup.picasso.RequestCreator, kotlin.Int, kotlin.Int)com.hendraanggrian.pikasso.transformations/com.squareup.picasso.-request-creator/rounded.html
+$dokka.location:com.hendraanggrian.pikasso.transformations$square(com.squareup.picasso.RequestCreator)com.hendraanggrian.pikasso.transformations/com.squareup.picasso.-request-creator/square.html
+com.hendraanggrian.pikasso.transformations
