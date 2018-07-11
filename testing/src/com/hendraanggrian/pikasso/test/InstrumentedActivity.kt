@@ -1,9 +1,9 @@
 package com.hendraanggrian.pikasso.test
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 
 class InstrumentedActivity : AppCompatActivity() {
 

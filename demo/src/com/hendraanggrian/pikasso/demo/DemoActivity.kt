@@ -12,18 +12,18 @@ import android.graphics.Color.green
 import android.graphics.Color.red
 import android.os.Bundle
 import android.support.annotation.ColorInt
-import android.support.design.widget.Errorbar
-import android.support.design.widget.indefiniteErrorbar
 import android.support.v4.content.ContextCompat.getDrawable
 import android.support.v4.util.PatternsCompat.WEB_URL
 import android.support.v4.view.GravityCompat.START
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import com.hendraanggrian.material.errorbar.Errorbar
+import com.hendraanggrian.material.errorbar.indefiniteErrorbar
 import com.hendraanggrian.pikasso.buildPicasso
 import com.hendraanggrian.pikasso.palette.palette
 import com.hendraanggrian.pikasso.transformations.circle
@@ -39,7 +39,6 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState.EXPANDED
 import com.squareup.picasso.Cache
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_demo.*
-import org.jetbrains.anko.dip
 
 class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreferenceChangeListener {
 
@@ -75,7 +74,7 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
             .replace(R.id.frameLayout, fragment)
             .commitNow()
         onSharedPreferenceChanged(fragment.preferenceScreen.sharedPreferences,
-            fragment.inputPreference.key)
+            fragment.input.key)
         panelLayout.setScrollableView(fragment.view)
         panelLayout.addPanelSlideListener(this)
 
@@ -87,8 +86,8 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
                     if (hasPrimaryClip() && primaryClipDescription
                             .hasMimeType(MIMETYPE_TEXT_PLAIN)) {
                         val clipboard = primaryClip.getItemAt(0).text.toString()
-                        fragment.inputPreference.text = clipboard
-                        fragment.onPreferenceChange(fragment.inputPreference, clipboard) // trigger
+                        fragment.input.text = clipboard
+                        fragment.onPreferenceChange(fragment.input, clipboard) // trigger
                     }
                 }
                 true
@@ -102,8 +101,6 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
         }
 
         errorbar = photoView.indefiniteErrorbar("Expand panel below to start loading") {
-            setBackground(R.drawable.errorbar_bg_cloud)
-            setIcon(R.drawable.errorbar_ic_cloud)
             setAction(R.string.expand) {
                 panelLayout.panelState = EXPANDED
             }
@@ -154,7 +151,7 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        if (key == fragment.inputPreference.key) {
+        if (key == fragment.input.key) {
             button.isEnabled = WEB_URL.toRegex().matches(sharedPreferences.getString(key, ""))
         }
     }
@@ -168,15 +165,15 @@ class DemoActivity : AppCompatActivity(), PanelSlideListener, OnSharedPreference
         toolbar2.title = getString(R.string.loading)
         progressBar.visibility = VISIBLE
         panelLayout.panelState = COLLAPSED
-        picasso.load(fragment.inputPreference.text)
+        picasso.load(fragment.input.text)
             .apply {
-                if (fragment.cropCirclePreference.isChecked) circle()
-                if (fragment.cropRoundedPreference.isChecked) rounded(dip(25), dip(10))
-                if (fragment.cropSquarePreference.isChecked) square()
-                if (fragment.grayscalePreference.isChecked) grayscale()
-                if (fragment.maskPreference.isChecked) mask(getDrawable(this@DemoActivity,
+                if (fragment.cropCircle.isChecked) circle()
+                if (fragment.cropRounded.isChecked) rounded(25.px, 10.px)
+                if (fragment.cropSquare.isChecked) square()
+                if (fragment.grayscale.isChecked) grayscale()
+                if (fragment.mask.isChecked) mask(getDrawable(this@DemoActivity,
                     R.drawable.mask)!!)
-                if (fragment.overlayPreference.isChecked) overlay(RED)
+                if (fragment.overlay.isChecked) overlay(RED)
             }
             .palette(photoView) {
                 onSuccess {

@@ -2,8 +2,8 @@
 
 package com.hendraanggrian.pikasso.palette
 
-import android.support.v7.graphics.Palette
 import android.widget.ImageView
+import androidx.palette.graphics.Palette
 import com.hendraanggrian.pikasso.palette.internal._PaletteCallbackBuilder
 import com.hendraanggrian.pikasso.palette.internal._PaletteTargetBuilder
 import com.squareup.picasso.RequestCreator

@@ -4,7 +4,7 @@ import org.gradle.language.base.plugins.LifecycleBasePlugin.*
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
-    `android-library`
+    android("library")
     kotlin("android")
     dokka
     `bintray-release`
@@ -17,7 +17,7 @@ android {
         minSdkVersion(SDK_MIN)
         targetSdkVersion(SDK_TARGET)
         versionName = RELEASE_VERSION
-        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     sourceSets {
         getByName("main") {
@@ -43,7 +43,7 @@ dependencies {
     api(kotlin("stdlib", VERSION_KOTLIN))
     api(project(":$RELEASE_ARTIFACT-commons"))
 
-    implementation(support("support-annotations", VERSION_SUPPORT))
+    implementation(androidx("annotation"))
 
     testImplementation(junit())
     androidTestImplementation(project(":testing"))
@@ -79,7 +79,11 @@ tasks {
 }
 
 publish {
+    bintrayUser = bintrayUserEnv
+    bintrayKey = bintrayKeyEnv
+    dryRun = false
     repoName = RELEASE_ARTIFACT
+
     userOrg = RELEASE_USER
     groupId = RELEASE_GROUP
     artifactId = "$RELEASE_ARTIFACT-transformations"

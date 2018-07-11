@@ -1,10 +1,11 @@
 package com.hendraanggrian.pikasso.palette.internal
 
 import android.graphics.drawable.BitmapDrawable
-import android.support.v7.graphics.Palette
 import android.widget.ImageView
+import androidx.palette.graphics.Palette
 import com.hendraanggrian.pikasso.palette.PaletteBuilder
 import com.hendraanggrian.pikasso.palette.PaletteCallbackBuilder
+import com.hendraanggrian.pikasso.palette.PaletteException
 import com.squareup.picasso.Callback
 import java.lang.Exception
 
@@ -25,8 +26,17 @@ internal class _PaletteCallbackBuilder(
         if (onSuccess != null) {
             val builder = Palette.from((target.drawable as BitmapDrawable).bitmap)
             when {
-                asynchronous -> builder.generate { onSuccess!!.invoke(PaletteBuilder.from(it)) }
-                else -> onSuccess!!.invoke(PaletteBuilder.from(builder.generate()))
+                !asynchronous -> onSuccess!!(PaletteBuilder.from(builder.generate()))
+                else -> builder.generate { palette ->
+                    when (palette) {
+                        null -> onError(PaletteException())
+                        else -> onSuccess!!(PaletteBuilder.from(palette))
+                    }
+                }
+            }
+            when {
+                asynchronous -> builder.generate { onSuccess!!.invoke(PaletteBuilder.from(it!!)) }
+                else -> onSuccess!!(PaletteBuilder.from(builder.generate()))
             }
         }
     }

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="App.Theme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowActionBarOverlay">true</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+
+        <item name="errorbarStyle">@style/App.Errorbar</item>
     </style>
 
     <style name="PaletteToolbar" parent="Widget.AppCompat.Toolbar">
@@ -11,5 +13,10 @@
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">bottom</item>
+    </style>
+
+    <style name="App.Errorbar" parent="Widget.Design.Errorbar">
+        <item name="background">@drawable/errorbar_bg_cloud</item>
+        <item name="android:src">@drawable/errorbar_ic_cloud</item>
     </style>
 </resources>

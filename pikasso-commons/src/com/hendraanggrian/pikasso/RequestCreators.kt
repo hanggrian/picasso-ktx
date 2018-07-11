@@ -1,9 +1,9 @@
 package com.hendraanggrian.pikasso
 
 import android.app.Notification
-import android.support.annotation.IdRes
 import android.widget.ImageView
 import android.widget.RemoteViews
+import androidx.annotation.IdRes
 import com.hendraanggrian.pikasso.internal._Callback
 import com.hendraanggrian.pikasso.internal._Target
 import com.squareup.picasso.RequestCreator

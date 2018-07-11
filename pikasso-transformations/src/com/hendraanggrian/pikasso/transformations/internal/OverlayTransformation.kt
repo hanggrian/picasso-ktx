@@ -8,7 +8,7 @@ import android.graphics.Paint
 import android.graphics.Paint.ANTI_ALIAS_FLAG
 import android.graphics.PorterDuff.Mode.SRC_ATOP
 import android.graphics.PorterDuffColorFilter
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 import com.squareup.picasso.Transformation
 
 @PublishedApi

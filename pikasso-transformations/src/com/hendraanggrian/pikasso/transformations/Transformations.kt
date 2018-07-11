@@ -3,7 +3,7 @@
 package com.hendraanggrian.pikasso.transformations
 
 import android.graphics.drawable.Drawable
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 import com.hendraanggrian.pikasso.transformations.internal.CropCircleTransformation
 import com.hendraanggrian.pikasso.transformations.internal.CropRoundedTransformation
 import com.hendraanggrian.pikasso.transformations.internal.CropSquareTransformation

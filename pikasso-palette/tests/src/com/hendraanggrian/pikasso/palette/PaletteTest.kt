@@ -2,17 +2,17 @@ package com.hendraanggrian.pikasso.palette
 
 import android.graphics.Color.TRANSPARENT
 import android.graphics.drawable.BitmapDrawable
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.UiController
-import android.support.test.espresso.ViewAction
-import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
-import android.support.test.espresso.matcher.ViewMatchers.withId
-import android.support.test.filters.LargeTest
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
-import android.support.v7.graphics.Palette
 import android.view.View
 import android.widget.ImageView
+import androidx.palette.graphics.Palette
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
+import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.filters.LargeTest
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import com.hendraanggrian.pikasso.picasso
 import com.hendraanggrian.pikasso.test.InstrumentedActivity
 import com.hendraanggrian.pikasso.test.InstrumentedTest
@@ -22,8 +22,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.test.assertEquals
 
-@LargeTest
 @RunWith(AndroidJUnit4::class)
+@LargeTest
 class PaletteTest : InstrumentedTest() {
 
     @Rule @JvmField var rule = ActivityTestRule(InstrumentedActivity::class.java)

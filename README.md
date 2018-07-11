@@ -1,7 +1,7 @@
 Pikasso
 =======
 [![Download](https://api.bintray.com/packages/hendraanggrian/pikasso/pikasso/images/download.svg) ](https://bintray.com/hendraanggrian/pikasso/pikasso/_latestVersion)
-[![Build Status](https://travis-ci.org/hendraanggrian/pikasso.svg)](https://travis-ci.org/hendraanggrian/pikasso)
+[![Build Status](https://travis-ci.com/hendraanggrian/pikasso.svg)](https://travis-ci.com/hendraanggrian/pikasso)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
 ![demo_transformations][demo_transformations]
@@ -21,7 +21,7 @@ To download all of them, use main library:
 
 ```gradle
 dependencies {
-    compile 'com.hendraanggrian.pikasso:pikasso:$version'
+    compile "com.hendraanggrian.pikasso:pikasso:$version"
 }
 ```
 

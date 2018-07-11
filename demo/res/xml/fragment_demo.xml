@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.v7.preference.PreferenceCategory android:title="Source">
+    <androidx.preference.PreferenceCategory android:title="@string/input_url">
 
         <android.support.v7.preference.EditTextPreference
-            android:key="inputPreference"
-            android:title="Input URL" />
-    </android.support.v7.preference.PreferenceCategory>
+            android:key="input_url"
+            android:title="@string/input_url" />
+    </androidx.preference.PreferenceCategory>
 
-    <android.support.v7.preference.PreferenceCategory android:title="Transformations">
+    <androidx.preference.PreferenceCategory android:title="@string/transformations">
 
-        <android.support.v7.preference.CheckBoxPreference
-            android:key="cropCirclePreference"
-            android:title="Crop circle" />
+        <androidx.preference.CheckBoxPreference
+            android:key="crop_circle"
+            android:title="@string/crop_circle" />
 
-        <android.support.v7.preference.CheckBoxPreference
-            android:key="cropRoundedPreference"
-            android:title="Crop rounded" />
+        <androidx.preference.CheckBoxPreference
+            android:key="crop_rounded"
+            android:title="@string/crop_rounded" />
 
-        <android.support.v7.preference.CheckBoxPreference
-            android:key="cropSquarePreference"
-            android:title="Crop square" />
+        <androidx.preference.CheckBoxPreference
+            android:key="crop_square"
+            android:title="@string/crop_square" />
 
-        <android.support.v7.preference.CheckBoxPreference
-            android:key="grayscalePreference"
-            android:title="Grayscale" />
+        <androidx.preference.CheckBoxPreference
+            android:key="grayscale"
+            android:title="@string/grayscale" />
 
-        <android.support.v7.preference.CheckBoxPreference
-            android:key="maskPreference"
-            android:title="Mask" />
+        <androidx.preference.CheckBoxPreference
+            android:key="mask"
+            android:title="@string/mask" />
 
-        <android.support.v7.preference.CheckBoxPreference
-            android:key="overlayPreference"
-            android:title="Overlay" />
-    </android.support.v7.preference.PreferenceCategory>
-</android.support.v7.preference.PreferenceScreen>
+        <androidx.preference.CheckBoxPreference
+            android:key="overlay"
+            android:title="@string/overlay" />
+    </androidx.preference.PreferenceCategory>
+</androidx.preference.PreferenceScreen>

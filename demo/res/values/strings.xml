@@ -18,4 +18,13 @@
     <string name="light_muted">Light muted</string>
     <string name="dark_muted">Dark muted</string>
     <string name="dominant">Dominant</string>
+
+    <string name="input_url">Input URL</string>
+    <string name="transformations">Transformations</string>
+    <string name="crop_circle">Crop circle</string>
+    <string name="crop_rounded">Crop rounded</string>
+    <string name="crop_square">Crop square</string>
+    <string name="grayscale">Grayscale</string>
+    <string name="mask">Mask</string>
+    <string name="overlay">Overlay</string>
 </resources>

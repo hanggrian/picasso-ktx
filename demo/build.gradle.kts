@@ -3,7 +3,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.Coroutines.ENABLE
 
 plugins {
-    `android-application`
+    android("application")
     kotlin("android")
     kotlin("android.extensions")
 }
@@ -42,22 +42,17 @@ val ktlint by configurations.creating
 
 dependencies {
     implementation(project(":$RELEASE_ARTIFACT"))
-
     implementation(kotlin("stdlib", VERSION_KOTLIN))
 
-    implementation(anko("commons"))
-    implementation(anko("sdk25"))
-
-    implementation(support("support-annotations", VERSION_SUPPORT))
-    implementation(support("appcompat-v7", VERSION_SUPPORT))
-    implementation(support("cardview-v7", VERSION_SUPPORT))
-    implementation(support("preference-v14", VERSION_SUPPORT))
-    implementation(support("design", VERSION_SUPPORT))
-    implementation(support("percent", VERSION_SUPPORT))
+    implementation(material())
+    implementation(androidx("appcompat"))
+    implementation(androidx("cardview"))
+    implementation(androidx("preference"))
+    implementation(androidx("percentlayout"))
 
     implementation(slidingUpPanel())
     implementation(photoView())
-    implementation(hendraanggrian("errorbar", VERSION_SUPPORT))
+    implementation(hendraanggrian("material", "errorbar-ktx"))
 
     ktlint(ktlint())
 }

@@ -1,6 +1,6 @@
 package com.hendraanggrian.pikasso
 
-import android.support.test.InstrumentationRegistry.getTargetContext
+import androidx.test.InstrumentationRegistry.getTargetContext
 import com.squareup.picasso.Picasso
 import org.junit.Test
 import kotlin.test.assertNotNull

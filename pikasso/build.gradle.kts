@@ -1,7 +1,7 @@
 import org.gradle.kotlin.dsl.kotlin
 
 plugins {
-    `android-library`
+    android("library")
     `git-publish`
     `bintray-release`
 }
@@ -42,7 +42,11 @@ tasks["gitPublishCopy"].dependsOn(
     ":$RELEASE_ARTIFACT-palette:dokka")
 
 publish {
+    bintrayUser = bintrayUserEnv
+    bintrayKey = bintrayKeyEnv
+    dryRun = false
     repoName = RELEASE_ARTIFACT
+
     userOrg = RELEASE_USER
     groupId = RELEASE_GROUP
     artifactId = RELEASE_ARTIFACT

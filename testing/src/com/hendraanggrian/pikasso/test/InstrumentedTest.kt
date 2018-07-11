@@ -2,11 +2,11 @@ package com.hendraanggrian.pikasso.test
 
 import android.os.Build.VERSION.SDK_INT
 import android.os.CountDownTimer
-import android.support.test.espresso.UiController
-import android.support.test.espresso.ViewAction
-import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import android.view.View
 import android.widget.ImageView
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
+import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 
 abstract class InstrumentedTest {
 

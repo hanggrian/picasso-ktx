@@ -7,7 +7,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import org.gradle.language.base.plugins.LifecycleBasePlugin.*
 
 plugins {
-    `android-library`
+    android("library")
     kotlin("android")
 }
 
@@ -37,11 +37,12 @@ val ktlint by configurations.creating
 dependencies {
     api(junit())
     api(kotlin("test", VERSION_KOTLIN))
-    api(anko("commons"))
-    api(support("design", VERSION_SUPPORT))
-    api(support("espresso-core", VERSION_ESPRESSO, "test", "espresso"))
-    api(support("runner", VERSION_RUNNER, "test"))
-    api(support("rules", VERSION_RULES, "test"))
+    api(material())
+    api(androidx("core", "core-ktx"))
+    api(androidx("appcompat"))
+    api(androidx("test.espresso", "espresso-core", VERSION_ESPRESSO))
+    api(androidx("test", "runner", VERSION_RUNNER))
+    api(androidx("test", "rules", VERSION_RULES))
 
     ktlint(ktlint())
 }

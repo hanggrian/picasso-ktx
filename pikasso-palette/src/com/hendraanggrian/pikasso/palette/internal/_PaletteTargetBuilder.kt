@@ -2,8 +2,9 @@ package com.hendraanggrian.pikasso.palette.internal
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.support.v7.graphics.Palette
+import androidx.palette.graphics.Palette
 import com.hendraanggrian.pikasso.palette.PaletteBuilder
+import com.hendraanggrian.pikasso.palette.PaletteException
 import com.hendraanggrian.pikasso.palette.PaletteTargetBuilder
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
@@ -26,10 +27,13 @@ internal class _PaletteTargetBuilder(
         if (onLoaded != null) {
             val builder = Palette.from(bitmap)
             when {
-                asynchronous -> builder.generate {
-                    onLoaded!!.invoke(PaletteBuilder.from(it), bitmap, from)
+                !asynchronous -> onLoaded!!(PaletteBuilder.from(builder.generate()), bitmap, from)
+                else -> builder.generate { palette ->
+                    when (palette) {
+                        null -> onBitmapFailed(PaletteException(), null)
+                        else -> onLoaded!!(PaletteBuilder.from(palette), bitmap, from)
+                    }
                 }
-                else -> onLoaded!!.invoke(PaletteBuilder.from(builder.generate()), bitmap, from)
             }
         }
     }

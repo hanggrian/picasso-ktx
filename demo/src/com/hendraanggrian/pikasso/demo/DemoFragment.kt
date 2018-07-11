@@ -1,33 +1,33 @@
 package com.hendraanggrian.pikasso.demo
 
 import android.os.Bundle
-import android.support.v7.preference.CheckBoxPreference
-import android.support.v7.preference.EditTextPreference
-import android.support.v7.preference.Preference
-import android.support.v7.preference.PreferenceFragmentCompat
+import androidx.preference.CheckBoxPreference
+import androidx.preference.EditTextPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
 
 class DemoFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener {
 
-    lateinit var inputPreference: EditTextPreference
-    lateinit var cropCirclePreference: CheckBoxPreference
-    lateinit var cropRoundedPreference: CheckBoxPreference
-    lateinit var cropSquarePreference: CheckBoxPreference
-    lateinit var grayscalePreference: CheckBoxPreference
-    lateinit var maskPreference: CheckBoxPreference
-    lateinit var overlayPreference: CheckBoxPreference
+    lateinit var input: EditTextPreference
+    lateinit var cropCircle: CheckBoxPreference
+    lateinit var cropRounded: CheckBoxPreference
+    lateinit var cropSquare: CheckBoxPreference
+    lateinit var grayscale: CheckBoxPreference
+    lateinit var mask: CheckBoxPreference
+    lateinit var overlay: CheckBoxPreference
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.fragment_demo)
-        inputPreference = find("inputPreference") {
+        input = find(PREFERENCE_INPUT_URL) {
             summary = text
             onPreferenceChangeListener = this@DemoFragment
         }
-        cropCirclePreference = find("cropCirclePreference")
-        cropRoundedPreference = find("cropRoundedPreference")
-        cropSquarePreference = find("cropSquarePreference")
-        grayscalePreference = find("grayscalePreference")
-        maskPreference = find("maskPreference")
-        overlayPreference = find("overlayPreference")
+        cropCircle = find(PREFERENCE_CROP_CIRCLE)
+        cropRounded = find(PREFERENCE_CROP_ROUNDED)
+        cropSquare = find(PREFERENCE_CROP_SQUARE)
+        grayscale = find(PREFERENCE_GRAYSCALE)
+        mask = find(PREFERENCE_MASK)
+        overlay = find(PREFERENCE_OVERLAY)
     }
 
     override fun onPreferenceChange(preference: Preference, value: Any): Boolean {
