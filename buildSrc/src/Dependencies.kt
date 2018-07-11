@@ -18,10 +18,6 @@ fun hendraanggrian(
     version: String = VERSION_ANDROIDX
 ): String = "com.hendraanggrian.$repository:$module:$version"
 
-fun DependencyHandler.photoView() = "com.github.chrisbanes:PhotoView:$VERSION_PHOTOVIEW"
-
-fun DependencyHandler.slidingUpPanel() = "com.sothree.slidinguppanel:library:$VERSION_SLIDINGUPPANEL"
-
 fun DependencyHandler.square(module: String, version: String) = "com.squareup.$module:$module:$version"
 
 fun DependencyHandler.junit() = "junit:junit:$VERSION_JUNIT"

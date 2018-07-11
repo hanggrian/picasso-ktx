@@ -3,7 +3,7 @@
 
     <androidx.preference.PreferenceCategory android:title="@string/input_url">
 
-        <android.support.v7.preference.EditTextPreference
+        <androidx.preference.EditTextPreference
             android:key="input_url"
             android:title="@string/input_url" />
     </androidx.preference.PreferenceCategory>

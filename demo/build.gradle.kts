@@ -14,9 +14,9 @@ android {
     defaultConfig {
         minSdkVersion(SDK_MIN)
         targetSdkVersion(SDK_TARGET)
+        versionCode = 1
         versionName = RELEASE_VERSION
         applicationId = "$RELEASE_GROUP.demo"
-        versionCode = 1
     }
     sourceSets {
         getByName("main") {
@@ -45,13 +45,11 @@ dependencies {
     implementation(kotlin("stdlib", VERSION_KOTLIN))
 
     implementation(material())
+    implementation(androidx("core"))
     implementation(androidx("appcompat"))
-    implementation(androidx("cardview"))
     implementation(androidx("preference"))
-    implementation(androidx("percentlayout"))
 
-    implementation(slidingUpPanel())
-    implementation(photoView())
+    // implementation(photoView())
     implementation(hendraanggrian("material", "errorbar-ktx"))
 
     ktlint(ktlint())
