@@ -14,6 +14,7 @@ import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat.getDrawable
 import androidx.core.util.PatternsCompat.WEB_URL
 import androidx.core.view.GravityCompat.START
 import com.google.android.material.appbar.AppBarLayout
@@ -24,17 +25,24 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.from
 import com.hendraanggrian.material.errorbar.Errorbar
 import com.hendraanggrian.material.errorbar.indefiniteErrorbar
 import com.hendraanggrian.pikasso.buildPicasso
+import com.hendraanggrian.pikasso.palette.palette
+import com.hendraanggrian.pikasso.transformations.circle
+import com.hendraanggrian.pikasso.transformations.grayscale
+import com.hendraanggrian.pikasso.transformations.mask
+import com.hendraanggrian.pikasso.transformations.overlay
+import com.hendraanggrian.pikasso.transformations.rounded
+import com.hendraanggrian.pikasso.transformations.square
 import com.squareup.picasso.Cache
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_demo.*
 
 class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
 
-    val fragment = DemoFragment()
-    lateinit var bottomSheetBehavior: BottomSheetBehavior<AppBarLayout>
+    private val fragment = DemoFragment()
+    private lateinit var sheetBehavior: BottomSheetBehavior<AppBarLayout>
 
-    lateinit var picasso: Picasso
-    lateinit var drawerToggle: ActionBarDrawerToggle
+    private lateinit var picasso: Picasso
+    private lateinit var drawerToggle: ActionBarDrawerToggle
 
     lateinit var pasteItem: MenuItem
     lateinit var toggleExpandItem: MenuItem
@@ -45,7 +53,7 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
         setContentView(R.layout.activity_demo)
         setSupportActionBar(toolbar)
         supportActionBar!!.run {
-            title = ""
+            title = null
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
         }
@@ -59,7 +67,7 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
         }
         drawerLayout.addDrawerListener(drawerToggle)
 
-        bottomSheetBehavior = from(appBarLayout)
+        sheetBehavior = from(appBarLayout)
         supportFragmentManager.beginTransaction()
             .replace(R.id.frameLayout, fragment)
             .commitNow()
@@ -89,7 +97,7 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
 
         errorbar = photoView.indefiniteErrorbar("Expand panel below to start loading") {
             setAction(R.string.expand) {
-                //                panelLayout.panelState = EXPANDED
+                sheetBehavior.state = STATE_EXPANDED
             }
         }
     }
@@ -102,6 +110,12 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
     override fun onPause() {
         super.onPause()
         fragment.preferenceScreen.sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
+    }
+
+    override fun onBackPressed() = when {
+        sheetBehavior.state == STATE_EXPANDED -> sheetBehavior.state = STATE_COLLAPSED
+        drawerLayout.isDrawerOpen(START) -> drawerLayout.closeDrawer(START)
+        else -> super.onBackPressed()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -127,11 +141,46 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
         }
     }
 
-    fun toggleExpand(view: View) {
-        bottomSheetBehavior.state = when (STATE_COLLAPSED) {
-            bottomSheetBehavior.state -> STATE_EXPANDED
+    fun toggleExpand(@Suppress("UNUSED_PARAMETER") view: View) {
+        sheetBehavior.state = when (STATE_COLLAPSED) {
+            sheetBehavior.state -> STATE_EXPANDED
             else -> STATE_COLLAPSED
         }
+    }
+
+    fun load(@Suppress("UNUSED_PARAMETER") view: View) {
+        if (errorbar.isShown) {
+            errorbar.dismiss()
+        }
+        toolbar2.title = getString(R.string.loading)
+        progressBar.visibility = View.VISIBLE
+        sheetBehavior.state = STATE_COLLAPSED
+        picasso.load(fragment.input.text)
+            .apply {
+                if (fragment.cropCircle.isChecked) circle()
+                if (fragment.cropRounded.isChecked) rounded(25.px, 10.px)
+                if (fragment.cropSquare.isChecked) square()
+                if (fragment.grayscale.isChecked) grayscale()
+                if (fragment.mask.isChecked) mask(getDrawable(this@DemoActivity, R.drawable.mask)!!)
+                if (fragment.overlay.isChecked) overlay(Color.RED)
+            }
+            .palette(photoView) {
+                onSuccess {
+                    useVibrant { vibrantToolbar assign it }
+                    useLightVibrant { lightVibrantToolbar assign it }
+                    useDarkVibrant { darkVibrantToolbar assign it }
+                    useMuted { mutedToolbar assign it }
+                    useLightMuted { lightMutedToolbar assign it }
+                    useDarkMuted { darkMutedToolbar assign it }
+                    useDominant { dominantToolbar assign it }
+                    toolbar2.title = getString(R.string.success)
+                    progressBar.visibility = View.GONE
+                }
+                onError {
+                    toolbar2.title = getString(R.string.error)
+                    progressBar.visibility = View.GONE
+                }
+            }
     }
 
     private companion object {
