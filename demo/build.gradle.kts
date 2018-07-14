@@ -48,8 +48,6 @@ dependencies {
     implementation(androidx("core"))
     implementation(androidx("appcompat"))
     implementation(androidx("preference"))
-
-    // implementation(photoView())
     implementation(hendraanggrian("material", "errorbar-ktx"))
 
     ktlint(ktlint())

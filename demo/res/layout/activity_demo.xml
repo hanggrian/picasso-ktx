@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
+        <!-- CoordinatorLayout is a suitable parent of Errobar. -->
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:animateLayoutChanges="true">
@@ -33,14 +34,15 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize" />
-        </FrameLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <LinearLayout
             android:layout_width="256dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:background="?android:windowBackground"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="?actionBarSize">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/vibrantToolbar"
@@ -107,6 +109,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:onClick="load"
             android:text="@string/load" />
     </com.google.android.material.appbar.AppBarLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
