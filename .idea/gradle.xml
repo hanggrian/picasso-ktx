@@ -8,13 +8,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/buildSrc" />
-            <option value="$PROJECT_DIR$/demo" />
-            <option value="$PROJECT_DIR$/pikasso" />
-            <option value="$PROJECT_DIR$/pikasso-commons" />
-            <option value="$PROJECT_DIR$/pikasso-palette" />
-            <option value="$PROJECT_DIR$/pikasso-transformations" />
-            <option value="$PROJECT_DIR$/testing" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

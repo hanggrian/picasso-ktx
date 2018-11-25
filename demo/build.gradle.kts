@@ -1,7 +1,3 @@
-import org.gradle.kotlin.dsl.kotlin
-import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.kotlin.gradle.dsl.Coroutines.ENABLE
-
 plugins {
     android("application")
     kotlin("android")
@@ -38,8 +34,6 @@ android {
     }
 }
 
-val ktlint by configurations.creating
-
 dependencies {
     implementation(project(":$RELEASE_ARTIFACT"))
     implementation(kotlin("stdlib", VERSION_KOTLIN))
@@ -49,29 +43,4 @@ dependencies {
     implementation(androidx("appcompat"))
     implementation(androidx("preference"))
     implementation(hendraanggrian("material", "errorbar-ktx"))
-
-    ktlint(ktlint())
-}
-
-
-tasks {
-    "ktlint"(JavaExec::class) {
-        get("check").dependsOn(this)
-        group = LifecycleBasePlugin.VERIFICATION_GROUP
-        inputs.dir("src")
-        outputs.dir("src")
-        description = "Check Kotlin code style."
-        classpath = ktlint
-        main = "com.github.shyiko.ktlint.Main"
-        args("--android", "src/**/*.kt")
-    }
-    "ktlintFormat"(JavaExec::class) {
-        group = "formatting"
-        inputs.dir("src")
-        outputs.dir("src")
-        description = "Fix Kotlin code style deviations."
-        classpath = ktlint
-        main = "com.github.shyiko.ktlint.Main"
-        args("--android", "-F", "src/**/*.kt")
-    }
 }

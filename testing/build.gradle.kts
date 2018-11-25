@@ -1,11 +1,3 @@
-import org.gradle.api.plugins.ExtensionAware
-import org.gradle.api.tasks.JavaExec
-import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.creating
-import org.gradle.kotlin.dsl.kotlin
-import org.jetbrains.dokka.gradle.DokkaTask
-import org.gradle.language.base.plugins.LifecycleBasePlugin.*
-
 plugins {
     android("library")
     kotlin("android")
@@ -48,9 +40,8 @@ dependencies {
 }
 
 tasks {
-    "ktlint"(JavaExec::class) {
-        get("check").dependsOn(this)
-        group = VERIFICATION_GROUP
+    register("ktlint", JavaExec::class) {
+        group = LifecycleBasePlugin.VERIFICATION_GROUP
         inputs.dir("src")
         outputs.dir("src")
         description = "Check Kotlin code style."
@@ -58,7 +49,10 @@ tasks {
         main = "com.github.shyiko.ktlint.Main"
         args("--android", "src/**/*.kt")
     }
-    "ktlintFormat"(JavaExec::class) {
+    "check" {
+        dependsOn("ktlint")
+    }
+    register("ktlintFormat", JavaExec::class) {
         group = "formatting"
         inputs.dir("src")
         outputs.dir("src")
