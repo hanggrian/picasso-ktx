@@ -1,16 +1,11 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package com.hendraanggrian.pikasso.palette
+package com.hendraanggrian.pikasso
 
 import android.widget.ImageView
 import androidx.palette.graphics.Palette
-import com.hendraanggrian.pikasso.palette.internal._PaletteCallbackBuilder
-import com.hendraanggrian.pikasso.palette.internal._PaletteTargetBuilder
 import com.squareup.picasso.RequestCreator
 import com.squareup.picasso.Target
-
-/** Build and returns the [Palette] synchronously. */
-inline val RequestCreator.palette: Palette get() = Palette.from(get()).generate()
 
 /** Build the [Palette] asynchronously. */
 inline fun RequestCreator.palette(
@@ -26,4 +21,7 @@ inline fun RequestCreator.palette(
     target: ImageView,
     asynchronous: Boolean = true,
     noinline builder: PaletteCallbackBuilder.() -> Unit
-): Unit = into(target, _PaletteCallbackBuilder(target, asynchronous).apply(builder))
+): Unit = into(target, _PaletteCallbackBuilder(
+    target,
+    asynchronous
+).apply(builder))

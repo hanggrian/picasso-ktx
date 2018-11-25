@@ -1,13 +1,15 @@
-package com.hendraanggrian.pikasso.palette.internal
+package com.hendraanggrian.pikasso
 
 import android.graphics.drawable.BitmapDrawable
 import android.widget.ImageView
 import androidx.palette.graphics.Palette
-import com.hendraanggrian.pikasso.palette.PaletteBuilder
-import com.hendraanggrian.pikasso.palette.PaletteCallbackBuilder
-import com.hendraanggrian.pikasso.palette.PaletteException
 import com.squareup.picasso.Callback
-import java.lang.Exception
+
+interface PaletteCallbackBuilder : BaseCallbackBuilder {
+
+    /** Invoked when image is successfully loaded. */
+    fun onSuccess(callback: PaletteBuilder.() -> Unit)
+}
 
 @PublishedApi
 @Suppress("ClassName")
@@ -26,16 +28,28 @@ internal class _PaletteCallbackBuilder(
         if (onSuccess != null) {
             val builder = Palette.from((target.drawable as BitmapDrawable).bitmap)
             when {
-                !asynchronous -> onSuccess!!(PaletteBuilder.from(builder.generate()))
+                !asynchronous -> onSuccess!!(
+                    PaletteBuilder.from(
+                        builder.generate()
+                    )
+                )
                 else -> builder.generate { palette ->
                     when (palette) {
                         null -> onError(PaletteException())
-                        else -> onSuccess!!(PaletteBuilder.from(palette))
+                        else -> onSuccess!!(
+                            PaletteBuilder.from(
+                                palette
+                            )
+                        )
                     }
                 }
             }
             when {
-                asynchronous -> builder.generate { onSuccess!!.invoke(PaletteBuilder.from(it!!)) }
+                asynchronous -> builder.generate { onSuccess!!.invoke(
+                    PaletteBuilder.from(
+                        it!!
+                    )
+                ) }
                 else -> onSuccess!!(PaletteBuilder.from(builder.generate()))
             }
         }

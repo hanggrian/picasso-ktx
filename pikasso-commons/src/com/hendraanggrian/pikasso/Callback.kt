@@ -1,8 +1,18 @@
-package com.hendraanggrian.pikasso.internal
+package com.hendraanggrian.pikasso
 
-import com.hendraanggrian.pikasso.CallbackBuilder
 import com.squareup.picasso.Callback
-import java.lang.Exception
+
+interface BaseCallbackBuilder {
+
+    /** Invoked when image failed to load. */
+    fun onError(callback: (e: java.lang.Exception) -> Unit)
+}
+
+interface CallbackBuilder : BaseCallbackBuilder {
+
+    /** Invoked when image is successfully loaded. */
+    fun onSuccess(callback: () -> Unit)
+}
 
 @PublishedApi
 @Suppress("ClassName")

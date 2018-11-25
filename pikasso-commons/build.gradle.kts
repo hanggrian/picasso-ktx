@@ -78,8 +78,8 @@ tasks {
 }
 
 publish {
-    bintrayUser = bintrayUserEnv
-    bintrayKey = bintrayKeyEnv
+    bintrayUser = BINTRAY_USER
+    bintrayKey = BINTRAY_KEY
     dryRun = false
     repoName = RELEASE_ARTIFACT
 

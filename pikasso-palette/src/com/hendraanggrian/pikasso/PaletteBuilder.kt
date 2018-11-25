@@ -1,4 +1,4 @@
-package com.hendraanggrian.pikasso.palette
+package com.hendraanggrian.pikasso
 
 import android.graphics.Color
 import androidx.annotation.ColorInt
@@ -53,7 +53,8 @@ interface PaletteBuilder {
 
     companion object {
 
-        internal fun from(palette: Palette): PaletteBuilder = object : PaletteBuilder {
+        internal fun from(palette: Palette): PaletteBuilder = object :
+            PaletteBuilder {
             override val palette: Palette = palette
         }
     }

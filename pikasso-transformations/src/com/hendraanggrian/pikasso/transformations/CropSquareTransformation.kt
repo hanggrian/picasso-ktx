@@ -1,4 +1,4 @@
-package com.hendraanggrian.pikasso.transformations.internal
+package com.hendraanggrian.pikasso.transformations
 
 import android.graphics.Bitmap
 import android.graphics.Bitmap.createBitmap

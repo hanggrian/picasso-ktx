@@ -1,14 +1,16 @@
-package com.hendraanggrian.pikasso.palette.internal
+package com.hendraanggrian.pikasso
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import androidx.palette.graphics.Palette
-import com.hendraanggrian.pikasso.palette.PaletteBuilder
-import com.hendraanggrian.pikasso.palette.PaletteException
-import com.hendraanggrian.pikasso.palette.PaletteTargetBuilder
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
-import java.lang.Exception
+
+interface PaletteTargetBuilder : BaseTargetBuilder {
+
+    /** Invoked when image is successfully loaded. */
+    fun onLoaded(callback: PaletteBuilder.(Bitmap, from: Picasso.LoadedFrom) -> Unit)
+}
 
 @PublishedApi
 @Suppress("ClassName")
@@ -27,11 +29,17 @@ internal class _PaletteTargetBuilder(
         if (onLoaded != null) {
             val builder = Palette.from(bitmap)
             when {
-                !asynchronous -> onLoaded!!(PaletteBuilder.from(builder.generate()), bitmap, from)
+                !asynchronous -> onLoaded!!(
+                    PaletteBuilder.from(
+                        builder.generate()
+                    ), bitmap, from)
                 else -> builder.generate { palette ->
                     when (palette) {
                         null -> onBitmapFailed(PaletteException(), null)
-                        else -> onLoaded!!(PaletteBuilder.from(palette), bitmap, from)
+                        else -> onLoaded!!(
+                            PaletteBuilder.from(
+                                palette
+                            ), bitmap, from)
                     }
                 }
             }

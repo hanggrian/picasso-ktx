@@ -1,15 +1,15 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package com.hendraanggrian.pikasso.transformations
+package com.hendraanggrian.pikasso
 
 import android.graphics.drawable.Drawable
 import androidx.annotation.ColorInt
-import com.hendraanggrian.pikasso.transformations.internal.CropCircleTransformation
-import com.hendraanggrian.pikasso.transformations.internal.CropRoundedTransformation
-import com.hendraanggrian.pikasso.transformations.internal.CropSquareTransformation
-import com.hendraanggrian.pikasso.transformations.internal.GrayscaleTransformation
-import com.hendraanggrian.pikasso.transformations.internal.MaskTransformation
-import com.hendraanggrian.pikasso.transformations.internal.OverlayTransformation
+import com.hendraanggrian.pikasso.transformations.CropCircleTransformation
+import com.hendraanggrian.pikasso.transformations.CropRoundedTransformation
+import com.hendraanggrian.pikasso.transformations.CropSquareTransformation
+import com.hendraanggrian.pikasso.transformations.GrayscaleTransformation
+import com.hendraanggrian.pikasso.transformations.MaskTransformation
+import com.hendraanggrian.pikasso.transformations.OverlayTransformation
 import com.squareup.picasso.RequestCreator
 
 /** Transform image to square. */

@@ -25,13 +25,13 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.from
 import com.hendraanggrian.material.errorbar.Errorbar
 import com.hendraanggrian.material.errorbar.indefiniteErrorbar
 import com.hendraanggrian.pikasso.buildPicasso
-import com.hendraanggrian.pikasso.palette.palette
-import com.hendraanggrian.pikasso.transformations.circle
-import com.hendraanggrian.pikasso.transformations.grayscale
-import com.hendraanggrian.pikasso.transformations.mask
-import com.hendraanggrian.pikasso.transformations.overlay
-import com.hendraanggrian.pikasso.transformations.rounded
-import com.hendraanggrian.pikasso.transformations.square
+import com.hendraanggrian.pikasso.palette
+import com.hendraanggrian.pikasso.circle
+import com.hendraanggrian.pikasso.grayscale
+import com.hendraanggrian.pikasso.mask
+import com.hendraanggrian.pikasso.overlay
+import com.hendraanggrian.pikasso.rounded
+import com.hendraanggrian.pikasso.square
 import com.squareup.picasso.Cache
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_demo.*
@@ -78,9 +78,9 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
             setOnMenuItemClickListener {
                 fragment.listView.smoothScrollToPosition(0)
                 (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).run {
-                    if (hasPrimaryClip() && primaryClipDescription
+                    if (hasPrimaryClip() && primaryClipDescription!!
                             .hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-                        val clipboard = primaryClip.getItemAt(0).text.toString()
+                        val clipboard = primaryClip!!.getItemAt(0).text.toString()
                         fragment.input.text = clipboard
                         fragment.onPreferenceChange(fragment.input, clipboard) // trigger
                     }
@@ -137,7 +137,7 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         if (key == fragment.input.key) {
-            button.isEnabled = WEB_URL.toRegex().matches(sharedPreferences.getString(key, ""))
+            button.isEnabled = WEB_URL.toRegex().matches(sharedPreferences.getString(key, "")!!)
         }
     }
 
