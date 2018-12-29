@@ -47,7 +47,7 @@ dependencies {
 }
 
 tasks {
-    register("ktlint", JavaExec::class) {
+    register<JavaExec>("ktlint") {
         group = LifecycleBasePlugin.VERIFICATION_GROUP
         inputs.dir("src")
         outputs.dir("src")
@@ -59,7 +59,7 @@ tasks {
     "check" {
         dependsOn("ktlint")
     }
-    register("ktlintFormat", JavaExec::class) {
+    register<JavaExec>("ktlintFormat") {
         group = "formatting"
         inputs.dir("src")
         outputs.dir("src")
@@ -69,7 +69,7 @@ tasks {
         args("--android", "-F", "src/**/*.kt")
     }
 
-    "dokka"(org.jetbrains.dokka.gradle.DokkaTask::class) {
+    named<org.jetbrains.dokka.gradle.DokkaTask>("dokka") {
         outputDirectory = "$buildDir/docs"
         doFirst { file(outputDirectory).deleteRecursively() }
     }

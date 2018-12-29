@@ -8,9 +8,9 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
-import android.support.annotation.ColorInt
 import android.view.MenuItem
 import android.view.View
+import androidx.annotation.ColorInt
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -19,17 +19,15 @@ import androidx.core.util.PatternsCompat.WEB_URL
 import androidx.core.view.GravityCompat.START
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
-import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
-import com.google.android.material.bottomsheet.BottomSheetBehavior.from
+import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import com.hendraanggrian.material.errorbar.Errorbar
 import com.hendraanggrian.material.errorbar.indefiniteErrorbar
 import com.hendraanggrian.pikasso.buildPicasso
-import com.hendraanggrian.pikasso.palette
 import com.hendraanggrian.pikasso.circle
 import com.hendraanggrian.pikasso.grayscale
 import com.hendraanggrian.pikasso.mask
 import com.hendraanggrian.pikasso.overlay
+import com.hendraanggrian.pikasso.palette
 import com.hendraanggrian.pikasso.rounded
 import com.hendraanggrian.pikasso.square
 import com.squareup.picasso.Cache
@@ -79,7 +77,8 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
                 fragment.listView.smoothScrollToPosition(0)
                 (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).run {
                     if (hasPrimaryClip() && primaryClipDescription!!
-                            .hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                            .hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)
+                    ) {
                         val clipboard = primaryClip!!.getItemAt(0).text.toString()
                         fragment.input.text = clipboard
                         fragment.onPreferenceChange(fragment.input, clipboard) // trigger

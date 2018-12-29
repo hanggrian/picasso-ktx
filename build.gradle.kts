@@ -24,10 +24,10 @@ allprojects {
 }
 
 tasks {
-    register("clean", Delete::class) {
+    register<Delete>("clean") {
         delete(rootProject.buildDir)
     }
-    register("wrapper", Wrapper::class) {
+    named<Wrapper>("wrapper") {
         gradleVersion = VERSION_GRADLE
     }
 }
