@@ -11,7 +11,7 @@ android {
         targetSdkVersion(SDK_TARGET)
         versionCode = 1
         versionName = RELEASE_VERSION
-        applicationId = "$RELEASE_GROUP.demo"
+        applicationId = "com.example.$RELEASE_ARTIFACT"
     }
     sourceSets {
         getByName("main") {
@@ -31,6 +31,9 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard.pro")
         }
     }
+    lintOptions {
+        isAbortOnError = false
+    }
 }
 
 dependencies {
@@ -41,5 +44,5 @@ dependencies {
     implementation(androidx("core"))
     implementation(androidx("appcompat"))
     implementation(androidx("preference"))
-    implementation(hendraanggrian("material", "errorbar-ktx"))
+    implementation(hendraanggrian("material", "errorbar-ktx", VERSION_ANDROIDX))
 }

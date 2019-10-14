@@ -6,59 +6,59 @@ import androidx.palette.graphics.Palette
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 
+/**
+ * Interface to build [Palette] target with Kotlin DSL.
+ *
+ * @see palette
+ */
 interface PaletteTargetBuilder : BaseTargetBuilder {
 
     /** Invoked when image is successfully loaded. */
-    fun onLoaded(callback: PaletteBuilder.(Bitmap, from: Picasso.LoadedFrom) -> Unit)
+    fun onLoaded(onLoaded: PaletteBuilder.(Bitmap, from: Picasso.LoadedFrom) -> Unit)
 }
 
-@PublishedApi
-@Suppress("ClassName")
-internal class _PaletteTargetBuilder(
-    private val asynchronous: Boolean
-) : Target, PaletteTargetBuilder {
-    private var onLoaded: (PaletteBuilder.(Bitmap, Picasso.LoadedFrom) -> Unit)? = null
-    private var onFailed: ((Exception, Drawable?) -> Unit)? = null
-    private var onPrepare: ((Drawable?) -> Unit)? = null
+internal class PaletteTargetBuilderImpl(private val asynchronous: Boolean) : Target,
+    PaletteTargetBuilder {
+    private var _onLoaded: (PaletteBuilder.(Bitmap, Picasso.LoadedFrom) -> Unit)? = null
+    private var _onFailed: ((Exception, Drawable?) -> Unit)? = null
+    private var _onPrepare: ((Drawable?) -> Unit)? = null
 
-    override fun onLoaded(callback: PaletteBuilder.(Bitmap, from: Picasso.LoadedFrom) -> Unit) {
-        onLoaded = callback
+    override fun onLoaded(onLoaded: PaletteBuilder.(Bitmap, from: Picasso.LoadedFrom) -> Unit) {
+        _onLoaded = onLoaded
     }
 
     override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
-        if (onLoaded != null) {
+        if (_onLoaded != null) {
             val builder = Palette.from(bitmap)
             when {
-                !asynchronous -> onLoaded!!(
+                !asynchronous -> _onLoaded!!(
                     PaletteBuilder.from(
                         builder.generate()
-                    ), bitmap, from)
+                    ), bitmap, from
+                )
                 else -> builder.generate { palette ->
                     when (palette) {
                         null -> onBitmapFailed(PaletteException(), null)
-                        else -> onLoaded!!(
-                            PaletteBuilder.from(
-                                palette
-                            ), bitmap, from)
+                        else -> _onLoaded!!(PaletteBuilder.from(palette), bitmap, from)
                     }
                 }
             }
         }
     }
 
-    override fun onFailed(callback: (Exception, Drawable?) -> Unit) {
-        onFailed = callback
+    override fun onFailed(onFailed: (Exception, Drawable?) -> Unit) {
+        _onFailed = onFailed
     }
 
     override fun onBitmapFailed(e: Exception, errorDrawable: Drawable?) {
-        onFailed?.invoke(e, errorDrawable)
+        _onFailed?.invoke(e, errorDrawable)
     }
 
-    override fun onPrepare(callback: (Drawable?) -> Unit) {
-        onPrepare = callback
+    override fun onPrepare(onPrepare: (Drawable?) -> Unit) {
+        _onPrepare = onPrepare
     }
 
     override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-        onPrepare?.invoke(placeHolderDrawable)
+        _onPrepare?.invoke(placeHolderDrawable)
     }
 }

@@ -5,49 +5,53 @@ import android.graphics.drawable.Drawable
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 
+/** Partial target builder, extended in `pikasso-palette` as well. */
 interface BaseTargetBuilder {
 
     /** Invoked when image failed to load. */
-    fun onFailed(callback: (e: java.lang.Exception, Drawable?) -> Unit)
+    fun onFailed(onFailed: (e: Exception, Drawable?) -> Unit)
 
     /** Invoked when image has started loading. */
-    fun onPrepare(callback: (Drawable?) -> Unit)
+    fun onPrepare(onPrepare: (Drawable?) -> Unit)
 }
 
+/**
+ * Interface to build [Target] with Kotlin DSL.
+ *
+ * @see into
+ */
 interface TargetBuilder : BaseTargetBuilder {
 
     /** Invoked when image is successfully loaded. */
-    fun onLoaded(callback: (Bitmap, from: Picasso.LoadedFrom) -> Unit)
+    fun onLoaded(onLoaded: (Bitmap, from: Picasso.LoadedFrom) -> Unit)
 }
 
-@PublishedApi
-@Suppress("ClassName")
-internal class _Target : Target, TargetBuilder {
-    private var onLoaded: ((Bitmap, Picasso.LoadedFrom) -> Unit)? = null
-    private var onFailed: ((Exception, Drawable?) -> Unit)? = null
-    private var onPrepare: ((Drawable?) -> Unit)? = null
+internal class TargetImpl : Target, TargetBuilder {
+    private var _onLoaded: ((Bitmap, Picasso.LoadedFrom) -> Unit)? = null
+    private var _onFailed: ((Exception, Drawable?) -> Unit)? = null
+    private var _onPrepare: ((Drawable?) -> Unit)? = null
 
-    override fun onLoaded(callback: (Bitmap, from: Picasso.LoadedFrom) -> Unit) {
-        onLoaded = callback
+    override fun onLoaded(onLoaded: (Bitmap, from: Picasso.LoadedFrom) -> Unit) {
+        _onLoaded = onLoaded
     }
 
     override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom) {
-        onLoaded?.invoke(bitmap, from)
+        _onLoaded?.invoke(bitmap, from)
     }
 
-    override fun onFailed(callback: (Exception, Drawable?) -> Unit) {
-        onFailed = callback
+    override fun onFailed(onFailed: (Exception, Drawable?) -> Unit) {
+        _onFailed = onFailed
     }
 
     override fun onBitmapFailed(e: Exception, errorDrawable: Drawable?) {
-        onFailed?.invoke(e, errorDrawable)
+        _onFailed?.invoke(e, errorDrawable)
     }
 
-    override fun onPrepare(callback: (Drawable?) -> Unit) {
-        onPrepare = callback
+    override fun onPrepare(onPrepare: (Drawable?) -> Unit) {
+        _onPrepare = onPrepare
     }
 
     override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-        onPrepare?.invoke(placeHolderDrawable)
+        _onPrepare?.invoke(placeHolderDrawable)
     }
 }

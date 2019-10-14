@@ -1,4 +1,4 @@
-package com.hendraanggrian.pikasso.transformations
+package com.hendraanggrian.pikasso.internal
 
 import android.graphics.Bitmap
 import android.graphics.Bitmap.Config.ARGB_8888
@@ -10,7 +10,6 @@ import android.graphics.PorterDuffXfermode
 import android.graphics.drawable.Drawable
 import com.squareup.picasso.Transformation
 
-@PublishedApi
 internal class MaskTransformation(private val drawable: Drawable) : Transformation {
 
     override fun transform(source: Bitmap): Bitmap {

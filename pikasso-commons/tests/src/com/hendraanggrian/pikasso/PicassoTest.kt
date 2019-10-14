@@ -2,17 +2,21 @@ package com.hendraanggrian.pikasso
 
 import androidx.test.InstrumentationRegistry.getTargetContext
 import com.squareup.picasso.Picasso
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
-import kotlin.test.assertTrue
 
-class PicassosTest {
+class PicassoTest {
 
-    @Test fun pikasso() = assertTrue(picasso == Picasso.get())
+    @Test
+    fun picasso() {
+        assertEquals(picasso, Picasso.get())
+    }
 
-    @Test fun buildPicasso() {
+    @Test
+    fun buildPicasso() {
         assertNotNull(getTargetContext().buildPicasso {
-            loggingEnabled(true)
+            loggingEnabled = true
         })
     }
 }

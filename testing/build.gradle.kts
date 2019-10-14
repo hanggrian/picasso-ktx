@@ -23,41 +23,40 @@ android {
     }
 }
 
-val ktlint by configurations.creating
+val configuration = configurations.register("ktlint")
 
 dependencies {
-    api(junit())
-    api(kotlin("test", VERSION_KOTLIN))
-    api(material())
-    api(androidx("core", "core-ktx"))
-    api(androidx("appcompat"))
-    api(androidx("test.espresso", "espresso-core", VERSION_ESPRESSO))
-    api(androidx("test", "runner", VERSION_RUNNER))
-    api(androidx("test", "rules", VERSION_RULES))
+    implementation(kotlin("test-junit", VERSION_KOTLIN))
+    implementation(material())
+    implementation(androidx("test.espresso", "espresso-core", VERSION_ESPRESSO))
+    implementation(androidx("test", "runner", VERSION_RUNNER))
+    implementation(androidx("test", "rules", VERSION_RULES))
 
-    ktlint(ktlint())
+    configuration {
+        invoke(ktlint())
+    }
 }
 
 tasks {
-    register("ktlint", JavaExec::class) {
+    val ktlint = register("ktlint", JavaExec::class) {
         group = LifecycleBasePlugin.VERIFICATION_GROUP
         inputs.dir("src")
         outputs.dir("src")
         description = "Check Kotlin code style."
-        classpath = ktlint
+        classpath(configuration.get())
         main = "com.pinterest.ktlint.Main"
-        args("--android", "src/**/*.kt")
+        args("src/**/*.kt")
     }
     "check" {
-        dependsOn("ktlint")
+        dependsOn(ktlint.get())
     }
     register("ktlintFormat", JavaExec::class) {
         group = "formatting"
         inputs.dir("src")
         outputs.dir("src")
         description = "Fix Kotlin code style deviations."
-        classpath = ktlint
+        classpath(configuration.get())
         main = "com.pinterest.ktlint.Main"
-        args("--android", "-F", "src/**/*.kt")
+        args("-F", "src/**/*.kt")
     }
 }

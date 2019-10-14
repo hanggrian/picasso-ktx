@@ -1,4 +1,4 @@
-package com.hendraanggrian.pikasso.transformations
+package com.hendraanggrian.pikasso.internal
 
 import android.graphics.Bitmap
 import android.graphics.Bitmap.Config.ARGB_8888
@@ -11,17 +11,13 @@ import android.graphics.RectF
 import android.graphics.Shader.TileMode.CLAMP
 import com.squareup.picasso.Transformation
 
-@PublishedApi
-internal class CropRoundedTransformation(
-    private val radius: Float,
-    private val margin: Float
-) : Transformation {
-
-    constructor(radius: Int, margin: Int) : this(radius.toFloat(), margin.toFloat())
+internal class CropRoundedTransformation(private val radius: Float, private val margin: Float) :
+    Transformation {
 
     override fun transform(source: Bitmap): Bitmap {
         val target = createBitmap(source.width, source.height, ARGB_8888)
-        Canvas(target).drawRoundRect(RectF(margin, margin,
+        Canvas(target).drawRoundRect(RectF(
+            margin, margin,
             (source.width - margin),
             (source.height - margin)
         ), radius, radius, Paint(ANTI_ALIAS_FLAG).apply {

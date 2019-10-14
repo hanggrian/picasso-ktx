@@ -1,4 +1,4 @@
-package com.hendraanggrian.pikasso.transformations
+package com.hendraanggrian.pikasso.internal
 
 import android.view.View
 import android.widget.ImageView
@@ -16,8 +16,8 @@ import com.hendraanggrian.pikasso.test.InstrumentedActivity
 import com.hendraanggrian.pikasso.test.InstrumentedTest
 import com.hendraanggrian.pikasso.test.R
 import org.junit.Rule
-import org.junit.Test
 import org.junit.runner.RunWith
+import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
@@ -27,7 +27,8 @@ class TransformationsTest : InstrumentedTest() {
 
     override val activity: InstrumentedActivity get() = rule.activity
 
-    @Test fun transformation() {
+    @Test
+    fun transformation() {
         onView(withId(R.id.imageView)).perform(
             object : ViewAction {
                 override fun getConstraints() = isAssignableFrom(ImageView::class.java)
@@ -37,6 +38,7 @@ class TransformationsTest : InstrumentedTest() {
                     .circle()
                     .into(view as ImageView)
             },
-            delay())
+            delay()
+        )
     }
 }

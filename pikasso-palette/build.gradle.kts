@@ -1,7 +1,7 @@
 plugins {
     android("library")
     kotlin("android")
-    dokka
+    dokka("android")
     `bintray-release`
 }
 
@@ -26,45 +26,50 @@ android {
             java.srcDir("tests/src")
         }
     }
+    lintOptions {
+        isCheckTestSources = true
+    }
     libraryVariants.all {
         generateBuildConfig?.enabled = false
     }
 }
 
-val ktlint by configurations.creating
+val configuration = configurations.register("ktlint")
 
 dependencies {
     api(kotlin("stdlib", VERSION_KOTLIN))
     api(project(":$RELEASE_ARTIFACT-commons"))
     api(androidx("palette", "palette-ktx"))
 
-    testImplementation(junit())
+    testImplementation(kotlin("test-junit", VERSION_KOTLIN))
     androidTestImplementation(project(":testing"))
 
-    ktlint(ktlint())
+    configuration {
+        invoke(ktlint())
+    }
 }
 
 tasks {
-    register<JavaExec>("ktlint") {
+    val ktlint = register("ktlint", JavaExec::class) {
         group = LifecycleBasePlugin.VERIFICATION_GROUP
         inputs.dir("src")
         outputs.dir("src")
         description = "Check Kotlin code style."
-        classpath = ktlint
+        classpath(configuration.get())
         main = "com.pinterest.ktlint.Main"
-        args("--android", "src/**/*.kt")
+        args("src/**/*.kt")
     }
     "check" {
-        dependsOn("ktlint")
+        dependsOn(ktlint.get())
     }
-    register<JavaExec>("ktlintFormat") {
+    register("ktlintFormat", JavaExec::class) {
         group = "formatting"
         inputs.dir("src")
         outputs.dir("src")
         description = "Fix Kotlin code style deviations."
-        classpath = ktlint
+        classpath(configuration.get())
         main = "com.pinterest.ktlint.Main"
-        args("--android", "-F", "src/**/*.kt")
+        args("-F", "src/**/*.kt")
     }
 
     named<org.jetbrains.dokka.gradle.DokkaTask>("dokka") {

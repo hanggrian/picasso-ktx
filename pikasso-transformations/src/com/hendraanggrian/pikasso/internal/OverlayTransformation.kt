@@ -1,4 +1,4 @@
-package com.hendraanggrian.pikasso.transformations
+package com.hendraanggrian.pikasso.internal
 
 import android.graphics.Bitmap
 import android.graphics.Bitmap.Config.ARGB_8888
@@ -11,7 +11,6 @@ import android.graphics.PorterDuffColorFilter
 import androidx.annotation.ColorInt
 import com.squareup.picasso.Transformation
 
-@PublishedApi
 internal class OverlayTransformation(@ColorInt private val color: Int) : Transformation {
 
     override fun transform(source: Bitmap): Bitmap {

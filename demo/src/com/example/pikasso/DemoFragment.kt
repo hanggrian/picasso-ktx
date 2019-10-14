@@ -1,4 +1,4 @@
-package com.hendraanggrian.pikasso.demo
+package com.example.pikasso
 
 import android.os.Bundle
 import androidx.preference.CheckBoxPreference

@@ -6,7 +6,7 @@ buildscript {
     dependencies {
         classpath(android())
         classpath(kotlin("gradle-plugin", VERSION_KOTLIN))
-        classpath(dokka())
+        classpath(dokka("android"))
         classpath(gitPublish())
         classpath(bintrayRelease())
     }
@@ -18,16 +18,13 @@ allprojects {
         jcenter()
         maven("https://jitpack.io")
     }
-    tasks.withType<Javadoc> {
-        isEnabled = false
-    }
+    //tasks.withType<Javadoc> {
+    //    isEnabled = false
+    //}
 }
 
 tasks {
     register<Delete>("clean") {
         delete(rootProject.buildDir)
-    }
-    named<Wrapper>("wrapper") {
-        gradleVersion = VERSION_GRADLE
     }
 }

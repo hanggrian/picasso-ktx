@@ -1,5 +1,3 @@
-@file:Suppress("NOTHING_TO_INLINE")
-
 package com.hendraanggrian.pikasso
 
 import android.widget.ImageView
@@ -8,20 +6,17 @@ import com.squareup.picasso.RequestCreator
 import com.squareup.picasso.Target
 
 /** Build the [Palette] asynchronously. */
-inline fun RequestCreator.palette(
+fun RequestCreator.palette(
     asynchronous: Boolean = true,
-    noinline builder: PaletteTargetBuilder.() -> Unit
-): Target = _PaletteTargetBuilder(asynchronous).also {
+    builder: PaletteTargetBuilder.() -> Unit
+): Target = PaletteTargetBuilderImpl(asynchronous).also {
     it.builder()
     into(it)
 }
 
 /** Build the [Palette] asynchronously from loaded target image. */
-inline fun RequestCreator.palette(
+fun RequestCreator.palette(
     target: ImageView,
     asynchronous: Boolean = true,
-    noinline builder: PaletteCallbackBuilder.() -> Unit
-): Unit = into(target, _PaletteCallbackBuilder(
-    target,
-    asynchronous
-).apply(builder))
+    builder: PaletteCallbackBuilder.() -> Unit
+): Unit = into(target, PaletteCallbackBuilderImpl(target, asynchronous).apply(builder))

@@ -19,8 +19,8 @@ import com.hendraanggrian.pikasso.test.InstrumentedActivity
 import com.hendraanggrian.pikasso.test.InstrumentedTest
 import com.hendraanggrian.pikasso.test.R
 import org.junit.Rule
-import org.junit.Test
 import org.junit.runner.RunWith
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 @RunWith(AndroidJUnit4::class)
@@ -31,7 +31,8 @@ class PaletteTest : InstrumentedTest() {
 
     override val activity: InstrumentedActivity get() = rule.activity
 
-    @Test fun palette() {
+    @Test
+    fun palette() {
         onView(withId(R.id.imageView)).perform(
             object : ViewAction {
                 override fun getConstraints() = isAssignableFrom(ImageView::class.java)
@@ -41,11 +42,16 @@ class PaletteTest : InstrumentedTest() {
                     .palette(view as ImageView) {
                         onSuccess {
                             useVibrant {
-                                assertEquals(Palette.from((view.drawable as BitmapDrawable).bitmap).generate().getVibrantColor(TRANSPARENT), it)
+                                assertEquals(
+                                    Palette.from((view.drawable as BitmapDrawable).bitmap).generate().getVibrantColor(
+                                        TRANSPARENT
+                                    ), it
+                                )
                             }
                         }
                     }
             },
-            delay())
+            delay()
+        )
     }
 }

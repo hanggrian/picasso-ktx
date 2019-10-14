@@ -1,4 +1,4 @@
-package com.hendraanggrian.pikasso.demo
+package com.example.pikasso
 
 import android.content.Context
 import android.util.AttributeSet
@@ -9,7 +9,6 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_demo.*
 
-@Suppress("unused") // used in xml
 class PersistentBottomSheetBehavior @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null
@@ -24,12 +23,16 @@ class PersistentBottomSheetBehavior @JvmOverloads constructor(
                     state == STATE_HIDDEN -> setState(STATE_COLLAPSED) // persistent
                     state == STATE_EXPANDED -> {
                         pasteItem.isVisible = true
-                        toggleExpandItem.icon = getDrawable(this, R.drawable.ic_collapse)
+                        toggleExpandItem.icon = getDrawable(this,
+                            R.drawable.ic_collapse
+                        )
                         toggleExpandItem.title = getString(R.string.collapse)
                     }
                     state == STATE_COLLAPSED -> {
                         pasteItem.isVisible = false
-                        toggleExpandItem.icon = getDrawable(this, R.drawable.ic_expand)
+                        toggleExpandItem.icon = getDrawable(this,
+                            R.drawable.ic_expand
+                        )
                         toggleExpandItem.title = getString(R.string.expand)
                     }
                     activity.drawerLayout.isDrawerOpen(START) -> drawerLayout.closeDrawer(START)

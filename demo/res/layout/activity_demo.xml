@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DemoActivity2">
+    tools:context=".DemoActivity">
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayout"
@@ -87,7 +87,7 @@
         android:layout_height="match_parent"
         app:behavior_hideable="true"
         app:behavior_peekHeight="?actionBarSize"
-        app:layout_behavior="com.hendraanggrian.pikasso.demo.PersistentBottomSheetBehavior">
+        app:layout_behavior="com.example.pikasso.PersistentBottomSheetBehavior">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar2"

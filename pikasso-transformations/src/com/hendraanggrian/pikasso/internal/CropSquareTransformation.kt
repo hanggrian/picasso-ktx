@@ -1,11 +1,10 @@
-package com.hendraanggrian.pikasso.transformations
+package com.hendraanggrian.pikasso.internal
 
 import android.graphics.Bitmap
 import android.graphics.Bitmap.createBitmap
 import com.squareup.picasso.Transformation
 import kotlin.math.min
 
-@PublishedApi
 internal class CropSquareTransformation : Transformation {
 
     private var width = 0

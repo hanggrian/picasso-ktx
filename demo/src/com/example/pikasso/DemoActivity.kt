@@ -1,4 +1,4 @@
-package com.hendraanggrian.pikasso.demo
+package com.example.pikasso
 
 import android.content.ClipDescription
 import android.content.ClipboardManager
@@ -57,8 +57,8 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
         }
 
         picasso = buildPicasso {
-            loggingEnabled(BuildConfig.DEBUG)
-            memoryCache(Cache.NONE)
+            loggingEnabled = BuildConfig.DEBUG
+            memoryCache = Cache.NONE
         }
         drawerToggle = ActionBarDrawerToggle(this, drawerLayout, 0, 0).apply {
             isDrawerIndicatorEnabled = true
@@ -160,7 +160,9 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
                 if (fragment.cropRounded.isChecked) rounded(25.px, 10.px)
                 if (fragment.cropSquare.isChecked) square()
                 if (fragment.grayscale.isChecked) grayscale()
-                if (fragment.mask.isChecked) mask(getDrawable(this@DemoActivity, R.drawable.mask)!!)
+                if (fragment.mask.isChecked) mask(getDrawable(this@DemoActivity,
+                    R.drawable.mask
+                )!!)
                 if (fragment.overlay.isChecked) overlay(Color.RED)
             }
             .palette(photoView) {
@@ -188,11 +190,19 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
             subtitle = "#%06X".format(0xFFFFFF and color)
 
             if ((Color.red(color) + Color.green(color) + Color.blue(color)) / 3 < 127.5) {
-                setTitleTextAppearance(context, R.style.TextAppearance_AppCompat_Small)
-                setSubtitleTextAppearance(context, R.style.TextAppearance_AppCompat_Subhead)
+                setTitleTextAppearance(context,
+                    R.style.TextAppearance_AppCompat_Small
+                )
+                setSubtitleTextAppearance(context,
+                    R.style.TextAppearance_AppCompat_Subhead
+                )
             } else {
-                setTitleTextAppearance(context, R.style.TextAppearance_AppCompat_Small_Inverse)
-                setSubtitleTextAppearance(context, R.style.TextAppearance_AppCompat_Subhead_Inverse)
+                setTitleTextAppearance(context,
+                    R.style.TextAppearance_AppCompat_Small_Inverse
+                )
+                setSubtitleTextAppearance(context,
+                    R.style.TextAppearance_AppCompat_Subhead_Inverse
+                )
             }
         }
     }

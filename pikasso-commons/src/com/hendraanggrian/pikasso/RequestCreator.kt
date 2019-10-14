@@ -12,55 +12,57 @@ import com.squareup.picasso.Target
  *
  * @see RequestCreator.fetch
  */
-inline fun RequestCreator.fetch(
-    builder: CallbackBuilder.() -> Unit
-): Unit = fetch(_Callback().apply(builder))
+fun RequestCreator.fetch(builder: CallbackBuilder.() -> Unit): Unit =
+    fetch(CallbackImpl().apply(builder))
 
 /**
  * Completes the request into an [ImageView] while listening to its callback with Kotlin DSL.
  *
  * @see RequestCreator.into
  */
-inline fun RequestCreator.into(
-    target: ImageView,
-    callback: CallbackBuilder.() -> Unit
-): Unit = into(target, _Callback().apply(callback))
+fun RequestCreator.into(target: ImageView, callback: CallbackBuilder.() -> Unit): Unit =
+    into(target, CallbackImpl().apply(callback))
 
 /**
  * Completes the request into a [Notification] while listening to its callback with Kotlin DSL.
  *
  * @see RequestCreator.into
  */
-inline fun RequestCreator.into(
+fun RequestCreator.into(
     remoteViews: RemoteViews,
     @IdRes viewId: Int,
     notificationId: Int,
     notification: Notification,
     notificationTag: String?,
     callback: CallbackBuilder.() -> Unit
-): Unit = into(remoteViews, viewId, notificationId, notification, notificationTag,
-    _Callback().apply(callback))
+): Unit = into(
+    remoteViews,
+    viewId,
+    notificationId,
+    notification,
+    notificationTag,
+    CallbackImpl().apply(callback)
+)
 
 /**
  * Completes the request into a [RemoteViews] while listening to its callback with Kotlin DSL.
  *
  * @see RequestCreator.into
  */
-inline fun RequestCreator.into(
+fun RequestCreator.into(
     remoteViews: RemoteViews,
     @IdRes viewId: Int,
     appWidgetIds: IntArray,
     callback: CallbackBuilder.() -> Unit
-): Unit = into(remoteViews, viewId, appWidgetIds, _Callback().apply(callback))
+): Unit = into(remoteViews, viewId, appWidgetIds, CallbackImpl().apply(callback))
 
 /**
  * Completes the request into a [Target] with Kotlin DSL, returning the [Target] created.
  *
  * @see RequestCreator.into
  */
-inline fun RequestCreator.into(
-    builder: TargetBuilder.() -> Unit
-): Target = _Target().also {
-    it.builder()
-    into(it)
-}
+fun RequestCreator.into(builder: TargetBuilder.() -> Unit): Target =
+    TargetImpl().also {
+        it.builder()
+        into(it)
+    }

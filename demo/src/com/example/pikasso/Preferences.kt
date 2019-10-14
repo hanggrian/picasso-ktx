@@ -1,4 +1,4 @@
-package com.hendraanggrian.pikasso.demo
+package com.example.pikasso
 
 const val PREFERENCE_INPUT_URL = "input_url"
 const val PREFERENCE_CROP_CIRCLE = "crop_circle"
