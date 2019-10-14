@@ -1,6 +1,6 @@
 $dokka.format:html
 $dokka.linkExtension:html
-$dokka.location:com.hendraanggrian.pikasso$buildPicasso(android.content.Context, kotlin.Function1((com.squareup.picasso.Picasso.Builder, kotlin.Unit)))com.hendraanggrian.pikasso/android.content.-context/build-picasso.html
+$dokka.location:com.hendraanggrian.pikasso$buildPicasso(android.content.Context, kotlin.Function1((com.hendraanggrian.pikasso.PicassoBuilder, kotlin.Unit)))com.hendraanggrian.pikasso/android.content.-context/build-picasso.html
 $dokka.location:com.hendraanggrian.pikasso$fetch(com.squareup.picasso.RequestCreator, kotlin.Function1((com.hendraanggrian.pikasso.CallbackBuilder, kotlin.Unit)))com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/fetch.html
 $dokka.location:com.hendraanggrian.pikasso$into(com.squareup.picasso.RequestCreator, android.widget.ImageView, kotlin.Function1((com.hendraanggrian.pikasso.CallbackBuilder, kotlin.Unit)))com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/into.html
 $dokka.location:com.hendraanggrian.pikasso$into(com.squareup.picasso.RequestCreator, android.widget.RemoteViews, kotlin.Int, kotlin.Int, android.app.Notification, kotlin.String, kotlin.Function1((com.hendraanggrian.pikasso.CallbackBuilder, kotlin.Unit)))com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/into.html
