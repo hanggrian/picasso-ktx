@@ -30,7 +30,7 @@
                 android:layout_gravity="center"
                 android:visibility="gone" />
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize" />
@@ -44,37 +44,37 @@
             android:orientation="vertical"
             android:paddingBottom="?actionBarSize">
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/vibrantToolbar"
                 style="@style/App.PaletteToolbar"
                 app:title="@string/vibrant" />
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/lightVibrantToolbar"
                 style="@style/App.PaletteToolbar"
                 app:title="@string/light_vibrant" />
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/darkVibrantToolbar"
                 style="@style/App.PaletteToolbar"
                 app:title="@string/dark_vibrant" />
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/mutedToolbar"
                 style="@style/App.PaletteToolbar"
                 app:title="@string/muted" />
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/lightMutedToolbar"
                 style="@style/App.PaletteToolbar"
                 app:title="@string/light_muted" />
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/darkMutedToolbar"
                 style="@style/App.PaletteToolbar"
                 app:title="@string/dark_muted" />
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/dominantToolbar"
                 style="@style/App.PaletteToolbar"
                 app:title="@string/dominant" />
@@ -89,7 +89,7 @@
         app:behavior_peekHeight="?actionBarSize"
         app:layout_behavior="com.example.pikasso.PersistentBottomSheetBehavior">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar2"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
@@ -103,7 +103,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"

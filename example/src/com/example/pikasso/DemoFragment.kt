@@ -7,7 +7,6 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 
 class DemoFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener {
-
     lateinit var input: EditTextPreference
     lateinit var cropCircle: CheckBoxPreference
     lateinit var cropRounded: CheckBoxPreference
@@ -37,7 +36,7 @@ class DemoFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeLi
 
     @Suppress("NOTHING_TO_INLINE", "UNCHECKED_CAST")
     private inline fun <T : Preference> find(key: CharSequence): T =
-        findPreference(key) as T
+        findPreference<T>(key) as T
 
     private inline fun <T : Preference> find(key: CharSequence, block: T.() -> Unit): T =
         find<T>(key).apply(block)

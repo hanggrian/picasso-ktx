@@ -19,7 +19,9 @@ import androidx.core.util.PatternsCompat.WEB_URL
 import androidx.core.view.GravityCompat.START
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetBehavior.*
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
+import com.google.android.material.bottomsheet.BottomSheetBehavior.from
 import com.hendraanggrian.material.errorbar.Errorbar
 import com.hendraanggrian.material.errorbar.indefiniteErrorbar
 import com.hendraanggrian.pikasso.buildPicasso
@@ -35,7 +37,6 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_demo.*
 
 class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
-
     private val fragment = DemoFragment()
     private lateinit var sheetBehavior: BottomSheetBehavior<AppBarLayout>
 
@@ -94,10 +95,8 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
             }
         }
 
-        errorbar = photoView.indefiniteErrorbar("Expand panel below to start loading") {
-            setAction(R.string.expand) {
-                sheetBehavior.state = STATE_EXPANDED
-            }
+        errorbar = photoView.indefiniteErrorbar("Expand panel below to start loading", R.string.expand) {
+            sheetBehavior.state = STATE_EXPANDED
         }
     }
 
@@ -129,7 +128,7 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
         drawerToggle.syncState()
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration?) {
+    override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         drawerToggle.onConfigurationChanged(newConfig)
     }
@@ -160,9 +159,12 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
                 if (fragment.cropRounded.isChecked) rounded(25.px, 10.px)
                 if (fragment.cropSquare.isChecked) square()
                 if (fragment.grayscale.isChecked) grayscale()
-                if (fragment.mask.isChecked) mask(getDrawable(this@DemoActivity,
-                    R.drawable.mask
-                )!!)
+                if (fragment.mask.isChecked) mask(
+                    getDrawable(
+                        this@DemoActivity,
+                        R.drawable.mask
+                    )!!
+                )
                 if (fragment.overlay.isChecked) overlay(Color.RED)
             }
             .palette(photoView) {
@@ -190,17 +192,21 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
             subtitle = "#%06X".format(0xFFFFFF and color)
 
             if ((Color.red(color) + Color.green(color) + Color.blue(color)) / 3 < 127.5) {
-                setTitleTextAppearance(context,
+                setTitleTextAppearance(
+                    context,
                     R.style.TextAppearance_AppCompat_Small
                 )
-                setSubtitleTextAppearance(context,
+                setSubtitleTextAppearance(
+                    context,
                     R.style.TextAppearance_AppCompat_Subhead
                 )
             } else {
-                setTitleTextAppearance(context,
+                setTitleTextAppearance(
+                    context,
                     R.style.TextAppearance_AppCompat_Small_Inverse
                 )
-                setSubtitleTextAppearance(context,
+                setSubtitleTextAppearance(
+                    context,
                     R.style.TextAppearance_AppCompat_Subhead_Inverse
                 )
             }

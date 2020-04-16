@@ -1,4 +1,4 @@
-package com.hendraanggrian.pikasso.internal
+package com.hendraanggrian.pikasso.transformations
 
 import android.view.View
 import android.widget.ImageView

@@ -1,7 +1,7 @@
 plugins {
     android("library")
     kotlin("android")
-    dokka("android")
+    dokka
     `bintray-release`
 }
 
@@ -39,7 +39,7 @@ val configuration = configurations.register("ktlint")
 dependencies {
     api(kotlin("stdlib", VERSION_KOTLIN))
     api(project(":$RELEASE_ARTIFACT-commons"))
-    api(androidx("palette", "palette-ktx"))
+    api(androidx("palette", "palette-ktx", "1.0.0"))
 
     testImplementation(kotlin("test-junit", VERSION_KOTLIN))
     androidTestImplementation(project(":testing"))

@@ -6,7 +6,7 @@ buildscript {
     dependencies {
         classpath(android())
         classpath(kotlin("gradle-plugin", VERSION_KOTLIN))
-        classpath(dokka("android"))
+        classpath(dokka())
         classpath(gitPublish())
         classpath(bintrayRelease())
     }
@@ -23,8 +23,6 @@ allprojects {
     //}
 }
 
-tasks {
-    register<Delete>("clean") {
-        delete(rootProject.buildDir)
-    }
+tasks.register<Delete>("clean") {
+    delete(rootProject.buildDir)
 }
