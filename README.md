@@ -9,30 +9,20 @@ Pikasso
 ![demo_palette][demo_palette]
 
 Kotlin extensions for Picasso image loader.
-
-Consists of several parts:
- * *Pikasso Commons*: invoke callback and target with Kotlin DSL.
- * *Pikasso Transformations*: pre-loaded transformations.
- * *Pikasso Palette*: use support library Palette alongside Picasso.
+* Invoke callback and target with Kotlin DSL.
+* Use pre-loaded transformations with extension functions.
+* Supports material components Palette alongside too.
 
 Download
 --------
-All artifacts are hosted on [jcenter].
-To download all of them, use main library:
-
 ```gradle
 dependencies {
     compile "com.hendraanggrian.pikasso:pikasso:$version"
-}
-```
 
-Or download separate library if only specific feature is desired:
-
-```gradle
-dependencies {
-    compile "com.hendraanggrian.pikasso:pikasso-commons:$version"
+    // or download separately
+    compile "com.hendraanggrian.pikasso:pikasso-commons:$version"
     compile "com.hendraanggrian.pikasso:pikasso-transformations:$version"
-    compile "com.hendraanggrian.pikasso:pikasso-palette:$version" 
+    compile "com.hendraanggrian.pikasso:pikasso-palette:$version"
 }
 ```
 
@@ -47,9 +37,7 @@ picasso.load(url).into(imageView)
 val myPicasso = buildPicasso {
     loggingEnabled(true)
     memoryCache(Cache.NONE)
-    listener { picasso, uri, exception ->
-
-    }
+    listener { picasso, uri, exception -> }
 }
 myPicasso.load(url).into(imageView)
 ```
@@ -90,7 +78,7 @@ picasso.load(url)
     .into(imageView)
 ```
 
-#### Available transformations
+### Available transformations
 |              |                                                         Transformations             |
 |--------------|-------------------------------------------------------------------------------------|
 | crop square  | `square()`                                                                          |
@@ -148,6 +136,16 @@ License
     See the License for the specific language governing permissions and
     limitations under the License.
 
+[demo_transformations]: /art/demo_transformations.gif
+[demo_palette]: /art/demo_palette.gif
+ns and
+    limitations under the License.
+
 [jcenter]: https://bintray.com/hendraanggrian/pikasso
 [demo_transformations]: /art/demo_transformations.gif
 [demo_palette]: /art/demo_palette.gif
+mo_palette.gif
+ansformations.gif
+[demo_palette]: /art/demo_palette.gif
+mo_palette.gif
+
