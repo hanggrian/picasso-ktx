@@ -4,27 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DemoActivity">
+    tools:context=".ExampleActivity">
 
     <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawerLayout"
+        android:id="@+id/drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- CoordinatorLayout is a suitable parent of Errobar. -->
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:animateLayoutChanges="true">
 
             <ImageView
-                android:id="@+id/photoView"
+                android:id="@+id/photo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:ignore="ContentDescription" />
 
             <ProgressBar
-                android:id="@+id/progressBar"
+                android:id="@+id/progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -47,42 +46,42 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/vibrantToolbar"
                 style="@style/App.PaletteToolbar"
-                app:title="@string/vibrant" />
+                app:title="Vibrant" />
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/lightVibrantToolbar"
                 style="@style/App.PaletteToolbar"
-                app:title="@string/light_vibrant" />
+                app:title="Light vibrant" />
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/darkVibrantToolbar"
                 style="@style/App.PaletteToolbar"
-                app:title="@string/dark_vibrant" />
+                app:title="Dark vibrant" />
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/mutedToolbar"
                 style="@style/App.PaletteToolbar"
-                app:title="@string/muted" />
+                app:title="Muted" />
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/lightMutedToolbar"
                 style="@style/App.PaletteToolbar"
-                app:title="@string/light_muted" />
+                app:title="Light muted" />
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/darkMutedToolbar"
                 style="@style/App.PaletteToolbar"
-                app:title="@string/dark_muted" />
+                app:title="Dark muted" />
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/dominantToolbar"
                 style="@style/App.PaletteToolbar"
-                app:title="@string/dominant" />
+                app:title="Dominant" />
         </LinearLayout>
     </androidx.drawerlayout.widget.DrawerLayout>
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:behavior_hideable="true"
@@ -95,10 +94,10 @@
             android:layout_height="?actionBarSize"
             android:foreground="?selectableItemBackground"
             android:onClick="toggleExpand"
-            app:title="@string/no_image" />
+            app:title="No image" />
 
         <FrameLayout
-            android:id="@+id/frameLayout"
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />
@@ -110,6 +109,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:onClick="load"
-            android:text="@string/load" />
+            android:text="Load" />
     </com.google.android.material.appbar.AppBarLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

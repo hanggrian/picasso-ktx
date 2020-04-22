@@ -16,7 +16,7 @@ android {
     sourceSets {
         getByName("main") {
             manifest.srcFile("AndroidManifest.xml")
-            java.srcDirs("src")
+            java.srcDir("src")
             res.srcDir("res")
             resources.srcDir("src")
         }
@@ -25,9 +25,6 @@ android {
             manifest.srcFile("tests/AndroidManifest.xml")
             java.srcDir("tests/src")
         }
-    }
-    lintOptions {
-        isCheckTestSources = true
     }
     libraryVariants.all {
         generateBuildConfig?.enabled = false
@@ -39,7 +36,7 @@ val configuration = configurations.register("ktlint")
 dependencies {
     api(kotlin("stdlib", VERSION_KOTLIN))
     api(project(":$RELEASE_ARTIFACT-commons"))
-    api(androidx("palette", "palette-ktx", "1.0.0"))
+    api(androidx("palette", "palette-ktx", VERSION_ANDROIDX))
 
     testImplementation(kotlin("test-junit", VERSION_KOTLIN))
     androidTestImplementation(project(":testing"))

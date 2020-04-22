@@ -2,6 +2,7 @@ plugins {
     android("application")
     kotlin("android")
     kotlin("android.extensions")
+    kotlin("kapt")
 }
 
 android {
@@ -16,7 +17,7 @@ android {
     sourceSets {
         getByName("main") {
             manifest.srcFile("AndroidManifest.xml")
-            java.srcDirs("src")
+            java.srcDir("src")
             res.srcDir("res")
             resources.srcDir("src")
         }
@@ -44,5 +45,8 @@ dependencies {
     implementation(androidx("core"))
     implementation(androidx("appcompat"))
     implementation(androidx("preference"))
-    implementation(hendraanggrian("material", "errorbar-ktx", VERSION_ANDROIDX))
+
+    implementation(hendraanggrian("material", "bannerbar-ktx", "1.1.0"))
+    implementation(hendraanggrian("prefy", "prefy-android", VERSION_PREFY))
+    kapt(hendraanggrian("prefy", "prefy-compiler", VERSION_PREFY))
 }

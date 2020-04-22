@@ -13,10 +13,13 @@ android {
     sourceSets {
         getByName("main") {
             manifest.srcFile("AndroidManifest.xml")
-            java.srcDirs("src")
+            java.srcDir("src")
             res.srcDir("res")
             resources.srcDir("src")
         }
+    }
+    lintOptions {
+        isAbortOnError = false
     }
     libraryVariants.all {
         generateBuildConfig?.enabled = false

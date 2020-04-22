@@ -22,8 +22,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.from
-import com.hendraanggrian.material.errorbar.Errorbar
-import com.hendraanggrian.material.errorbar.indefiniteErrorbar
+import com.google.android.material.snackbar.Bannerbar
+import com.google.android.material.snackbar.bannerbar
 import com.hendraanggrian.pikasso.buildPicasso
 import com.hendraanggrian.pikasso.circle
 import com.hendraanggrian.pikasso.grayscale
@@ -32,57 +32,78 @@ import com.hendraanggrian.pikasso.overlay
 import com.hendraanggrian.pikasso.palette
 import com.hendraanggrian.pikasso.rounded
 import com.hendraanggrian.pikasso.square
+import com.hendraanggrian.prefy.BindPreference
+import com.hendraanggrian.prefy.PreferencesSaver
+import com.hendraanggrian.prefy.Prefy
+import com.hendraanggrian.prefy.android.AndroidPreferences
+import com.hendraanggrian.prefy.android.get
+import com.hendraanggrian.prefy.bind
 import com.squareup.picasso.Cache
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_demo.*
+import kotlinx.android.synthetic.main.activity_example.*
 
-class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
-    private val fragment = DemoFragment()
+class ExampleActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
+    @BindPreference lateinit var inputUrl: String
+    @BindPreference @JvmField var isCropCircle = false
+    @BindPreference @JvmField var isCropRounded = false
+    @BindPreference @JvmField var isCropSquare = false
+    @BindPreference @JvmField var isGrayscale = false
+    @BindPreference @JvmField var isMask = false
+    @BindPreference @JvmField var isOverlay = false
+
+    private val fragment = ExampleFragment()
     private lateinit var sheetBehavior: BottomSheetBehavior<AppBarLayout>
 
     private lateinit var picasso: Picasso
     private lateinit var drawerToggle: ActionBarDrawerToggle
 
+    private lateinit var preferences: AndroidPreferences
+    private lateinit var saver: PreferencesSaver
+
     lateinit var pasteItem: MenuItem
     lateinit var toggleExpandItem: MenuItem
-    lateinit var errorbar: Errorbar
+    lateinit var bannerbar: Bannerbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_demo)
+        setContentView(R.layout.activity_example)
         setSupportActionBar(toolbar)
         supportActionBar!!.run {
             title = null
             setDisplayHomeAsUpEnabled(true)
             setHomeButtonEnabled(true)
         }
+        preferences = Prefy[this]
+        saver = preferences.bind(this)
 
         picasso = buildPicasso {
             loggingEnabled = BuildConfig.DEBUG
             memoryCache = Cache.NONE
         }
-        drawerToggle = ActionBarDrawerToggle(this, drawerLayout, 0, 0).apply {
+        drawerToggle = ActionBarDrawerToggle(this, drawer, 0, 0).apply {
             isDrawerIndicatorEnabled = true
         }
-        drawerLayout.addDrawerListener(drawerToggle)
+        drawer.addDrawerListener(drawerToggle)
 
-        sheetBehavior = from(appBarLayout)
+        sheetBehavior = from(appbar)
         supportFragmentManager.beginTransaction()
-            .replace(R.id.frameLayout, fragment)
+            .replace(R.id.container, fragment)
             .commitNow()
-        onSharedPreferenceChanged(fragment.preferenceScreen.sharedPreferences, fragment.input.key)
+        onSharedPreferenceChanged(preferences, "inputUrl")
 
-        toolbar2.inflateMenu(R.menu.activity_demo)
+        toolbar2.inflateMenu(R.menu.activity_example)
         pasteItem = toolbar2.menu.findItem(R.id.pasteItem).apply {
             setOnMenuItemClickListener {
+                saver = preferences.bind(this)
                 fragment.listView.smoothScrollToPosition(0)
                 (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).run {
                     if (hasPrimaryClip() && primaryClipDescription!!
                             .hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)
                     ) {
                         val clipboard = primaryClip!!.getItemAt(0).text.toString()
-                        fragment.input.text = clipboard
-                        fragment.onPreferenceChange(fragment.input, clipboard) // trigger
+                        inputUrl = clipboard
+                        // fragment.onPreferenceChange(fragment.input, clipboard) // trigger
+                        saver.save()
                     }
                 }
                 true
@@ -95,8 +116,8 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
             }
         }
 
-        errorbar = photoView.indefiniteErrorbar("Expand panel below to start loading", R.string.expand) {
-            sheetBehavior.state = STATE_EXPANDED
+        bannerbar = appbar.bannerbar("Expand panel below to start loading") {
+            "Expand" { sheetBehavior.state = STATE_EXPANDED }
         }
     }
 
@@ -112,13 +133,13 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
 
     override fun onBackPressed() = when {
         sheetBehavior.state == STATE_EXPANDED -> sheetBehavior.state = STATE_COLLAPSED
-        drawerLayout.isDrawerOpen(START) -> drawerLayout.closeDrawer(START)
+        drawer.isDrawerOpen(START) -> drawer.closeDrawer(START)
         else -> super.onBackPressed()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            drawerLayout.openDrawer(START)
+            drawer.openDrawer(START)
         }
         return false
     }
@@ -134,7 +155,7 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        if (key == fragment.input.key) {
+        if (key == "inputUrl") {
             button.isEnabled = WEB_URL.toRegex().matches(sharedPreferences.getString(key, "")!!)
         }
     }
@@ -147,27 +168,21 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
     }
 
     fun load(@Suppress("UNUSED_PARAMETER") view: View) {
-        if (errorbar.isShown) {
-            errorbar.dismiss()
-        }
-        toolbar2.title = getString(R.string.loading)
-        progressBar.visibility = View.VISIBLE
+        saver = preferences.bind(this)
+        if (bannerbar.isShown) bannerbar.dismiss()
+        toolbar2.title = "Loading"
+        progress.visibility = View.VISIBLE
         sheetBehavior.state = STATE_COLLAPSED
-        picasso.load(fragment.input.text)
+        picasso.load(inputUrl)
             .apply {
-                if (fragment.cropCircle.isChecked) circle()
-                if (fragment.cropRounded.isChecked) rounded(25.px, 10.px)
-                if (fragment.cropSquare.isChecked) square()
-                if (fragment.grayscale.isChecked) grayscale()
-                if (fragment.mask.isChecked) mask(
-                    getDrawable(
-                        this@DemoActivity,
-                        R.drawable.mask
-                    )!!
-                )
-                if (fragment.overlay.isChecked) overlay(Color.RED)
+                if (isCropCircle) circle()
+                if (isCropRounded) rounded(25.px, 10.px)
+                if (isCropSquare) square()
+                if (isGrayscale) grayscale()
+                if (isMask) mask(getDrawable(this@ExampleActivity, R.drawable.mask)!!)
+                if (isOverlay) overlay(Color.RED)
             }
-            .palette(photoView) {
+            .palette(photo) {
                 onSuccess {
                     useVibrant { vibrantToolbar assign it }
                     useLightVibrant { lightVibrantToolbar assign it }
@@ -176,12 +191,12 @@ class DemoActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
                     useLightMuted { lightMutedToolbar assign it }
                     useDarkMuted { darkMutedToolbar assign it }
                     useDominant { dominantToolbar assign it }
-                    toolbar2.title = getString(R.string.success)
-                    progressBar.visibility = View.GONE
+                    toolbar2.title = "Success"
+                    progress.visibility = View.GONE
                 }
                 onError {
-                    toolbar2.title = getString(R.string.error)
-                    progressBar.visibility = View.GONE
+                    toolbar2.title = "Error"
+                    progress.visibility = View.GONE
                 }
             }
     }

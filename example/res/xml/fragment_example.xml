@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.preference.PreferenceCategory android:title="Input URL">
+        <androidx.preference.EditTextPreference
+            android:key="inputUrl"
+            android:title="Input URL" />
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory android:title="Transformations">
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="isCropCircle"
+            android:title="Crop circle" />
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="isCropRounded"
+            android:title="Crop rounded" />
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="isCropSquare"
+            android:title="Crop square" />
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="isGrayscale"
+            android:title="Grayscale" />
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="isMask"
+            android:title="Mask" />
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:key="isOverlay"
+            android:title="Overlay" />
+    </androidx.preference.PreferenceCategory>
+</androidx.preference.PreferenceScreen>
