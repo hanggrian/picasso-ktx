@@ -1,7 +1,7 @@
-[![bintray](https://img.shields.io/badge/bintray-pikasso-brightgreen.svg)](https://bintray.com/hendraanggrian/pikasso)
 [![download](https://api.bintray.com/packages/hendraanggrian/pikasso/pikasso/images/download.svg) ](https://bintray.com/hendraanggrian/pikasso/pikasso/_latestVersion)
 [![build](https://travis-ci.com/hendraanggrian/pikasso.svg)](https://travis-ci.com/hendraanggrian/pikasso)
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
+[![license](https://img.shields.io/github/license/hendraanggrian/pikasso)](http://www.apache.org/licenses/LICENSE-2.0)
 
 Pikasso
 =======
@@ -120,32 +120,5 @@ picasso.load(url).palette(imageView) {
 }
 ```
 
-License
--------
-    Copyright 2018 Hendra Anggrian
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-
 [demo_transformations]: /art/demo_transformations.gif
 [demo_palette]: /art/demo_palette.gif
-ns and
-    limitations under the License.
-
-[jcenter]: https://bintray.com/hendraanggrian/pikasso
-[demo_transformations]: /art/demo_transformations.gif
-[demo_palette]: /art/demo_palette.gif
-mo_palette.gif
-ansformations.gif
-[demo_palette]: /art/demo_palette.gif
-mo_palette.gif
-
