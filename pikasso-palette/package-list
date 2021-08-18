@@ -1,6 +1,0 @@
-$dokka.format:html
-$dokka.linkExtension:html
-$dokka.location:com.hendraanggrian.pikasso$palette#com.squareup.picasso.RequestCreatorcom.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/palette.html
-$dokka.location:com.hendraanggrian.pikasso$palette(com.squareup.picasso.RequestCreator, android.widget.ImageView, kotlin.Boolean, kotlin.Function1((com.hendraanggrian.pikasso.PaletteCallbackBuilder, kotlin.Unit)))com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/palette.html
-$dokka.location:com.hendraanggrian.pikasso$palette(com.squareup.picasso.RequestCreator, kotlin.Boolean, kotlin.Function1((com.hendraanggrian.pikasso.PaletteTargetBuilder, kotlin.Unit)))com.hendraanggrian.pikasso/com.squareup.picasso.-request-creator/palette.html
-com.hendraanggrian.pikasso
