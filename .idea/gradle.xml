@@ -4,19 +4,16 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="delegatedBuild" value="true" />
-        <option name="testRunner" value="PLATFORM" />
+        <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="11" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/buildSrc" />
-            <option value="$PROJECT_DIR$/example" />
-            <option value="$PROJECT_DIR$/pikasso" />
-            <option value="$PROJECT_DIR$/pikasso-commons" />
-            <option value="$PROJECT_DIR$/pikasso-palette" />
-            <option value="$PROJECT_DIR$/pikasso-transformations" />
+            <option value="$PROJECT_DIR$/picasso-ktx" />
+            <option value="$PROJECT_DIR$/picasso-palette-ktx" />
             <option value="$PROJECT_DIR$/testing" />
             <option value="$PROJECT_DIR$/website" />
           </set>

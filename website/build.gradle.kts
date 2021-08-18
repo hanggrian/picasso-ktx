@@ -3,16 +3,23 @@ plugins {
 }
 
 gitPublish {
-    repoUri.set(RELEASE_WEBSITE)
+    repoUri.set("git@github.com:hendraanggrian/$RELEASE_ARTIFACT.git")
     branch.set("gh-pages")
     contents.from(
         "src",
-        "../$RELEASE_ARTIFACT-commons/build/docs",
-        "../$RELEASE_ARTIFACT-transformations/build/docs",
-        "../$RELEASE_ARTIFACT-palette/build/docs")
+        "../$RELEASE_ARTIFACT/build/dokka",
+        "../picasso-palette-ktx/build/dokka"
+    )
 }
 
-tasks["gitPublishCopy"].dependsOn(
-    ":$RELEASE_ARTIFACT-commons:dokka",
-    ":$RELEASE_ARTIFACT-transformations:dokka",
-    ":$RELEASE_ARTIFACT-palette:dokka")
+tasks {
+    register("clean") {
+        delete(buildDir)
+    }
+    gitPublishCopy {
+        dependsOn(
+            ":$RELEASE_ARTIFACT:dokkaHtml",
+            ":picasso-palette-ktx:dokkaHtml"
+        )
+    }
+}
