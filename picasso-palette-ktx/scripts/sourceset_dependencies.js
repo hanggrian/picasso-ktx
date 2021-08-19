@@ -1,1 +1,0 @@
-sourceset_dependencies='{":picasso-palette-ktx:dokkaHtml/androidTestRelease":[],":picasso-palette-ktx:dokkaHtml/debug":[],":picasso-palette-ktx:dokkaHtml/main":[],":picasso-palette-ktx:dokkaHtml/release":[]}'
