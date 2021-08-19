@@ -10,7 +10,7 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-30.0.2
+    - build-tools-31.0.0
     - android-30
     - android-22
     - extra-google-google_play_services
