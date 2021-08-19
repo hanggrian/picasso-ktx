@@ -5,11 +5,7 @@ plugins {
 gitPublish {
     repoUri.set("git@github.com:hendraanggrian/$RELEASE_ARTIFACT.git")
     branch.set("gh-pages")
-    contents.from(
-        "src",
-        "../$RELEASE_ARTIFACT/build/dokka",
-        "../picasso-palette-ktx/build/dokka"
-    )
+    contents.from("src", "../$RELEASE_ARTIFACT/build/dokka")
 }
 
 tasks {
@@ -17,9 +13,6 @@ tasks {
         delete(buildDir)
     }
     gitPublishCopy {
-        dependsOn(
-            ":$RELEASE_ARTIFACT:dokkaHtml",
-            ":picasso-palette-ktx:dokkaHtml"
-        )
+        dependsOn(":$RELEASE_ARTIFACT:dokkaHtml")
     }
 }

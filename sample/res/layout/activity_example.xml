@@ -6,79 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".ExampleActivity">
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawer"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <ImageView
+            android:id="@+id/photo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:animateLayoutChanges="true">
+            tools:ignore="ContentDescription" />
 
-            <ImageView
-                android:id="@+id/photo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:ignore="ContentDescription" />
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
 
-            <ProgressBar
-                android:id="@+id/progress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:visibility="gone" />
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize" />
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-        <LinearLayout
-            android:layout_width="256dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="?android:windowBackground"
-            android:orientation="vertical"
-            android:paddingBottom="?actionBarSize">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/vibrantToolbar"
-                style="@style/App.PaletteToolbar"
-                app:title="Vibrant" />
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/lightVibrantToolbar"
-                style="@style/App.PaletteToolbar"
-                app:title="Light vibrant" />
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/darkVibrantToolbar"
-                style="@style/App.PaletteToolbar"
-                app:title="Dark vibrant" />
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/mutedToolbar"
-                style="@style/App.PaletteToolbar"
-                app:title="Muted" />
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/lightMutedToolbar"
-                style="@style/App.PaletteToolbar"
-                app:title="Light muted" />
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/darkMutedToolbar"
-                style="@style/App.PaletteToolbar"
-                app:title="Dark muted" />
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/dominantToolbar"
-                style="@style/App.PaletteToolbar"
-                app:title="Dominant" />
-        </LinearLayout>
-    </androidx.drawerlayout.widget.DrawerLayout>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -86,7 +36,7 @@
         android:layout_height="match_parent"
         app:behavior_hideable="true"
         app:behavior_peekHeight="?actionBarSize"
-        app:layout_behavior="com.example.pikasso.PersistentBottomSheetBehavior">
+        app:layout_behavior="com.example.picasso.PersistentBottomSheetBehavior">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar2"

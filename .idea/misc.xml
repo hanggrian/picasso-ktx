@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="picasso-ktx/tests/res/layout/activity_instrumented.xml" value="0.1651469098277609" />
+        <entry key="picasso-ktx/tests/res/layout/activity_test.xml" value="0.1651469098277609" />
+        <entry key="sample/res/layout/activity_example.xml" value="0.1651469098277609" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state>

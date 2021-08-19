@@ -13,8 +13,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/picasso-ktx" />
-            <option value="$PROJECT_DIR$/picasso-palette-ktx" />
-            <option value="$PROJECT_DIR$/testing" />
+            <option value="$PROJECT_DIR$/sample" />
             <option value="$PROJECT_DIR$/website" />
           </set>
         </option>

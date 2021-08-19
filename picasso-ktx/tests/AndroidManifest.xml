@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.hendraanggrian.picasso" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.hendraanggrian.picasso">
+
+    <uses-sdk tools:overrideLibrary="androidx.test, android.app, androidx.test.rule, androidx.test.espresso, androidx.test.espresso.idling" />
+
+    <application android:theme="@style/Theme.AppCompat.DayNight">
+        <uses-library android:name="android.test.runner" />
+        <activity android:name=".TestActivity" />
+    </application>
+</manifest>

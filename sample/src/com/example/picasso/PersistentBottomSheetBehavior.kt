@@ -1,4 +1,4 @@
-package com.example.pikasso
+package com.example.picasso
 
 import android.content.Context
 import android.util.AttributeSet
@@ -19,19 +19,18 @@ class PersistentBottomSheetBehavior @JvmOverloads constructor(
         addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(view: View, i: Float) {}
             override fun onStateChanged(view: View, state: Int) = activity.run {
-                when {
-                    state == STATE_HIDDEN -> setState(STATE_COLLAPSED) // persistent
-                    state == STATE_EXPANDED -> {
+                when (state) {
+                    STATE_HIDDEN -> setState(STATE_COLLAPSED) // persistent
+                    STATE_EXPANDED -> {
                         pasteItem.isVisible = true
                         toggleExpandItem.icon = getDrawable(this, R.drawable.ic_collapse)
                         toggleExpandItem.title = "Collapse"
                     }
-                    state == STATE_COLLAPSED -> {
+                    STATE_COLLAPSED -> {
                         pasteItem.isVisible = false
                         toggleExpandItem.icon = getDrawable(this, R.drawable.ic_expand)
                         toggleExpandItem.title = "Expand"
                     }
-                    activity.drawer.isDrawerOpen(START) -> drawer.closeDrawer(START)
                 }
             }
         })

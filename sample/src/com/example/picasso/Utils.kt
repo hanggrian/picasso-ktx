@@ -1,4 +1,4 @@
-package com.example.pikasso
+package com.example.picasso
 
 import android.content.res.Resources.getSystem
 import android.util.DisplayMetrics.DENSITY_DEFAULT

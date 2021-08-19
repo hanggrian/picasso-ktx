@@ -1,4 +1,4 @@
-package com.example.pikasso
+package com.example.picasso
 
 import android.os.Bundle
 import androidx.preference.EditTextPreference

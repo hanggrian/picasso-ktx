@@ -12,10 +12,11 @@ android {
         targetSdk = SDK_TARGET
         versionCode = 1
         versionName = RELEASE_VERSION
-        applicationId = "com.example.$RELEASE_ARTIFACT"
+        applicationId = "com.example.picasso"
+        multiDexEnabled = true
     }
     sourceSets {
-        getByName("main") {
+        named("main") {
             manifest.srcFile("AndroidManifest.xml")
             java.srcDir("src")
             res.srcDir("res")
@@ -23,16 +24,16 @@ android {
         }
     }
     buildTypes {
-        getByName("debug") {
+        named("debug") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard.pro")
         }
-        getByName("release") {
+        named("release") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard.pro")
         }
     }
-    lintOptions {
+    lint {
         isAbortOnError = false
     }
 }
@@ -40,13 +41,12 @@ android {
 dependencies {
     implementation(project(":$RELEASE_ARTIFACT"))
     implementation(kotlin("stdlib", VERSION_KOTLIN))
-
     implementation(material())
+    implementation(androidx("multidex", version = VERSION_MULTIDEX))
     implementation(androidx("core"))
     implementation(androidx("appcompat"))
-    implementation(androidx("preference"))
-
-    implementation(hendraanggrian("material", "bannerbar-ktx", "1.1.0"))
-    implementation(hendraanggrian("prefy", "prefy-android", VERSION_PREFY))
-    kapt(hendraanggrian("prefy", "prefy-compiler", VERSION_PREFY))
+    implementation(androidx("preference", "preference-ktx", "1.1.1"))
+    implementation(hendraanggrian("material", "bannerbar-ktx", "$VERSION_ANDROIDX-SNAPSHOT"))
+    implementation(hendraanggrian("auto", "prefs-android", VERSION_PREFY))
+    kapt(hendraanggrian("auto", "prefs-compiler", VERSION_PREFY))
 }

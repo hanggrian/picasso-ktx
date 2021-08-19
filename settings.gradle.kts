@@ -1,5 +1,3 @@
 include("picasso-ktx")
-include("picasso-palette-ktx")
-include("testing")
 include("website")
-// include("sample")
+include("sample")

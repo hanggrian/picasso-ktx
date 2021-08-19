@@ -19,12 +19,11 @@ Download
 ```gradle
 dependencies {
     compile "com.hendraanggrian.appcompat:picasso-ktx:$version"
-    compile "com.hendraanggrian.appcompat:picasso-palette-ktx:$version"
 }
 ```
 
-Main Usage
-----------
+Usage
+-----
 
 ### Common
 
@@ -86,37 +85,3 @@ picasso.load(url)
 | crop rounded | `rounded(radius)`<br> `rounded(radius, margin)<br> rounded(radius, margin, usedDp)` |
 | overlay      | `overlay(color, alpha)`<br> `overlay(context, colorRes, alpha)`                     |
 | grayscale    | `grayscale()`                                                                       |
-
-Palette Extensions
-------------------
-
-Get a palette synchronously from `RequestCreator`.
-
-```kotlin
-val palette = picasso.load(url).palette
-val vibrant = palette.getVibrantColor(defaultColor)
-```
-
-Or asynchronously.
-
-```kotlin
-picasso.load(url).palette {
-    onLoaded { bitmap, from ->
-        useVibrant {
-            title.setTextColor(it)
-        }
-    }
-}
-```
-
-Alternatively, you can also load image to target image and extract its palette. 
-
-```kotlin
-picasso.load(url).palette(imageView) {
-    onSuccess {
-        useMuted {
-            layout.setBackgroundColor(it)
-        }
-    }
-}
-```

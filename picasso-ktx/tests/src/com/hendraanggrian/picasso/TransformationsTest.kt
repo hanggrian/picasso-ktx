@@ -10,8 +10,6 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
-import com.hendraanggrian.picasso.test.InstrumentedActivity
-import com.hendraanggrian.picasso.test.InstrumentedTest
 import com.hendraanggrian.picasso.test.R
 import org.junit.Rule
 import org.junit.runner.RunWith
@@ -19,11 +17,9 @@ import kotlin.test.Test
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class TransformationsTest : InstrumentedTest() {
+class TransformationsTest {
 
-    @Rule @JvmField var rule = ActivityTestRule(InstrumentedActivity::class.java)
-
-    override val activity: InstrumentedActivity get() = rule.activity
+    @Rule @JvmField var rule = ActivityTestRule(TestActivity::class.java)
 
     @Test
     fun transformation() {
@@ -35,8 +31,7 @@ class TransformationsTest : InstrumentedTest() {
                     .load(R.drawable.bg_test)
                     .circle()
                     .into(view as ImageView)
-            },
-            delay()
+            }
         )
     }
 }

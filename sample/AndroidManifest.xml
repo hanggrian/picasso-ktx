@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.pikasso">
+    package="com.example.picasso">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".ExampleApp"
+        android:name="com.example.picasso.ExampleApp"
         android:allowBackup="true"
         android:label="Pikasso Example"
         android:supportsRtl="true"
         android:theme="@style/App.Theme">
-        <activity android:name=".ExampleActivity">
+        <activity android:name="com.example.picasso.ExampleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
