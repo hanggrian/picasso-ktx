@@ -1,4 +1,4 @@
-package com.hendraanggrian.picasso
+package com.hendraanggrian.appcompat.picasso
 
 import androidx.test.InstrumentationRegistry.getTargetContext
 import com.squareup.picasso.Picasso

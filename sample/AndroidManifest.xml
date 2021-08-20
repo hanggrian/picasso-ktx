@@ -7,7 +7,7 @@
     <application
         android:name="com.example.picasso.ExampleApp"
         android:allowBackup="true"
-        android:label="Pikasso Example"
+        android:label="Picasso KTX Example"
         android:supportsRtl="true"
         android:theme="@style/App.Theme">
         <activity android:name="com.example.picasso.ExampleActivity">

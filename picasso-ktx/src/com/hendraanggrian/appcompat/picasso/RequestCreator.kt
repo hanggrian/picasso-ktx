@@ -1,4 +1,4 @@
-package com.hendraanggrian.picasso
+package com.hendraanggrian.appcompat.picasso
 
 import android.app.Notification
 import android.graphics.drawable.Drawable
@@ -6,12 +6,12 @@ import android.widget.ImageView
 import android.widget.RemoteViews
 import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
-import com.hendraanggrian.picasso.internal.CropCircleTransformation
-import com.hendraanggrian.picasso.internal.CropRoundedTransformation
-import com.hendraanggrian.picasso.internal.CropSquareTransformation
-import com.hendraanggrian.picasso.internal.GrayscaleTransformation
-import com.hendraanggrian.picasso.internal.MaskTransformation
-import com.hendraanggrian.picasso.internal.OverlayTransformation
+import com.hendraanggrian.appcompat.picasso.internal.CropCircleTransformation
+import com.hendraanggrian.appcompat.picasso.internal.CropRoundedTransformation
+import com.hendraanggrian.appcompat.picasso.internal.CropSquareTransformation
+import com.hendraanggrian.appcompat.picasso.internal.GrayscaleTransformation
+import com.hendraanggrian.appcompat.picasso.internal.MaskTransformation
+import com.hendraanggrian.appcompat.picasso.internal.OverlayTransformation
 import com.squareup.picasso.RequestCreator
 import com.squareup.picasso.Target
 

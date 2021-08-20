@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.hendraanggrian.picasso">
+    package="com.hendraanggrian.appcompat.picasso">
 
     <uses-sdk tools:overrideLibrary="androidx.test, android.app, androidx.test.rule, androidx.test.espresso, androidx.test.espresso.idling" />
 

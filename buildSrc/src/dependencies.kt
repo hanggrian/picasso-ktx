@@ -7,7 +7,7 @@ const val VERSION_ANDROIDX_TEST = "1.4.0"
 const val VERSION_ANDROIDX_JUNIT = "1.1.3"
 const val VERSION_ANDROIDX_TRUTH = "1.4.0"
 const val VERSION_ESPRESSO = "3.4.0"
-val Dependencies.android get() = "com.android.tools.build:gradle:7.0.0"
+val Dependencies.android get() = "com.android.tools.build:gradle:7.0.1"
 fun Plugins.android(submodule: String) = id("com.android.$submodule")
 fun Dependencies.material(version: String = VERSION_ANDROIDX) = "com.google.android.material:material:$version"
 fun Dependencies.androidx(repository: String, module: String = repository, version: String = VERSION_ANDROIDX) =

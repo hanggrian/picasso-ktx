@@ -1,4 +1,4 @@
-package com.hendraanggrian.picasso
+package com.hendraanggrian.appcompat.picasso
 
 import android.view.View
 import android.widget.ImageView
@@ -10,7 +10,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
-import com.hendraanggrian.picasso.test.R
+import com.hendraanggrian.appcompat.picasso.test.R
 import org.junit.Rule
 import org.junit.runner.RunWith
 import kotlin.test.Test

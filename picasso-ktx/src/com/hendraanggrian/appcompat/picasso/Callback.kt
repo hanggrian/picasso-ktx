@@ -1,4 +1,4 @@
-package com.hendraanggrian.picasso
+package com.hendraanggrian.appcompat.picasso
 
 import com.squareup.picasso.Callback
 

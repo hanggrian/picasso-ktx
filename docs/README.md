@@ -1,6 +1,6 @@
 [![version](https://img.shields.io/maven-central/v/com.hendraanggrian.appcompat/picasso-ktx)](https://search.maven.org/artifact/com.hendraanggrian.appcompat/picasso-ktx)
 [![build](https://img.shields.io/travis/com/hendraanggrian/picasso-ktx)](https://www.travis-ci.com/github/hendraanggrian/picasso-ktx)
-[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081)](https://ktlint.github.io/)
+[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081)](https://ktlint.github.io)
 
 Picasso KTX
 ===========
@@ -22,6 +22,8 @@ dependencies {
 }
 ```
 
+Snapshots of the development version are available in [Sonatype's snapshots repository](https://s01.oss.sonatype.org/content/repositories/snapshots).
+
 Usage
 -----
 
@@ -41,7 +43,7 @@ val myPicasso = buildPicasso {
 myPicasso.load(url).into(imageView)
 ```
 
-Clean declaration of `Callback` when loading images into `ImageView`. 
+Clean declaration of `Callback` when loading images into `ImageView`.
 
 ```kotlin
 picasso.load(url).into(imageView) {

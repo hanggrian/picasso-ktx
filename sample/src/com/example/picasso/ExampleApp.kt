@@ -1,9 +1,9 @@
 package com.example.picasso
 
 import androidx.multidex.MultiDexApplication
-import com.hendraanggrian.prefs.PreferencesLogger
-import com.hendraanggrian.prefs.Prefs
-import com.hendraanggrian.prefs.android.Android
+import com.hendraanggrian.auto.prefs.PreferencesLogger
+import com.hendraanggrian.auto.prefs.Prefs
+import com.hendraanggrian.auto.prefs.android.Android
 
 class ExampleApp : MultiDexApplication() {
 

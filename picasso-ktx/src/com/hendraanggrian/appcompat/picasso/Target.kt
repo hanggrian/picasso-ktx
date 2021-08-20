@@ -1,4 +1,4 @@
-package com.hendraanggrian.picasso
+package com.hendraanggrian.appcompat.picasso
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable

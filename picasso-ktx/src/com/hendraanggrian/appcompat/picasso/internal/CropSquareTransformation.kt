@@ -1,4 +1,4 @@
-package com.hendraanggrian.picasso.internal
+package com.hendraanggrian.appcompat.picasso.internal
 
 import android.graphics.Bitmap
 import android.graphics.Bitmap.createBitmap

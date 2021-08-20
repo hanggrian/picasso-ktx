@@ -1,9 +1,9 @@
-package com.hendraanggrian.picasso
+package com.hendraanggrian.appcompat.picasso
 
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.hendraanggrian.picasso.test.R
+import com.hendraanggrian.appcompat.picasso.test.R
 
 class TestActivity : AppCompatActivity() {
     lateinit var imageView: ImageView
