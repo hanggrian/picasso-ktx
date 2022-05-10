@@ -9,9 +9,9 @@ Picasso KTX
 ![](images/demo_palette.gif)
 
 Kotlin extensions for Picasso image loader.
-* Invoke callback and target with Kotlin DSL.
-* Use pre-loaded transformations with extension functions.
-* Supports material components Palette alongside too.
+- Invoke callback and target with Kotlin DSL.
+- Use pre-loaded transformations with extension functions.
+- Supports material components Palette alongside too.
 
 Download
 --------
