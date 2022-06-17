@@ -1,20 +1,18 @@
-[![version](https://img.shields.io/maven-central/v/com.hendraanggrian.appcompat/picasso-ktx)](https://search.maven.org/artifact/com.hendraanggrian.appcompat/picasso-ktx)
-[![build](https://img.shields.io/travis/com/hendraanggrian/picasso-ktx)](https://www.travis-ci.com/github/hendraanggrian/picasso-ktx)
-[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081)](https://ktlint.github.io)
+[![Travis CI](https://img.shields.io/travis/com/hendraanggrian/picasso-ktx)](https://www.travis-ci.com/github/hendraanggrian/picasso-ktx/)
+[![Maven Central](https://img.shields.io/maven-central/v/com.hendraanggrian.appcompat/picasso-ktx)](https://search.maven.org/artifact/com.hendraanggrian.appcompat/picasso-ktx/)
 
-Picasso KTX
-===========
+# Picasso KTX
 
-![](images/demo_transformation.gif)
-![](images/demo_palette.gif)
+![Transformation demo](images/demo_transformation.gif)
+![Palette demo](images/demo_palette.gif)
 
 Kotlin extensions for Picasso image loader.
+
 - Invoke callback and target with Kotlin DSL.
 - Use pre-loaded transformations with extension functions.
 - Supports material components Palette alongside too.
 
-Download
---------
+## Download
 
 ```gradle
 dependencies {
@@ -22,10 +20,9 @@ dependencies {
 }
 ```
 
-Snapshots of the development version are available in [Sonatype's snapshots repository](https://s01.oss.sonatype.org/content/repositories/snapshots).
+Snapshots of the development version are available in [Sonatype's snapshots repository](https://s01.oss.sonatype.org/content/repositories/snapshots/).
 
-Usage
------
+## Usage
 
 ### Common
 
@@ -80,6 +77,7 @@ picasso.load(url)
 ```
 
 ### Available transformations
+
 |              |                                                         Transformations             |
 |--------------|-------------------------------------------------------------------------------------|
 | crop square  | `square()`                                                                          |

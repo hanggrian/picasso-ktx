@@ -36,8 +36,8 @@ android {
 ktlint()
 
 dependencies {
-    api(kotlin("stdlib", VERSION_KOTLIN))
-    api(square("picasso", VERSION_PICASSO))
+    implementation(kotlin("stdlib", VERSION_KOTLIN))
+    implementation(square("picasso", VERSION_PICASSO))
     implementation(androidx("annotation", "annotation", "1.2.0"))
     androidTestImplementation(kotlin("test-junit", VERSION_KOTLIN))
     androidTestImplementation(androidx("appcompat", version = VERSION_ANDROIDX))
