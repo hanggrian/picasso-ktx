@@ -1,10 +1,14 @@
-[![Travis CI](https://img.shields.io/travis/com/hendraanggrian/picasso-ktx)](https://www.travis-ci.com/github/hendraanggrian/picasso-ktx/)
+[![Travis CI](https://img.shields.io/travis/com/hendraanggrian/picasso-ktx)](https://travis-ci.com/github/hendraanggrian/picasso-ktx/)
 [![Maven Central](https://img.shields.io/maven-central/v/com.hendraanggrian.appcompat/picasso-ktx)](https://search.maven.org/artifact/com.hendraanggrian.appcompat/picasso-ktx/)
 
 # Picasso KTX
 
-![Transformation demo](images/demo_transformation.gif)
-![Palette demo](images/demo_palette.gif)
+> ## Deprecated
+>
+> This library is no longer maintained, use [coil-kt](https://github.com/coil-kt/coil) instead.
+
+![Transformation demo](https://github.com/hendraanggrian/picasso-ktx/raw/assets/demo_transformations.gif)
+![Palette demo](https://github.com/hendraanggrian/picasso-ktx/raw/assets/demo_palette.gif)
 
 Kotlin extensions for Picasso image loader.
 

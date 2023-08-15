@@ -17,7 +17,7 @@ class PersistentBottomSheetBehavior @JvmOverloads constructor(
     init {
         val activity = context as ExampleActivity
         addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onSlide(view: View, i: Float) {}
+            override fun onSlide(view: View, i: Float) { }
             override fun onStateChanged(view: View, state: Int) = activity.run {
                 when (state) {
                     STATE_HIDDEN -> setState(STATE_COLLAPSED) // persistent

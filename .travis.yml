@@ -1,6 +1,6 @@
+os: linux
 language: android
-dist: trusty
-jdk: oraclejdk11
+jdk: openjdk11
 
 android:
   components:

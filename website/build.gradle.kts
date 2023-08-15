@@ -9,7 +9,7 @@ gitPublish {
 }
 
 tasks {
-    register("clean") {
+    register(LifecycleBasePlugin.CLEAN_TASK_NAME) {
         delete(buildDir)
     }
     gitPublishCopy {

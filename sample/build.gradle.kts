@@ -24,18 +24,16 @@ android {
         }
     }
     buildTypes {
-        named("debug") {
+        debug {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard.pro")
         }
-        named("release") {
+        release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard.pro")
         }
     }
-    lint {
-        isAbortOnError = false
-    }
+    lint.isAbortOnError = false
 }
 
 dependencies {
